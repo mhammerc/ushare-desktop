@@ -5,9 +5,7 @@
 #include <QAction>
 #include <QList>
 #include "systemtrayicon.h"
-#include "configurationwindows.h"
-
-
+#include "configuration/configurationwindows.h"
 
 #include <QHttpMultiPart>
 #include <QHttpPart>
@@ -30,6 +28,6 @@ int main(int argc, char *argv[])
 
     SystemTrayIcon systemTray;
 
-    QWidget fuckU;
+    //QWidget fuckU;
     return app.exec();
 }

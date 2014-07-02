@@ -1,7 +1,8 @@
 #ifndef SCREENMANAGER_H
 #define SCREENMANAGER_H
 
-
+#include <iostream>
+#include <memory>
 
 #include <QApplication>
 #include <QScreen>
@@ -18,17 +19,12 @@
 #include <QRgb>
 #include <QObject>
 #include <string>
-#include "ftpupload.h"
+
 #include "selectareaband.h"
-#include "httppostupload.h"
+#include "uploadMethod/ftpupload.h"
+#include "uploadMethod/httppostupload.h"
+
 #include <SFML/Network.hpp>
-
-#include <memory>
-
-
-//WARNING To delete
-#include <iostream>
-
 
 class SystemTrayIcon;
 

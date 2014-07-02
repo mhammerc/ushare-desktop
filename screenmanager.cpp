@@ -69,7 +69,8 @@ bool ScreenManager::sendFileTroughHTTP(const QString &pathToFile)
             if(http->canGetReply() && http->reply->isFinished())
                 {
                     http->terminate();
-                    delete http;
+                    http->deleteLater();
+                    //delete http;
                     return true;
                 }
         }

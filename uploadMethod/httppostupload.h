@@ -40,6 +40,9 @@ public:
     }
 
     QNetworkReply * reply;
+    QNetworkAccessManager * manager;
+    QHttpMultiPart * container;
+    QFile * file;
 
     bool canGetReply()
     {

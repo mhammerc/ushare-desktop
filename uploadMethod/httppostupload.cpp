@@ -2,14 +2,17 @@
 #include "screenmanager.h"
 
 
-
 HTTPPostUpload::HTTPPostUpload()
 {
     isFileSended = false;
     reply = 0;
 }
 
-HTTPPostUpload::~HTTPPostUpload() {}
+HTTPPostUpload::~HTTPPostUpload()
+{
+    delete container;
+    delete file;
+}
 
 void HTTPPostUpload::setHost(const QString &host, int port)
 {
@@ -30,9 +33,9 @@ void HTTPPostUpload::setContentType(const QString &contentType)
 
 void HTTPPostUpload::sendFile()
 {
-    QHttpMultiPart * container = new QHttpMultiPart(QHttpMultiPart::FormDataType);
+    container = new QHttpMultiPart(QHttpMultiPart::FormDataType);
     QHttpPart filePart;
-    QFile * file = new QFile(pathToFile);
+    file = new QFile(pathToFile);
 
     if(!file->open(QIODevice::ReadOnly))
         QMessageBox::critical(0,"!!","");
@@ -46,8 +49,9 @@ void HTTPPostUpload::sendFile()
     QNetworkRequest request;
     request.setUrl(url);
 
-    QNetworkAccessManager * manager = new QNetworkAccessManager;
-
-    delete reply;
+    manager = new QNetworkAccessManager;
     reply = manager->post(request, container);
+
+    reply->setParent(container);
+    manager->setParent(reply);
 }

@@ -1,3 +1,7 @@
+/**
+  This file simply represent the area band when selecting area for take screen.
+ */
+
 #ifndef SELECTAREABAND_H
 #define SELECTAREABAND_H
 

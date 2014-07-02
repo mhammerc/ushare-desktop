@@ -1,7 +1,7 @@
 #ifndef SYSTEMTRAYICON_H
 #define SYSTEMTRAYICON_H
 
-
+#include <fstream>
 
 #include <QApplication>
 #include <QMenu>
@@ -15,9 +15,7 @@
 #include <QString>
 #include <QMessageBox>
 
-#include <fstream>
-
-#include "configurationwindows.h"
+#include "configuration/configurationwindows.h"
 #include "screenmanager.h"
 #include "FileDialog.h"
 #include "shared.h"

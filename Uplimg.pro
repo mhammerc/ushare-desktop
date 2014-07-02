@@ -7,34 +7,34 @@ TEMPLATE = app
 
 QMAKE_CXXFLAGS += -std=c++11
 
-OTHER_FILES += small.png
+OTHER_FILES += resources/small.png
 
 RESOURCES += \
-    resources.qrc
+    resources/resources.qrc
 
 HEADERS += \
-    configurationwindows.h \
+    configuration/configurationwindows.h \
     FileDialog.h \
-    ftpconfiguration.h \
-    ftpupload.h \
-    HTTPConfiguration.h \
-    httppostupload.h \
+    configuration/ftpconfiguration.h \
+    uploadMethod/ftpupload.h \
+    uploadMethod/httppostupload.h \
     screenmanager.h \
     selectareaband.h \
     systemtrayicon.h \
-    shared.h
+    shared.h \
+    configuration/httpconfiguration.h
 
 SOURCES += \
-    configurationwindows.cpp \
+    configuration/configurationwindows.cpp \
     FileDialog.cpp \
-    ftpconfiguration.cpp \
-    ftpupload.cpp \
-    HTTPConfiguration.cpp \
-    httppostupload.cpp \
+    configuration/ftpconfiguration.cpp \
+    uploadMethod/ftpupload.cpp \
+    uploadMethod/httppostupload.cpp \
     screenmanager.cpp \
     selectareaband.cpp \
     systemtrayicon.cpp \
-    uplimg.cpp
+    uplimg.cpp \
+    configuration/httpconfiguration.cpp
 
 INCLUDEPATH = C:\Users\Imote\Documents\Development\SFML-master\include
 DEPENDPATH = C:\Users\Imote\Documents\Development\SFML-master\include
