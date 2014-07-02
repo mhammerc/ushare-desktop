@@ -14,8 +14,6 @@ SystemTrayIcon::SystemTrayIcon(QObject *qobject) :
     setToolTip(tr("Daemon is running and waiting"));
 
     base = new QWidget;
-    //base->show();
-    //base->hide();
 
     setUpContextMenu();
 
