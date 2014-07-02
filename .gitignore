@@ -11,7 +11,7 @@
 *.dylib
 
 # Qt-es
-
+*.config
 *.pro.user
 *.pro.user.*
 moc_*.cpp
@@ -19,7 +19,7 @@ qrc_*.cpp
 ui_*.h
 Makefile*
 *-build-*
-*qm
+*.qm
 qtc*
 
 # QtCreator

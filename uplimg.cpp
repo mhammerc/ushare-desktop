@@ -28,6 +28,5 @@ int main(int argc, char *argv[])
 
     SystemTrayIcon systemTray;
 
-    //QWidget fuckU;
     return app.exec();
 }
