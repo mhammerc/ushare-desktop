@@ -66,12 +66,17 @@ bool ScreenManager::sendFileTroughHTTP(const QString &pathToFile)
     while(true)
         {
             sf::sleep(sf::milliseconds(1000));
-            if(http->canGetReply() && http->reply->isFinished())
+            if(http->canGetReply() && http->reply->isFinished() && http->reply->error() == QNetworkReply::NetworkError::NoError)
                 {
                     http->terminate();
                     http->deleteLater();
-                    //delete http;
                     return true;
+                }
+            else if(http->canGetReply() && http->reply->isFinished() && http->reply->error() != QNetworkReply::NetworkError::NoError)
+                {
+                    http->terminate();
+                    http->deleteLater();
+                    return false;
                 }
         }
 }

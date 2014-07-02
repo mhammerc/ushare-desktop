@@ -29,11 +29,10 @@ public:
 
 protected:
     const QString applicationName;
-    QSettings settings;
-
     const QString HTTPWebPathSettingName;
     const QString FTPWebPathSettingName;
     const QString choosedMethodSettingName;
+    QSettings settings;
 
     ConfigurationWindows * configurationWindows;
     ScreenManager * screenManager;

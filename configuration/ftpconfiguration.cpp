@@ -13,6 +13,9 @@ FTPConfiguration::FTPConfiguration(QWidget *parent) :
 
     this->setUpUI();
 
+    if(settings.value(portSettingName).isNull())
+        settings.setValue(portSettingName,21);
+
     host->setText(settings.value(hostSettingName).toString());
     port->setValue(settings.value(portSettingName, 21).toInt());
     username->setText(settings.value(usernameSettingName).toString());

@@ -11,6 +11,9 @@ HTTPConfiguration::HTTPConfiguration(QWidget * parent) :
 {
     this->setUpUI();
 
+    if(settings.value(portSettingName).isNull())
+        settings.setValue(portSettingName,80);
+
     host->setText(settings.value(hostSettingName).toString());
     port->setValue(settings.value(portSettingName, 80).toInt());
     fileFieldName->setText(settings.value(fileFieldNameSettingName, "uplimgFile").toString());

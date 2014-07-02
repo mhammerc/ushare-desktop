@@ -24,14 +24,11 @@ bool FTPUpload::sendFile(std::string pathToLocalFile)
                 }
             return true;
         }
-
     return false;
 }
 
 bool FTPUpload::openConnexion()
 {
-
-
     if (ftpClient->connect(sf::IpAddress(host), port).isOk())
         {
             if (ftpClient->login(username, password).isOk())

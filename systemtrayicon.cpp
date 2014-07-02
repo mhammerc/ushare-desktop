@@ -1,12 +1,11 @@
 #include "systemtrayicon.h"
 
-
 SystemTrayIcon::SystemTrayIcon(QObject *qobject) :
     QSystemTrayIcon(qobject),
-    FTPWebPathSettingName("configuration/ftp/webPath"),
+    applicationName("Uplimg"),
     HTTPWebPathSettingName("configuration/http/webPath"),
-    choosedMethodSettingName("configuration/method"),
-    applicationName("Uplimg")
+    FTPWebPathSettingName("configuration/ftp/webPath"),
+    choosedMethodSettingName("configuration/method")
 {
     configurationWindows = new ConfigurationWindows;
     screenManager = new ScreenManager(this);
@@ -17,14 +16,14 @@ SystemTrayIcon::SystemTrayIcon(QObject *qobject) :
 
     setUpContextMenu();
 
-    QSystemTrayIcon::show();
-
     QObject::connect(takeScreen, SIGNAL(triggered()), this, SLOT(takeFullScrenTriggered()));
     QObject::connect(takeSelectedScreen, SIGNAL(triggered()), this, SLOT(takeSelectedAreaScreenTriggered()));
     QObject::connect(uploadFile, SIGNAL(triggered()), this, SLOT(uploadSelectedFileTriggered()));
     QObject::connect(uploadClipboard, SIGNAL(triggered()), this, SLOT(uploadClipboardTriggered()));
     QObject::connect(showConfiguration, SIGNAL(triggered()), this, SLOT(showWindowConfigurationTriggered()));
     QObject::connect(quit, SIGNAL(triggered()), qApp, SLOT(quit()));
+
+    QSystemTrayIcon::show();
 }
 
 void SystemTrayIcon::setUpContextMenu()
@@ -44,41 +43,28 @@ void SystemTrayIcon::setUpContextMenu()
 
 void SystemTrayIcon::takeSelectedAreaScreenTriggered()
 {
-    std::cerr << "Started screen process\n";
-
     fileName = getNewFileName(".png");
     pathToFile = getFileTempPath(fileName);
-
-    std::cerr << "Names generated\n";
     screenManager->captureSelectedZone(pathToFile);
 }
 
 void SystemTrayIcon::sendSelectedArea()
 {
     if (screenManager->autoSendFile(pathToFile))
-        {
-
-            std::cerr << "File sended\n";
-
-            const QString urlPath = getUploadedFileURL(fileName);
-            QApplication::clipboard()->setText(urlPath);
-
-            this->showMessage(applicationName, tr("Congratulation !\nUpload success. The URL is :\n") + urlPath);
-            std::cerr << "Upload success !\n";
-        }
+        fileSended(fileName);
     else
         throwErrorAlert(Uplimg::ErrorList::UPLOAD_FAIL);
 }
 
 void SystemTrayIcon::takeFullScrenTriggered()
 {
-    std::cerr << "Started screen process\n";
-
     QString fileName = getNewFileName(".png");
     QString pathToFile = getFileTempPath(fileName);
 
     if (screenManager->autoSendFile(screenManager->captureFullScreen(pathToFile)))
         fileSended(fileName);
+    else
+        throwErrorAlert(Uplimg::ErrorList::UPLOAD_FAIL);
 }
 
 void SystemTrayIcon::fileSended(QString fileName)
@@ -110,11 +96,9 @@ void SystemTrayIcon::uploadClipboardTriggered()
             file << QApplication::clipboard()->text().toStdString();
             file.close();
             if (screenManager->autoSendFile(filePath))
-                {
-                    const QString url = getUploadedFileURL(fileName);
-                    this->showMessage(applicationName, "Clipboard upload success !\n" + url);
-                    QApplication::clipboard()->setText(url);
-                }
+                fileSended(fileName);
+            else
+                throwErrorAlert(Uplimg::ErrorList::UPLOAD_FAIL);
         }
 }
 
@@ -162,12 +146,12 @@ void SystemTrayIcon::throwErrorAlert(const Uplimg::ErrorList &error)
     if (error == Uplimg::ErrorList::UPLOAD_FAIL)
         {
             const QString text(tr("Upload failed.\nYou must verify Uplimg's configuration or your Internet configuration to solve the problem."));
-            QMessageBox::critical(0, "Uplimg", text);
+            this->showMessage(applicationName, text);
         }
     else if(error == Uplimg::ErrorList::UPLOAD_METHOD_NOT_CHOOSED)
         {
             const QString text(tr("We can't upload anything.\nYou must configure method to upload before."));
-            QMessageBox::critical(0, "Uplimg", text);
+            this->showMessage(applicationName, text);
         }
 }
 

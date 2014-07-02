@@ -14,6 +14,7 @@
 #include <QFile>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
+#include <QSignalMapper>
 
 #include <fstream>
 
