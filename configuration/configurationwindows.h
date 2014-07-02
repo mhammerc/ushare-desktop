@@ -27,6 +27,7 @@ class ConfigurationWindows : public QWidget
     Q_OBJECT
 public:
     explicit ConfigurationWindows(QWidget *parent = 0);
+    ~ConfigurationWindows();
 
 protected:
     const QString windowTitle;
@@ -36,6 +37,7 @@ protected:
     const QString runOnStartupSettingName;
     const QString showNotificationsSettingName;
     const QString playSoundSettingName;
+    const QString copyToClipboardSettingName;
     const QString langSettingName;
     const QString FTPMethodSettingName;
     const QString choosedMethodSettingName;
@@ -51,6 +53,7 @@ protected:
     QCheckBox * runOnStartup;
     QCheckBox * showNotifications;
     QCheckBox * playSound;
+    QCheckBox * copyToClipboard;
     QComboBox * lang;
     //Online Services
     QGroupBox * onlineServices;
@@ -93,6 +96,7 @@ public slots :
     void runOnStartupSettingModified(bool);
     void showNotificationSettingModified(bool);
     void playSoundSettingModified(bool);
+    void copyToClipboardSettingModified(bool);
     void langSettingModified(QString);
     void FTPMethodSettingModified(bool);
     void HTTPMethodSettingModified(bool);

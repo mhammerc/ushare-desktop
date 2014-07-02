@@ -6,20 +6,23 @@ ConfigurationWindows::ConfigurationWindows(QWidget *parent) :
     runOnStartupSettingName("configuration/runOnStartup"),
     showNotificationsSettingName("configuration/showNotifications"),
     playSoundSettingName("configuration/playSound"),
+    copyToClipboardSettingName("configuration/clipboard"),
     langSettingName("configuration/lang"),
     FTPMethodSettingName("configuration/ftp"),
     choosedMethodSettingName("configuration/method")
 {
 
     this->setWindowTitle(windowTitle);
-    this->setFixedSize(530, 290);
 
     this->setUpUI();
+
+    this->setFixedSize(530, this->minimumHeight());
 
     /* Load Settings */
     runOnStartup->setChecked(settings.value(runOnStartupSettingName, true).toBool());
     showNotifications->setChecked(settings.value(showNotificationsSettingName, true).toBool());
     playSound->setChecked(settings.value(playSoundSettingName, true).toBool());
+    copyToClipboard->setChecked(settings.value(copyToClipboardSettingName, true).toBool());
     lang->setCurrentText(settings.value(langSettingName, "English").toString());
 
     if (settings.value(choosedMethodSettingName).toString() == "FTP")
@@ -31,6 +34,7 @@ ConfigurationWindows::ConfigurationWindows(QWidget *parent) :
     QObject::connect(runOnStartup, SIGNAL(toggled(bool)), this, SLOT(runOnStartupSettingModified(bool)));
     QObject::connect(showNotifications, SIGNAL(toggled(bool)), this, SLOT(showNotificationSettingModified(bool)));
     QObject::connect(playSound, SIGNAL(toggled(bool)), this, SLOT(playSoundSettingModified(bool)));
+    QObject::connect(copyToClipboard, SIGNAL(toggled(bool)), this, SLOT(copyToClipboardSettingModified(bool)));
     QObject::connect(lang, SIGNAL(currentTextChanged(QString)), this, SLOT(langSettingModified(QString)));
 
     QObject::connect(FTPMethod, SIGNAL(toggled(bool)), this, SLOT(FTPMethodSettingModified(bool)));
@@ -85,6 +89,9 @@ void ConfigurationWindows::setUpGeneralSectionUI()
 
     playSound = new QCheckBox();
     formGeneral->addRow(tr("Play sounds when event take place"), playSound);
+
+    copyToClipboard = new QCheckBox();
+    formGeneral->addRow(tr("Copy file's link when it is uploaded to clipboard"), copyToClipboard);
 
     lang = new QComboBox();
     lang->addItem("English");
@@ -163,6 +170,17 @@ void ConfigurationWindows::HTTPMethodSettingModified(bool checked)
 void ConfigurationWindows::runOnStartupSettingModified(bool checked)
 {
     settings.setValue(runOnStartupSettingName, checked);
+    std::cerr << "AA";
+
+#ifdef _WIN32
+    QSettings startSettings("HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run");
+        if (checked)
+            startSettings.setValue("MyAppli", "aa");//QCoreApplication::applicationFilePath().replace('/','\\'));
+         else
+            startSettings.remove("MyAppli");
+
+        std::cerr << "AA";
+#endif
 }
 
 void ConfigurationWindows::showNotificationSettingModified(bool checked)
@@ -173,6 +191,11 @@ void ConfigurationWindows::showNotificationSettingModified(bool checked)
 void ConfigurationWindows::playSoundSettingModified(bool checked)
 {
     settings.setValue(playSoundSettingName, checked);
+}
+
+void ConfigurationWindows::copyToClipboardSettingModified(bool checked)
+{
+    settings.setValue(copyToClipboardSettingName, checked);
 }
 
 void ConfigurationWindows::langSettingModified(QString newValue)
@@ -192,3 +215,8 @@ void ConfigurationWindows::closeEvent(QCloseEvent *event)
     this->hide();
 }
 
+ConfigurationWindows::~ConfigurationWindows()
+{
+    delete FTPConf;
+    delete HTTPConf;
+}

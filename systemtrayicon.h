@@ -25,13 +25,18 @@ class SystemTrayIcon : public QSystemTrayIcon
     Q_OBJECT
 public:
     explicit SystemTrayIcon(QObject *qobject = 0);
+    ~SystemTrayIcon();
     Uplimg::UploadMethod getUploadMethod() const;
 
 protected:
     const QString applicationName;
     const QString HTTPWebPathSettingName;
     const QString FTPWebPathSettingName;
+    const QString runOnStartupSettingName;
     const QString choosedMethodSettingName;
+    const QString showNotificationsSettingName;
+    const QString playSoundSettingName;
+    const QString copyToClipboardSettingName;
     QSettings settings;
 
     ConfigurationWindows * configurationWindows;
@@ -53,6 +58,7 @@ protected:
     QString getNewFileName(QString ending);
     QString getFileTempPath(const QString &screenName);
     QString getUploadedFileURL(const QString &fileName);
+    void firstStart();
 
     //Temp
     QString fileName;

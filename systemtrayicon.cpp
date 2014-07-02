@@ -5,9 +5,17 @@ SystemTrayIcon::SystemTrayIcon(QObject *qobject) :
     applicationName("Uplimg"),
     HTTPWebPathSettingName("configuration/http/webPath"),
     FTPWebPathSettingName("configuration/ftp/webPath"),
-    choosedMethodSettingName("configuration/method")
+    runOnStartupSettingName("configuration/runOnStartup"),
+    choosedMethodSettingName("configuration/method"),
+    showNotificationsSettingName("configuration/showNotifications"),
+    playSoundSettingName("configuration/playSound"),
+    copyToClipboardSettingName("configuration/clipboard")
 {
+    if(settings.value(runOnStartupSettingName).isNull()) //First time the application is started
+        firstStart();
+
     configurationWindows = new ConfigurationWindows;
+
     screenManager = new ScreenManager(this);
     setIcon(QIcon(":/small.png"));
     setToolTip(tr("Daemon is running and waiting"));
@@ -70,9 +78,12 @@ void SystemTrayIcon::takeFullScrenTriggered()
 void SystemTrayIcon::fileSended(QString fileName)
 {
     const QString urlPath = getUploadedFileURL(fileName);
-    QApplication::clipboard()->setText(urlPath);
 
-    this->showMessage(applicationName, tr("Congratulation !\nUpload success. The URL is :\n") + urlPath);
+    if(settings.value(copyToClipboardSettingName).toBool())
+        QApplication::clipboard()->setText(urlPath);
+
+    if(settings.value(showNotificationsSettingName).toBool())
+        this->showMessage(applicationName, tr("Congratulation !\nUpload success. The URL is :\n") + urlPath);
 }
 
 void SystemTrayIcon::uploadSelectedFileTriggered()
@@ -163,4 +174,18 @@ Uplimg::UploadMethod SystemTrayIcon::getUploadMethod() const
         return Uplimg::UploadMethod::HTTP;
     else
         return Uplimg::UploadMethod::ERROR;
+}
+
+void SystemTrayIcon::firstStart()
+{
+    settings.setValue(runOnStartupSettingName, true);
+    settings.setValue(showNotificationsSettingName, true);
+    settings.setValue(playSoundSettingName, true);
+    settings.setValue(copyToClipboardSettingName, true);
+    settings.setValue(choosedMethodSettingName, "FTP");
+}
+
+SystemTrayIcon::~SystemTrayIcon()
+{
+    delete configurationWindows;
 }
