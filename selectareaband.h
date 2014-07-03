@@ -12,6 +12,7 @@
 #include <QPoint>
 #include <QRect>
 #include <QPoint>
+#include <QCursor>
 
 class ScreenManager;
 

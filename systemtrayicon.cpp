@@ -3,7 +3,7 @@
 SystemTrayIcon::SystemTrayIcon(QObject *qobject) :
     QSystemTrayIcon(qobject),
     applicationName("Uplimg"),
-    HTTPWebPathSettingName("configuration/http/webPath"),
+    HTTPWebPathSettingName{"configuration/http/webPath"},
     FTPWebPathSettingName("configuration/ftp/webPath"),
     runOnStartupSettingName("configuration/runOnStartup"),
     choosedMethodSettingName("configuration/method"),
@@ -17,7 +17,7 @@ SystemTrayIcon::SystemTrayIcon(QObject *qobject) :
     configurationWindows = new ConfigurationWindows;
 
     screenManager = new ScreenManager(this);
-    setIcon(QIcon(":/small.png"));
+    setIcon(QIcon{":/small.png"});
     setToolTip(tr("Daemon is running and waiting"));
 
     base = new QWidget;

@@ -4,6 +4,7 @@
 
 SelectAreaBand::SelectAreaBand(ScreenManager *manager, QWidget * parent) : QLabel(parent)
 {
+    this->setCursor(Qt::CrossCursor);
     rubberBand = new QRubberBand(QRubberBand::Rectangle, this);
     this->manager = manager;
     QObject::connect(this, SIGNAL(areaTaken(QRect)), manager, SLOT(areaPictureTaken(QRect)));
