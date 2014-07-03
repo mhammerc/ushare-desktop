@@ -20,8 +20,6 @@ SystemTrayIcon::SystemTrayIcon(QObject *qobject) :
     setIcon(QIcon {":/small.png"});
     setToolTip(tr("Daemon is running and waiting"));
 
-    base = new QWidget;
-
     setUpContextMenu();
 
     QObject::connect(takeScreen, SIGNAL(triggered()), this, SLOT(takeFullScrenTriggered()));
@@ -77,7 +75,7 @@ void SystemTrayIcon::takeFullScrenTriggered()
 
 void SystemTrayIcon::uploadSelectedFileTriggered()
 {
-    QString path = FileDialog::getOpenFileName(base, tr("Select file"));
+    QString path = FileDialog::getOpenFileName(0, tr("Select file"));
 
     if (screenManager->autoSendFile(path))
         {

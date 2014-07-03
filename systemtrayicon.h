@@ -53,8 +53,6 @@ protected:
 
     QShortcut * shortcut;
 
-    QWidget * base;
-
     void setUpContextMenu();
     QString getNewFileName(QString ending);
     QString getFileTempPath(const QString &screenName);
