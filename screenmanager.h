@@ -68,6 +68,9 @@ protected:
     QPixmap originalScreenshot;
     QString pathToFile;
 
+    SelectAreaBand * fullScreenPicture;
+    QScreen * screen;
+
 public slots:
     void areaPictureTaken(QRect);
     bool autoSendFile(const QString &pathToFile);

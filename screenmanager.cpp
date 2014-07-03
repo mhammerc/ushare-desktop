@@ -57,7 +57,7 @@ bool ScreenManager::sendFileTroughFTP(const QString &pathToFile)
 
 bool ScreenManager::sendFileTroughHTTP(const QString &pathToFile)
 {
-    HTTPPostUpload * http = new HTTPPostUpload;
+    std::unique_ptr<HTTPPostUpload> http(new HTTPPostUpload);
     http->setHost(settings.value(HTTPHostSettingName).toString(), settings.value(HTTPPortSettingName).toInt());
     http->setFile(pathToFile, settings.value(HTTPFileFieldNameSettingName, "uplimgFile").toString());
     http->setContentType("image/png");
@@ -83,10 +83,10 @@ bool ScreenManager::sendFileTroughHTTP(const QString &pathToFile)
 
 QString ScreenManager::captureSelectedZone(const QString &pathToScreen)
 {
-
-    QScreen * screen = QGuiApplication::primaryScreen();
-    this->pathToFile = pathToScreen;
     QPixmap fullScreenshot;
+    screen = QGuiApplication::primaryScreen();
+
+    this->pathToFile = pathToScreen;
 
     if (screen)
         {
@@ -96,7 +96,7 @@ QString ScreenManager::captureSelectedZone(const QString &pathToScreen)
                 {
                     originalScreenshot = fullScreenshot;
                     fullScreenshot = darkenPicture(fullScreenshot);
-                    SelectAreaBand * fullScreenPicture = new SelectAreaBand(this);
+                    fullScreenPicture = new SelectAreaBand(this);
                     fullScreenPicture->setPixmap(fullScreenshot);
                     fullScreenPicture->selectArea();
                 }
@@ -110,6 +110,7 @@ void ScreenManager::areaPictureTaken(QRect area)
     originalScreenshot = originalScreenshot.copy(area);
     originalScreenshot.save(pathToFile);
     emit canSend();
+    fullScreenPicture->deleteLater();
 }
 
 QPixmap ScreenManager::darkenPicture(const QPixmap &picture)
