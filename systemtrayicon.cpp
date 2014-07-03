@@ -3,13 +3,13 @@
 SystemTrayIcon::SystemTrayIcon(QObject *qobject) :
     QSystemTrayIcon(qobject),
     applicationName("Uplimg"),
-    HTTPWebPathSettingName{"configuration/http/webPath"},
-    FTPWebPathSettingName("configuration/ftp/webPath"),
-    runOnStartupSettingName("configuration/runOnStartup"),
-    choosedMethodSettingName("configuration/method"),
-    showNotificationsSettingName("configuration/showNotifications"),
-    playSoundSettingName("configuration/playSound"),
-    copyToClipboardSettingName("configuration/clipboard")
+    HTTPWebPathSettingName {"configuration/http/webPath"},
+                       FTPWebPathSettingName("configuration/ftp/webPath"),
+                       runOnStartupSettingName("configuration/runOnStartup"),
+                       choosedMethodSettingName("configuration/method"),
+                       showNotificationsSettingName("configuration/showNotifications"),
+                       playSoundSettingName("configuration/playSound"),
+                       copyToClipboardSettingName("configuration/clipboard")
 {
     if(settings.value(runOnStartupSettingName).isNull()) //First time the application is started
         firstStart();
@@ -17,7 +17,7 @@ SystemTrayIcon::SystemTrayIcon(QObject *qobject) :
     configurationWindows = new ConfigurationWindows;
 
     screenManager = new ScreenManager(this);
-    setIcon(QIcon{":/small.png"});
+    setIcon(QIcon {":/small.png"});
     setToolTip(tr("Daemon is running and waiting"));
 
     base = new QWidget;
@@ -75,6 +75,19 @@ void SystemTrayIcon::takeFullScrenTriggered()
         throwErrorAlert(Uplimg::ErrorList::UPLOAD_FAIL);
 }
 
+void SystemTrayIcon::uploadSelectedFileTriggered()
+{
+    QString path = FileDialog::getOpenFileName(base, tr("Select file"));
+
+    if (screenManager->autoSendFile(path))
+        {
+            QFileInfo fileInfo(path);
+            fileSended(fileInfo.fileName());
+        }
+    else
+        throwErrorAlert(Uplimg::ErrorList::UPLOAD_FAIL);
+}
+
 void SystemTrayIcon::fileSended(QString fileName)
 {
     const QString urlPath = getUploadedFileURL(fileName);
@@ -86,15 +99,6 @@ void SystemTrayIcon::fileSended(QString fileName)
         this->showMessage(applicationName, tr("Congratulation !\nUpload success. The URL is :\n") + urlPath);
 }
 
-void SystemTrayIcon::uploadSelectedFileTriggered()
-{
-    QString path = FileDialog::getOpenFileName(base, tr("Select file"));
-
-    if (screenManager->autoSendFile(path))
-        {
-            this->showMessage(applicationName, tr("Congratulation !\nFile uploaded !"));
-        }
-}
 
 void SystemTrayIcon::uploadClipboardTriggered()
 {

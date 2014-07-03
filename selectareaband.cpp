@@ -34,4 +34,12 @@ void SelectAreaBand::mouseReleaseEvent(QMouseEvent * event)
     emit areaTaken(QRect(origin, event->pos()).normalized());
 }
 
+void SelectAreaBand::keyPressEvent(QKeyEvent * event)
+{
+    if(event->key() == Qt::Key_Escape)
+        {
+            this->close();
+        }
+}
+
 SelectAreaBand::~SelectAreaBand() {}

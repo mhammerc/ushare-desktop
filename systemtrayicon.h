@@ -14,6 +14,7 @@
 #include <QFileDialog>
 #include <QString>
 #include <QMessageBox>
+#include <QFileInfo>
 
 #include "configuration/configurationwindows.h"
 #include "screenmanager.h"
