@@ -57,7 +57,7 @@ bool ScreenManager::sendFileTroughFTP(const QString &pathToFile)
 
 bool ScreenManager::sendFileTroughHTTP(const QString &pathToFile)
 {
-    std::unique_ptr<HTTPPostUpload> http(new HTTPPostUpload);
+    HTTPPostUpload * http = new HTTPPostUpload;
     http->setHost(settings.value(HTTPHostSettingName).toString(), settings.value(HTTPPortSettingName).toInt());
     http->setFile(pathToFile, settings.value(HTTPFileFieldNameSettingName, "uplimgFile").toString());
     http->setContentType("image/png");

@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file alias="small.png">small.png</file>
+        <file alias="fileSended.wav">fileSended.wav</file>
     </qresource>
 </RCC>

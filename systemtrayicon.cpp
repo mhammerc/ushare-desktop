@@ -3,13 +3,14 @@
 SystemTrayIcon::SystemTrayIcon(QObject *qobject) :
     QSystemTrayIcon(qobject),
     applicationName("Uplimg"),
-    HTTPWebPathSettingName {"configuration/http/webPath"},
-                       FTPWebPathSettingName("configuration/ftp/webPath"),
-                       runOnStartupSettingName("configuration/runOnStartup"),
-                       choosedMethodSettingName("configuration/method"),
-                       showNotificationsSettingName("configuration/showNotifications"),
-                       playSoundSettingName("configuration/playSound"),
-                       copyToClipboardSettingName("configuration/clipboard")
+    HTTPWebPathSettingName("configuration/http/webPath"),
+    FTPWebPathSettingName("configuration/ftp/webPath"),
+    runOnStartupSettingName("configuration/runOnStartup"),
+    choosedMethodSettingName("configuration/method"),
+    showNotificationsSettingName("configuration/showNotifications"),
+    playSoundSettingName("configuration/playSound"),
+    copyToClipboardSettingName("configuration/clipboard"),
+    fileSendedSound(":/fileSended.wav")
 {
     if(settings.value(runOnStartupSettingName).isNull()) //First time the application is started
         firstStart();
@@ -88,6 +89,9 @@ void SystemTrayIcon::uploadSelectedFileTriggered()
 
 void SystemTrayIcon::fileSended(QString fileName)
 {
+    if(settings.value(playSoundSettingName).toBool())
+        fileSendedSound.play();
+
     const QString urlPath = getUploadedFileURL(fileName);
 
     if(settings.value(copyToClipboardSettingName).toBool())
@@ -96,7 +100,6 @@ void SystemTrayIcon::fileSended(QString fileName)
     if(settings.value(showNotificationsSettingName).toBool())
         this->showMessage(applicationName, tr("Congratulation !\nUpload success. The URL is :\n") + urlPath);
 }
-
 
 void SystemTrayIcon::uploadClipboardTriggered()
 {

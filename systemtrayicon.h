@@ -15,6 +15,7 @@
 #include <QString>
 #include <QMessageBox>
 #include <QFileInfo>
+#include <QSound>
 
 #include "configuration/configurationwindows.h"
 #include "screenmanager.h"
@@ -59,6 +60,8 @@ protected:
     QString getUploadedFileURL(const QString &fileName);
     void firstStart();
 
+    QSound fileSendedSound;
+
     //Temp
     QString fileName;
     QString pathToFile;
@@ -74,6 +77,7 @@ public slots :
     void fileSended(QString fileName);
 
     void sendSelectedArea();
+
     void throwErrorAlert(const QString &text);
     void throwErrorAlert(const Uplimg::ErrorList &error);
 
