@@ -9,6 +9,7 @@ HTTPConfiguration::HTTPConfiguration(QWidget * parent) :
     fileFieldNameSettingName("configuration/http/fieldName"),
     webPathSettingName("configuration/http/webPath")
 {
+    this->setWindowIcon(QIcon(":/small.png"));
     this->setUpUI();
 
     if(settings.value(portSettingName).isNull())

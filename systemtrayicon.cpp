@@ -78,13 +78,16 @@ void SystemTrayIcon::uploadSelectedFileTriggered()
 {
     QString path = FileDialog::getOpenFileName(0, tr("SELECT_FILE"));
 
-    if (screenManager->autoSendFile(path))
+    if(!path.isNull())
         {
-            QFileInfo fileInfo(path);
-            fileSended(fileInfo.fileName());
+            if (screenManager->autoSendFile(path))
+                {
+                    QFileInfo fileInfo(path);
+                    fileSended(fileInfo.fileName());
+                }
+            else
+                throwErrorAlert(Uplimg::ErrorList::UPLOAD_FAIL);
         }
-    else
-        throwErrorAlert(Uplimg::ErrorList::UPLOAD_FAIL);
 }
 
 void SystemTrayIcon::fileSended(QString fileName)

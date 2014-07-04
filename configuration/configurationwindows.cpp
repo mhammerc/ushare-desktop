@@ -11,7 +11,7 @@ ConfigurationWindows::ConfigurationWindows(QWidget *parent) :
     FTPMethodSettingName("configuration/ftp"),
     choosedMethodSettingName("configuration/method")
 {
-
+    this->setWindowIcon(QIcon(":/small.png"));
     this->setWindowTitle(windowTitle);
 
     this->setUpUI();
