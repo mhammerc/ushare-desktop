@@ -16,6 +16,8 @@
 #include <QMessageBox>
 #include <QFileInfo>
 #include <QSound>
+#include <QSoundEffect>
+#include <QAudioOutput>
 
 #include "configuration/configurationwindows.h"
 #include "screenmanager.h"

@@ -196,11 +196,15 @@ void SystemTrayIcon::firstStart()
 
 SystemTrayIcon::~SystemTrayIcon()
 {
-    delete configurationWindows;
+    configurationWindows->deleteLater();
+    fileSendedSound->deleteLater();
 }
 
 void SystemTrayIcon::enableEasterEgg()
 {
-    delete fileSendedSound;
+if(fileSendedSound->fileName() != ":/Easter_Egg.wav")
+{
+    fileSendedSound->deleteLater();
     fileSendedSound = new QSound(":/Easter_Egg.wav");
+}
 }
