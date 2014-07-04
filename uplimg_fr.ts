@@ -96,7 +96,7 @@
         <location filename="configuration/configurationwindows.cpp" line="102"/>
         <source>HAPPY4EVER</source>
         <comment>And, don&apos;t forget to be Happy 4 Ever</comment>
-        <translation>Et, n&apos;oubliez pas de toujours être &quot;Happy 4 Ever&quot; !</translation>
+        <translation type="unfinished">Enfin, soyez &quot;Happy 4 Ever&quot; !</translation>
     </message>
     <message>
         <location filename="configuration/configurationwindows.cpp" line="111"/>

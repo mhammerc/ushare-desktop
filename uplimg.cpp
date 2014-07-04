@@ -34,13 +34,13 @@ int main(int argc, char *argv[])
     QSettings settings;
 
     if(settings.value(langSettingName).toString() == "English")
-        translator.load(":/uplimg_en");
+        translator.load(":/lang/uplimg_en");
     else if(settings.value(langSettingName).toString() == "Français")
-        translator.load(":/uplimg_fr");
+        translator.load(":/lang/uplimg_fr");
     else
         {
             QString locale = QLocale::system().name().section('_', 0, 0);
-            translator.load(QString(":/uplimg_") + locale);
+            translator.load(QString(":/lang/uplimg_") + locale);
         }
 
     app.installTranslator(&translator);

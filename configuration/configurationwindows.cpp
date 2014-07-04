@@ -270,7 +270,7 @@ ConfigurationWindows::~ConfigurationWindows()
 
 void ConfigurationWindows::keyPressEvent(QKeyEvent * event)
 {
-    if(event->key() == Qt::Key_E|Qt::Key_A)
+    if(event->key() == Qt::Key_E)
         emit easterEgg();
 
 }

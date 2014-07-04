@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/lang">
+        <file>uplimg_en.qm</file>
+        <file>uplimg_fr.qm</file>
+    </qresource>
+</RCC>

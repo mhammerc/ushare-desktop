@@ -3,8 +3,6 @@
         <file>small.png</file>
         <file>fileSended.wav</file>
         <file>SFML_LICENCE.txt</file>
-        <file>uplimg_en.qm</file>
-        <file>uplimg_fr.qm</file>
         <file>Easter_Egg.wav</file>
     </qresource>
 </RCC>

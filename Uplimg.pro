@@ -1,6 +1,4 @@
-QT       += core gui network multimedia
-
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+QT       += core gui network multimedia widgets
 
 TARGET = Uplimg
 TEMPLATE = app
@@ -8,10 +6,9 @@ TRANSLATIONS = uplimg_fr.ts uplimg_en.ts
 
 QMAKE_CXXFLAGS += -std=c++11
 
-OTHER_FILES += resources/small.png
-
 RESOURCES += \
-    resources/resources.qrc
+    resources/resources.qrc \
+    langs.qrc
 
 HEADERS += \
     configuration/configurationwindows.h \
@@ -37,9 +34,9 @@ SOURCES += \
     uplimg.cpp \
     configuration/httpconfiguration.cpp
 
-INCLUDEPATH = C:\Users\Imote\Documents\Development\SFML-master\include
-DEPENDPATH = C:\Users\Imote\Documents\Development\SFML-master\include
-LIBS = -LC:\Users\Imote\Documents\Development\SFML-master-build-gcc-32\lib
+INCLUDEPATH = D:\Development\SFML\SFML-master\include
+DEPENDPATH = D:\Development\SFML\SFML-master\include
+LIBS = -LD:\Development\SFML\SFML-master-build-gcc-32\lib
 
 CONFIG(release, debug|release): LIBS += -lsfml-audio -lsfml-graphics -lsfml-network -lsfml-window -lsfml-system
 CONFIG(debug, debug|release): LIBS += -lsfml-audio-d -lsfml-graphics-d -lsfml-network-d -lsfml-window-d -lsfml-system-d
