@@ -60,7 +60,7 @@ protected:
     QString getUploadedFileURL(const QString &fileName);
     void firstStart();
 
-    QSound fileSendedSound;
+    QSound * fileSendedSound;
 
     //Temp
     QString fileName;
@@ -80,6 +80,8 @@ public slots :
 
     void throwErrorAlert(const QString &text);
     void throwErrorAlert(const Uplimg::ErrorList &error);
+
+    void enableEasterEgg();
 
 };
 

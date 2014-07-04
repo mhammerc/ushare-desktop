@@ -1,8 +1,9 @@
 #include "configurationwindows.h"
+#include "systemtrayicon.h"
 
 
-ConfigurationWindows::ConfigurationWindows(QWidget *parent) :
-    QWidget(parent), windowTitle(tr("UPLIMG_CONFIGURATION")),
+ConfigurationWindows::ConfigurationWindows(SystemTrayIcon * parent, QWidget *qwidget) :
+    QWidget(qwidget), windowTitle(tr("UPLIMG_CONFIGURATION")),
     runOnStartupSettingName("configuration/runOnStartup"),
     showNotificationsSettingName("configuration/showNotifications"),
     playSoundSettingName("configuration/playSound"),
@@ -11,6 +12,9 @@ ConfigurationWindows::ConfigurationWindows(QWidget *parent) :
     FTPMethodSettingName("configuration/ftp"),
     choosedMethodSettingName("configuration/method")
 {
+    this->parent = parent;
+    QObject::connect(this, SIGNAL(easterEgg()), parent, SLOT(enableEasterEgg()));
+
     this->setWindowIcon(QIcon(":/small.png"));
     this->setWindowTitle(windowTitle);
 
@@ -96,8 +100,10 @@ void ConfigurationWindows::setUpCreditsSectionUI()
     allContributorsTwo = new QListWidget;
     allContributorsLayout->addWidget(allContributorsOne);
     allContributorsLayout->addWidget(allContributorsTwo);
-    new QListWidgetItem("You <3", allContributorsOne); new QListWidgetItem("Krayon973", allContributorsTwo);
-    new QListWidgetItem("Yohann", allContributorsOne); new QListWidgetItem("Si0ls", allContributorsTwo);
+    new QListWidgetItem("You <3", allContributorsOne);
+    new QListWidgetItem("Krayon973", allContributorsTwo);
+    new QListWidgetItem("Yohann Hammad", allContributorsOne);
+    new QListWidgetItem("Si0ls", allContributorsTwo);
     new QListWidgetItem("Eldraeildor", allContributorsOne);
     new QListWidgetItem(tr("HAPPY4EVER", "And, don't forget to be Happy 4 Ever"), allContributorsOne);
 
@@ -261,4 +267,11 @@ ConfigurationWindows::~ConfigurationWindows()
 {
     delete FTPConf;
     delete HTTPConf;
+}
+
+void ConfigurationWindows::keyPressEvent(QKeyEvent * event)
+{
+    if(event->key() == Qt::Key_E|Qt::Key_A)
+        emit easterEgg();
+
 }

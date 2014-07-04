@@ -9,13 +9,14 @@ SystemTrayIcon::SystemTrayIcon(QObject *qobject) :
     choosedMethodSettingName("configuration/method"),
     showNotificationsSettingName("configuration/showNotifications"),
     playSoundSettingName("configuration/playSound"),
-    copyToClipboardSettingName("configuration/clipboard"),
-    fileSendedSound(":/fileSended.wav")
+    copyToClipboardSettingName("configuration/clipboard")
 {
     if(settings.value(runOnStartupSettingName).isNull()) //First time the application is started
         firstStart();
 
-    configurationWindows = new ConfigurationWindows;
+    fileSendedSound = new QSound(":/fileSended.wav");
+
+    configurationWindows = new ConfigurationWindows(this);
 
     screenManager = new ScreenManager(this);
     setIcon(QIcon {":/small.png"});
@@ -93,7 +94,7 @@ void SystemTrayIcon::uploadSelectedFileTriggered()
 void SystemTrayIcon::fileSended(QString fileName)
 {
     if(settings.value(playSoundSettingName).toBool())
-        fileSendedSound.play();
+        fileSendedSound->play();
 
     const QString urlPath = getUploadedFileURL(fileName);
 
@@ -196,4 +197,10 @@ void SystemTrayIcon::firstStart()
 SystemTrayIcon::~SystemTrayIcon()
 {
     delete configurationWindows;
+}
+
+void SystemTrayIcon::enableEasterEgg()
+{
+    delete fileSendedSound;
+    fileSendedSound = new QSound(":/Easter_Egg.wav");
 }

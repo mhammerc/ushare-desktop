@@ -25,14 +25,17 @@
 #include "ftpconfiguration.h"
 #include "HTTPConfiguration.h"
 
+class SystemTrayIcon;
+
 class ConfigurationWindows : public QWidget
 {
     Q_OBJECT
 public:
-    explicit ConfigurationWindows(QWidget *parent = 0);
+    explicit ConfigurationWindows(SystemTrayIcon * parent, QWidget *qwidget = 0);
     ~ConfigurationWindows();
 
 protected:
+    SystemTrayIcon * parent;
     const QString windowTitle;
     QSettings settings;
 
@@ -105,8 +108,10 @@ protected:
     void setUpCreditsSectionUI();
 
     virtual void closeEvent(QCloseEvent *event);
+    virtual void keyPressEvent(QKeyEvent *);
 
 signals:
+    void easterEgg();
 
 public slots :
     void runOnStartupSettingModified(bool);

@@ -84,7 +84,7 @@
         <location filename="configuration/configurationwindows.cpp" line="85"/>
         <source>MADE_WITH_SFML</source>
         <comment>Made with the lightness of SFML</comment>
-        <translation>Développé avec la fléxibilité de SFML</translation>
+        <translation type="unfinished">Développé avec la légèreté de SFML</translation>
     </message>
     <message>
         <location filename="configuration/configurationwindows.cpp" line="93"/>

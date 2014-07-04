@@ -21,7 +21,7 @@
 #include <iostream>
 
 int main(int argc, char *argv[])
-{    
+{
     QApplication app(argc, argv);
     app.setQuitOnLastWindowClosed(false);
 
@@ -38,10 +38,10 @@ int main(int argc, char *argv[])
     else if(settings.value(langSettingName).toString() == "Français")
         translator.load(":/uplimg_fr");
     else
-    {
-        QString locale = QLocale::system().name().section('_', 0, 0);
-        translator.load(QString(":/uplimg_") + locale);
-    }
+        {
+            QString locale = QLocale::system().name().section('_', 0, 0);
+            translator.load(QString(":/uplimg_") + locale);
+        }
 
     app.installTranslator(&translator);
 
