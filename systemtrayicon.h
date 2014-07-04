@@ -18,6 +18,8 @@
 #include <QSound>
 #include <QSoundEffect>
 #include <QAudioOutput>
+#include <QDesktopServices>
+#include <QUrl>
 
 #include "configuration/configurationwindows.h"
 #include "screenmanager.h"
@@ -67,6 +69,7 @@ protected:
     //Temp
     QString fileName;
     QString pathToFile;
+    QUrl lastUrl;
 
 signals:
 
@@ -84,6 +87,10 @@ public slots :
     void throwErrorAlert(const Uplimg::ErrorList &error);
 
     void enableEasterEgg();
+
+    void openLastUrl();
+
+    void activatedTrigerred(QSystemTrayIcon::ActivationReason);
 
 };
 

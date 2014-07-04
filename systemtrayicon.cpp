@@ -31,6 +31,9 @@ SystemTrayIcon::SystemTrayIcon(QObject *qobject) :
     QObject::connect(showConfiguration, SIGNAL(triggered()), this, SLOT(showWindowConfigurationTriggered()));
     QObject::connect(quit, SIGNAL(triggered()), qApp, SLOT(quit()));
 
+    QObject::connect(this, SIGNAL(messageClicked()), this, SLOT(openLastUrl()));
+    QObject::connect(this, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(activatedTrigerred(QSystemTrayIcon::ActivationReason)));
+
     QSystemTrayIcon::show();
 }
 
@@ -92,11 +95,12 @@ void SystemTrayIcon::uploadSelectedFileTriggered()
 }
 
 void SystemTrayIcon::fileSended(QString fileName)
-{
+{    
     if(settings.value(playSoundSettingName).toBool())
         fileSendedSound->play();
 
     const QString urlPath = getUploadedFileURL(fileName);
+    lastUrl.setUrl(urlPath);
 
     if(settings.value(copyToClipboardSettingName).toBool())
         QApplication::clipboard()->setText(urlPath);
@@ -154,6 +158,8 @@ QString SystemTrayIcon::getUploadedFileURL(const QString &fileName)
 void SystemTrayIcon::showWindowConfigurationTriggered()
 {
     configurationWindows->show();
+    configurationWindows->hide();
+    configurationWindows->show();
 }
 
 void SystemTrayIcon::throwErrorAlert(const QString &text)
@@ -207,4 +213,15 @@ void SystemTrayIcon::enableEasterEgg()
             fileSendedSound->deleteLater();
             fileSendedSound = new QSound(":/Easter_Egg.wav");
         }
+}
+
+void SystemTrayIcon::openLastUrl()
+{
+    QDesktopServices::openUrl(lastUrl);
+}
+
+void SystemTrayIcon::activatedTrigerred(QSystemTrayIcon::ActivationReason reason)
+{
+    if(reason == QSystemTrayIcon::ActivationReason::DoubleClick)
+        this->showWindowConfigurationTriggered();
 }
