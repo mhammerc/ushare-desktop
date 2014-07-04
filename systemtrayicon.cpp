@@ -19,7 +19,7 @@ SystemTrayIcon::SystemTrayIcon(QObject *qobject) :
 
     screenManager = new ScreenManager(this);
     setIcon(QIcon {":/small.png"});
-    setToolTip(tr("Daemon is running and waiting"));
+    setToolTip(tr("DAEMON_RUNNING"));
 
     setUpContextMenu();
 
@@ -37,13 +37,13 @@ void SystemTrayIcon::setUpContextMenu()
 {
     systemTrayMenu = new QMenu;
 
-    takeScreen = systemTrayMenu->addAction(tr("Take new screen"));
-    takeSelectedScreen = systemTrayMenu->addAction(tr("Take new selected screen"));
-    uploadFile = systemTrayMenu->addAction(tr("Upload specific file"));
-    uploadClipboard = systemTrayMenu->addAction(tr("Upload clipboard"));
+    takeScreen = systemTrayMenu->addAction(tr("TAKE_NEW_FULLSCREEN"));
+    takeSelectedScreen = systemTrayMenu->addAction(tr("TAKE_NEW_AREA_SELECTED_SCREEN"));
+    uploadFile = systemTrayMenu->addAction(tr("UPLOAD_CHOOSED_FILE"));
+    uploadClipboard = systemTrayMenu->addAction(tr("UPLOAD_CLIPBOARD"));
     systemTrayMenu->addSeparator();
-    showConfiguration = systemTrayMenu->addAction(tr("Configuration...", "In system tray icon"));
-    quit = systemTrayMenu->addAction(tr("Exit !"));
+    showConfiguration = systemTrayMenu->addAction(tr("CONFIGURATION", "In system tray icon"));
+    quit = systemTrayMenu->addAction(tr("EXIT"));
 
     setContextMenu(systemTrayMenu);
 }
@@ -76,7 +76,7 @@ void SystemTrayIcon::takeFullScrenTriggered()
 
 void SystemTrayIcon::uploadSelectedFileTriggered()
 {
-    QString path = FileDialog::getOpenFileName(0, tr("Select file"));
+    QString path = FileDialog::getOpenFileName(0, tr("SELECT_FILE"));
 
     if (screenManager->autoSendFile(path))
         {
@@ -98,7 +98,7 @@ void SystemTrayIcon::fileSended(QString fileName)
         QApplication::clipboard()->setText(urlPath);
 
     if(settings.value(showNotificationsSettingName).toBool())
-        this->showMessage(applicationName, tr("Congratulation !\nUpload success. The URL is :\n") + urlPath);
+        this->showMessage(applicationName, tr("UPLOAD_SUCCESS_WITH_URL", "Congratulation !\nUpload success. The URL is :\n") + urlPath);
 }
 
 void SystemTrayIcon::uploadClipboardTriggered()
@@ -161,12 +161,12 @@ void SystemTrayIcon::throwErrorAlert(const Uplimg::ErrorList &error)
 {
     if (error == Uplimg::ErrorList::UPLOAD_FAIL)
         {
-            const QString text(tr("Upload failed.\nYou must verify Uplimg's configuration or your Internet configuration to solve the problem."));
+            const QString text(tr("UPLOAD_FAILED", "Upload failed.\nYou must verify Uplimg's configuration or your Internet configuration to solve the problem."));
             this->showMessage(applicationName, text);
         }
     else if(error == Uplimg::ErrorList::UPLOAD_METHOD_NOT_CHOOSED)
         {
-            const QString text(tr("We can't upload anything.\nYou must configure method to upload before."));
+            const QString text(tr("NO_METHOD_TO_UPLOAD_CHOOSED", "We can't upload anything.\nYou must configure method to upload before."));
             this->showMessage(applicationName, text);
         }
 }

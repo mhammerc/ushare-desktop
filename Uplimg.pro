@@ -4,6 +4,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = Uplimg
 TEMPLATE = app
+TRANSLATIONS = uplimg_fr.ts uplimg_en.ts
 
 QMAKE_CXXFLAGS += -std=c++11
 

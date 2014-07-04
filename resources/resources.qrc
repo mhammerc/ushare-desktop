@@ -1,7 +1,9 @@
 <RCC>
     <qresource prefix="/">
-        <file alias="small.png">small.png</file>
-        <file alias="fileSended.wav">fileSended.wav</file>
+        <file>small.png</file>
+        <file>fileSended.wav</file>
         <file>SFML_LICENCE.txt</file>
+        <file>uplimg_en.qm</file>
+        <file>uplimg_fr.qm</file>
     </qresource>
 </RCC>

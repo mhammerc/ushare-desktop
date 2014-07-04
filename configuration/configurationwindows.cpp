@@ -2,7 +2,7 @@
 
 
 ConfigurationWindows::ConfigurationWindows(QWidget *parent) :
-    QWidget(parent), windowTitle(tr("Uplimg configuration")),
+    QWidget(parent), windowTitle(tr("UPLIMG_CONFIGURATION")),
     runOnStartupSettingName("configuration/runOnStartup"),
     showNotificationsSettingName("configuration/showNotifications"),
     playSoundSettingName("configuration/playSound"),
@@ -69,7 +69,7 @@ void ConfigurationWindows::setUpCreditsSectionUI()
     creditLayout = new QVBoxLayout;
 
     //Header
-    openSourceText = new QLabel(tr("This software is open source and entirely free to use."));
+    openSourceText = new QLabel(tr("SOFTWARE_FREE_OPEN_SOURCE", "This software is open source and entirely free to use."));
 
     //Made with
     SFMLLicence = new QTextEdit;
@@ -81,8 +81,8 @@ void ConfigurationWindows::setUpCreditsSectionUI()
     SFMLLicence->setFixedSize(400,280);
 
     madeWithLayout = new QHBoxLayout;
-    madeWithQt = new QPushButton(tr("Made with the flexibility of Qt"));
-    madeWithSFML = new QPushButton(tr("Made with the lightness of SFML"));
+    madeWithQt = new QPushButton(tr("MADE_WITH_QT", "Made with the flexibility of Qt"));
+    madeWithSFML = new QPushButton(tr("MADE_WITH_SFML", "Made with the lightness of SFML"));
     madeWithLayout->addWidget(madeWithQt);
     madeWithLayout->addStretch();
     madeWithLayout->addWidget(madeWithSFML);
@@ -90,7 +90,7 @@ void ConfigurationWindows::setUpCreditsSectionUI()
     QObject::connect(madeWithSFML, SIGNAL(clicked()), SFMLLicence, SLOT(show()));
 
     //Contributors
-    leadDevelopper = new QLabel(tr("Main developper and project manager : <span style=\"color:red;\">Martin Hammerchmidt alias Imote</span>"));
+    leadDevelopper = new QLabel(tr("MAIN_DEVELOPPER", "Main developper and project manager : <span style=\"color:red;\">Martin Hammerchmidt alias Imote</span>"));
     allContributorsLayout = new QHBoxLayout;
     allContributorsOne = new QListWidget;
     allContributorsTwo = new QListWidget;
@@ -99,7 +99,7 @@ void ConfigurationWindows::setUpCreditsSectionUI()
     new QListWidgetItem("You <3", allContributorsOne); new QListWidgetItem("Krayon973", allContributorsTwo);
     new QListWidgetItem("Yohann", allContributorsOne); new QListWidgetItem("Si0ls", allContributorsTwo);
     new QListWidgetItem("Eldraeildor", allContributorsOne);
-    new QListWidgetItem(tr("And, don't forget to be Happy 4 Ever"), allContributorsOne);
+    new QListWidgetItem(tr("HAPPY4EVER", "And, don't forget to be Happy 4 Ever"), allContributorsOne);
 
     creditLayout->addWidget(openSourceText);
     creditLayout->addLayout(madeWithLayout);
@@ -124,37 +124,37 @@ void ConfigurationWindows::setUpGeneralSectionUI()
     formGeneral = new QFormLayout();
 
     runOnStartup = new QCheckBox();
-    formGeneral->addRow(tr("Run on startup"), runOnStartup);
+    formGeneral->addRow(tr("RUN_ON_STARTUP"), runOnStartup);
 
     showNotifications = new QCheckBox();
-    formGeneral->addRow(tr("Show notifications when event take place"), showNotifications);
+    formGeneral->addRow(tr("SHOW_NOTIFICATION"), showNotifications);
 
     playSound = new QCheckBox();
-    formGeneral->addRow(tr("Play sounds when event take place"), playSound);
+    formGeneral->addRow(tr("PLAY_SOUND"), playSound);
 
     copyToClipboard = new QCheckBox();
-    formGeneral->addRow(tr("Copy file's link when it is uploaded to clipboard"), copyToClipboard);
+    formGeneral->addRow(tr("COPY_FILE_LINK_CLIPBOARD"), copyToClipboard);
 
     lang = new QComboBox();
     lang->addItem("English");
     lang->addItem("Français");
-    formGeneral->addRow(tr("Lang of the application"), lang);
+    formGeneral->addRow(tr("APPLICATION_LANG", "Application's lang :"), lang);
 
     onlineServicesLayout = new QVBoxLayout;
 
     FTPLayout = new QHBoxLayout;
-    FTPMethod = new QRadioButton(tr("Use FTP to send pictures"));
-    configureFTPButton = new QPushButton(tr("Configure FTP..."));
+    FTPMethod = new QRadioButton(tr("USE_FTP"));
+    configureFTPButton = new QPushButton(tr("CONFIGURE_FTP"));
     FTPLayout->addWidget(FTPMethod);
     FTPLayout->addWidget(configureFTPButton);
 
     HTTPLayout = new QVBoxLayout;
     HTTPLayoutForRadioAndPushButton = new QHBoxLayout;
-    HTTPMethod = new QRadioButton(tr("Send HTTP request to put pictures online"));
-    configureHTTPButton = new QPushButton(tr("Configure HTTP POST..."));
+    HTTPMethod = new QRadioButton(tr("USE_HTTP"));
+    configureHTTPButton = new QPushButton(tr("CONFIGURE_HTTP"));
     HTTPLayoutForRadioAndPushButton->addWidget(HTTPMethod);
     HTTPLayoutForRadioAndPushButton->addWidget(configureHTTPButton);
-    HTTPWarning = new QLabel(tr("<font size='2'><span style='color:blue;'>(!)</span> Only for advanced users</font>"));
+    HTTPWarning = new QLabel(tr("ONLY_ADVANCED_USERS", "<font size='2'><span style='color:blue;'>(!)</span> Only for advanced users</font>"));
     HTTPLayout->addLayout(HTTPLayoutForRadioAndPushButton);
     HTTPLayout->addWidget(HTTPWarning);
 
@@ -180,7 +180,7 @@ void ConfigurationWindows::setUpGeneralSectionUI()
 
     generalSection->setLayout(generalLayout);
 
-    windowContent->addTab(generalSection, tr("General", "Configuration menu, general section"));
+    windowContent->addTab(generalSection, tr("GENERAL", "Configuration menu, general section"));
 }
 
 void ConfigurationWindows::configureFTP()

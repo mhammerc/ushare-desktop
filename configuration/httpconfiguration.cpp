@@ -44,12 +44,12 @@ void HTTPConfiguration::setUpUI()
     fileFieldName = new QLineEdit();
     webPath = new QLineEdit();
 
-    formLayout->addRow(tr("Your host :"), host);
-    formLayout->addRow(tr("Port of your server :"), port);
-    formLayout->addRow(tr("Name of the field containing the file  :"), fileFieldName);
-    formLayout->addRow(tr("URL to web access :"), webPath);
+    formLayout->addRow(tr("YOUR_HOST"), host);
+    formLayout->addRow(tr("YOUR_PORT"), port);
+    formLayout->addRow(tr("YOUR_FILE_FIED_NAME"), fileFieldName);
+    formLayout->addRow(tr("YOUR_WEB_PATH"), webPath);
 
-    mainGroupLayout = new QGroupBox(tr("Modify HTTP credentials"));
+    mainGroupLayout = new QGroupBox(tr("SET_HTTP_CREDENTIALS"));
     mainGroupLayout->setLayout(formLayout);
 
     validateLayout = new QHBoxLayout;

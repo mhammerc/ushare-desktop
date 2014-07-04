@@ -45,14 +45,14 @@ void FTPConfiguration::setUpUI()
     basePath = new QLineEdit();
     webPath = new QLineEdit();
 
-    formLayout->addRow(tr("Your host :"), host);
-    formLayout->addRow(tr("Port of your server :"), port);
-    formLayout->addRow(tr("Username to connect :"), username);
-    formLayout->addRow(tr("Password to connect :"), password);
-    formLayout->addRow(tr("Path to upload directory on distant server :"), basePath);
-    formLayout->addRow(tr("URL to web access :"), webPath);
+    formLayout->addRow(tr("SET_HOST"), host);
+    formLayout->addRow(tr("SET_PORT"), port);
+    formLayout->addRow(tr("SET_USERNAME"), username);
+    formLayout->addRow(tr("SET_PASSWORD"), password);
+    formLayout->addRow(tr("PATh_ON_DISTANT_SERVER"), basePath);
+    formLayout->addRow(tr("ONLINE_URL"), webPath);
 
-    mainGroupLayout = new QGroupBox(tr("Modify FTP credentials"));
+    mainGroupLayout = new QGroupBox(tr("SET_FTP_CREDENTIALS"));
     mainGroupLayout->setLayout(formLayout);
 
     validateLayout = new QHBoxLayout;
