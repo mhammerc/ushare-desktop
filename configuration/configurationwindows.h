@@ -19,6 +19,7 @@
 #include <QTextEdit>
 #include <QListWidget>
 #include <QListWidgetItem>
+#include <QMessageBox>
 
 #include <iostream>
 

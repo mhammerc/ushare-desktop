@@ -250,11 +250,10 @@ void ConfigurationWindows::langSettingModified(QString newValue)
 {
     settings.setValue(langSettingName, newValue);
 
-    /*QTranslator translator;
-    if (newValue == "Français")
-        if (translator.load("C:/uplimg_fr.qm"))
-            std::cerr << "ok";
-    QApplication::installTranslator(&translator);*/
+    if(newValue == "English")
+        QMessageBox::information(this, windowTitle, "You need to restart Uplimg.");
+    else if(newValue == "Français")
+        QMessageBox::information(this, windowTitle, "Vous devez redémarrer Uplimg.");
 }
 
 void ConfigurationWindows::closeEvent(QCloseEvent *event)
