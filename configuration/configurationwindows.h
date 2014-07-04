@@ -16,6 +16,9 @@
 #include <QTranslator>
 #include <QLabel>
 #include <QSizePolicy>
+#include <QTextEdit>
+#include <QListWidget>
+#include <QListWidgetItem>
 
 #include <iostream>
 
@@ -76,6 +79,19 @@ protected:
 
     /* Credits */
     QWidget * creditSection;
+    QVBoxLayout * creditLayout;
+    //Header
+    QLabel * openSourceText;
+    //Made with
+    QHBoxLayout * madeWithLayout;
+    QPushButton * madeWithQt;
+    QPushButton * madeWithSFML;
+    QTextEdit * SFMLLicence;
+    //Contributors
+    QLabel * leadDevelopper;
+    QHBoxLayout * allContributorsLayout;
+    QListWidget * allContributorsOne;
+    QListWidget * allContributorsTwo;
 
     /* To close window */
     QHBoxLayout * validateLayout;

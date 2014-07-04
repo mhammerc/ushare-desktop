@@ -18,7 +18,7 @@ void SelectAreaBand::selectArea()
 void SelectAreaBand::mousePressEvent(QMouseEvent * event)
 {
     origin = event->pos();
-    rubberBand->setGeometry(QRect(origin, QSize(10,10)));
+    rubberBand->setGeometry(QRect(origin, QSize(0,0)));
     rubberBand->show();
 }
 

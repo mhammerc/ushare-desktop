@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file alias="small.png">small.png</file>
         <file alias="fileSended.wav">fileSended.wav</file>
+        <file>SFML_LICENCE.txt</file>
     </qresource>
 </RCC>
