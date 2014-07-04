@@ -202,9 +202,9 @@ SystemTrayIcon::~SystemTrayIcon()
 
 void SystemTrayIcon::enableEasterEgg()
 {
-if(fileSendedSound->fileName() != ":/Easter_Egg.wav")
-{
-    fileSendedSound->deleteLater();
-    fileSendedSound = new QSound(":/Easter_Egg.wav");
-}
+    if(fileSendedSound->fileName() != ":/Easter_Egg.wav")
+        {
+            fileSendedSound->deleteLater();
+            fileSendedSound = new QSound(":/Easter_Egg.wav");
+        }
 }
