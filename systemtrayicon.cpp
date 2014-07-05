@@ -181,9 +181,9 @@ QString SystemTrayIcon::getUploadedFileURL(const QString &fileName)
 
 void SystemTrayIcon::showWindowConfigurationTriggered()
 {
-    configurationWindows->showNormal();
-    //configurationWindows->hide();
-    //configurationWindows->show();
+    configurationWindows->show();
+    configurationWindows->hide();
+    configurationWindows->show();
     /* This tricks is needed else window not open over other windows. This tricks is not visible by user.*/
 }
 
@@ -223,10 +223,10 @@ void SystemTrayIcon::firstStart()
     settings.setValue(playSoundSettingName, true);
     settings.setValue(copyToClipboardSettingName, true);
     settings.setValue(choosedMethodSettingName, "FTP");
-    settings.setValue(takeFullScrenShortcutSettingName, "Alt+Shift+1");
-    settings.setValue(takeSelectedAreaScreenShortcutSettingName, "Alt+Shift+2");
-    settings.setValue(uploadFileShortcutSettingName, "Alt+Shift+3");
-    settings.setValue(uploadClipboardShortcutSettingName, "Alt+Shift+4");
+    settings.setValue(takeFullScrenShortcutSettingName, "Alt+1");
+    settings.setValue(takeSelectedAreaScreenShortcutSettingName, "Alt+2");
+    settings.setValue(uploadFileShortcutSettingName, "Alt+3");
+    settings.setValue(uploadClipboardShortcutSettingName, "Alt+4");
 }
 
 SystemTrayIcon::~SystemTrayIcon()
