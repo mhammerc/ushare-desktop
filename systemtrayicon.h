@@ -20,6 +20,10 @@
 #include <QAudioOutput>
 #include <QDesktopServices>
 #include <QUrl>
+#include <QVariant>
+
+#include <QxtCore/Qxt>
+#include <QxtWidgets/QxtGlobalShortcut>
 
 #include "configuration/configurationwindows.h"
 #include "screenmanager.h"
@@ -43,6 +47,10 @@ protected:
     const QString showNotificationsSettingName;
     const QString playSoundSettingName;
     const QString copyToClipboardSettingName;
+    const QString takeFullScrenShortcutSettingName;
+    const QString takeSelectedAreaScreenShortcutSettingName;
+    const QString uploadFileShortcutSettingName;
+    const QString uploadClipboardShortcutSettingName;
     QSettings settings;
 
     ConfigurationWindows * configurationWindows;
@@ -65,6 +73,16 @@ protected:
     void firstStart();
 
     QSound * fileSendedSound;
+
+    QxtGlobalShortcut * takeFullScrenShortcut;
+    QxtGlobalShortcut * takeSelectedAreaScreenShortcut;
+    QxtGlobalShortcut * uploadFileShortcut;
+    QxtGlobalShortcut * uploadClipboardShortcut;
+
+    QKeySequence takeFullScreenKeySequence;
+    QKeySequence takeSelectedAreaKeySequence;
+    QKeySequence uploadFileKeySequence;
+    QKeySequence uploadClipboardKeySequence;
 
     //Temp
     QString fileName;

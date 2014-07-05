@@ -9,18 +9,32 @@ SystemTrayIcon::SystemTrayIcon(QObject *qobject) :
     choosedMethodSettingName("configuration/method"),
     showNotificationsSettingName("configuration/showNotifications"),
     playSoundSettingName("configuration/playSound"),
-    copyToClipboardSettingName("configuration/clipboard")
+    copyToClipboardSettingName("configuration/clipboard"),
+    takeFullScrenShortcutSettingName("configuration/shortcut/takeFullScreen"),
+    takeSelectedAreaScreenShortcutSettingName("configuration/shortcut/takeSelectedArea"),
+    uploadFileShortcutSettingName("configuration/shortcut/uploadFile"),
+    uploadClipboardShortcutSettingName("configuration/shortcut/uploadClipboard")
 {
     if(settings.value(runOnStartupSettingName).isNull()) //First time the application is started
         firstStart();
 
-    fileSendedSound = new QSound(":/fileSended.wav");
+    fileSendedSound = new QSound(":/fileSended.wav", this);
 
     configurationWindows = new ConfigurationWindows(this);
 
     screenManager = new ScreenManager(this);
     setIcon(QIcon {":/small.png"});
     setToolTip(tr("DAEMON_RUNNING"));
+
+    takeFullScreenKeySequence = QKeySequence(settings.value(takeFullScrenShortcutSettingName).toString());
+    takeSelectedAreaKeySequence = QKeySequence(settings.value(takeSelectedAreaScreenShortcutSettingName).toString());
+    uploadFileKeySequence = QKeySequence::fromString(settings.value(uploadFileShortcutSettingName).toString());
+    uploadClipboardKeySequence = QKeySequence::fromString(settings.value(uploadClipboardShortcutSettingName).toString());
+
+    takeFullScrenShortcut = new QxtGlobalShortcut(takeFullScreenKeySequence, this);
+    takeSelectedAreaScreenShortcut = new QxtGlobalShortcut(takeSelectedAreaKeySequence, this);
+    uploadFileShortcut = new QxtGlobalShortcut(uploadFileKeySequence, this);
+    uploadClipboardShortcut = new QxtGlobalShortcut(uploadClipboardKeySequence, this);
 
     setUpContextMenu();
 
@@ -34,7 +48,10 @@ SystemTrayIcon::SystemTrayIcon(QObject *qobject) :
     QObject::connect(this, SIGNAL(messageClicked()), this, SLOT(openLastUrl()));
     QObject::connect(this, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(activatedTrigerred(QSystemTrayIcon::ActivationReason)));
 
-    QSystemTrayIcon::show();
+    QObject::connect(takeFullScrenShortcut, SIGNAL(activated()), this, SLOT(takeFullScrenTriggered()));
+    QObject::connect(takeSelectedAreaScreenShortcut, SIGNAL(activated()), this, SLOT(takeSelectedAreaScreenTriggered()));
+    QObject::connect(uploadFileShortcut, SIGNAL(activated()), this, SLOT(uploadSelectedFileTriggered()));
+    QObject::connect(uploadClipboardShortcut, SIGNAL(activated()), this, SLOT(uploadClipboardTriggered()));
 }
 
 void SystemTrayIcon::setUpContextMenu()
@@ -48,6 +65,13 @@ void SystemTrayIcon::setUpContextMenu()
     systemTrayMenu->addSeparator();
     showConfiguration = systemTrayMenu->addAction(tr("CONFIGURATION", "In system tray icon"));
     quit = systemTrayMenu->addAction(tr("EXIT"));
+
+    takeScreen->setShortcut(takeFullScrenShortcut->shortcut());
+    takeSelectedScreen->setShortcut(takeSelectedAreaScreenShortcut->shortcut());
+    uploadFile->setShortcut(uploadFileShortcut->shortcut());
+    uploadClipboard->setShortcut(uploadClipboardShortcut->shortcut());
+
+    systemTrayMenu->setTearOffEnabled(true);
 
     setContextMenu(systemTrayMenu);
 }
@@ -95,7 +119,7 @@ void SystemTrayIcon::uploadSelectedFileTriggered()
 }
 
 void SystemTrayIcon::fileSended(QString fileName)
-{    
+{
     if(settings.value(playSoundSettingName).toBool())
         fileSendedSound->play();
 
@@ -157,9 +181,10 @@ QString SystemTrayIcon::getUploadedFileURL(const QString &fileName)
 
 void SystemTrayIcon::showWindowConfigurationTriggered()
 {
-    configurationWindows->show();
-    configurationWindows->hide();
-    configurationWindows->show();
+    configurationWindows->showNormal();
+    //configurationWindows->hide();
+    //configurationWindows->show();
+    /* This tricks is needed else window not open over other windows. This tricks is not visible by user.*/
 }
 
 void SystemTrayIcon::throwErrorAlert(const QString &text)
@@ -198,12 +223,15 @@ void SystemTrayIcon::firstStart()
     settings.setValue(playSoundSettingName, true);
     settings.setValue(copyToClipboardSettingName, true);
     settings.setValue(choosedMethodSettingName, "FTP");
+    settings.setValue(takeFullScrenShortcutSettingName, "Alt+Shift+1");
+    settings.setValue(takeSelectedAreaScreenShortcutSettingName, "Alt+Shift+2");
+    settings.setValue(uploadFileShortcutSettingName, "Alt+Shift+3");
+    settings.setValue(uploadClipboardShortcutSettingName, "Alt+Shift+4");
 }
 
 SystemTrayIcon::~SystemTrayIcon()
 {
     configurationWindows->deleteLater();
-    fileSendedSound->deleteLater();
 }
 
 void SystemTrayIcon::enableEasterEgg()

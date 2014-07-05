@@ -1,4 +1,6 @@
 QT       += core gui network multimedia widgets
+CONFIG += qxt
+QXT += core gui widgets
 
 TARGET = Uplimg
 TEMPLATE = app
@@ -34,9 +36,17 @@ SOURCES += \
     uplimg.cpp \
     configuration/httpconfiguration.cpp
 
-INCLUDEPATH = D:\Development\SFML\SFML-master\include
-DEPENDPATH = D:\Development\SFML\SFML-master\include
-LIBS = -LD:\Development\SFML\SFML-master-build-gcc-32\lib
+
+INCLUDEPATH += D:\Development\SFML\SFML-master\include
+DEPENDPATH += D:\Development\SFML\SFML-master\include
+LIBS += -LD:\Development\SFML\SFML-master-build-gcc-32\lib
 
 CONFIG(release, debug|release): LIBS += -lsfml-audio -lsfml-graphics -lsfml-network -lsfml-window -lsfml-system
 CONFIG(debug, debug|release): LIBS += -lsfml-audio-d -lsfml-graphics-d -lsfml-network-d -lsfml-window-d -lsfml-system-d
+
+INCLUDEPATH += D:\Development\libqxt-qt5\include
+DEPENDPATH += D:\Development\libqxt-qt5\include
+LIBS += -LD:\Development\libqxt-qt5\lib
+
+CONFIG(release, debug|release): LIBS += -lQxtCore -lQxtDesignerPlugins -lQxtNetwork -lQxtSql -lQxtWeb -lQxtWidgets
+CONFIG(debug, debug|release): LIBS += -lQxtCored -lQxtDesignerPluginsd -lQxtNetworkd -lQxtSqld -lQxtWebd -lQxtWidgetsd

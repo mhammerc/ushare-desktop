@@ -16,6 +16,7 @@
 #include <QNetworkReply>
 #include <QSignalMapper>
 
+
 #include <fstream>
 
 #include <iostream>
@@ -46,6 +47,7 @@ int main(int argc, char *argv[])
     app.installTranslator(&translator);
 
     SystemTrayIcon systemTray;
+    systemTray.show();
 
     return app.exec();
 }
