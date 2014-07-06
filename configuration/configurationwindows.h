@@ -25,7 +25,7 @@
 #include <iostream>
 
 #include "ftpconfiguration.h"
-#include "HTTPConfiguration.h"
+#include "httpconfiguration.h"
 
 class SystemTrayIcon;
 
