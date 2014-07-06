@@ -4,5 +4,6 @@
         <file>fileSended.wav</file>
         <file>SFML_LICENCE.txt</file>
         <file>Easter_Egg.wav</file>
+        <file>lgpl-2.1.txt</file>
     </qresource>
 </RCC>
