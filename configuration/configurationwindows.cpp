@@ -167,7 +167,7 @@ void ConfigurationWindows::setUpGeneralSectionUI()
     onlineServicesLayout->addLayout(FTPLayout);
     onlineServicesLayout->addLayout(HTTPLayout);
 
-    onlineServices = new QGroupBox("Online services");
+    onlineServices = new QGroupBox(tr("ONLINE_SERVICES_GROUPBOX"));
     onlineServices->setLayout(onlineServicesLayout);
 
     validate = new QPushButton("Ok");
