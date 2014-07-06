@@ -90,7 +90,7 @@
         <location filename="configuration/configurationwindows.cpp" line="89"/>
         <source>MADE_WITH_SFML</source>
         <comment>Made with the lightness of SFML</comment>
-        <translation type="unfinished">Développé avec la légèreté de SFML</translation>
+        <translation>Développé avec la légèreté de SFML</translation>
     </message>
     <message>
         <location filename="configuration/configurationwindows.cpp" line="97"/>
@@ -102,7 +102,7 @@
         <location filename="configuration/configurationwindows.cpp" line="108"/>
         <source>HAPPY4EVER</source>
         <comment>And, don&apos;t forget to be Happy 4 Ever</comment>
-        <translation type="unfinished">Enfin, soyez &quot;Happy 4 Ever&quot; !</translation>
+        <translation>Enfin, n&apos;oubliez jamais le but même de la vie. Soyez &quot;Happy 4 Ever&quot; !</translation>
     </message>
     <message>
         <location filename="configuration/configurationwindows.cpp" line="117"/>

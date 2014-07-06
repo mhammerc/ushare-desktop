@@ -105,12 +105,13 @@ void ConfigurationWindows::setUpCreditsSectionUI()
     new QListWidgetItem("Yohann Hammad", allContributorsOne);
     new QListWidgetItem("Si0ls", allContributorsTwo);
     new QListWidgetItem("Eldraeildor", allContributorsOne);
-    new QListWidgetItem(tr("HAPPY4EVER", "And, don't forget to be Happy 4 Ever"), allContributorsOne);
+    happy4Ever = new QLabel(tr("HAPPY4EVER", "And, don't forget to be Happy 4 Ever"));
 
     creditLayout->addWidget(openSourceText);
     creditLayout->addLayout(madeWithLayout);
     creditLayout->addWidget(leadDevelopper);
     creditLayout->addLayout(allContributorsLayout);
+    creditLayout->addWidget(happy4Ever);
     creditLayout->addStretch();
 
     creditSection->setLayout(creditLayout);

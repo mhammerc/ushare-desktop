@@ -97,6 +97,7 @@ protected:
     QHBoxLayout * allContributorsLayout;
     QListWidget * allContributorsOne;
     QListWidget * allContributorsTwo;
+    QLabel * happy4Ever;
 
     /* To close window */
     QHBoxLayout * validateLayout;
