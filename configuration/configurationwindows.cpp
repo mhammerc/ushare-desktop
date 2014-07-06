@@ -265,8 +265,8 @@ void ConfigurationWindows::closeEvent(QCloseEvent *event)
 
 ConfigurationWindows::~ConfigurationWindows()
 {
-    delete FTPConf;
-    delete HTTPConf;
+    FTPConf->deleteLater();
+    HTTPConf->deleteLater();
 }
 
 void ConfigurationWindows::keyPressEvent(QKeyEvent * event)
