@@ -20,7 +20,7 @@ SystemTrayIcon::SystemTrayIcon(QObject *qobject) :
 
     fileSendedSound = new QSound(":/fileSended.wav", this);
 
-    configurationWindows = new ConfigurationWindows(this);
+    configurationWindows = 0;
 
     screenManager = new ScreenManager(this);
     setIcon(QIcon {":/small.png"});
@@ -181,10 +181,10 @@ QString SystemTrayIcon::getUploadedFileURL(const QString &fileName)
 
 void SystemTrayIcon::showWindowConfigurationTriggered()
 {
+    if(configurationWindows == 0)
+        configurationWindows = new ConfigurationWindows(this);
     configurationWindows->show();
-    configurationWindows->hide();
-    configurationWindows->show();
-    /* This tricks is needed else window not open over other windows. This tricks is not visible by user.*/
+    configurationWindows->setWindowState(Qt::WindowActive);
 }
 
 void SystemTrayIcon::throwErrorAlert(const QString &text)
