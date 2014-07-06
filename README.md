@@ -20,6 +20,6 @@ Il vous permet de partager des images et d'autres fichier en peu de temps.
 
 Uplimg est actuelement en version bêta et est donc toujours en cours de développement. Des options sont rajoutées au fur et à mesure. Vous pouvez contribuer au projet en ajoutant une/des issue(s) et/ou en créant des pull requests.
 
-Uniquement Windows est entièrement compatible à l'heure actuel. Vous pouvez toujours essayer de compiler Uplimg sur Linux et Mac mais vous rencontrerez probablement quelques problèmes. Vous avez besoin de la dernière version de Qt, de Qxt et de SFML.
+Seul Windows est officiellement supporté à l'heure actuelle. Vous pouvez toujours essayer de compiler Uplimg sur Linux et Mac mais vous rencontrerez probablement quelques problèmes. Vous avez besoin des dernières versions de Qt, de Qxt et de SFML.
 
 Uplimg est développé par Imote : [Site web](http://www.imote.eu/)  |  [Twitter](https://twitter.com/_MartinH_)
