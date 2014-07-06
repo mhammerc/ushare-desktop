@@ -49,6 +49,7 @@ protected:
     const QString langSettingName;
     const QString FTPMethodSettingName;
     const QString choosedMethodSettingName;
+    const QString autoOpenToBrowserSettingName;
 
     QVBoxLayout * mainLayout;
     QTabWidget * windowContent;
@@ -58,12 +59,19 @@ protected:
     QFormLayout * formGeneral;
     QVBoxLayout * generalLayout;
     //Main Form
-    QCheckBox * runOnStartup;
-    QCheckBox * showNotifications;
+    QVBoxLayout * generalSettingsLayout;
+    QGroupBox * generalSettings;
+
     QCheckBox * playSound;
+    QCheckBox * showNotifications;
     QCheckBox * copyToClipboard;
+    QCheckBox * autoOpenToBrowser;
+    QCheckBox * runOnStartup;
     QComboBox * lang;
-    //Online Services
+
+    /* Online Services */
+    QWidget * uploadSection;
+    QVBoxLayout * uploadLayout;
     QGroupBox * onlineServices;
     QVBoxLayout * onlineServicesLayout;
 
@@ -89,9 +97,11 @@ protected:
     QLabel * openSourceText;
     //Made with
     QHBoxLayout * madeWithLayout;
-    QPushButton * madeWithQt;
     QPushButton * madeWithSFML;
+    QPushButton * madeWithQt;
+    QPushButton * madeWithQxt;
     QTextEdit * SFMLLicence;
+    QTextEdit * LGPLLicence;
     //Contributors
     QLabel * leadDevelopper;
     QHBoxLayout * allContributorsLayout;
@@ -107,6 +117,7 @@ protected:
     //Fonctions
     void setUpUI();
     void setUpGeneralSectionUI();
+    void setUpUploadSectionUI();
     void setUpHotkeysSectionUI();
     void setUpCreditsSectionUI();
 
@@ -118,6 +129,7 @@ signals:
 
 public slots :
     void runOnStartupSettingModified(bool);
+    void autoOpenToBrowserSettingModified(bool);
     void showNotificationSettingModified(bool);
     void playSoundSettingModified(bool);
     void copyToClipboardSettingModified(bool);

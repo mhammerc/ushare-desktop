@@ -13,7 +13,8 @@ SystemTrayIcon::SystemTrayIcon(QObject *qobject) :
     takeFullScrenShortcutSettingName("configuration/shortcut/takeFullScreen"),
     takeSelectedAreaScreenShortcutSettingName("configuration/shortcut/takeSelectedArea"),
     uploadFileShortcutSettingName("configuration/shortcut/uploadFile"),
-    uploadClipboardShortcutSettingName("configuration/shortcut/uploadClipboard")
+    uploadClipboardShortcutSettingName("configuration/shortcut/uploadClipboard"),
+    autoOpenToBrowserSettingName("configuration/autoOpenToBrowser")
 {
     if(settings.value(runOnStartupSettingName).isNull()) //First time the application is started
         firstStart();
@@ -125,6 +126,9 @@ void SystemTrayIcon::fileSended(QString fileName)
 
     const QString urlPath = getUploadedFileURL(fileName);
     lastUrl.setUrl(urlPath);
+
+    if(settings.value(autoOpenToBrowserSettingName).toBool())
+        openLastUrl();
 
     if(settings.value(copyToClipboardSettingName).toBool())
         QApplication::clipboard()->setText(urlPath);
@@ -245,11 +249,12 @@ void SystemTrayIcon::enableEasterEgg()
 
 void SystemTrayIcon::openLastUrl()
 {
-    QDesktopServices::openUrl(lastUrl);
+    if(!lastUrl.toString().isNull())
+        QDesktopServices::openUrl(lastUrl);
 }
 
 void SystemTrayIcon::activatedTrigerred(QSystemTrayIcon::ActivationReason reason)
 {
-    if(reason == QSystemTrayIcon::ActivationReason::DoubleClick)
-        this->showWindowConfigurationTriggered();
+    if(reason == QSystemTrayIcon::ActivationReason::Trigger)
+        this->openLastUrl();
 }

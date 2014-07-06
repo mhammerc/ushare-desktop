@@ -10,8 +10,8 @@ HTTPPostUpload::HTTPPostUpload()
 
 HTTPPostUpload::~HTTPPostUpload()
 {
-    delete container;
-    delete file;
+    container->deleteLater();
+    file->deleteLater();
 }
 
 void HTTPPostUpload::setHost(const QString &host, int port)

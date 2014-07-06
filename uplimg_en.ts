@@ -21,104 +21,115 @@
         <translation>This software is open source and entirely free to use.</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="88"/>
+        <location filename="configuration/configurationwindows.cpp" line="97"/>
         <source>MADE_WITH_QT</source>
         <comment>Made with the flexibility of Qt</comment>
-        <translation>Made with the flexibility of Qt</translation>
+        <translation>With the flexibility of Qt</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="89"/>
+        <location filename="configuration/configurationwindows.cpp" line="96"/>
         <source>MADE_WITH_SFML</source>
         <comment>Made with the lightness of SFML</comment>
-        <translation>Made with the lightness of SFML</translation>
+        <translation>With the lightness of SFML</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="97"/>
+        <location filename="configuration/configurationwindows.cpp" line="91"/>
+        <source>LGPL Licence</source>
+        <translation>LGPL Licence</translation>
+    </message>
+    <message>
+        <location filename="configuration/configurationwindows.cpp" line="98"/>
+        <source>MADE_WITH_QXT</source>
+        <comment>Made with the powerfull of Qxt</comment>
+        <translation>With the powerfull of Qxt</translation>
+    </message>
+    <message>
+        <location filename="configuration/configurationwindows.cpp" line="109"/>
         <source>MAIN_DEVELOPPER</source>
         <comment>Main developper and project manager : &lt;span style=&quot;color:red;&quot;&gt;Martin Hammerchmidt alias Imote&lt;/span&gt;</comment>
         <translation>Main developper and project manager : &lt;span style=&quot;color:red;&quot;&gt;Martin Hammerchmidt alias Imote&lt;/span&gt;</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="108"/>
+        <location filename="configuration/configurationwindows.cpp" line="120"/>
         <source>HAPPY4EVER</source>
         <comment>And, don&apos;t forget to be Happy 4 Ever</comment>
         <translation>And, don&apos;t forget to be Happy 4 Ever !</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="117"/>
+        <location filename="configuration/configurationwindows.cpp" line="130"/>
         <source>Credits</source>
         <translation>Credits</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="123"/>
+        <location filename="configuration/configurationwindows.cpp" line="136"/>
         <source>Hotkeys</source>
         <translation>Hotkeys</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="133"/>
+        <location filename="configuration/configurationwindows.cpp" line="146"/>
         <source>RUN_ON_STARTUP</source>
         <oldsource>Run on startup</oldsource>
         <translation>Start on startup</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="136"/>
+        <location filename="configuration/configurationwindows.cpp" line="149"/>
         <source>SHOW_NOTIFICATION</source>
         <oldsource>Show notifications when event take place</oldsource>
         <translation>Show notifications</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="139"/>
+        <location filename="configuration/configurationwindows.cpp" line="152"/>
         <source>PLAY_SOUND</source>
         <translation>Play sounds</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="147"/>
+        <location filename="configuration/configurationwindows.cpp" line="160"/>
         <source>APPLICATION_LANG</source>
         <comment>Application&apos;s lang :</comment>
         <translation>Uplimg&apos;s lang :</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="152"/>
+        <location filename="configuration/configurationwindows.cpp" line="165"/>
         <source>USE_FTP</source>
         <translation>Use FTP server</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="159"/>
+        <location filename="configuration/configurationwindows.cpp" line="172"/>
         <source>USE_HTTP</source>
         <translation>Use HTTP server</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="163"/>
+        <location filename="configuration/configurationwindows.cpp" line="176"/>
         <source>ONLY_ADVANCED_USERS</source>
         <comment>&lt;font size=&apos;2&apos;&gt;&lt;span style=&apos;color:blue;&apos;&gt;(!)&lt;/span&gt; Only for advanced users&lt;/font&gt;</comment>
         <translation>&lt;font size=&apos;2&apos;&gt;&lt;span style=&apos;color:blue;&apos;&gt;(!)&lt;/span&gt; Only for advanced users&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="142"/>
+        <location filename="configuration/configurationwindows.cpp" line="155"/>
         <source>COPY_FILE_LINK_CLIPBOARD</source>
         <oldsource>Copy file&apos;s link when it is uploaded to clipboard</oldsource>
-        <translation>Copy web link to clipboard</translation>
+        <translation>Copy web link</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="153"/>
+        <location filename="configuration/configurationwindows.cpp" line="166"/>
         <source>CONFIGURE_FTP</source>
         <oldsource>Configure FTP...</oldsource>
         <translation>Set FTP server</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="160"/>
+        <location filename="configuration/configurationwindows.cpp" line="173"/>
         <source>CONFIGURE_HTTP</source>
         <oldsource>Configure HTTP POST...</oldsource>
         <translation>Set HTTP parameters</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="170"/>
+        <location filename="configuration/configurationwindows.cpp" line="183"/>
         <source>ONLINE_SERVICES_GROUPBOX</source>
         <oldsource>Online services</oldsource>
         <translation>Online services</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="189"/>
+        <location filename="configuration/configurationwindows.cpp" line="202"/>
         <source>GENERAL</source>
         <oldsource>General</oldsource>
         <comment>Configuration menu, general section</comment>

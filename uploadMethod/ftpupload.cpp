@@ -13,7 +13,6 @@ FTPUpload::FTPUpload(const std::string &host, unsigned short port, const std::st
 
 bool FTPUpload::sendFile(std::string pathToLocalFile)
 {
-
     if (isOpenedConnection)
         {
             sf::Ftp::Response response = ftpClient->upload(pathToLocalFile, basePath);

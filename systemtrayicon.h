@@ -51,6 +51,7 @@ protected:
     const QString takeSelectedAreaScreenShortcutSettingName;
     const QString uploadFileShortcutSettingName;
     const QString uploadClipboardShortcutSettingName;
+    const QString autoOpenToBrowserSettingName;
     QSettings settings;
 
     ConfigurationWindows * configurationWindows;

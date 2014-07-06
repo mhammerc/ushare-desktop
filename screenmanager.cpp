@@ -12,7 +12,7 @@ ScreenManager::ScreenManager(SystemTrayIcon *parent) :
     HTTPHostSettingName("configuration/http/host"),
     HTTPPortSettingName("configuration/http/port"),
     HTTPFileFieldNameSettingName("configuration/http/fieldName"),
-    darkenFactor(40),
+    darkenFactor(10),
     parent(parent)
 {
     QObject::connect(this, SIGNAL(canSend()), parent, SLOT(sendSelectedArea()));

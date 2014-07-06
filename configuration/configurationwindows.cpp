@@ -10,7 +10,8 @@ ConfigurationWindows::ConfigurationWindows(SystemTrayIcon * parent, QWidget *qwi
     copyToClipboardSettingName("configuration/clipboard"),
     langSettingName("configuration/lang"),
     FTPMethodSettingName("configuration/ftp"),
-    choosedMethodSettingName("configuration/method")
+    choosedMethodSettingName("configuration/method"),
+    autoOpenToBrowserSettingName("configuration/autoOpenToBrowser")
 {
     this->parent = parent;
     QObject::connect(this, SIGNAL(easterEgg()), parent, SLOT(enableEasterEgg()));
@@ -40,6 +41,7 @@ ConfigurationWindows::ConfigurationWindows(SystemTrayIcon * parent, QWidget *qwi
     QObject::connect(playSound, SIGNAL(toggled(bool)), this, SLOT(playSoundSettingModified(bool)));
     QObject::connect(copyToClipboard, SIGNAL(toggled(bool)), this, SLOT(copyToClipboardSettingModified(bool)));
     QObject::connect(lang, SIGNAL(currentTextChanged(QString)), this, SLOT(langSettingModified(QString)));
+    QObject::connect(autoOpenToBrowser, SIGNAL(clicked(bool)), this, SLOT(autoOpenToBrowserSettingModified(bool)));
 
     QObject::connect(FTPMethod, SIGNAL(toggled(bool)), this, SLOT(FTPMethodSettingModified(bool)));
     QObject::connect(HTTPMethod, SIGNAL(toggled(bool)), this, SLOT(HTTPMethodSettingModified(bool)));
@@ -61,6 +63,7 @@ void ConfigurationWindows::setUpUI()
     mainLayout = new QVBoxLayout();
 
     this->setUpGeneralSectionUI();
+    this->setUpUploadSectionUI();
     this->setUpHotkeysSectionUI();
     this->setUpCreditsSectionUI();
 
@@ -84,14 +87,26 @@ void ConfigurationWindows::setUpCreditsSectionUI()
     SFMLLicence->setReadOnly(true);
     SFMLLicence->setFixedSize(400,280);
 
+    LGPLLicence = new QTextEdit;
+    QFile LGPLLicenceFile(":/lgpl-2.1.txt");
+    LGPLLicenceFile.open(QIODevice::ReadOnly);
+    LGPLLicence->setText(LGPLLicenceFile.readAll());
+    LGPLLicence->setWindowTitle(tr("LGPL Licence"));
+    LGPLLicence->setReadOnly(true);
+    LGPLLicence->setFixedSize(400,450);
+
     madeWithLayout = new QHBoxLayout;
-    madeWithQt = new QPushButton(tr("MADE_WITH_QT", "Made with the flexibility of Qt"));
     madeWithSFML = new QPushButton(tr("MADE_WITH_SFML", "Made with the lightness of SFML"));
-    madeWithLayout->addWidget(madeWithQt);
-    madeWithLayout->addStretch();
+    madeWithQt = new QPushButton(tr("MADE_WITH_QT", "Made with the flexibility of Qt"));
+    madeWithQxt = new QPushButton(tr("MADE_WITH_QXT", "Made with the powerfull of Qxt"));
     madeWithLayout->addWidget(madeWithSFML);
-    QObject::connect(madeWithQt, SIGNAL(clicked()), qApp, SLOT(aboutQt()));
+    madeWithLayout->addWidget(madeWithQt);
+    madeWithLayout->addWidget(madeWithQxt);
+
+
     QObject::connect(madeWithSFML, SIGNAL(clicked()), SFMLLicence, SLOT(show()));
+    QObject::connect(madeWithQt, SIGNAL(clicked()), qApp, SLOT(aboutQt()));
+    QObject::connect(madeWithQxt, SIGNAL(clicked()), LGPLLicence, SLOT(show()));
 
     //Contributors
     leadDevelopper = new QLabel(tr("MAIN_DEVELOPPER", "Main developper and project manager : <span style=\"color:red;\">Martin Hammerchmidt alias Imote</span>"));
@@ -121,32 +136,61 @@ void ConfigurationWindows::setUpCreditsSectionUI()
 void ConfigurationWindows::setUpHotkeysSectionUI()
 {
     hotkeysSection = new QWidget;
-    windowContent->addTab(hotkeysSection, tr("Hotkeys"));
+    windowContent->addTab(hotkeysSection, tr("HOTKEYS_SECTION"));
 }
 
 void ConfigurationWindows::setUpGeneralSectionUI()
 {
     generalSection = new QWidget;
 
-    formGeneral = new QFormLayout();
+    formGeneral = new QFormLayout;
 
-    runOnStartup = new QCheckBox();
-    formGeneral->addRow(tr("RUN_ON_STARTUP"), runOnStartup);
-
-    showNotifications = new QCheckBox();
-    formGeneral->addRow(tr("SHOW_NOTIFICATION"), showNotifications);
-
-    playSound = new QCheckBox();
+    playSound = new QCheckBox;
     formGeneral->addRow(tr("PLAY_SOUND"), playSound);
 
-    copyToClipboard = new QCheckBox();
+    showNotifications = new QCheckBox;
+    formGeneral->addRow(tr("SHOW_NOTIFICATION"), showNotifications);
+
+    copyToClipboard = new QCheckBox;
     formGeneral->addRow(tr("COPY_FILE_LINK_CLIPBOARD"), copyToClipboard);
 
-    lang = new QComboBox();
+    autoOpenToBrowser = new QCheckBox;
+    formGeneral->addRow(tr("AUTO_OPEN_FILE_IN_BROWSER"), autoOpenToBrowser);
+
+    runOnStartup = new QCheckBox;
+    formGeneral->addRow(tr("RUN_ON_STARTUP"), runOnStartup);
+
+    lang = new QComboBox;
     lang->addItem("English");
     lang->addItem("Français");
     formGeneral->addRow(tr("APPLICATION_LANG", "Application's lang :"), lang);
 
+    validate = new QPushButton("Ok");
+    validateLayout = new QHBoxLayout;
+    validateLayout->addStretch();
+    validateLayout->addWidget(validate);
+
+    generalSettingsLayout = new QVBoxLayout;
+    generalSettingsLayout->addLayout(formGeneral);
+    generalSettingsLayout->addStretch();
+
+    generalSettings = new QGroupBox(tr("GENERAL_SETTINGS"));
+    generalSettings->setLayout(generalSettingsLayout);
+
+    generalLayout = new QVBoxLayout;
+    generalLayout->addWidget(generalSettings);
+    generalLayout->addLayout(validateLayout);
+    generalLayout->addStretch();
+
+    generalSection->setLayout(generalLayout);
+
+    windowContent->addTab(generalSection, tr("GENERAL", "Configuration menu, general section"));
+}
+
+void ConfigurationWindows::setUpUploadSectionUI()
+{
+    uploadSection = new QWidget;
+    uploadLayout = new QVBoxLayout;
     onlineServicesLayout = new QVBoxLayout;
 
     FTPLayout = new QHBoxLayout;
@@ -171,23 +215,12 @@ void ConfigurationWindows::setUpGeneralSectionUI()
     onlineServices = new QGroupBox(tr("ONLINE_SERVICES_GROUPBOX"));
     onlineServices->setLayout(onlineServicesLayout);
 
-    validate = new QPushButton("Ok");
-    validateLayout = new QHBoxLayout;
-    validateLayout->addStretch();
-    validateLayout->addWidget(validate);
+    uploadLayout->addWidget(onlineServices);
+    uploadLayout->addStretch();
 
+    uploadSection->setLayout(uploadLayout);
 
-    generalLayout = new QVBoxLayout;
-    generalLayout->addLayout(formGeneral);
-    generalLayout->addWidget(onlineServices);
-    generalLayout->addLayout(validateLayout);
-    generalLayout->addStretch();
-
-
-
-    generalSection->setLayout(generalLayout);
-
-    windowContent->addTab(generalSection, tr("GENERAL", "Configuration menu, general section"));
+    windowContent->addTab(uploadSection, tr("UPLOAD_SECTION"));
 }
 
 void ConfigurationWindows::configureFTP()
@@ -255,6 +288,11 @@ void ConfigurationWindows::langSettingModified(QString newValue)
         QMessageBox::information(this, windowTitle, "You need to restart Uplimg.");
     else if(newValue == "Français")
         QMessageBox::information(this, windowTitle, "Vous devez redémarrer Uplimg.");
+}
+
+void ConfigurationWindows::autoOpenToBrowserSettingModified(bool checked)
+{
+    settings.setValue(autoOpenToBrowserSettingName, checked);
 }
 
 void ConfigurationWindows::closeEvent(QCloseEvent *event)
