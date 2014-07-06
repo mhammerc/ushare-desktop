@@ -11,7 +11,9 @@ ConfigurationWindows::ConfigurationWindows(SystemTrayIcon * parent, QWidget *qwi
     langSettingName("configuration/lang"),
     FTPMethodSettingName("configuration/ftp"),
     choosedMethodSettingName("configuration/method"),
-    autoOpenToBrowserSettingName("configuration/autoOpenToBrowser")
+    autoOpenToBrowserSettingName("configuration/autoOpenToBrowser"),
+    imageTypeSettingName("configuration/imageType"),
+    imageQualitySettingName("configuration/imageQuality")
 {
     this->parent = parent;
     QObject::connect(this, SIGNAL(easterEgg()), parent, SLOT(enableEasterEgg()));
@@ -21,7 +23,7 @@ ConfigurationWindows::ConfigurationWindows(SystemTrayIcon * parent, QWidget *qwi
 
     this->setUpUI();
 
-    this->setFixedSize(530, 300);
+    this->setFixedSize(530, 350);
 
     /* Load Settings */
     runOnStartup->setChecked(settings.value(runOnStartupSettingName, true).toBool());
@@ -29,11 +31,17 @@ ConfigurationWindows::ConfigurationWindows(SystemTrayIcon * parent, QWidget *qwi
     playSound->setChecked(settings.value(playSoundSettingName, true).toBool());
     copyToClipboard->setChecked(settings.value(copyToClipboardSettingName, true).toBool());
     lang->setCurrentText(settings.value(langSettingName, "English").toString());
+    imageType->setCurrentText(settings.value(imageTypeSettingName, "PNG").toString());
+    imageQuality->setValue(settings.value(imageQualitySettingName, 100).toInt());
+    imageQualityShower->setNum(settings.value(imageQualitySettingName, 100).toInt());
+
+    if(settings.value(imageTypeSettingName).toString() != "JPEG")
+        imageQuality->setDisabled(true);
 
     if (settings.value(choosedMethodSettingName).toString() == "FTP")
         FTPMethod->setChecked(true);
     else if (settings.value(choosedMethodSettingName).toString() == "HTTP")
-        HTTPMethod->setChecked(true);
+        HTTPMethod->setChecked(true);    
 
     /* Settings Modifier */
     QObject::connect(runOnStartup, SIGNAL(toggled(bool)), this, SLOT(runOnStartupSettingModified(bool)));
@@ -42,6 +50,9 @@ ConfigurationWindows::ConfigurationWindows(SystemTrayIcon * parent, QWidget *qwi
     QObject::connect(copyToClipboard, SIGNAL(toggled(bool)), this, SLOT(copyToClipboardSettingModified(bool)));
     QObject::connect(lang, SIGNAL(currentTextChanged(QString)), this, SLOT(langSettingModified(QString)));
     QObject::connect(autoOpenToBrowser, SIGNAL(clicked(bool)), this, SLOT(autoOpenToBrowserSettingModified(bool)));
+    QObject::connect(imageType, SIGNAL(currentTextChanged(QString)), this, SLOT(imageTypeSettingModified(QString)));
+    QObject::connect(imageQuality, SIGNAL(valueChanged(int)), this, SLOT(imageQualitySettingModified(int)));
+    QObject::connect(imageQuality, SIGNAL(valueChanged(int)), imageQualityShower, SLOT(setNum(int)));
 
     QObject::connect(FTPMethod, SIGNAL(toggled(bool)), this, SLOT(FTPMethodSettingModified(bool)));
     QObject::connect(HTTPMethod, SIGNAL(toggled(bool)), this, SLOT(HTTPMethodSettingModified(bool)));
@@ -120,6 +131,7 @@ void ConfigurationWindows::setUpCreditsSectionUI()
     new QListWidgetItem("Yohann Hammad", allContributorsOne);
     new QListWidgetItem("Si0ls", allContributorsTwo);
     new QListWidgetItem("Eldraeildor", allContributorsOne);
+    new QListWidgetItem("Mrs025", allContributorsTwo);
     happy4Ever = new QLabel(tr("HAPPY4EVER", "And, don't forget to be Happy 4 Ever"));
 
     creditLayout->addWidget(openSourceText);
@@ -142,44 +154,63 @@ void ConfigurationWindows::setUpHotkeysSectionUI()
 void ConfigurationWindows::setUpGeneralSectionUI()
 {
     generalSection = new QWidget;
+    generalLayout = new QVBoxLayout;
 
-    formGeneral = new QFormLayout;
-
-    playSound = new QCheckBox;
-    formGeneral->addRow(tr("PLAY_SOUND"), playSound);
-
-    showNotifications = new QCheckBox;
-    formGeneral->addRow(tr("SHOW_NOTIFICATION"), showNotifications);
-
-    copyToClipboard = new QCheckBox;
-    formGeneral->addRow(tr("COPY_FILE_LINK_CLIPBOARD"), copyToClipboard);
-
-    autoOpenToBrowser = new QCheckBox;
-    formGeneral->addRow(tr("AUTO_OPEN_FILE_IN_BROWSER"), autoOpenToBrowser);
+    //General settings
+    //generalSettingsLayout = new QVBoxLayout;
+    generalSettings = new QGroupBox(tr("GENERAL_SETTINGS"));
+    generalFormLayout = new QFormLayout;
 
     runOnStartup = new QCheckBox;
-    formGeneral->addRow(tr("RUN_ON_STARTUP"), runOnStartup);
+    generalFormLayout->addRow(tr("RUN_ON_STARTUP"), runOnStartup);
 
     lang = new QComboBox;
     lang->addItem("English");
     lang->addItem("Français");
-    formGeneral->addRow(tr("APPLICATION_LANG", "Application's lang :"), lang);
+    generalFormLayout->addRow(tr("APPLICATION_LANG", "Application's lang :"), lang);
+
+    imageType = new QComboBox;
+    imageType->addItem("PNG");
+    imageType->addItem("JPEG");
+    generalFormLayout->addRow(tr("IMAGE_TYPE"), imageType);
+
+    imageQualityLayout = new QHBoxLayout;
+    imageQuality = new QSlider(Qt::Horizontal);
+    imageQuality->setMinimum(0);
+    imageQuality->setMaximum(100);
+    imageQualityShower = new QLabel("0");
+    imageQualityLayout->addWidget(imageQuality);
+    imageQualityLayout->addWidget(imageQualityShower);
+    generalFormLayout->addRow(tr("IMAGE_QUALITY"), imageQualityLayout);
+
+    generalSettings->setLayout(generalFormLayout);
+    generalLayout->addWidget(generalSettings);
+
+    //On sucess settings
+    onSuccessSettings = new QGroupBox(tr("ON_SUCCESS"));
+    onSuccessFormLayout = new QFormLayout;
+
+    playSound = new QCheckBox;
+    onSuccessFormLayout->addRow(tr("PLAY_SOUND"), playSound);
+
+    showNotifications = new QCheckBox;
+    onSuccessFormLayout->addRow(tr("SHOW_NOTIFICATION"), showNotifications);
+
+    copyToClipboard = new QCheckBox;
+    onSuccessFormLayout->addRow(tr("COPY_FILE_LINK_CLIPBOARD"), copyToClipboard);
+
+    autoOpenToBrowser = new QCheckBox;
+    onSuccessFormLayout->addRow(tr("AUTO_OPEN_FILE_IN_BROWSER"), autoOpenToBrowser);
+
+    onSuccessSettings->setLayout(onSuccessFormLayout);
+    generalLayout->addWidget(onSuccessSettings);
 
     validate = new QPushButton("Ok");
     validateLayout = new QHBoxLayout;
     validateLayout->addStretch();
     validateLayout->addWidget(validate);
-
-    generalSettingsLayout = new QVBoxLayout;
-    generalSettingsLayout->addLayout(formGeneral);
-    generalSettingsLayout->addStretch();
-
-    generalSettings = new QGroupBox(tr("GENERAL_SETTINGS"));
-    generalSettings->setLayout(generalSettingsLayout);
-
-    generalLayout = new QVBoxLayout;
-    generalLayout->addWidget(generalSettings);
     generalLayout->addLayout(validateLayout);
+
     generalLayout->addStretch();
 
     generalSection->setLayout(generalLayout);
@@ -293,6 +324,20 @@ void ConfigurationWindows::langSettingModified(QString newValue)
 void ConfigurationWindows::autoOpenToBrowserSettingModified(bool checked)
 {
     settings.setValue(autoOpenToBrowserSettingName, checked);
+}
+
+void ConfigurationWindows::imageTypeSettingModified(QString text)
+{
+    settings.setValue(imageTypeSettingName, text);
+    if(text == "JPEG")
+        imageQuality->setEnabled(true);
+    else
+        imageQuality->setDisabled(true);
+}
+
+void ConfigurationWindows::imageQualitySettingModified(int value)
+{
+    settings.setValue(imageQualitySettingName, value);
 }
 
 void ConfigurationWindows::closeEvent(QCloseEvent *event)

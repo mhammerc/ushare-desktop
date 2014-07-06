@@ -50,24 +50,35 @@ protected:
     const QString FTPMethodSettingName;
     const QString choosedMethodSettingName;
     const QString autoOpenToBrowserSettingName;
+    const QString imageTypeSettingName;
+    const QString imageQualitySettingName;
 
     QVBoxLayout * mainLayout;
     QTabWidget * windowContent;
 
     /* General */
     QWidget * generalSection;
-    QFormLayout * formGeneral;
     QVBoxLayout * generalLayout;
-    //Main Form
-    QVBoxLayout * generalSettingsLayout;
-    QGroupBox * generalSettings;
 
+    //General settings
+    //QVBoxLayout * generalSettingsLayout;
+    QGroupBox * generalSettings;
+    QFormLayout * generalFormLayout;
+    QCheckBox * runOnStartup;
+    QComboBox * lang;
+
+    //On successfull upload settings
+    //QVBoxLayout * onSuccessSettingsLayout;
+    QGroupBox * onSuccessSettings;
+    QFormLayout * onSuccessFormLayout;
     QCheckBox * playSound;
     QCheckBox * showNotifications;
     QCheckBox * copyToClipboard;
     QCheckBox * autoOpenToBrowser;
-    QCheckBox * runOnStartup;
-    QComboBox * lang;
+    QComboBox * imageType;
+    QHBoxLayout * imageQualityLayout;
+    QSlider * imageQuality;
+    QLabel * imageQualityShower;
 
     /* Online Services */
     QWidget * uploadSection;
@@ -134,6 +145,8 @@ public slots :
     void playSoundSettingModified(bool);
     void copyToClipboardSettingModified(bool);
     void langSettingModified(QString);
+    void imageTypeSettingModified(QString);
+    void imageQualitySettingModified(int);
     void FTPMethodSettingModified(bool);
     void HTTPMethodSettingModified(bool);
 

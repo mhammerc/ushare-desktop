@@ -9,6 +9,9 @@
 
 namespace Uplimg
 {
+
+enum ImageFormat { JPEG, PNG, INVALID_FORMAT };
+
 enum ErrorList { UPLOAD_FAIL, UPLOAD_METHOD_NOT_CHOOSED };
 
 enum UploadMethod

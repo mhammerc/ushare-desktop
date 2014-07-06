@@ -37,6 +37,8 @@ public:
     explicit SystemTrayIcon(QObject *qobject = 0);
     ~SystemTrayIcon();
     Uplimg::UploadMethod getUploadMethod() const;
+    Uplimg::ImageFormat getImageFormat() const;
+    int getImageQuality() const;
 
 protected:
     const QString applicationName;
@@ -52,6 +54,9 @@ protected:
     const QString uploadFileShortcutSettingName;
     const QString uploadClipboardShortcutSettingName;
     const QString autoOpenToBrowserSettingName;
+    const QString imageFormatSettingName;
+    const QString imageQualitySettingName;
+
     QSettings settings;
 
     ConfigurationWindows * configurationWindows;
@@ -68,6 +73,7 @@ protected:
     QShortcut * shortcut;
 
     void setUpContextMenu();
+    QString getNewFileName(Uplimg::ImageFormat ending);
     QString getNewFileName(QString ending);
     QString getFileTempPath(const QString &screenName);
     QString getUploadedFileURL(const QString &fileName);
@@ -110,7 +116,6 @@ public slots :
     void openLastUrl();
 
     void activatedTrigerred(QSystemTrayIcon::ActivationReason);
-
 };
 
 #endif // SYSTEMTRAYICON_H

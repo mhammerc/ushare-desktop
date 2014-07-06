@@ -14,7 +14,9 @@ SystemTrayIcon::SystemTrayIcon(QObject *qobject) :
     takeSelectedAreaScreenShortcutSettingName("configuration/shortcut/takeSelectedArea"),
     uploadFileShortcutSettingName("configuration/shortcut/uploadFile"),
     uploadClipboardShortcutSettingName("configuration/shortcut/uploadClipboard"),
-    autoOpenToBrowserSettingName("configuration/autoOpenToBrowser")
+    autoOpenToBrowserSettingName("configuration/autoOpenToBrowser"),
+    imageFormatSettingName("configuration/imageType"),
+    imageQualitySettingName("configuration/imageQuality")
 {
     if(settings.value(runOnStartupSettingName).isNull()) //First time the application is started
         firstStart();
@@ -79,7 +81,7 @@ void SystemTrayIcon::setUpContextMenu()
 
 void SystemTrayIcon::takeSelectedAreaScreenTriggered()
 {
-    fileName = getNewFileName(".png");
+    fileName = getNewFileName(getImageFormat());
     pathToFile = getFileTempPath(fileName);
     screenManager->captureSelectedZone(pathToFile);
 }
@@ -94,7 +96,7 @@ void SystemTrayIcon::sendSelectedArea()
 
 void SystemTrayIcon::takeFullScrenTriggered()
 {
-    QString fileName = getNewFileName(".png");
+    QString fileName = getNewFileName(getImageFormat());
     QString pathToFile = getFileTempPath(fileName);
 
     if (screenManager->autoSendFile(screenManager->captureFullScreen(pathToFile)))
@@ -153,6 +155,26 @@ void SystemTrayIcon::uploadClipboardTriggered()
                 throwErrorAlert(Uplimg::ErrorList::UPLOAD_FAIL);
         }
 }
+
+QString SystemTrayIcon::getNewFileName(Uplimg::ImageFormat ending)
+{
+    QTime time = QTime::currentTime();
+    QDate date = QDate::currentDate();
+
+    QString fileName = QString::number(date.dayOfYear())
+                       + QString::number(time.hour())
+                       + QString::number(time.minute())
+                       + QString::number(time.second());
+
+    if(ending == Uplimg::ImageFormat::PNG)
+        return fileName + ".png";
+    else if(ending == Uplimg::ImageFormat::JPEG)
+        return fileName + ".jpg";
+    else
+        return fileName;
+
+}
+
 
 QString SystemTrayIcon::getNewFileName(QString ending)
 {
@@ -257,4 +279,19 @@ void SystemTrayIcon::activatedTrigerred(QSystemTrayIcon::ActivationReason reason
 {
     if(reason == QSystemTrayIcon::ActivationReason::Trigger)
         this->openLastUrl();
+}
+
+Uplimg::ImageFormat SystemTrayIcon::getImageFormat() const
+{
+    if(settings.value(imageFormatSettingName).toString() == "PNG")
+        return Uplimg::ImageFormat::PNG;
+    else if(settings.value(imageFormatSettingName).toString() == "JPEG")
+        return Uplimg::ImageFormat::JPEG;
+    else
+        return Uplimg::ImageFormat::INVALID_FORMAT;
+}
+
+int SystemTrayIcon::getImageQuality() const
+{
+    return settings.value(imageQualitySettingName).toInt();
 }
