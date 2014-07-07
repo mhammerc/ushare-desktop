@@ -8,17 +8,17 @@
 ### What is Uplimg ?
 
 Uplimg is an instant user-frendly file sharing tool.
-It permits you to share images and other files in less time.
+It permits you to share images and multiples other files in less time.
 
 ~~Uplimg can control your brain, so this text is not writed but you also can read it !~~ :D
 
 ### In developpement
 
-Uplimg is actually in intensive development. Options are added in the time. You can contribute to the project by adding issue(s) and/or create pull requests.
+Uplimg is actually in development, so it's in evolution. Options are added in the time. You can contribute to the project by adding issue(s) and/or create pull requests.
 
 ### Downloads
 
-Only Windows is officialy supported. You can try to compile it on Linux and Mac but you can get some problems. You need the latest version of Qt, Qxt and SFML.
+In the time, only the Windows version is stable and available in downloads. If you want to use Uplimg on MAC ou LINUX, you can try to compilate, you should have somes bugs. You need the latest version of Qt, Qxt and SFML.
 
 #####Pre-release 0.5 :
 - [Pre-release binary 0.5](https://github.com/Imote/Uplimg/releases/download/0.5/uplimg-0.5-x86-W.zip)
