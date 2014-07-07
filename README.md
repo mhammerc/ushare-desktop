@@ -16,18 +16,6 @@ It permits you to share images and other files in less time.
 
 Uplimg is actually in intensive development. Options are added in the time. You can contribute to the project by adding issue(s) and/or create pull requests.
 
-### Functionalities
-
-- Comming
-
-### Present in next version
-
-- Comming
-
-### Changelog
-
-- Comming
-
 ### Downloads
 
 Only Windows is officialy supported. You can try to compile it on Linux and Mac but you can get some problems. You need the latest version of Qt, Qxt and SFML.
@@ -79,23 +67,11 @@ Uplimg est actuelement en développement et poursuit donc son évolution. Des op
 
 Vous avez la possibilité de contribuer au projet en ajoutant une/des issue(s) et/ou en créant des pull requests.
 
-### Fonctionalitées
-
-- A venir
-
-### Présent dans la prochaine version
-
-- A venir
-
-### Changelog
-
-- A venir
-
 ### Téléchargements
 
 Pour le moment, seul la version Windows de Uplimg est stable et est disponible au téléchargement.
-Si vous souhaitez utiliser Umpling sous MAC où LINUX, tentez de compiler Umpling, il n'est pas exclu que vous rencontriez cependant quelques problèmes.
-Pour cela, les dernières versions de Qt, de Qxt et de SFML sont vivement recommandées.
+Si vous souhaitez utiliser Umpling sous MAC ou Linux, vous pouvez tenter de compiler Umpling, il n'est pas exclu que vous rencontriez cependant quelques problèmes.
+Pour cela, les dernières versions de Qt, de Qxt et de SFML sont nécessaires.
 
 #####Pre-release 0.5 :
 - [Pre-release binaire 0.5](https://github.com/Imote/Uplimg/releases/download/0.5/uplimg-0.5-x86-W.zip)
