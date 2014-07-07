@@ -22,6 +22,7 @@
 #include <QMessageBox>
 #include <QShortcut>
 #include <QFileDialog>
+#include <QLocale>
 
 #include <iostream>
 

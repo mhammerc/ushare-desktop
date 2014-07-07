@@ -34,7 +34,7 @@ ConfigurationWindows::ConfigurationWindows(SystemTrayIcon * parent, QWidget *qwi
     playSound->setChecked(settings.value(playSoundSettingName, true).toBool());
     copyToClipboard->setChecked(settings.value(copyToClipboardSettingName, true).toBool());
     autoOpenToBrowser->setChecked(settings.value(autoOpenToBrowserSettingName, true).toBool());
-    lang->setCurrentText(settings.value(langSettingName, "English").toString());
+    lang->setCurrentText(settings.value(langSettingName).toString());
     localSave->setChecked(settings.value(localSaveSettingName).toBool());
     localSavePath->setText(settings.value(localSavePathSettingName).toString());
     imageType->setCurrentText(settings.value(imageTypeSettingName, "PNG").toString());
@@ -61,6 +61,19 @@ ConfigurationWindows::ConfigurationWindows(SystemTrayIcon * parent, QWidget *qwi
     {
         localMethodPath->setDisabled(true);
         localMethodPathChooser->setDisabled(true);
+    }
+
+    if(settings.value(langSettingName).toString().isNull())
+    {
+        QString locale = QLocale::system().name().section('_', 0, 0);
+        if(locale == "fr")
+        {
+            lang->setCurrentText("Français");
+        }
+        else
+        {
+            lang->setCurrentText("English");
+        }
     }
 
     localMethodPath->setText(settings.value(localSavePathSettingName).toString());
