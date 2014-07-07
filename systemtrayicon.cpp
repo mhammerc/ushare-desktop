@@ -158,6 +158,21 @@ void SystemTrayIcon::fileSended(QString fileName)
 
 void SystemTrayIcon::uploadClipboardTriggered()
 {
+    QString clipboard = QApplication::clipboard()->text();
+    clipboard = clipboard.right(clipboard.size()-8);
+
+    if(QFile::exists(clipboard)) //Clipboard is pointing to file
+    {
+        QFile file(clipboard);
+        if(screenManager->autoSendFile(clipboard))
+        {
+            QFileInfo fi(clipboard);
+            fileSended(fi.fileName());
+        }
+        return;
+    }
+    //Else, we upload the clipboard
+
     const QString fileName = getNewFileName(".txt");
     const QString filePath = getFileTempPath(fileName);
     std::ofstream file(filePath.toStdString().c_str());
