@@ -11,6 +11,7 @@
 #include <QHBoxLayout>
 #include <QPushButton>
 #include <QGroupBox>
+#include <QRadioButton>
 
 class HTTPConfiguration : public QWidget
 {
@@ -26,15 +27,22 @@ protected:
     const QString portSettingName;
     const QString fileFieldNameSettingName;
     const QString webPathSettingName;
+    const QString linkFromSettingName;
 
     //Main layout and main form
     QVBoxLayout * layout;
     QGroupBox * mainGroupLayout;
-    QFormLayout * formLayout;
+    QFormLayout * mainFormLayout;
+    QVBoxLayout * secondLayout;
 
     QLineEdit * host;
     QSpinBox * port;
     QLineEdit * fileFieldName;
+    QGroupBox * webPathBox;
+    QVBoxLayout * webPathLayout;
+    QRadioButton * webPathFromHTTPResponse;
+    QHBoxLayout * webPathFromFixedLayout;
+    QRadioButton * webPathFromFixed;
     QLineEdit * webPath;
 
     QHBoxLayout * validateLayout;
@@ -47,6 +55,8 @@ public slots :
     void portSettingModified(int);
     void fileFieldNameSettingModified(QString);
     void webPathSettingModified(QString);
+    void webPathFromHTTPResponseSettingModified(bool);
+    void webPathFromFixedSettingModified(bool);
 
 };
 

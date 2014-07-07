@@ -18,7 +18,8 @@ SystemTrayIcon::SystemTrayIcon(QObject *qobject) :
     imageFormatSettingName("configuration/imageType"),
     imageQualitySettingName("configuration/imageQuality"),
     localSaveSettingName("configuration/localSave"),
-    localSavePathSettingName("configuration/localSavePath")
+    localSavePathSettingName("configuration/localSavePath"),
+    linkFromSettingName("configuration/http/linkFrom")
 {
     if(settings.value(runOnStartupSettingName).isNull()) //First time the application is started
         firstStart();
@@ -130,26 +131,29 @@ void SystemTrayIcon::fileSended(QString fileName)
             if(settings.value(playSoundSettingName).toBool())
                 fileSendedSound->play();
 
-            const QString urlPath = getUploadedFileURL(fileName);
-            lastUrl.setUrl(urlPath);
+            if(settings.value(linkFromSettingName).toString() != "FROM_HTTP" || getUploadMethod() != Uplimg::UploadMethod::HTTP)
+                {
+                    const QString urlPath = getUploadedFileURL(fileName);
+                    lastUrl.setUrl(urlPath);
+                }
 
             if(settings.value(autoOpenToBrowserSettingName).toBool())
                 openLastUrl();
 
             if(settings.value(copyToClipboardSettingName).toBool())
-                QApplication::clipboard()->setText(urlPath);
+                QApplication::clipboard()->setText(lastUrl.toString());
 
             if(settings.value(showNotificationsSettingName).toBool())
-                this->showMessage(applicationName, tr("UPLOAD_SUCCESS_WITH_URL", "Congratulation !\nUpload success. The URL is :\n") + urlPath);
+                this->showMessage(applicationName, tr("UPLOAD_SUCCESS_WITH_URL", "Congratulation !\nUpload success. The URL is :\n") + lastUrl.toString());
         }
     else if(getUploadMethod() == Uplimg::UploadMethod::LOCAL)
-    {
-        if(settings.value(playSoundSettingName).toBool())
-            fileSendedSound->play();
+        {
+            if(settings.value(playSoundSettingName).toBool())
+                fileSendedSound->play();
 
-        if(settings.value(showNotificationsSettingName).toBool())
-            this->showMessage(applicationName, tr("UPLOAD_SUCCESS_LOCAL"));
-    }
+            if(settings.value(showNotificationsSettingName).toBool())
+                this->showMessage(applicationName, tr("UPLOAD_SUCCESS_LOCAL"));
+        }
 }
 
 void SystemTrayIcon::uploadClipboardTriggered()

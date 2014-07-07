@@ -66,12 +66,20 @@ bool ScreenManager::sendFileTroughHTTP(const QString &pathToFile)
     http->setContentType("image/png");
     http->start();
 
+    sf::Clock clock;
+    clock.restart();
+
     while(true)
         {
-            sf::sleep(sf::milliseconds(1000));
+            if(clock.getElapsedTime() >= sf::seconds(10))
+                return false;
+
+            sf::sleep(sf::milliseconds(30));
             if(http->canGetReply() && http->reply->isFinished() && http->reply->error() == QNetworkReply::NetworkError::NoError)
                 {
                     http->terminate();
+                    parent->lastUrl.setUrl(QString(http->reply->readAll()));
+
                     http->deleteLater();
                     return true;
                 }

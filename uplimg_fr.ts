@@ -10,18 +10,18 @@
         <translation>Configuration d&apos;Uplimg</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="125"/>
+        <location filename="configuration/configurationwindows.cpp" line="138"/>
         <source>SFML Licence</source>
         <translation>Licence de SFML</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="192"/>
+        <location filename="configuration/configurationwindows.cpp" line="205"/>
         <source>RUN_ON_STARTUP</source>
         <oldsource>Run on startup</oldsource>
         <translation>Lancer le logiciel lors du démarrage de l&apos;OS</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="234"/>
+        <location filename="configuration/configurationwindows.cpp" line="247"/>
         <source>SHOW_NOTIFICATION</source>
         <oldsource>Show notifications when event take place</oldsource>
         <translation>Afficher des notifications</translation>
@@ -31,7 +31,7 @@
         <translation type="vanished">Jouer un son lors d&apos;un événement</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="237"/>
+        <location filename="configuration/configurationwindows.cpp" line="250"/>
         <source>COPY_FILE_LINK_CLIPBOARD</source>
         <oldsource>Copy file&apos;s link when it is uploaded to clipboard</oldsource>
         <translation>Copier le lien</translation>
@@ -45,25 +45,25 @@
         <translation type="vanished">Utiliser FTP pour envoyer les images</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="275"/>
+        <location filename="configuration/configurationwindows.cpp" line="288"/>
         <source>CONFIGURE_FTP</source>
         <oldsource>Configure FTP...</oldsource>
         <translation>Configurer le serveur FTP</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="282"/>
+        <location filename="configuration/configurationwindows.cpp" line="295"/>
         <source>CONFIGURE_HTTP</source>
         <oldsource>Configure HTTP POST...</oldsource>
         <translation>Configurer la requête HTTP</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="293"/>
+        <location filename="configuration/configurationwindows.cpp" line="306"/>
         <source>ONLINE_SERVICES_GROUPBOX</source>
         <oldsource>Online services</oldsource>
         <translation>Services Internet</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="255"/>
+        <location filename="configuration/configurationwindows.cpp" line="268"/>
         <source>GENERAL</source>
         <oldsource>General</oldsource>
         <comment>Configuration menu, general section</comment>
@@ -74,120 +74,120 @@
         <translation type="vanished">Raccourcis clavier</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="118"/>
+        <location filename="configuration/configurationwindows.cpp" line="131"/>
         <source>SOFTWARE_FREE_OPEN_SOURCE</source>
         <comment>This software is open source and entirely free to use.</comment>
         <translation>Ce logiciel est Open-Source et entièrement gratuit.</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="139"/>
+        <location filename="configuration/configurationwindows.cpp" line="152"/>
         <source>MADE_WITH_QT</source>
         <comment>Made with the flexibility of Qt</comment>
         <translation>Avec la fléxibilité de Qt</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="138"/>
+        <location filename="configuration/configurationwindows.cpp" line="151"/>
         <source>MADE_WITH_SFML</source>
         <comment>Made with the lightness of SFML</comment>
         <translation>Avec la légèreté de SFML</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="133"/>
+        <location filename="configuration/configurationwindows.cpp" line="146"/>
         <source>LGPL Licence</source>
         <translation>Licence LGPL</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="140"/>
+        <location filename="configuration/configurationwindows.cpp" line="153"/>
         <source>MADE_WITH_QXT</source>
         <comment>Made with the powerfull of Qxt</comment>
         <translation>Avec la puissance de Qxt</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="151"/>
+        <location filename="configuration/configurationwindows.cpp" line="164"/>
         <source>MAIN_DEVELOPPER</source>
         <comment>Main developper and project manager : &lt;span style=&quot;color:red;&quot;&gt;Martin Hammerchmidt alias Imote&lt;/span&gt;</comment>
         <translation>Développeur principal et leader du projet : &lt;span style=&quot;color:red;&quot;&gt;Martin Hammerchmidt alias Imote&lt;/span&gt;</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="163"/>
+        <location filename="configuration/configurationwindows.cpp" line="176"/>
         <source>HAPPY4EVER</source>
         <comment>And, don&apos;t forget to be Happy 4 Ever</comment>
         <translation>Enfin, n&apos;oubliez jamais le but même de la vie. Soyez &quot;Happy 4 Ever&quot; !</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="173"/>
+        <location filename="configuration/configurationwindows.cpp" line="186"/>
         <source>Credits</source>
         <translation>Crédits</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="179"/>
+        <location filename="configuration/configurationwindows.cpp" line="192"/>
         <source>HOTKEYS_SECTION</source>
         <translation>Raccourcis clavier</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="188"/>
+        <location filename="configuration/configurationwindows.cpp" line="201"/>
         <source>GENERAL_SETTINGS</source>
         <translation>Paramètres généraux</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="202"/>
+        <location filename="configuration/configurationwindows.cpp" line="215"/>
         <source>IMAGE_TYPE</source>
         <translation>Format de l&apos;image</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="211"/>
+        <location filename="configuration/configurationwindows.cpp" line="224"/>
         <source>IMAGE_QUALITY</source>
         <translation>Qualité de l&apos;image</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="221"/>
+        <location filename="configuration/configurationwindows.cpp" line="234"/>
         <source>LOCAL_SAVE</source>
         <translation>Sauvegarde locale de l&apos;image</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="227"/>
+        <location filename="configuration/configurationwindows.cpp" line="240"/>
         <source>ON_SUCCESS</source>
         <translation>Lors d&apos;un upload réussi</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="231"/>
+        <location filename="configuration/configurationwindows.cpp" line="244"/>
         <source>PLAY_SOUND</source>
         <translation>Jouer des sons</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="265"/>
+        <location filename="configuration/configurationwindows.cpp" line="278"/>
         <source>USE_UPLOADMETHOD_LOCAL</source>
         <translation>Stocker localement (image uniquement)</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="274"/>
+        <location filename="configuration/configurationwindows.cpp" line="287"/>
         <source>USE_UPLOADMETHOD_FTP</source>
         <translation>Utiliser un serveur FTP</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="281"/>
+        <location filename="configuration/configurationwindows.cpp" line="294"/>
         <source>USE_UPLOADMETHOD_HTTP</source>
         <translation>Utiliser une requête HTTP</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="301"/>
+        <location filename="configuration/configurationwindows.cpp" line="314"/>
         <source>UPLOAD_SECTION</source>
         <translation>Upload</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="423"/>
-        <location filename="configuration/configurationwindows.cpp" line="446"/>
+        <location filename="configuration/configurationwindows.cpp" line="436"/>
+        <location filename="configuration/configurationwindows.cpp" line="459"/>
         <source>CHOOSE_DIRECTORY</source>
         <translation>Choisissez un dossier</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="197"/>
+        <location filename="configuration/configurationwindows.cpp" line="210"/>
         <source>APPLICATION_LANG</source>
         <comment>Application&apos;s lang :</comment>
         <translation>Langue de l&apos;application :</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="240"/>
+        <location filename="configuration/configurationwindows.cpp" line="253"/>
         <source>AUTO_OPEN_FILE_IN_BROWSER</source>
         <translation>Ouvrir le fichier dans le navigateur</translation>
     </message>
@@ -200,7 +200,7 @@
         <translation type="vanished">Utiliser des requêtes HTTP</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="285"/>
+        <location filename="configuration/configurationwindows.cpp" line="298"/>
         <source>ONLY_ADVANCED_USERS</source>
         <comment>&lt;font size=&apos;2&apos;&gt;&lt;span style=&apos;color:blue;&apos;&gt;(!)&lt;/span&gt; Only for advanced users&lt;/font&gt;</comment>
         <translation>&lt;font size=&apos;2&apos;&gt;&lt;span style=&apos;color:blue;&apos;&gt;(!)&lt;/span&gt; Uniquement pour les utilisateurs avancés&lt;/font&gt;</translation>
@@ -257,35 +257,49 @@
 <context>
     <name>HTTPConfiguration</name>
     <message>
-        <location filename="configuration/httpconfiguration.cpp" line="48"/>
+        <location filename="configuration/httpconfiguration.cpp" line="59"/>
+        <source>FROM_LINK_TO_DISTRIBUTE</source>
+        <translation>Origine du lien</translation>
+    </message>
+    <message>
+        <location filename="configuration/httpconfiguration.cpp" line="61"/>
+        <source>LINK_FROM_HTTP_RESPONSE</source>
+        <translation>Obtenir le lien auprès de la réponse HTTP</translation>
+    </message>
+    <message>
+        <location filename="configuration/httpconfiguration.cpp" line="63"/>
+        <source>LINK_FROM_FIXED_WEBPATH</source>
+        <translation>Obtenir le lien avec un pattern fixe</translation>
+    </message>
+    <message>
+        <location filename="configuration/httpconfiguration.cpp" line="72"/>
         <source>YOUR_HOST</source>
         <oldsource>Your host :</oldsource>
         <translation>Hôte :</translation>
     </message>
     <message>
-        <location filename="configuration/httpconfiguration.cpp" line="49"/>
+        <location filename="configuration/httpconfiguration.cpp" line="73"/>
         <source>YOUR_PORT</source>
         <oldsource>Port of your server :</oldsource>
         <translation>Port :</translation>
     </message>
     <message>
-        <location filename="configuration/httpconfiguration.cpp" line="50"/>
+        <location filename="configuration/httpconfiguration.cpp" line="74"/>
         <source>YOUR_FILE_FIED_NAME</source>
         <translation>Nom du champ de destination de l&apos;image :</translation>
     </message>
     <message>
-        <location filename="configuration/httpconfiguration.cpp" line="51"/>
         <source>YOUR_WEB_PATH</source>
-        <translation>Lien d&apos;accès sur Internet :</translation>
+        <translation type="vanished">Lien d&apos;accès sur Internet :</translation>
     </message>
     <message>
-        <location filename="configuration/httpconfiguration.cpp" line="53"/>
+        <location filename="configuration/httpconfiguration.cpp" line="80"/>
         <source>SET_HTTP_CREDENTIALS</source>
         <oldsource>Modify HTTP credentials</oldsource>
         <translation>Configurer la requête HTTP</translation>
     </message>
     <message>
-        <location filename="configuration/httpconfiguration.cpp" line="57"/>
+        <location filename="configuration/httpconfiguration.cpp" line="84"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
@@ -293,56 +307,56 @@
 <context>
     <name>SystemTrayIcon</name>
     <message>
-        <location filename="systemtrayicon.cpp" line="32"/>
+        <location filename="systemtrayicon.cpp" line="33"/>
         <source>DAEMON_RUNNING</source>
         <oldsource>Daemon is running and waiting</oldsource>
         <translation>Le service tourne en arrière plan</translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="66"/>
+        <location filename="systemtrayicon.cpp" line="67"/>
         <source>TAKE_NEW_FULLSCREEN</source>
         <oldsource>Take new screen</oldsource>
         <translation>Capturer l&apos;écran entier</translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="67"/>
+        <location filename="systemtrayicon.cpp" line="68"/>
         <source>TAKE_NEW_AREA_SELECTED_SCREEN</source>
         <oldsource>Take new selected screen</oldsource>
         <translation>Capturer une zone précise de l&apos;écran</translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="68"/>
+        <location filename="systemtrayicon.cpp" line="69"/>
         <source>UPLOAD_CHOOSED_FILE</source>
         <oldsource>Upload specific file</oldsource>
         <translation>Envoyer un fichier...</translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="69"/>
+        <location filename="systemtrayicon.cpp" line="70"/>
         <source>UPLOAD_CLIPBOARD</source>
         <oldsource>Upload clipboard</oldsource>
         <translation>Envoyer le contenu du presse papier</translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="71"/>
+        <location filename="systemtrayicon.cpp" line="72"/>
         <source>CONFIGURATION</source>
         <oldsource>Configuration...</oldsource>
         <comment>In system tray icon</comment>
         <translation>Paramètres</translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="72"/>
+        <location filename="systemtrayicon.cpp" line="73"/>
         <source>EXIT</source>
         <oldsource>Exit !</oldsource>
         <translation>Quitter</translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="112"/>
+        <location filename="systemtrayicon.cpp" line="113"/>
         <source>SELECT_FILE</source>
         <oldsource>Select file</oldsource>
         <translation>Selectionnez un fichier</translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="143"/>
+        <location filename="systemtrayicon.cpp" line="147"/>
         <source>UPLOAD_SUCCESS_WITH_URL</source>
         <comment>Congratulation !
 Upload success. The URL is :
@@ -352,12 +366,12 @@ L&apos;envoi est un succès. Le lien est :
 </translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="151"/>
+        <location filename="systemtrayicon.cpp" line="155"/>
         <source>UPLOAD_SUCCESS_LOCAL</source>
         <translation>Votre image est désormais sauvegardé locallement.</translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="241"/>
+        <location filename="systemtrayicon.cpp" line="245"/>
         <source>UPLOAD_FAILED</source>
         <comment>Upload failed.
 You must verify Uplimg&apos;s configuration or your Internet configuration to solve the problem.</comment>
@@ -365,7 +379,7 @@ You must verify Uplimg&apos;s configuration or your Internet configuration to so
 Vous devez vérifier votre configuration d&apos;Uplimg ou votre configuration internet pour corriger le problème.</translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="246"/>
+        <location filename="systemtrayicon.cpp" line="250"/>
         <source>NO_METHOD_TO_UPLOAD_CHOOSED</source>
         <comment>We can&apos;t upload anything.
 You must configure method to upload before.</comment>

@@ -41,6 +41,8 @@ public:
     Uplimg::ImageFormat getImageFormat() const;
     int getImageQuality() const;
 
+    QUrl lastUrl;
+
 protected:
     const QString applicationName;
     const QString HTTPWebPathSettingName;
@@ -59,6 +61,7 @@ protected:
     const QString imageQualitySettingName;
     const QString localSaveSettingName;
     const QString localSavePathSettingName;
+    const QString linkFromSettingName;
 
     QSettings settings;
 
@@ -97,7 +100,6 @@ protected:
     //Temp
     QString fileName;
     QString pathToFile;
-    QUrl lastUrl;
 
 signals:
 

@@ -7,7 +7,8 @@ HTTPConfiguration::HTTPConfiguration(QWidget * parent) :
     hostSettingName("configuration/http/host"),
     portSettingName("configuration/http/port"),
     fileFieldNameSettingName("configuration/http/fieldName"),
-    webPathSettingName("configuration/http/webPath")
+    webPathSettingName("configuration/http/webPath"),
+    linkFromSettingName("configuration/http/linkFrom")
 {
     this->setWindowIcon(QIcon(":/small.png"));
     this->setUpUI();
@@ -22,9 +23,19 @@ HTTPConfiguration::HTTPConfiguration(QWidget * parent) :
     fileFieldName->setText(settings.value(fileFieldNameSettingName, "uplimgFile").toString());
     webPath->setText(settings.value(webPathSettingName).toString());
 
+    if(settings.value(linkFromSettingName).toString() == "FROM_FIXED")
+        webPathFromFixed->setChecked(true);
+    else
+    {
+        webPath->setDisabled(true);
+        webPathFromHTTPResponse->setChecked(true);
+    }
+
     QObject::connect(host, SIGNAL(textChanged(QString)), this, SLOT(hostSettingModified(QString)));
     QObject::connect(port, SIGNAL(valueChanged(int)), this, SLOT(portSettingModified(int)));
     QObject::connect(fileFieldName, SIGNAL(textChanged(QString)), this, SLOT(fileFieldNameSettingModified(QString)));
+    QObject::connect(webPathFromHTTPResponse, SIGNAL(toggled(bool)), this, SLOT(webPathFromHTTPResponseSettingModified(bool)));
+    QObject::connect(webPathFromFixed, SIGNAL(toggled(bool)), this, SLOT(webPathFromFixedSettingModified(bool)));
     QObject::connect(webPath, SIGNAL(textChanged(QString)), this, SLOT(webPathSettingModified(QString)));
 
     QObject::connect(validate, SIGNAL(clicked()), this, SLOT(close()));
@@ -38,20 +49,36 @@ HTTPConfiguration::~HTTPConfiguration()
 
 void HTTPConfiguration::setUpUI()
 {
-    formLayout = new QFormLayout;
+    mainFormLayout = new QFormLayout;
+    mainGroupLayout = new QGroupBox;
 
-    host = new QLineEdit();
-    port = new QSpinBox();
-    fileFieldName = new QLineEdit();
-    webPath = new QLineEdit();
+    host = new QLineEdit;
+    port = new QSpinBox;
+    fileFieldName = new QLineEdit;
 
-    formLayout->addRow(tr("YOUR_HOST"), host);
-    formLayout->addRow(tr("YOUR_PORT"), port);
-    formLayout->addRow(tr("YOUR_FILE_FIED_NAME"), fileFieldName);
-    formLayout->addRow(tr("YOUR_WEB_PATH"), webPath);
+    webPathBox = new QGroupBox(tr("FROM_LINK_TO_DISTRIBUTE"));
+    webPathLayout = new QVBoxLayout;
+    webPathFromHTTPResponse = new QRadioButton(tr("LINK_FROM_HTTP_RESPONSE"));
+    webPathFromFixedLayout = new QHBoxLayout;
+    webPathFromFixed = new QRadioButton(tr("LINK_FROM_FIXED_WEBPATH"));
+    webPath = new QLineEdit;
+    webPathFromFixedLayout->addWidget(webPathFromFixed);
+    webPathFromFixedLayout->addWidget(webPath);
+    webPathLayout->addWidget(webPathFromHTTPResponse);
+    webPathLayout->addLayout(webPathFromFixedLayout);
+
+    webPathBox->setLayout(webPathLayout);
+
+    mainFormLayout->addRow(tr("YOUR_HOST"), host);
+    mainFormLayout->addRow(tr("YOUR_PORT"), port);
+    mainFormLayout->addRow(tr("YOUR_FILE_FIED_NAME"), fileFieldName);
+
+    secondLayout = new QVBoxLayout;
+    secondLayout->addLayout(mainFormLayout);
+    secondLayout->addWidget(webPathBox);
 
     mainGroupLayout = new QGroupBox(tr("SET_HTTP_CREDENTIALS"));
-    mainGroupLayout->setLayout(formLayout);
+    mainGroupLayout->setLayout(secondLayout);
 
     validateLayout = new QHBoxLayout;
     validate = new QPushButton(tr("Ok"));
@@ -100,4 +127,22 @@ void HTTPConfiguration::webPathSettingModified(QString text)
 
     settings.setValue(webPathSettingName, text);
 
+}
+
+void HTTPConfiguration::webPathFromFixedSettingModified(bool checked)
+{
+    if(checked)
+        {
+            settings.setValue(linkFromSettingName, "FROM_FIXED");
+            webPath->setEnabled(checked);
+        }
+}
+
+void HTTPConfiguration::webPathFromHTTPResponseSettingModified(bool checked)
+{
+    if(checked)
+    {
+        settings.setValue(linkFromSettingName, "FROM_HTTP");
+        webPath->setDisabled(checked);
+    }
 }
