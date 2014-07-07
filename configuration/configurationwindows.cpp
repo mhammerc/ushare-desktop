@@ -30,6 +30,7 @@ ConfigurationWindows::ConfigurationWindows(SystemTrayIcon * parent, QWidget *qwi
     showNotifications->setChecked(settings.value(showNotificationsSettingName, true).toBool());
     playSound->setChecked(settings.value(playSoundSettingName, true).toBool());
     copyToClipboard->setChecked(settings.value(copyToClipboardSettingName, true).toBool());
+    autoOpenToBrowser->setChecked(settings.value(autoOpenToBrowserSettingName, true).toBool());
     lang->setCurrentText(settings.value(langSettingName, "English").toString());
     imageType->setCurrentText(settings.value(imageTypeSettingName, "PNG").toString());
     imageQuality->setValue(settings.value(imageQualitySettingName, 100).toInt());

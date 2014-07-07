@@ -253,6 +253,9 @@ void SystemTrayIcon::firstStart()
     settings.setValue(takeSelectedAreaScreenShortcutSettingName, "Alt+2");
     settings.setValue(uploadFileShortcutSettingName, "Alt+3");
     settings.setValue(uploadClipboardShortcutSettingName, "Alt+4");
+    settings.setValue(imageFormatSettingName, "PNG");
+    settings.setValue(imageQualitySettingName, 100);
+    settings.setValue(autoOpenToBrowserSettingName, false);
 }
 
 SystemTrayIcon::~SystemTrayIcon()

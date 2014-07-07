@@ -108,7 +108,12 @@ QString ScreenManager::captureSelectedZone(const QString &pathToScreen)
 void ScreenManager::areaPictureTaken(QRect area)
 {
     originalScreenshot = originalScreenshot.copy(area);
-    originalScreenshot.save(pathToFile);
+
+    if(parent->getImageFormat() == Uplimg::ImageFormat::JPEG)
+        originalScreenshot.save(pathToFile, 0, parent->getImageQuality());
+    else if(parent->getImageFormat() == Uplimg::ImageFormat::PNG)
+        originalScreenshot.save(pathToFile, 0, 0);
+
     emit canSend();
     fullScreenPicture->deleteLater();
 }
@@ -145,8 +150,16 @@ QString ScreenManager::captureFullScreen(const QString &pathToScreen)
         {
             screenshot = screen->grabWindow(0);
 
-            if (!screenshot.save(pathToScreen, 0, 0))
-                return "error";
+            if(parent->getImageFormat() == Uplimg::ImageFormat::JPEG)
+                {
+                    if (!screenshot.save(pathToScreen, 0, parent->getImageQuality()))
+                        return "error";
+                }
+            else if(parent->getImageFormat() == Uplimg::ImageFormat::PNG)
+                {
+                    if (!screenshot.save(pathToScreen, 0, 0))
+                        return "error";
+                }
 
             return pathToScreen;
         }
