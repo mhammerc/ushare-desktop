@@ -21,6 +21,7 @@
 #include <QDesktopServices>
 #include <QUrl>
 #include <QVariant>
+#include <QStandardPaths>
 
 #include <QxtCore/Qxt>
 #include <QxtWidgets/QxtGlobalShortcut>
@@ -56,6 +57,8 @@ protected:
     const QString autoOpenToBrowserSettingName;
     const QString imageFormatSettingName;
     const QString imageQualitySettingName;
+    const QString localSaveSettingName;
+    const QString localSavePathSettingName;
 
     QSettings settings;
 

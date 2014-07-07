@@ -13,7 +13,10 @@ ConfigurationWindows::ConfigurationWindows(SystemTrayIcon * parent, QWidget *qwi
     choosedMethodSettingName("configuration/method"),
     autoOpenToBrowserSettingName("configuration/autoOpenToBrowser"),
     imageTypeSettingName("configuration/imageType"),
-    imageQualitySettingName("configuration/imageQuality")
+    imageQualitySettingName("configuration/imageQuality"),
+    localSaveSettingName("configuration/localSave"),
+    localSavePathSettingName("configuration/localSavePath"),
+    localMethodSettingName("configuration/localMethod")
 {
     this->parent = parent;
     QObject::connect(this, SIGNAL(easterEgg()), parent, SLOT(enableEasterEgg()));
@@ -23,7 +26,7 @@ ConfigurationWindows::ConfigurationWindows(SystemTrayIcon * parent, QWidget *qwi
 
     this->setUpUI();
 
-    this->setFixedSize(530, 350);
+    this->setFixedSize(530, 370);
 
     /* Load Settings */
     runOnStartup->setChecked(settings.value(runOnStartupSettingName, true).toBool());
@@ -32,9 +35,17 @@ ConfigurationWindows::ConfigurationWindows(SystemTrayIcon * parent, QWidget *qwi
     copyToClipboard->setChecked(settings.value(copyToClipboardSettingName, true).toBool());
     autoOpenToBrowser->setChecked(settings.value(autoOpenToBrowserSettingName, true).toBool());
     lang->setCurrentText(settings.value(langSettingName, "English").toString());
+    localSave->setChecked(settings.value(localSaveSettingName).toBool());
+    localSavePath->setText(settings.value(localSavePathSettingName).toString());
     imageType->setCurrentText(settings.value(imageTypeSettingName, "PNG").toString());
     imageQuality->setValue(settings.value(imageQualitySettingName, 100).toInt());
     imageQualityShower->setNum(settings.value(imageQualitySettingName, 100).toInt());
+
+    if(!settings.value(localSaveSettingName).toBool())
+    {
+        localSavePath->setDisabled(true);
+        localSavePathChooser->setDisabled(true);
+    }
 
     if(settings.value(imageTypeSettingName).toString() != "JPEG")
         imageQuality->setDisabled(true);
@@ -42,7 +53,17 @@ ConfigurationWindows::ConfigurationWindows(SystemTrayIcon * parent, QWidget *qwi
     if (settings.value(choosedMethodSettingName).toString() == "FTP")
         FTPMethod->setChecked(true);
     else if (settings.value(choosedMethodSettingName).toString() == "HTTP")
-        HTTPMethod->setChecked(true);    
+        HTTPMethod->setChecked(true);
+    else if(settings.value(choosedMethodSettingName).toString() == "LOCAL")
+        localMethod->setChecked(true);
+
+    if(settings.value(choosedMethodSettingName).toString() != "LOCAL")
+    {
+        localMethodPath->setDisabled(true);
+        localMethodPathChooser->setDisabled(true);
+    }
+
+    localMethodPath->setText(settings.value(localSavePathSettingName).toString());
 
     /* Settings Modifier */
     QObject::connect(runOnStartup, SIGNAL(toggled(bool)), this, SLOT(runOnStartupSettingModified(bool)));
@@ -50,11 +71,17 @@ ConfigurationWindows::ConfigurationWindows(SystemTrayIcon * parent, QWidget *qwi
     QObject::connect(playSound, SIGNAL(toggled(bool)), this, SLOT(playSoundSettingModified(bool)));
     QObject::connect(copyToClipboard, SIGNAL(toggled(bool)), this, SLOT(copyToClipboardSettingModified(bool)));
     QObject::connect(lang, SIGNAL(currentTextChanged(QString)), this, SLOT(langSettingModified(QString)));
-    QObject::connect(autoOpenToBrowser, SIGNAL(clicked(bool)), this, SLOT(autoOpenToBrowserSettingModified(bool)));
+    QObject::connect(localSave, SIGNAL(toggled(bool)), this, SLOT(localSaveSettingsModified(bool)));
+    QObject::connect(localSavePath, SIGNAL(textChanged(QString)), this, SLOT(localSavePathSettingsModified(QString)));
+    QObject::connect(localSavePathChooser, SIGNAL(clicked()), this, SLOT(localSavePathSettingsClicked()));
+    QObject::connect(autoOpenToBrowser, SIGNAL(toggled(bool)), this, SLOT(autoOpenToBrowserSettingModified(bool)));
     QObject::connect(imageType, SIGNAL(currentTextChanged(QString)), this, SLOT(imageTypeSettingModified(QString)));
     QObject::connect(imageQuality, SIGNAL(valueChanged(int)), this, SLOT(imageQualitySettingModified(int)));
     QObject::connect(imageQuality, SIGNAL(valueChanged(int)), imageQualityShower, SLOT(setNum(int)));
 
+    QObject::connect(localMethod, SIGNAL(toggled(bool)), this, SLOT(localMethodSettingsModified(bool)));
+    QObject::connect(localMethodPath, SIGNAL(textChanged(QString)), this, SLOT(localMethodPathSettingsModified(QString)));
+    QObject::connect(localMethodPathChooser, SIGNAL(clicked()), this, SLOT(localMethodPathSettingsClicked()));
     QObject::connect(FTPMethod, SIGNAL(toggled(bool)), this, SLOT(FTPMethodSettingModified(bool)));
     QObject::connect(HTTPMethod, SIGNAL(toggled(bool)), this, SLOT(HTTPMethodSettingModified(bool)));
 
@@ -158,7 +185,6 @@ void ConfigurationWindows::setUpGeneralSectionUI()
     generalLayout = new QVBoxLayout;
 
     //General settings
-    //generalSettingsLayout = new QVBoxLayout;
     generalSettings = new QGroupBox(tr("GENERAL_SETTINGS"));
     generalFormLayout = new QFormLayout;
 
@@ -183,6 +209,16 @@ void ConfigurationWindows::setUpGeneralSectionUI()
     imageQualityLayout->addWidget(imageQuality);
     imageQualityLayout->addWidget(imageQualityShower);
     generalFormLayout->addRow(tr("IMAGE_QUALITY"), imageQualityLayout);
+
+    localSaveLayout = new QHBoxLayout;
+    localSave = new QCheckBox;
+    localSavePath = new QLineEdit;
+    localSavePathChooser = new QPushButton("..");
+    localSavePathChooser->setFixedWidth(30);
+    localSaveLayout->addWidget(localSave);
+    localSaveLayout->addWidget(localSavePath);
+    localSaveLayout->addWidget(localSavePathChooser);
+    generalFormLayout->addRow(tr("LOCAL_SAVE"), localSaveLayout);
 
     generalSettings->setLayout(generalFormLayout);
     generalLayout->addWidget(generalSettings);
@@ -210,9 +246,9 @@ void ConfigurationWindows::setUpGeneralSectionUI()
     validateLayout = new QHBoxLayout;
     validateLayout->addStretch();
     validateLayout->addWidget(validate);
-    generalLayout->addLayout(validateLayout);
 
     generalLayout->addStretch();
+    generalLayout->addLayout(validateLayout);
 
     generalSection->setLayout(generalLayout);
 
@@ -225,15 +261,24 @@ void ConfigurationWindows::setUpUploadSectionUI()
     uploadLayout = new QVBoxLayout;
     onlineServicesLayout = new QVBoxLayout;
 
+    localMethodLayout = new QHBoxLayout;
+    localMethod = new QRadioButton(tr("USE_UPLOADMETHOD_LOCAL"));
+    localMethodPath = new QLineEdit;
+    localMethodPathChooser = new QPushButton("..");
+    localMethodPathChooser->setFixedWidth(30);
+    localMethodLayout->addWidget(localMethod);
+    localMethodLayout->addWidget(localMethodPath);
+    localMethodLayout->addWidget(localMethodPathChooser);
+
     FTPLayout = new QHBoxLayout;
-    FTPMethod = new QRadioButton(tr("USE_FTP"));
+    FTPMethod = new QRadioButton(tr("USE_UPLOADMETHOD_FTP"));
     configureFTPButton = new QPushButton(tr("CONFIGURE_FTP"));
     FTPLayout->addWidget(FTPMethod);
     FTPLayout->addWidget(configureFTPButton);
 
     HTTPLayout = new QVBoxLayout;
     HTTPLayoutForRadioAndPushButton = new QHBoxLayout;
-    HTTPMethod = new QRadioButton(tr("USE_HTTP"));
+    HTTPMethod = new QRadioButton(tr("USE_UPLOADMETHOD_HTTP"));
     configureHTTPButton = new QPushButton(tr("CONFIGURE_HTTP"));
     HTTPLayoutForRadioAndPushButton->addWidget(HTTPMethod);
     HTTPLayoutForRadioAndPushButton->addWidget(configureHTTPButton);
@@ -241,6 +286,7 @@ void ConfigurationWindows::setUpUploadSectionUI()
     HTTPLayout->addLayout(HTTPLayoutForRadioAndPushButton);
     HTTPLayout->addWidget(HTTPWarning);
 
+    onlineServicesLayout->addLayout(localMethodLayout);
     onlineServicesLayout->addLayout(FTPLayout);
     onlineServicesLayout->addLayout(HTTPLayout);
 
@@ -284,7 +330,6 @@ void ConfigurationWindows::HTTPMethodSettingModified(bool checked)
 void ConfigurationWindows::runOnStartupSettingModified(bool checked)
 {
     settings.setValue(runOnStartupSettingName, checked);
-    std::cerr << "AA";
 
 #ifdef _WIN32
     /*QSettings startSettings("HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run");
@@ -358,4 +403,48 @@ void ConfigurationWindows::keyPressEvent(QKeyEvent * event)
     if(event->key() == Qt::Key_E)
         emit easterEgg();
 
+}
+
+void ConfigurationWindows::localSaveSettingsModified(bool checked)
+{
+    settings.setValue(localSaveSettingName, checked);
+    localSavePath->setEnabled(checked);
+    localSavePathChooser->setEnabled(checked);
+}
+
+void ConfigurationWindows::localSavePathSettingsModified(QString path)
+{
+    settings.setValue(localSavePathSettingName, path);
+    localMethodPath->setText(path);
+}
+
+void ConfigurationWindows::localSavePathSettingsClicked()
+{
+    QString path = QFileDialog::getExistingDirectory(this, tr("CHOOSE_DIRECTORY"), localSavePath->text());
+    localSavePath->setText(path);
+    settings.setValue(localSavePathSettingName, path);
+}
+
+void ConfigurationWindows::localMethodSettingsModified(bool checked)
+{
+    settings.setValue(localMethodSettingName, checked);
+    localMethodPath->setEnabled(checked);
+    localMethodPathChooser->setEnabled(checked);
+
+    if(checked)
+        settings.setValue(choosedMethodSettingName, "LOCAL");
+}
+
+void ConfigurationWindows::localMethodPathSettingsModified(QString path)
+{
+    settings.setValue(localSavePathSettingName, path);
+    localSavePath->setText(path);
+}
+
+void ConfigurationWindows::localMethodPathSettingsClicked()
+{
+    QString path = QFileDialog::getExistingDirectory(this, tr("CHOOSE_DIRECTORY"), localSavePath->text());
+    localSavePath->setText(path);
+    localMethodPath->setText(path);
+    settings.setValue(localSavePathSettingName, path);
 }

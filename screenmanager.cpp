@@ -32,6 +32,9 @@ bool ScreenManager::autoSendFile(const QString &pathToFile)
     else if (method == Uplimg::UploadMethod::HTTP)
         return sendFileTroughHTTP(pathToFile);
 
+    else if (method == Uplimg::UploadMethod::LOCAL)
+        return true;
+
     return false;
 }
 

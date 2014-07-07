@@ -16,7 +16,9 @@ SystemTrayIcon::SystemTrayIcon(QObject *qobject) :
     uploadClipboardShortcutSettingName("configuration/shortcut/uploadClipboard"),
     autoOpenToBrowserSettingName("configuration/autoOpenToBrowser"),
     imageFormatSettingName("configuration/imageType"),
-    imageQualitySettingName("configuration/imageQuality")
+    imageQualitySettingName("configuration/imageQuality"),
+    localSaveSettingName("configuration/localSave"),
+    localSavePathSettingName("configuration/localSavePath")
 {
     if(settings.value(runOnStartupSettingName).isNull()) //First time the application is started
         firstStart();
@@ -123,20 +125,31 @@ void SystemTrayIcon::uploadSelectedFileTriggered()
 
 void SystemTrayIcon::fileSended(QString fileName)
 {
-    if(settings.value(playSoundSettingName).toBool())
-        fileSendedSound->play();
+    if(getUploadMethod() != Uplimg::UploadMethod::LOCAL && getUploadMethod() != Uplimg::UploadMethod::ERROR)
+        {
+            if(settings.value(playSoundSettingName).toBool())
+                fileSendedSound->play();
 
-    const QString urlPath = getUploadedFileURL(fileName);
-    lastUrl.setUrl(urlPath);
+            const QString urlPath = getUploadedFileURL(fileName);
+            lastUrl.setUrl(urlPath);
 
-    if(settings.value(autoOpenToBrowserSettingName).toBool())
-        openLastUrl();
+            if(settings.value(autoOpenToBrowserSettingName).toBool())
+                openLastUrl();
 
-    if(settings.value(copyToClipboardSettingName).toBool())
-        QApplication::clipboard()->setText(urlPath);
+            if(settings.value(copyToClipboardSettingName).toBool())
+                QApplication::clipboard()->setText(urlPath);
 
-    if(settings.value(showNotificationsSettingName).toBool())
-        this->showMessage(applicationName, tr("UPLOAD_SUCCESS_WITH_URL", "Congratulation !\nUpload success. The URL is :\n") + urlPath);
+            if(settings.value(showNotificationsSettingName).toBool())
+                this->showMessage(applicationName, tr("UPLOAD_SUCCESS_WITH_URL", "Congratulation !\nUpload success. The URL is :\n") + urlPath);
+        }
+    else if(getUploadMethod() == Uplimg::UploadMethod::LOCAL)
+    {
+        if(settings.value(playSoundSettingName).toBool())
+            fileSendedSound->play();
+
+        if(settings.value(showNotificationsSettingName).toBool())
+            this->showMessage(applicationName, tr("UPLOAD_SUCCESS_LOCAL"));
+    }
 }
 
 void SystemTrayIcon::uploadClipboardTriggered()
@@ -190,9 +203,12 @@ QString SystemTrayIcon::getNewFileName(QString ending)
 
 QString SystemTrayIcon::getFileTempPath(const QString &screenName)
 {
-    return QStandardPaths::writableLocation(QStandardPaths::TempLocation)
-           + "/"
-           + screenName;
+    if(settings.value(localSaveSettingName).toBool() || settings.value(choosedMethodSettingName).toString() == "LOCAL")
+        return settings.value(localSavePathSettingName).toString() + "/" + screenName;
+    else
+        return QStandardPaths::writableLocation(QStandardPaths::TempLocation)
+               + "/"
+               + screenName;
 }
 
 QString SystemTrayIcon::getUploadedFileURL(const QString &fileName)
@@ -238,6 +254,8 @@ Uplimg::UploadMethod SystemTrayIcon::getUploadMethod() const
         return Uplimg::UploadMethod::FTP;
     else if (settings.value(choosedMethodSettingName).toString().toStdString() == "HTTP")
         return Uplimg::UploadMethod::HTTP;
+    else if (settings.value(choosedMethodSettingName).toString().toStdString() == "LOCAL")
+        return Uplimg::UploadMethod::LOCAL;
     else
         return Uplimg::UploadMethod::ERROR;
 }
@@ -256,6 +274,8 @@ void SystemTrayIcon::firstStart()
     settings.setValue(imageFormatSettingName, "PNG");
     settings.setValue(imageQualitySettingName, 100);
     settings.setValue(autoOpenToBrowserSettingName, false);
+    settings.setValue(localSavePathSettingName, QStandardPaths::standardLocations(QStandardPaths::PicturesLocation));
+    settings.setValue(localSaveSettingName, false);
 }
 
 SystemTrayIcon::~SystemTrayIcon()

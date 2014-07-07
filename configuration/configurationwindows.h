@@ -21,6 +21,7 @@
 #include <QListWidgetItem>
 #include <QMessageBox>
 #include <QShortcut>
+#include <QFileDialog>
 
 #include <iostream>
 
@@ -52,6 +53,9 @@ protected:
     const QString autoOpenToBrowserSettingName;
     const QString imageTypeSettingName;
     const QString imageQualitySettingName;
+    const QString localSaveSettingName;
+    const QString localSavePathSettingName;
+    const QString localMethodSettingName;
 
     QVBoxLayout * mainLayout;
     QTabWidget * windowContent;
@@ -61,14 +65,18 @@ protected:
     QVBoxLayout * generalLayout;
 
     //General settings
-    //QVBoxLayout * generalSettingsLayout;
     QGroupBox * generalSettings;
     QFormLayout * generalFormLayout;
     QCheckBox * runOnStartup;
     QComboBox * lang;
+    QSlider * imageQuality;
+    QLabel * imageQualityShower;
+    QHBoxLayout * localSaveLayout;
+    QCheckBox * localSave;
+    QLineEdit * localSavePath;
+    QPushButton * localSavePathChooser;
 
     //On successfull upload settings
-    //QVBoxLayout * onSuccessSettingsLayout;
     QGroupBox * onSuccessSettings;
     QFormLayout * onSuccessFormLayout;
     QCheckBox * playSound;
@@ -77,14 +85,18 @@ protected:
     QCheckBox * autoOpenToBrowser;
     QComboBox * imageType;
     QHBoxLayout * imageQualityLayout;
-    QSlider * imageQuality;
-    QLabel * imageQualityShower;
+
 
     /* Online Services */
     QWidget * uploadSection;
     QVBoxLayout * uploadLayout;
     QGroupBox * onlineServices;
     QVBoxLayout * onlineServicesLayout;
+
+    QHBoxLayout * localMethodLayout;
+    QRadioButton * localMethod;
+    QLineEdit * localMethodPath;
+    QPushButton * localMethodPathChooser;
 
     QRadioButton * FTPMethod;
     QPushButton * configureFTPButton;
@@ -145,6 +157,12 @@ public slots :
     void playSoundSettingModified(bool);
     void copyToClipboardSettingModified(bool);
     void langSettingModified(QString);
+    void localSaveSettingsModified(bool);
+    void localSavePathSettingsModified(QString);
+    void localSavePathSettingsClicked();
+    void localMethodSettingsModified(bool);
+    void localMethodPathSettingsModified(QString);
+    void localMethodPathSettingsClicked();
     void imageTypeSettingModified(QString);
     void imageQualitySettingModified(int);
     void FTPMethodSettingModified(bool);

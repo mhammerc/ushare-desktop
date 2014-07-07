@@ -20,6 +20,7 @@ enum UploadMethod
     SSH,
     HTTP,
     UPLIMG_WEB,
+    LOCAL,
     ERROR
 };
 
