@@ -20,29 +20,7 @@ Uplimg is actually in development, so it's in evolution. Options are added in th
 
 In the time, only the Windows version is stable and available in downloads. If you want to use Uplimg on MAC ou LINUX, you can try to compilate, you should have somes bugs. You need the latest version of Qt, Qxt and SFML.
 
-#####Pre-release 0.5 :
-- [Pre-release binary 0.5](https://github.com/Imote/Uplimg/releases/download/0.5/uplimg-0.5-x86-W.zip)
-- [Source code (zip)](https://github.com/Imote/Uplimg/archive/0.5.zip)
-- [Source code (tar.gz)](https://github.com/Imote/Uplimg/archive/0.5.tar.gz)
-
-#####Pre-release 0.4 :
-- [Pre-release binary 0.4](https://github.com/Imote/Uplimg/releases/download/0.4/uplimg-0.4-x86-W.zip)
-- [Source code (zip)](https://github.com/Imote/Uplimg/archive/0.4.zip)
-- [Source code (tar.gz)](https://github.com/Imote/Uplimg/archive/0.4.tar.gz)
-
-#####Pre-release 0.3 :
-- [Pre-release binary 0.3](https://github.com/Imote/Uplimg/releases/download/0.3/uplimg-0.3-x86-W.zip)
-- [Source code (zip)](https://github.com/Imote/Uplimg/archive/0.3.zip)
-- [Source code (tar.gz)](https://github.com/Imote/Uplimg/archive/0.3.tar.gz)
-
-#####Pre-release 0.2 :
-- [Pre-release binary 0.2](https://github.com/Imote/Uplimg/releases/download/0.2/uplimg.zip)
-- [Source code (zip)](https://github.com/Imote/Uplimg/archive/0.2.zip)
-- [Source code (tar.gz)](https://github.com/Imote/Uplimg/archive/0.2.tar.gz)
-
-#####Pre-release 0.1 :
-- [Source code (zip)](https://github.com/Imote/Uplimg/archive/0.1.zip)
-- [Source code (tar.gz)](https://github.com/Imote/Uplimg/archive/0.1.tar.gz)
+[Let's see all pre-releases](https://github.com/Imote/Uplimg/releases)
 
 ### Credits  /  Crédits
 
@@ -73,29 +51,7 @@ Pour le moment, seul la version Windows de Uplimg est stable et est disponible a
 Si vous souhaitez utiliser Umpling sous MAC ou Linux, vous pouvez tenter de compiler Umpling, il n'est pas exclu que vous rencontriez cependant quelques problèmes.
 Pour cela, les dernières versions de Qt, de Qxt et de SFML sont nécessaires.
 
-#####Pre-release 0.5 :
-- [Pre-release binaire 0.5](https://github.com/Imote/Uplimg/releases/download/0.5/uplimg-0.5-x86-W.zip)
-- [Code source (zip)](https://github.com/Imote/Uplimg/archive/0.5.zip)
-- [Code source (tar.gz)](https://github.com/Imote/Uplimg/archive/0.5.tar.gz)
-
-#####Pre-release 0.4 :
-- [Pre-release binaire 0.4](https://github.com/Imote/Uplimg/releases/download/0.4/uplimg-0.4-x86-W.zip)
-- [Code source (zip)](https://github.com/Imote/Uplimg/archive/0.4.zip)
-- [Code source (tar.gz)](https://github.com/Imote/Uplimg/archive/0.4.tar.gz)
-
-#####Pre-release 0.3 :
-- [Pre-release binaire 0.3](https://github.com/Imote/Uplimg/releases/download/0.3/uplimg-0.3-x86-W.zip)
-- [Code source (zip)](https://github.com/Imote/Uplimg/archive/0.3.zip)
-- [Code source (tar.gz)](https://github.com/Imote/Uplimg/archive/0.3.tar.gz)
-
-#####Pre-release 0.2 :
-- [Pre-release binaire 0.2](https://github.com/Imote/Uplimg/releases/download/0.2/uplimg.zip)
-- [Code source (zip)](https://github.com/Imote/Uplimg/archive/0.2.zip)
-- [Code source (tar.gz)](https://github.com/Imote/Uplimg/archive/0.2.tar.gz)
-
-#####Pre-release 0.1 :
-- [Code source (zip)](https://github.com/Imote/Uplimg/archive/0.1.zip)
-- [Code source (tar.gz)](https://github.com/Imote/Uplimg/archive/0.1.tar.gz)
+[Accès à toutes les pre-releases](https://github.com/Imote/Uplimg/releases)
 
 ### Credits  /  Crédits
 
