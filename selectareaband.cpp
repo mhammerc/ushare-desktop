@@ -17,6 +17,9 @@ void SelectAreaBand::selectArea()
 
 void SelectAreaBand::mousePressEvent(QMouseEvent * event)
 {
+    if(event->button() != Qt::LeftButton)
+        return;
+
     origin = event->pos();
     rubberBand->setGeometry(QRect(origin, QSize(0,0)));
     rubberBand->show();
@@ -29,6 +32,9 @@ void SelectAreaBand::mouseMoveEvent(QMouseEvent * event)
 
 void SelectAreaBand::mouseReleaseEvent(QMouseEvent * event)
 {
+    if(event->button() != Qt::LeftButton)
+        return;
+
     rubberBand->hide();
     this->hide();
     emit areaTaken(QRect(origin, event->pos()).normalized());

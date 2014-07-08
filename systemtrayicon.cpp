@@ -64,10 +64,10 @@ void SystemTrayIcon::setUpContextMenu()
 {
     systemTrayMenu = new QMenu;
 
-    takeScreen = systemTrayMenu->addAction(tr("TAKE_NEW_FULLSCREEN"));
-    takeSelectedScreen = systemTrayMenu->addAction(tr("TAKE_NEW_AREA_SELECTED_SCREEN"));
-    uploadFile = systemTrayMenu->addAction(tr("UPLOAD_CHOOSED_FILE"));
-    uploadClipboard = systemTrayMenu->addAction(tr("UPLOAD_CLIPBOARD"));
+    takeScreen = systemTrayMenu->addAction(QIcon(":/contextMenu/icon/fullscreen.png"), tr("TAKE_NEW_FULLSCREEN"));
+    takeSelectedScreen = systemTrayMenu->addAction(QIcon(":/contextMenu/icon/selectedScreen.png"), tr("TAKE_NEW_AREA_SELECTED_SCREEN"));
+    uploadFile = systemTrayMenu->addAction(QIcon(":/contextMenu/icon/file.png"), tr("UPLOAD_CHOOSED_FILE"));
+    uploadClipboard = systemTrayMenu->addAction(QIcon(":/contextMenu/icon/clipboard.png"), tr("UPLOAD_CLIPBOARD"));
     systemTrayMenu->addSeparator();
     showConfiguration = systemTrayMenu->addAction(tr("CONFIGURATION", "In system tray icon"));
     quit = systemTrayMenu->addAction(tr("EXIT"));
@@ -158,12 +158,13 @@ void SystemTrayIcon::fileSended(QString fileName)
 
 void SystemTrayIcon::uploadClipboardTriggered()
 {
+    /* ONLY SUPPORTED FOR WINDOWS, NEVER TESTED ON X11 OR MAX */
+    /* IF CLIPBOARD POINT TO FILE, WE UPLOAD IT INSTEAD FILE PATH */
     QString clipboard = QApplication::clipboard()->text();
-    clipboard = clipboard.right(clipboard.size()-8);
+    clipboard = clipboard.right(clipboard.size()-8); //Windows automatically put file:/// at begin
 
     if(QFile::exists(clipboard)) //Clipboard is pointing to file
     {
-        QFile file(clipboard);
         if(screenManager->autoSendFile(clipboard))
         {
             QFileInfo fi(clipboard);
@@ -171,7 +172,7 @@ void SystemTrayIcon::uploadClipboardTriggered()
         }
         return;
     }
-    //Else, we upload the clipboard
+    /* WINDOWS ONLY END */
 
     const QString fileName = getNewFileName(".txt");
     const QString filePath = getFileTempPath(fileName);

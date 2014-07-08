@@ -87,6 +87,9 @@ protected:
     QComboBox * imageType;
     QHBoxLayout * imageQualityLayout;
 
+    QHBoxLayout * validateGeneralLayout;
+    QPushButton * validateGeneral;
+
 
     /* Online Services */
     QWidget * uploadSection;
@@ -111,8 +114,14 @@ protected:
     QVBoxLayout * HTTPLayout;
     HTTPConfiguration * HTTPConf;
 
+    QHBoxLayout * validateUploadLayout;
+    QPushButton * validateUpload;
+
     /* HotKeys */
     QWidget * hotkeysSection;
+    QVBoxLayout * hotkeysLayout;
+    QHBoxLayout * validateHotkeysLayout;
+    QPushButton * validateHotkeys;
 
     /* Credits */
     QWidget * creditSection;
@@ -133,10 +142,8 @@ protected:
     QListWidget * allContributorsTwo;
     QLabel * happy4Ever;
 
-    /* To close window */
-    QHBoxLayout * validateLayout;
-    QPushButton * validate;
-
+    QHBoxLayout * validateCreditLayout;
+    QPushButton * validateCredit;
 
     //Fonctions
     void setUpUI();

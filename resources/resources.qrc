@@ -6,4 +6,10 @@
         <file>Easter_Egg.wav</file>
         <file>lgpl-2.1.txt</file>
     </qresource>
+    <qresource prefix="/contextMenu/icon">
+        <file>clipboard.png</file>
+        <file>file.png</file>
+        <file>fullscreen.png</file>
+        <file>selectedScreen.png</file>
+    </qresource>
 </RCC>

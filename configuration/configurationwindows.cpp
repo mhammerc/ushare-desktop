@@ -101,7 +101,10 @@ ConfigurationWindows::ConfigurationWindows(SystemTrayIcon * parent, QWidget *qwi
     QObject::connect(configureFTPButton, SIGNAL(clicked()), this, SLOT(configureFTP()));
     QObject::connect(configureHTTPButton, SIGNAL(clicked()), this, SLOT(configureHTTP()));
 
-    QObject::connect(validate, SIGNAL(clicked()), this, SLOT(hide()));
+    QObject::connect(validateGeneral, SIGNAL(clicked()), this, SLOT(hide()));
+    QObject::connect(validateUpload, SIGNAL(clicked()), this, SLOT(hide()));
+    QObject::connect(validateHotkeys, SIGNAL(clicked()), this, SLOT(hide()));
+    QObject::connect(validateCredit, SIGNAL(clicked()), this, SLOT(hide()));
 
     FTPConf = new FTPConfiguration();
     HTTPConf = new HTTPConfiguration();
@@ -168,12 +171,17 @@ void ConfigurationWindows::setUpCreditsSectionUI()
     allContributorsLayout->addWidget(allContributorsOne);
     allContributorsLayout->addWidget(allContributorsTwo);
     new QListWidgetItem("You <3", allContributorsOne);
-    new QListWidgetItem("Krayon973", allContributorsTwo);
+    new QListWidgetItem("si0ls", allContributorsTwo);
     new QListWidgetItem("Yohann Hammad", allContributorsOne);
-    new QListWidgetItem("Si0ls", allContributorsTwo);
+    new QListWidgetItem("Krayon973", allContributorsTwo);
     new QListWidgetItem("Eldraeildor", allContributorsOne);
     new QListWidgetItem("Mrs025", allContributorsTwo);
     happy4Ever = new QLabel(tr("HAPPY4EVER", "And, don't forget to be Happy 4 Ever"));
+
+    validateCredit = new QPushButton("Ok");
+    validateCreditLayout = new QHBoxLayout;
+    validateCreditLayout->addStretch();
+    validateCreditLayout->addWidget(validateCredit);
 
     creditLayout->addWidget(openSourceText);
     creditLayout->addLayout(madeWithLayout);
@@ -181,6 +189,7 @@ void ConfigurationWindows::setUpCreditsSectionUI()
     creditLayout->addLayout(allContributorsLayout);
     creditLayout->addWidget(happy4Ever);
     creditLayout->addStretch();
+    creditLayout->addLayout(validateCreditLayout);
 
     creditSection->setLayout(creditLayout);
     windowContent->addTab(creditSection, tr("Credits"));
@@ -189,6 +198,18 @@ void ConfigurationWindows::setUpCreditsSectionUI()
 void ConfigurationWindows::setUpHotkeysSectionUI()
 {
     hotkeysSection = new QWidget;
+    hotkeysLayout = new QVBoxLayout;
+
+    validateHotkeys = new QPushButton("Ok");
+    validateHotkeysLayout = new QHBoxLayout;
+    validateHotkeysLayout->addStretch();
+    validateHotkeysLayout->addWidget(validateHotkeys);
+
+    hotkeysLayout->addStretch();
+    hotkeysLayout->addLayout(validateHotkeysLayout);
+
+    hotkeysSection->setLayout(hotkeysLayout);
+
     windowContent->addTab(hotkeysSection, tr("HOTKEYS_SECTION"));
 }
 
@@ -255,13 +276,13 @@ void ConfigurationWindows::setUpGeneralSectionUI()
     onSuccessSettings->setLayout(onSuccessFormLayout);
     generalLayout->addWidget(onSuccessSettings);
 
-    validate = new QPushButton("Ok");
-    validateLayout = new QHBoxLayout;
-    validateLayout->addStretch();
-    validateLayout->addWidget(validate);
+    validateGeneral = new QPushButton("Ok");
+    validateGeneralLayout = new QHBoxLayout;
+    validateGeneralLayout->addStretch();
+    validateGeneralLayout->addWidget(validateGeneral);
 
     generalLayout->addStretch();
-    generalLayout->addLayout(validateLayout);
+    generalLayout->addLayout(validateGeneralLayout);
 
     generalSection->setLayout(generalLayout);
 
@@ -306,8 +327,14 @@ void ConfigurationWindows::setUpUploadSectionUI()
     onlineServices = new QGroupBox(tr("ONLINE_SERVICES_GROUPBOX"));
     onlineServices->setLayout(onlineServicesLayout);
 
+    validateUpload = new QPushButton("Ok");
+    validateUploadLayout = new QHBoxLayout;
+    validateUploadLayout->addStretch();
+    validateUploadLayout->addWidget(validateUpload);
+
     uploadLayout->addWidget(onlineServices);
     uploadLayout->addStretch();
+    uploadLayout->addLayout(validateUploadLayout);
 
     uploadSection->setLayout(uploadLayout);
 
