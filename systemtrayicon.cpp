@@ -28,8 +28,13 @@ SystemTrayIcon::SystemTrayIcon(QObject *qobject) :
 
     configurationWindows = 0;
 
+    iconTimer = new QTimer(this);
+    iconTimer->setSingleShot(true);
+    iconTimer->setInterval(3000);
+    QObject::connect(iconTimer, SIGNAL(timeout()), this, SLOT(setWaitingIcon()));
+
     screenManager = new ScreenManager(this);
-    setIcon(QIcon {":/small.png"});
+    setIcon(QIcon {":/icon/waiting.png"});
     setToolTip(tr("DAEMON_RUNNING"));
 
     takeFullScreenKeySequence = QKeySequence(settings.value(takeFullScrenShortcutSettingName).toString());
@@ -90,7 +95,7 @@ void SystemTrayIcon::takeSelectedAreaScreenTriggered()
 }
 
 void SystemTrayIcon::sendSelectedArea()
-{
+{  
     if (screenManager->autoSendFile(pathToFile))
         fileSended(fileName);
     else
@@ -126,6 +131,9 @@ void SystemTrayIcon::uploadSelectedFileTriggered()
 
 void SystemTrayIcon::fileSended(QString fileName)
 {
+    setIcon(QIcon(":/icon/success.png"));
+    iconTimer->start();
+
     if(getUploadMethod() != Uplimg::UploadMethod::LOCAL && getUploadMethod() != Uplimg::UploadMethod::ERROR)
         {
             if(settings.value(playSoundSettingName).toBool())
@@ -154,6 +162,11 @@ void SystemTrayIcon::fileSended(QString fileName)
             if(settings.value(showNotificationsSettingName).toBool())
                 this->showMessage(applicationName, tr("UPLOAD_SUCCESS_LOCAL"));
         }
+}
+
+void SystemTrayIcon::setWaitingIcon()
+{
+    setIcon(QIcon(":/icon/waiting.png"));
 }
 
 void SystemTrayIcon::uploadClipboardTriggered()
@@ -256,6 +269,9 @@ void SystemTrayIcon::throwErrorAlert(const QString &text)
 
 void SystemTrayIcon::throwErrorAlert(const Uplimg::ErrorList &error)
 {
+    setIcon(QIcon(":/icon/error.png"));
+    iconTimer->start();
+
     if (error == Uplimg::ErrorList::UPLOAD_FAIL)
         {
             const QString text(tr("UPLOAD_FAILED", "Upload failed.\nYou must verify Uplimg's configuration or your Internet configuration to solve the problem."));

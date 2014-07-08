@@ -172,7 +172,7 @@
     <message>
         <location filename="configuration/configurationwindows.cpp" line="314"/>
         <source>UPLOAD_SECTION</source>
-        <translation>Upload</translation>
+        <translation type="unfinished">Enregistrement</translation>
     </message>
     <message>
         <location filename="configuration/configurationwindows.cpp" line="436"/>

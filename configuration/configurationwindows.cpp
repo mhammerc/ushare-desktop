@@ -21,7 +21,7 @@ ConfigurationWindows::ConfigurationWindows(SystemTrayIcon * parent, QWidget *qwi
     this->parent = parent;
     QObject::connect(this, SIGNAL(easterEgg()), parent, SLOT(enableEasterEgg()));
 
-    this->setWindowIcon(QIcon(":/small.png"));
+    this->setWindowIcon(QIcon(":/icon/base.png"));
     this->setWindowTitle(windowTitle);
 
     this->setUpUI();

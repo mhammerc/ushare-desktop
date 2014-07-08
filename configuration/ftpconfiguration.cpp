@@ -10,7 +10,7 @@ FTPConfiguration::FTPConfiguration(QWidget *parent) :
     basePathSettingName("configuration/ftp/basePath"),
     webPathSettingName("configuration/ftp/webPath")
 {
-    this->setWindowIcon(QIcon(":/small.png"));
+    this->setWindowIcon(QIcon(":/icon/base.png"));
     this->setUpUI();
 
     if(settings.value(portSettingName).isNull())

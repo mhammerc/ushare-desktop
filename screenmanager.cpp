@@ -21,6 +21,8 @@ ScreenManager::ScreenManager(SystemTrayIcon *parent) :
 
 bool ScreenManager::autoSendFile(const QString &pathToFile)
 {
+    parent->setIcon(QIcon(":/icon/uploading.png"));
+
     Uplimg::UploadMethod method = parent->getUploadMethod();
 
     if (method == Uplimg::UploadMethod::ERROR)

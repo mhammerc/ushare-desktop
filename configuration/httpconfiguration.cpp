@@ -10,7 +10,7 @@ HTTPConfiguration::HTTPConfiguration(QWidget * parent) :
     webPathSettingName("configuration/http/webPath"),
     linkFromSettingName("configuration/http/linkFrom")
 {
-    this->setWindowIcon(QIcon(":/small.png"));
+    this->setWindowIcon(QIcon(":/icon/base.png"));
     this->setUpUI();
 
     if(settings.value(portSettingName).isNull())

@@ -22,6 +22,7 @@
 #include <QUrl>
 #include <QVariant>
 #include <QStandardPaths>
+#include <QTimer>
 
 #include <QxtCore/Qxt>
 #include <QxtWidgets/QxtGlobalShortcut>
@@ -97,6 +98,8 @@ protected:
     QKeySequence uploadFileKeySequence;
     QKeySequence uploadClipboardKeySequence;
 
+    QTimer * iconTimer;
+
     //Temp
     QString fileName;
     QString pathToFile;
@@ -110,6 +113,7 @@ public slots :
     void uploadSelectedFileTriggered();
     void uploadClipboardTriggered();
     void fileSended(QString fileName);
+    void setWaitingIcon();
 
     void sendSelectedArea();
 

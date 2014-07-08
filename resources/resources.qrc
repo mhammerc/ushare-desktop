@@ -1,6 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>small.png</file>
         <file>fileSended.wav</file>
         <file>SFML_LICENCE.txt</file>
         <file>Easter_Egg.wav</file>
@@ -11,5 +10,12 @@
         <file>file.png</file>
         <file>fullscreen.png</file>
         <file>selectedScreen.png</file>
+    </qresource>
+    <qresource prefix="/icon">
+        <file alias="base.png">iconBase.png</file>
+        <file alias="error.png">iconError.png</file>
+        <file alias="success.png">iconSuccess.png</file>
+        <file alias="uploading.png">iconUploading.png</file>
+        <file alias="waiting.png">iconWaiting.png</file>
     </qresource>
 </RCC>
