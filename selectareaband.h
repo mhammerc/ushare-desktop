@@ -13,6 +13,9 @@
 #include <QRect>
 #include <QPoint>
 #include <QCursor>
+#include <QPalette>
+
+#include "shared.h"
 
 class ScreenManager;
 

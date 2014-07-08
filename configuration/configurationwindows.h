@@ -23,11 +23,13 @@
 #include <QShortcut>
 #include <QFileDialog>
 #include <QLocale>
+#include <QColorDialog>
 
 #include <iostream>
 
 #include "ftpconfiguration.h"
 #include "httpconfiguration.h"
+#include "shared.h"
 
 class SystemTrayIcon;
 
@@ -42,21 +44,6 @@ protected:
     SystemTrayIcon * parent;
     const QString windowTitle;
     QSettings settings;
-
-    /* Settings name */
-    const QString runOnStartupSettingName;
-    const QString showNotificationsSettingName;
-    const QString playSoundSettingName;
-    const QString copyToClipboardSettingName;
-    const QString langSettingName;
-    const QString FTPMethodSettingName;
-    const QString choosedMethodSettingName;
-    const QString autoOpenToBrowserSettingName;
-    const QString imageTypeSettingName;
-    const QString imageQualitySettingName;
-    const QString localSaveSettingName;
-    const QString localSavePathSettingName;
-    const QString localMethodSettingName;
 
     QVBoxLayout * mainLayout;
     QTabWidget * windowContent;
@@ -76,6 +63,10 @@ protected:
     QCheckBox * localSave;
     QLineEdit * localSavePath;
     QPushButton * localSavePathChooser;
+    QHBoxLayout * selectingAreaColorLayout;
+    QColor selectingAreaColor;
+    QLabel * selectingAreaColorShower;
+    QPushButton * selectingAreaColorOpener;
 
     //On successfull upload settings
     QGroupBox * onSuccessSettings;
@@ -175,6 +166,7 @@ public slots :
     void imageQualitySettingModified(int);
     void FTPMethodSettingModified(bool);
     void HTTPMethodSettingModified(bool);
+    void selectingAreaColorClicked();
 
     void configureFTP();
     void configureHTTP();

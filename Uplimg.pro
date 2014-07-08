@@ -14,7 +14,6 @@ RESOURCES += \
 
 HEADERS += \
     configuration/configurationwindows.h \
-    FileDialog.h \
     configuration/ftpconfiguration.h \
     uploadMethod/ftpupload.h \
     uploadMethod/httppostupload.h \
@@ -26,7 +25,6 @@ HEADERS += \
 
 SOURCES += \
     configuration/configurationwindows.cpp \
-    FileDialog.cpp \
     configuration/ftpconfiguration.cpp \
     uploadMethod/ftpupload.cpp \
     uploadMethod/httppostupload.cpp \

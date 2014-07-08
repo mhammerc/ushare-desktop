@@ -2,26 +2,20 @@
 
 
 FTPConfiguration::FTPConfiguration(QWidget *parent) :
-    QWidget(parent),
-    hostSettingName("configuration/ftp/host"),
-    portSettingName("configuration/ftp/port"),
-    usernameSettingName("configuration/ftp/username"),
-    passwordSettingName("configuration/ftp/password"),
-    basePathSettingName("configuration/ftp/basePath"),
-    webPathSettingName("configuration/ftp/webPath")
+    QWidget(parent)
 {
     this->setWindowIcon(QIcon(":/icon/base.png"));
     this->setUpUI();
 
-    if(settings.value(portSettingName).isNull())
-        settings.setValue(portSettingName,21);
+    if(settings.value(Reg::FTPPort).isNull())
+        settings.setValue(Reg::FTPPort,21);
 
-    host->setText(settings.value(hostSettingName).toString());
-    port->setValue(settings.value(portSettingName, 21).toInt());
-    username->setText(settings.value(usernameSettingName).toString());
-    password->setText(settings.value(passwordSettingName).toString());
-    basePath->setText(settings.value(basePathSettingName).toString());
-    webPath->setText(settings.value(webPathSettingName).toString());
+    host->setText(settings.value(Reg::FTPHost).toString());
+    port->setValue(settings.value(Reg::FTPPort, 21).toInt());
+    username->setText(settings.value(Reg::FTPUsername).toString());
+    password->setText(settings.value(Reg::FTPPassword).toString());
+    basePath->setText(settings.value(Reg::FTPBasePath).toString());
+    webPath->setText(settings.value(Reg::FTPWebPath).toString());
 
     QObject::connect(host, SIGNAL(textChanged(QString)), this, SLOT(hostSettingModified(QString)));
     QObject::connect(port, SIGNAL(valueChanged(int)), this, SLOT(portSettingModified(int)));
@@ -79,27 +73,27 @@ void FTPConfiguration::webPathSettingModified(QString text)
     else if (text.toStdString().empty())
         text = "/";
 
-    settings.setValue(webPathSettingName, text);
+    settings.setValue(Reg::FTPWebPath, text);
 }
 
 void FTPConfiguration::hostSettingModified(QString text)
 {
-    settings.setValue(hostSettingName, text);
+    settings.setValue(Reg::FTPHost, text);
 }
 
 void FTPConfiguration::portSettingModified(int value)
 {
-    settings.setValue(portSettingName, value);
+    settings.setValue(Reg::FTPPort, value);
 }
 
 void FTPConfiguration::usernameSettingModified(QString text)
 {
-    settings.setValue(usernameSettingName, text);
+    settings.setValue(Reg::FTPUsername, text);
 }
 
 void FTPConfiguration::passwordSettingModified(QString text)
 {
-    settings.setValue(passwordSettingName, text);
+    settings.setValue(Reg::FTPPassword, text);
 }
 
 void FTPConfiguration::basePathSettingModified(QString text)
@@ -109,5 +103,5 @@ void FTPConfiguration::basePathSettingModified(QString text)
     else if (text.toStdString().empty())
         text = "/";
 
-    settings.setValue(basePathSettingName, text);
+    settings.setValue(Reg::FTPBasePath, text);
 }

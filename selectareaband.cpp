@@ -2,9 +2,19 @@
 #include "screenmanager.h"
 
 
-SelectAreaBand::SelectAreaBand(ScreenManager *manager, QWidget * parent) : QLabel(parent)
+SelectAreaBand::SelectAreaBand(ScreenManager *manager, QWidget * parent) :
+    QLabel(parent)
 {
-    this->setCursor(Qt::CrossCursor);
+    QColor color;
+    QSettings settings;
+    color.setRed(settings.value(Reg::redArea).toInt());
+    color.setGreen(settings.value(Reg::greenArea).toInt());
+    color.setBlue(settings.value(Reg::blueArea).toInt());
+    QPalette palette;
+    palette.setBrush(QPalette::Highlight, QBrush(color));
+    setPalette(palette);
+
+    setCursor(Qt::CrossCursor);
     rubberBand = new QRubberBand(QRubberBand::Rectangle, this);
     this->manager = manager;
     QObject::connect(this, SIGNAL(areaTaken(QRect)), manager, SLOT(areaPictureTaken(QRect)));

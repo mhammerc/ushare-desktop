@@ -13,6 +13,8 @@
 #include <QPushButton>
 #include <QGroupBox>
 
+#include "shared.h"
+
 class FTPConfiguration : public QWidget
 {
     Q_OBJECT
@@ -21,13 +23,6 @@ public:
 
 protected:
     QSettings settings;
-
-    const QString hostSettingName;
-    const QString portSettingName;
-    const QString usernameSettingName;
-    const QString passwordSettingName;
-    const QString basePathSettingName;
-    const QString webPathSettingName;
 
     //Main layout and main form
     QVBoxLayout * layout;

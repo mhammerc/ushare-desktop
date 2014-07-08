@@ -20,11 +20,13 @@
 #include <QObject>
 #include <string>
 
+#include <SFML/Network.hpp>
+
 #include "selectareaband.h"
 #include "uploadMethod/ftpupload.h"
 #include "uploadMethod/httppostupload.h"
 
-#include <SFML/Network.hpp>
+#include "shared.h"
 
 class SystemTrayIcon;
 
@@ -42,28 +44,13 @@ public:
     bool sendFileTroughFTP(const QString &pathToFile);
 
 protected:
+    SystemTrayIcon * parent;
     QSettings settings;
-    const QString choosedMethodSettingName;
-
-    //FTP
-    const QString FTPHostSettingName;
-    const QString FTPPortSettingName;
-    const QString FTPUsernameSettingName;
-    const QString FTPPasswordSettingName;
-    const QString FTPBasePathSettingName;
-
-    //HTTP
-    const QString HTTPHostSettingName;
-    const QString HTTPPortSettingName;
-    const QString HTTPFileFieldNameSettingName;
 
     const int darkenFactor;
-
     bool isFileSended;
 
     QPixmap darkenPicture(const QPixmap &picture);
-
-    SystemTrayIcon * parent;
 
     QPixmap originalScreenshot;
     QString pathToFile;

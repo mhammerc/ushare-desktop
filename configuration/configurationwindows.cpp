@@ -3,20 +3,7 @@
 
 
 ConfigurationWindows::ConfigurationWindows(SystemTrayIcon * parent, QWidget *qwidget) :
-    QWidget(qwidget), windowTitle(tr("UPLIMG_CONFIGURATION")),
-    runOnStartupSettingName("configuration/runOnStartup"),
-    showNotificationsSettingName("configuration/showNotifications"),
-    playSoundSettingName("configuration/playSound"),
-    copyToClipboardSettingName("configuration/clipboard"),
-    langSettingName("configuration/lang"),
-    FTPMethodSettingName("configuration/ftp"),
-    choosedMethodSettingName("configuration/method"),
-    autoOpenToBrowserSettingName("configuration/autoOpenToBrowser"),
-    imageTypeSettingName("configuration/imageType"),
-    imageQualitySettingName("configuration/imageQuality"),
-    localSaveSettingName("configuration/localSave"),
-    localSavePathSettingName("configuration/localSavePath"),
-    localMethodSettingName("configuration/localMethod")
+    QWidget(qwidget), windowTitle(tr("UPLIMG_CONFIGURATION"))
 {
     this->parent = parent;
     QObject::connect(this, SIGNAL(easterEgg()), parent, SLOT(enableEasterEgg()));
@@ -26,59 +13,66 @@ ConfigurationWindows::ConfigurationWindows(SystemTrayIcon * parent, QWidget *qwi
 
     this->setUpUI();
 
-    this->setFixedSize(530, 370);
+    this->setFixedSize(530, 380);
 
     /* Load Settings */
-    runOnStartup->setChecked(settings.value(runOnStartupSettingName, true).toBool());
-    showNotifications->setChecked(settings.value(showNotificationsSettingName, true).toBool());
-    playSound->setChecked(settings.value(playSoundSettingName, true).toBool());
-    copyToClipboard->setChecked(settings.value(copyToClipboardSettingName, true).toBool());
-    autoOpenToBrowser->setChecked(settings.value(autoOpenToBrowserSettingName, true).toBool());
-    lang->setCurrentText(settings.value(langSettingName).toString());
-    localSave->setChecked(settings.value(localSaveSettingName).toBool());
-    localSavePath->setText(settings.value(localSavePathSettingName).toString());
-    imageType->setCurrentText(settings.value(imageTypeSettingName, "PNG").toString());
-    imageQuality->setValue(settings.value(imageQualitySettingName, 100).toInt());
-    imageQualityShower->setNum(settings.value(imageQualitySettingName, 100).toInt());
+    runOnStartup->setChecked(settings.value(Reg::runOnStartup, true).toBool());
+    showNotifications->setChecked(settings.value(Reg::showNotifications, true).toBool());
+    playSound->setChecked(settings.value(Reg::playSound, true).toBool());
+    copyToClipboard->setChecked(settings.value(Reg::copyToClipboard, true).toBool());
+    autoOpenToBrowser->setChecked(settings.value(Reg::autoOpenToBrowser, true).toBool());
+    lang->setCurrentText(settings.value(Reg::lang).toString());
+    localSave->setChecked(settings.value(Reg::localSave).toBool());
+    localSavePath->setText(settings.value(Reg::localSavePath).toString());
+    imageType->setCurrentText(settings.value(Reg::imageFormat, "PNG").toString());
+    imageQuality->setValue(settings.value(Reg::imageQuality, 100).toInt());
+    imageQualityShower->setNum(settings.value(Reg::imageQuality, 100).toInt());
 
-    if(!settings.value(localSaveSettingName).toBool())
-    {
-        localSavePath->setDisabled(true);
-        localSavePathChooser->setDisabled(true);
-    }
+    if(!settings.value(Reg::localSave).toBool())
+        {
+            localSavePath->setDisabled(true);
+            localSavePathChooser->setDisabled(true);
+        }
 
-    if(settings.value(imageTypeSettingName).toString() != "JPEG")
+    if(settings.value(Reg::imageFormat).toString() != "JPEG")
         imageQuality->setDisabled(true);
 
-    if (settings.value(choosedMethodSettingName).toString() == "FTP")
+    if (settings.value(Reg::choosedMethod).toString() == "FTP")
         FTPMethod->setChecked(true);
-    else if (settings.value(choosedMethodSettingName).toString() == "HTTP")
+    else if (settings.value(Reg::choosedMethod).toString() == "HTTP")
         HTTPMethod->setChecked(true);
-    else if(settings.value(choosedMethodSettingName).toString() == "LOCAL")
+    else if(settings.value(Reg::choosedMethod).toString() == "LOCAL")
         localMethod->setChecked(true);
 
-    if(settings.value(choosedMethodSettingName).toString() != "LOCAL")
-    {
-        localMethodPath->setDisabled(true);
-        localMethodPathChooser->setDisabled(true);
-    }
-
-    if(settings.value(langSettingName).toString().isNull())
-    {
-        QString locale = QLocale::system().name().section('_', 0, 0);
-        if(locale == "fr")
+    if(settings.value(Reg::choosedMethod).toString() != "LOCAL")
         {
-            lang->setCurrentText("Français");
+            localMethodPath->setDisabled(true);
+            localMethodPathChooser->setDisabled(true);
         }
-        else
+
+    if(settings.value(Reg::lang).toString().isNull())
         {
-            lang->setCurrentText("English");
+            QString locale = QLocale::system().name().section('_', 0, 0);
+            if(locale == "fr")
+                {
+                    lang->setCurrentText("Français");
+                }
+            else
+                {
+                    lang->setCurrentText("English");
+                }
         }
-    }
 
-    localMethodPath->setText(settings.value(localSavePathSettingName).toString());
+    localMethodPath->setText(settings.value(Reg::localSavePath).toString());
 
-    /* Settings Modifier */
+    selectingAreaColor.setRed(settings.value(Reg::redArea).toInt());
+    selectingAreaColor.setGreen(settings.value(Reg::greenArea).toInt());
+    selectingAreaColor.setBlue(settings.value(Reg::blueArea).toInt());
+
+    QPalette pal;
+    pal.setColor(QPalette::Window, selectingAreaColor);
+    selectingAreaColorShower->setPalette(pal);
+
     QObject::connect(runOnStartup, SIGNAL(toggled(bool)), this, SLOT(runOnStartupSettingModified(bool)));
     QObject::connect(showNotifications, SIGNAL(toggled(bool)), this, SLOT(showNotificationSettingModified(bool)));
     QObject::connect(playSound, SIGNAL(toggled(bool)), this, SLOT(playSoundSettingModified(bool)));
@@ -91,6 +85,7 @@ ConfigurationWindows::ConfigurationWindows(SystemTrayIcon * parent, QWidget *qwi
     QObject::connect(imageType, SIGNAL(currentTextChanged(QString)), this, SLOT(imageTypeSettingModified(QString)));
     QObject::connect(imageQuality, SIGNAL(valueChanged(int)), this, SLOT(imageQualitySettingModified(int)));
     QObject::connect(imageQuality, SIGNAL(valueChanged(int)), imageQualityShower, SLOT(setNum(int)));
+    QObject::connect(selectingAreaColorOpener, SIGNAL(clicked()), this, SLOT(selectingAreaColorClicked()));
 
     QObject::connect(localMethod, SIGNAL(toggled(bool)), this, SLOT(localMethodSettingsModified(bool)));
     QObject::connect(localMethodPath, SIGNAL(textChanged(QString)), this, SLOT(localMethodPathSettingsModified(QString)));
@@ -254,6 +249,16 @@ void ConfigurationWindows::setUpGeneralSectionUI()
     localSaveLayout->addWidget(localSavePathChooser);
     generalFormLayout->addRow(tr("LOCAL_SAVE"), localSaveLayout);
 
+    selectingAreaColorLayout = new QHBoxLayout;
+    selectingAreaColorShower = new QLabel;
+    selectingAreaColorShower->setAutoFillBackground(true);
+    selectingAreaColorShower->setFixedWidth(50);
+    selectingAreaColorOpener = new QPushButton("..");
+    selectingAreaColorOpener->setFixedWidth(30);
+    selectingAreaColorLayout->addWidget(selectingAreaColorShower);
+    selectingAreaColorLayout->addWidget(selectingAreaColorOpener);
+    generalFormLayout->addRow(tr("CHOOSE_COLOR_FOR_SELECTING_AREA_SCREEN"), selectingAreaColorLayout);
+
     generalSettings->setLayout(generalFormLayout);
     generalLayout->addWidget(generalSettings);
 
@@ -356,7 +361,7 @@ void ConfigurationWindows::FTPMethodSettingModified(bool checked)
     if (!checked)
         return;
 
-    settings.setValue(choosedMethodSettingName, "FTP");
+    settings.setValue(Reg::choosedMethod, "FTP");
 }
 
 void ConfigurationWindows::HTTPMethodSettingModified(bool checked)
@@ -364,12 +369,12 @@ void ConfigurationWindows::HTTPMethodSettingModified(bool checked)
     if (!checked)
         return;
 
-    settings.setValue(choosedMethodSettingName, "HTTP");
+    settings.setValue(Reg::choosedMethod, "HTTP");
 }
 
 void ConfigurationWindows::runOnStartupSettingModified(bool checked)
 {
-    settings.setValue(runOnStartupSettingName, checked);
+    settings.setValue(Reg::runOnStartup, checked);
 
 #ifdef _WIN32
     /*QSettings startSettings("HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run");
@@ -384,22 +389,22 @@ void ConfigurationWindows::runOnStartupSettingModified(bool checked)
 
 void ConfigurationWindows::showNotificationSettingModified(bool checked)
 {
-    settings.setValue(showNotificationsSettingName, checked);
+    settings.setValue(Reg::showNotifications, checked);
 }
 
 void ConfigurationWindows::playSoundSettingModified(bool checked)
 {
-    settings.setValue(playSoundSettingName, checked);
+    settings.setValue(Reg::playSound, checked);
 }
 
 void ConfigurationWindows::copyToClipboardSettingModified(bool checked)
 {
-    settings.setValue(copyToClipboardSettingName, checked);
+    settings.setValue(Reg::copyToClipboard, checked);
 }
 
 void ConfigurationWindows::langSettingModified(QString newValue)
 {
-    settings.setValue(langSettingName, newValue);
+    settings.setValue(Reg::lang, newValue);
 
     if(newValue == "English")
         QMessageBox::information(this, windowTitle, "You need to restart Uplimg.");
@@ -409,12 +414,12 @@ void ConfigurationWindows::langSettingModified(QString newValue)
 
 void ConfigurationWindows::autoOpenToBrowserSettingModified(bool checked)
 {
-    settings.setValue(autoOpenToBrowserSettingName, checked);
+    settings.setValue(Reg::autoOpenToBrowser, checked);
 }
 
 void ConfigurationWindows::imageTypeSettingModified(QString text)
 {
-    settings.setValue(imageTypeSettingName, text);
+    settings.setValue(Reg::imageFormat, text);
     if(text == "JPEG")
         imageQuality->setEnabled(true);
     else
@@ -423,7 +428,7 @@ void ConfigurationWindows::imageTypeSettingModified(QString text)
 
 void ConfigurationWindows::imageQualitySettingModified(int value)
 {
-    settings.setValue(imageQualitySettingName, value);
+    settings.setValue(Reg::imageQuality, value);
 }
 
 void ConfigurationWindows::closeEvent(QCloseEvent *event)
@@ -447,14 +452,14 @@ void ConfigurationWindows::keyPressEvent(QKeyEvent * event)
 
 void ConfigurationWindows::localSaveSettingsModified(bool checked)
 {
-    settings.setValue(localSaveSettingName, checked);
+    settings.setValue(Reg::localSave, checked);
     localSavePath->setEnabled(checked);
     localSavePathChooser->setEnabled(checked);
 }
 
 void ConfigurationWindows::localSavePathSettingsModified(QString path)
 {
-    settings.setValue(localSavePathSettingName, path);
+    settings.setValue(Reg::localSavePath, path);
     localMethodPath->setText(path);
 }
 
@@ -462,22 +467,21 @@ void ConfigurationWindows::localSavePathSettingsClicked()
 {
     QString path = QFileDialog::getExistingDirectory(this, tr("CHOOSE_DIRECTORY"), localSavePath->text());
     localSavePath->setText(path);
-    settings.setValue(localSavePathSettingName, path);
+    settings.setValue(Reg::localSavePath, path);
 }
 
 void ConfigurationWindows::localMethodSettingsModified(bool checked)
 {
-    settings.setValue(localMethodSettingName, checked);
     localMethodPath->setEnabled(checked);
     localMethodPathChooser->setEnabled(checked);
 
     if(checked)
-        settings.setValue(choosedMethodSettingName, "LOCAL");
+        settings.setValue(Reg::choosedMethod, "LOCAL");
 }
 
 void ConfigurationWindows::localMethodPathSettingsModified(QString path)
 {
-    settings.setValue(localSavePathSettingName, path);
+    settings.setValue(Reg::localSavePath, path);
     localSavePath->setText(path);
 }
 
@@ -486,5 +490,18 @@ void ConfigurationWindows::localMethodPathSettingsClicked()
     QString path = QFileDialog::getExistingDirectory(this, tr("CHOOSE_DIRECTORY"), localSavePath->text());
     localSavePath->setText(path);
     localMethodPath->setText(path);
-    settings.setValue(localSavePathSettingName, path);
+    settings.setValue(Reg::localSavePath, path);
+}
+
+void ConfigurationWindows::selectingAreaColorClicked()
+{
+    selectingAreaColor = QColorDialog::getColor(selectingAreaColor, this);
+
+    QPalette pal;
+    pal.setColor(QPalette::Window, selectingAreaColor);
+    selectingAreaColorShower->setPalette(pal);
+
+    settings.setValue(Reg::redArea, selectingAreaColor.red());
+    settings.setValue(Reg::greenArea, selectingAreaColor.green());
+    settings.setValue(Reg::blueArea, selectingAreaColor.blue());
 }

@@ -1,32 +1,16 @@
 #include "systemtrayicon.h"
 
 SystemTrayIcon::SystemTrayIcon(QObject *qobject) :
-    QSystemTrayIcon(qobject),
-    applicationName("Uplimg"),
-    HTTPWebPathSettingName("configuration/http/webPath"),
-    FTPWebPathSettingName("configuration/ftp/webPath"),
-    runOnStartupSettingName("configuration/runOnStartup"),
-    choosedMethodSettingName("configuration/method"),
-    showNotificationsSettingName("configuration/showNotifications"),
-    playSoundSettingName("configuration/playSound"),
-    copyToClipboardSettingName("configuration/clipboard"),
-    takeFullScrenShortcutSettingName("configuration/shortcut/takeFullScreen"),
-    takeSelectedAreaScreenShortcutSettingName("configuration/shortcut/takeSelectedArea"),
-    uploadFileShortcutSettingName("configuration/shortcut/uploadFile"),
-    uploadClipboardShortcutSettingName("configuration/shortcut/uploadClipboard"),
-    autoOpenToBrowserSettingName("configuration/autoOpenToBrowser"),
-    imageFormatSettingName("configuration/imageType"),
-    imageQualitySettingName("configuration/imageQuality"),
-    localSaveSettingName("configuration/localSave"),
-    localSavePathSettingName("configuration/localSavePath"),
-    linkFromSettingName("configuration/http/linkFrom")
+    QSystemTrayIcon(qobject)
 {
-    if(settings.value(runOnStartupSettingName).isNull()) //First time the application is started
+
+    if(settings.value(Reg::runOnStartup).isNull()) //First time the application is started
         firstStart();
 
-    fileSendedSound = new QSound(":/fileSended.wav", this);
+    configurationWindow = 0;
 
-    configurationWindows = 0;
+    setIcon(QIcon(":/icon/waiting.png"));
+    setToolTip(tr("DAEMON_RUNNING"));
 
     iconTimer = new QTimer(this);
     iconTimer->setSingleShot(true);
@@ -34,15 +18,14 @@ SystemTrayIcon::SystemTrayIcon(QObject *qobject) :
     QObject::connect(iconTimer, SIGNAL(timeout()), this, SLOT(setWaitingIcon()));
 
     screenManager = new ScreenManager(this);
-    setIcon(QIcon {":/icon/waiting.png"});
-    setToolTip(tr("DAEMON_RUNNING"));
+    fileSendedSound = new QSound(":/fileSended.wav", this);
 
-    takeFullScreenKeySequence = QKeySequence(settings.value(takeFullScrenShortcutSettingName).toString());
-    takeSelectedAreaKeySequence = QKeySequence(settings.value(takeSelectedAreaScreenShortcutSettingName).toString());
-    uploadFileKeySequence = QKeySequence::fromString(settings.value(uploadFileShortcutSettingName).toString());
-    uploadClipboardKeySequence = QKeySequence::fromString(settings.value(uploadClipboardShortcutSettingName).toString());
+    takeFullScreenKeySequence = QKeySequence(settings.value(Reg::takeFullScrenShortcut).toString());
+    takeSelectedAreaKeySequence = QKeySequence(settings.value(Reg::takeSelectedAreaScreenShortcut).toString());
+    uploadFileKeySequence = QKeySequence(settings.value(Reg::uploadFileShortcut).toString());
+    uploadClipboardKeySequence = QKeySequence(settings.value(Reg::uploadClipboardShortcut).toString());
 
-    takeFullScrenShortcut = new QxtGlobalShortcut(takeFullScreenKeySequence, this);
+    takeFullScreenShortcut = new QxtGlobalShortcut(takeFullScreenKeySequence, this);
     takeSelectedAreaScreenShortcut = new QxtGlobalShortcut(takeSelectedAreaKeySequence, this);
     uploadFileShortcut = new QxtGlobalShortcut(uploadFileKeySequence, this);
     uploadClipboardShortcut = new QxtGlobalShortcut(uploadClipboardKeySequence, this);
@@ -59,7 +42,7 @@ SystemTrayIcon::SystemTrayIcon(QObject *qobject) :
     QObject::connect(this, SIGNAL(messageClicked()), this, SLOT(openLastUrl()));
     QObject::connect(this, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(activatedTrigerred(QSystemTrayIcon::ActivationReason)));
 
-    QObject::connect(takeFullScrenShortcut, SIGNAL(activated()), this, SLOT(takeFullScrenTriggered()));
+    QObject::connect(takeFullScreenShortcut, SIGNAL(activated()), this, SLOT(takeFullScrenTriggered()));
     QObject::connect(takeSelectedAreaScreenShortcut, SIGNAL(activated()), this, SLOT(takeSelectedAreaScreenTriggered()));
     QObject::connect(uploadFileShortcut, SIGNAL(activated()), this, SLOT(uploadSelectedFileTriggered()));
     QObject::connect(uploadClipboardShortcut, SIGNAL(activated()), this, SLOT(uploadClipboardTriggered()));
@@ -77,7 +60,7 @@ void SystemTrayIcon::setUpContextMenu()
     showConfiguration = systemTrayMenu->addAction(tr("CONFIGURATION", "In system tray icon"));
     quit = systemTrayMenu->addAction(tr("EXIT"));
 
-    takeScreen->setShortcut(takeFullScrenShortcut->shortcut());
+    takeScreen->setShortcut(takeFullScreenShortcut->shortcut());
     takeSelectedScreen->setShortcut(takeSelectedAreaScreenShortcut->shortcut());
     uploadFile->setShortcut(uploadFileShortcut->shortcut());
     uploadClipboard->setShortcut(uploadClipboardShortcut->shortcut());
@@ -115,7 +98,7 @@ void SystemTrayIcon::takeFullScrenTriggered()
 
 void SystemTrayIcon::uploadSelectedFileTriggered()
 {
-    QString path = FileDialog::getOpenFileName(0, tr("SELECT_FILE"));
+    QString path = QFileDialog::getOpenFileName(0, tr("SELECT_FILE"));
 
     if(!path.isNull())
         {
@@ -136,31 +119,31 @@ void SystemTrayIcon::fileSended(QString fileName)
 
     if(getUploadMethod() != Uplimg::UploadMethod::LOCAL && getUploadMethod() != Uplimg::UploadMethod::ERROR)
         {
-            if(settings.value(playSoundSettingName).toBool())
+            if(settings.value(Reg::playSound).toBool())
                 fileSendedSound->play();
 
-            if(settings.value(linkFromSettingName).toString() != "FROM_HTTP" || getUploadMethod() != Uplimg::UploadMethod::HTTP)
+            if(settings.value(Reg::linkFrom).toString() != "FROM_HTTP" || getUploadMethod() != Uplimg::UploadMethod::HTTP)
                 {
                     const QString urlPath = getUploadedFileURL(fileName);
                     lastUrl.setUrl(urlPath);
                 }
 
-            if(settings.value(autoOpenToBrowserSettingName).toBool())
+            if(settings.value(Reg::autoOpenToBrowser).toBool())
                 openLastUrl();
 
-            if(settings.value(copyToClipboardSettingName).toBool())
+            if(settings.value(Reg::copyToClipboard).toBool())
                 QApplication::clipboard()->setText(lastUrl.toString());
 
-            if(settings.value(showNotificationsSettingName).toBool())
-                this->showMessage(applicationName, tr("UPLOAD_SUCCESS_WITH_URL", "Congratulation !\nUpload success. The URL is :\n") + lastUrl.toString());
+            if(settings.value(Reg::showNotifications).toBool())
+                this->showMessage(Uplimg::applicationName, tr("UPLOAD_SUCCESS_WITH_URL", "Congratulation !\nUpload success. The URL is :\n") + lastUrl.toString());
         }
-    else if(getUploadMethod() == Uplimg::UploadMethod::LOCAL)
+    else if(getUploadMethod()  == Uplimg::UploadMethod::LOCAL)
         {
-            if(settings.value(playSoundSettingName).toBool())
+            if(settings.value(Reg::playSound).toBool())
                 fileSendedSound->play();
 
-            if(settings.value(showNotificationsSettingName).toBool())
-                this->showMessage(applicationName, tr("UPLOAD_SUCCESS_LOCAL"));
+            if(settings.value(Reg::showNotifications).toBool())
+                this->showMessage(Uplimg::applicationName, tr("UPLOAD_SUCCESS_LOCAL"));
         }
 }
 
@@ -236,8 +219,8 @@ QString SystemTrayIcon::getNewFileName(QString ending)
 
 QString SystemTrayIcon::getFileTempPath(const QString &screenName)
 {
-    if(settings.value(localSaveSettingName).toBool() || settings.value(choosedMethodSettingName).toString() == "LOCAL")
-        return settings.value(localSavePathSettingName).toString() + "/" + screenName;
+    if(settings.value(Reg::localSave).toBool() || settings.value(Reg::choosedMethod).toString() == "LOCAL")
+        return settings.value(Reg::localSavePath).toString() + "/" + screenName;
     else
         return QStandardPaths::writableLocation(QStandardPaths::TempLocation)
                + "/"
@@ -246,20 +229,20 @@ QString SystemTrayIcon::getFileTempPath(const QString &screenName)
 
 QString SystemTrayIcon::getUploadedFileURL(const QString &fileName)
 {
-    if(getUploadMethod() == Uplimg::UploadMethod::FTP)
-        return settings.value(FTPWebPathSettingName, "http://").toString() + fileName;
-    else if(getUploadMethod() == Uplimg::UploadMethod::HTTP)
-        return settings.value(HTTPWebPathSettingName, "http://").toString() + fileName;
+    if(getUploadMethod()  == Uplimg::UploadMethod::FTP)
+        return settings.value(Reg::FTPWebPath, "http://").toString() + fileName;
+    else if(getUploadMethod()  == Uplimg::UploadMethod::HTTP)
+        return settings.value(Reg::HTTPWebPath, "http://").toString() + fileName;
     else
         return "error";
 }
 
 void SystemTrayIcon::showWindowConfigurationTriggered()
 {
-    if(configurationWindows == 0)
-        configurationWindows = new ConfigurationWindows(this);
-    configurationWindows->show();
-    configurationWindows->setWindowState(Qt::WindowActive);
+    if(configurationWindow == 0)
+        configurationWindow = new ConfigurationWindows(this);
+    configurationWindow->show();
+    configurationWindow->setWindowState(Qt::WindowActive);
 }
 
 void SystemTrayIcon::throwErrorAlert(const QString &text)
@@ -274,23 +257,23 @@ void SystemTrayIcon::throwErrorAlert(const Uplimg::ErrorList &error)
 
     if (error == Uplimg::ErrorList::UPLOAD_FAIL)
         {
-            const QString text(tr("UPLOAD_FAILED", "Upload failed.\nYou must verify Uplimg's configuration or your Internet configuration to solve the problem."));
-            this->showMessage(applicationName, text);
+            const QString text(tr("UPLOAD_FAILED"));
+            this->showMessage(Uplimg::applicationName, text);
         }
     else if(error == Uplimg::ErrorList::UPLOAD_METHOD_NOT_CHOOSED)
         {
-            const QString text(tr("NO_METHOD_TO_UPLOAD_CHOOSED", "We can't upload anything.\nYou must configure method to upload before."));
-            this->showMessage(applicationName, text);
+            const QString text(tr("NO_METHOD_TO_UPLOAD_CHOOSED"));
+            this->showMessage(Uplimg::applicationName, text);
         }
 }
 
 Uplimg::UploadMethod SystemTrayIcon::getUploadMethod() const
 {
-    if (settings.value(choosedMethodSettingName).toString().toStdString() == "FTP")
+    if (settings.value(Reg::choosedMethod).toString().toStdString() == "FTP")
         return Uplimg::UploadMethod::FTP;
-    else if (settings.value(choosedMethodSettingName).toString().toStdString() == "HTTP")
+    else if (settings.value(Reg::choosedMethod).toString().toStdString() == "HTTP")
         return Uplimg::UploadMethod::HTTP;
-    else if (settings.value(choosedMethodSettingName).toString().toStdString() == "LOCAL")
+    else if (settings.value(Reg::choosedMethod).toString().toStdString() == "LOCAL")
         return Uplimg::UploadMethod::LOCAL;
     else
         return Uplimg::UploadMethod::ERROR;
@@ -298,25 +281,20 @@ Uplimg::UploadMethod SystemTrayIcon::getUploadMethod() const
 
 void SystemTrayIcon::firstStart()
 {
-    settings.setValue(runOnStartupSettingName, true);
-    settings.setValue(showNotificationsSettingName, true);
-    settings.setValue(playSoundSettingName, true);
-    settings.setValue(copyToClipboardSettingName, true);
-    settings.setValue(choosedMethodSettingName, "FTP");
-    settings.setValue(takeFullScrenShortcutSettingName, "Alt+1");
-    settings.setValue(takeSelectedAreaScreenShortcutSettingName, "Alt+2");
-    settings.setValue(uploadFileShortcutSettingName, "Alt+3");
-    settings.setValue(uploadClipboardShortcutSettingName, "Alt+4");
-    settings.setValue(imageFormatSettingName, "PNG");
-    settings.setValue(imageQualitySettingName, 100);
-    settings.setValue(autoOpenToBrowserSettingName, false);
-    settings.setValue(localSavePathSettingName, QStandardPaths::standardLocations(QStandardPaths::PicturesLocation));
-    settings.setValue(localSaveSettingName, false);
-}
-
-SystemTrayIcon::~SystemTrayIcon()
-{
-    configurationWindows->deleteLater();
+    settings.setValue(Reg::runOnStartup, true);
+    settings.setValue(Reg::showNotifications, true);
+    settings.setValue(Reg::playSound, true);
+    settings.setValue(Reg::copyToClipboard, true);
+    settings.setValue(Reg::autoOpenToBrowser, false);
+    settings.setValue(Reg::localSave, false);
+    settings.setValue(Reg::choosedMethod, "FTP");
+    settings.setValue(Reg::takeFullScrenShortcut, "Alt+1");
+    settings.setValue(Reg::takeSelectedAreaScreenShortcut, "Alt+2");
+    settings.setValue(Reg::uploadFileShortcut, "Alt+3");
+    settings.setValue(Reg::uploadClipboardShortcut, "Alt+4");
+    settings.setValue(Reg::imageFormat, "PNG");
+    settings.setValue(Reg::imageQuality, 100);
+    settings.setValue(Reg::localSavePath, QStandardPaths::standardLocations(QStandardPaths::PicturesLocation));
 }
 
 void SystemTrayIcon::enableEasterEgg()
@@ -342,9 +320,9 @@ void SystemTrayIcon::activatedTrigerred(QSystemTrayIcon::ActivationReason reason
 
 Uplimg::ImageFormat SystemTrayIcon::getImageFormat() const
 {
-    if(settings.value(imageFormatSettingName).toString() == "PNG")
+    if(settings.value(Reg::imageFormat).toString() == "PNG")
         return Uplimg::ImageFormat::PNG;
-    else if(settings.value(imageFormatSettingName).toString() == "JPEG")
+    else if(settings.value(Reg::imageFormat).toString() == "JPEG")
         return Uplimg::ImageFormat::JPEG;
     else
         return Uplimg::ImageFormat::INVALID_FORMAT;
@@ -352,5 +330,10 @@ Uplimg::ImageFormat SystemTrayIcon::getImageFormat() const
 
 int SystemTrayIcon::getImageQuality() const
 {
-    return settings.value(imageQualitySettingName).toInt();
+    return settings.value(Reg::imageQuality).toInt();
+}
+
+SystemTrayIcon::~SystemTrayIcon()
+{
+    configurationWindow->deleteLater();
 }

@@ -13,6 +13,8 @@
 #include <QGroupBox>
 #include <QRadioButton>
 
+#include "shared.h"
+
 class HTTPConfiguration : public QWidget
 {
     Q_OBJECT
@@ -22,12 +24,6 @@ public:
 
 protected:
     QSettings settings;
-
-    const QString hostSettingName;
-    const QString portSettingName;
-    const QString fileFieldNameSettingName;
-    const QString webPathSettingName;
-    const QString linkFromSettingName;
 
     //Main layout and main form
     QVBoxLayout * layout;

@@ -3,7 +3,7 @@
 
 FTPUpload::FTPUpload(const std::string &host, unsigned short port, const std::string &username, const std::string &password, const std::string &basePath)
     : ftpClient(new sf::Ftp())
-{
+{    
     this->host = host;
     this->port = port;
     this->username = username;

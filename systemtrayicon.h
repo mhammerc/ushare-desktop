@@ -29,7 +29,6 @@
 
 #include "configuration/configurationwindows.h"
 #include "screenmanager.h"
-#include "FileDialog.h"
 #include "shared.h"
 
 class SystemTrayIcon : public QSystemTrayIcon
@@ -38,35 +37,17 @@ class SystemTrayIcon : public QSystemTrayIcon
 public:
     explicit SystemTrayIcon(QObject *qobject = 0);
     ~SystemTrayIcon();
-    Uplimg::UploadMethod getUploadMethod() const;
+    Uplimg::UploadMethod
+    getUploadMethod() const;
     Uplimg::ImageFormat getImageFormat() const;
     int getImageQuality() const;
 
     QUrl lastUrl;
 
 protected:
-    const QString applicationName;
-    const QString HTTPWebPathSettingName;
-    const QString FTPWebPathSettingName;
-    const QString runOnStartupSettingName;
-    const QString choosedMethodSettingName;
-    const QString showNotificationsSettingName;
-    const QString playSoundSettingName;
-    const QString copyToClipboardSettingName;
-    const QString takeFullScrenShortcutSettingName;
-    const QString takeSelectedAreaScreenShortcutSettingName;
-    const QString uploadFileShortcutSettingName;
-    const QString uploadClipboardShortcutSettingName;
-    const QString autoOpenToBrowserSettingName;
-    const QString imageFormatSettingName;
-    const QString imageQualitySettingName;
-    const QString localSaveSettingName;
-    const QString localSavePathSettingName;
-    const QString linkFromSettingName;
-
     QSettings settings;
 
-    ConfigurationWindows * configurationWindows;
+    ConfigurationWindows * configurationWindow;
     ScreenManager * screenManager;
 
     QMenu * systemTrayMenu;
@@ -77,8 +58,6 @@ protected:
     QAction * showConfiguration;
     QAction * quit;
 
-    QShortcut * shortcut;
-
     void setUpContextMenu();
     QString getNewFileName(Uplimg::ImageFormat ending);
     QString getNewFileName(QString ending);
@@ -88,7 +67,7 @@ protected:
 
     QSound * fileSendedSound;
 
-    QxtGlobalShortcut * takeFullScrenShortcut;
+    QxtGlobalShortcut * takeFullScreenShortcut;
     QxtGlobalShortcut * takeSelectedAreaScreenShortcut;
     QxtGlobalShortcut * uploadFileShortcut;
     QxtGlobalShortcut * uploadClipboardShortcut;

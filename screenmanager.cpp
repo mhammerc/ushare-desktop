@@ -3,17 +3,8 @@
 
 
 ScreenManager::ScreenManager(SystemTrayIcon *parent) :
-    choosedMethodSettingName("configuration/method"),
-    FTPHostSettingName("configuration/ftp/host"),
-    FTPPortSettingName("configuration/ftp/port"),
-    FTPUsernameSettingName("configuration/ftp/username"),
-    FTPPasswordSettingName("configuration/ftp/password"),
-    FTPBasePathSettingName("configuration/ftp/basePath"),
-    HTTPHostSettingName("configuration/http/host"),
-    HTTPPortSettingName("configuration/http/port"),
-    HTTPFileFieldNameSettingName("configuration/http/fieldName"),
-    darkenFactor(10),
-    parent(parent)
+    parent(parent),
+    darkenFactor(10)
 {
     QObject::connect(this, SIGNAL(canSend()), parent, SLOT(sendSelectedArea()));
     isFileSended = false;
@@ -42,11 +33,11 @@ bool ScreenManager::autoSendFile(const QString &pathToFile)
 
 bool ScreenManager::sendFileTroughFTP(const QString &pathToFile)
 {
-    std::unique_ptr<FTPUpload> ftp(new FTPUpload(settings.value(FTPHostSettingName).toString().toStdString(),
-                                   settings.value(FTPPortSettingName).toInt(),
-                                   settings.value(FTPUsernameSettingName).toString().toStdString(),
-                                   settings.value(FTPPasswordSettingName).toString().toStdString(),
-                                   settings.value(FTPBasePathSettingName).toString().toStdString()));
+    std::unique_ptr<FTPUpload> ftp(new FTPUpload(settings.value(Reg::FTPHost).toString().toStdString(),
+                                   settings.value(Reg::FTPPort).toInt(),
+                                   settings.value(Reg::FTPUsername).toString().toStdString(),
+                                   settings.value(Reg::FTPPassword).toString().toStdString(),
+                                   settings.value(Reg::FTPBasePath).toString().toStdString()));
 
     if (ftp->openConnexion())
         if (ftp->sendFile(pathToFile.toStdString()))
@@ -63,13 +54,12 @@ bool ScreenManager::sendFileTroughFTP(const QString &pathToFile)
 bool ScreenManager::sendFileTroughHTTP(const QString &pathToFile)
 {
     HTTPPostUpload * http = new HTTPPostUpload;
-    http->setHost(settings.value(HTTPHostSettingName).toString(), settings.value(HTTPPortSettingName).toInt());
-    http->setFile(pathToFile, settings.value(HTTPFileFieldNameSettingName, "uplimgFile").toString());
+    http->setHost(settings.value(Reg::HTTPHost).toString(), settings.value(Reg::HTTPPort).toInt());
+    http->setFile(pathToFile, settings.value(Reg::HTTPFileFieldName, "uplimgFile").toString());
     http->setContentType("image/png");
     http->start();
 
     sf::Clock clock;
-    clock.restart();
 
     while(true)
         {
@@ -77,11 +67,11 @@ bool ScreenManager::sendFileTroughHTTP(const QString &pathToFile)
                 return false;
 
             sf::sleep(sf::milliseconds(30));
+
             if(http->canGetReply() && http->reply->isFinished() && http->reply->error() == QNetworkReply::NetworkError::NoError)
                 {
                     http->terminate();
                     parent->lastUrl.setUrl(QString(http->reply->readAll()));
-
                     http->deleteLater();
                     return true;
                 }
