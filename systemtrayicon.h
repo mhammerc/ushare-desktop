@@ -79,6 +79,11 @@ protected:
     QString fileName;
     QString pathToFile;
 
+    bool lastUploadedFileSeparatorInserted;
+    QAction * lastUploadedFileSeparator;
+    short lastUploadedFileCounter;
+
+
 signals:
 
 public slots :
@@ -89,6 +94,7 @@ public slots :
     void uploadClipboardTriggered();
     void fileSended(QString fileName);
     void setWaitingIcon();
+    void addUploadedFileInContextMenu();
 
     void sendSelectedArea();
 
@@ -98,6 +104,7 @@ public slots :
     void enableEasterEgg();
 
     void openLastUrl();
+    void copyLastUrlToClipboard();
 
     void activatedTrigerred(QSystemTrayIcon::ActivationReason);
 };

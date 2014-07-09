@@ -86,21 +86,21 @@ bool ScreenManager::sendFileTroughHTTP(const QString &pathToFile)
 
 QString ScreenManager::captureSelectedZone(const QString &pathToScreen)
 {
-    QPixmap fullScreenshot;
+    //QPixmap fullScreenshot;
     screen = QGuiApplication::primaryScreen();
 
     this->pathToFile = pathToScreen;
 
     if (screen)
         {
-            fullScreenshot = screen->grabWindow(0);
+            originalScreenshot = screen->grabWindow(0);
 
-            if (!fullScreenshot.isNull())
+            if (!originalScreenshot.isNull())
                 {
-                    originalScreenshot = fullScreenshot;
-                    fullScreenshot = darkenPicture(fullScreenshot);
+                    //originalScreenshot = fullScreenshot;
+                    //fullScreenshot = darkenPicture(fullScreenshot);
                     fullScreenPicture = new SelectAreaBand(this);
-                    fullScreenPicture->setPixmap(fullScreenshot);
+                    fullScreenPicture->setPixmap(originalScreenshot);
                     fullScreenPicture->selectArea();
                 }
         }

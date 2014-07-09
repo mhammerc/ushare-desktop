@@ -312,56 +312,56 @@
 <context>
     <name>SystemTrayIcon</name>
     <message>
-        <location filename="systemtrayicon.cpp" line="13"/>
+        <location filename="systemtrayicon.cpp" line="15"/>
         <source>DAEMON_RUNNING</source>
         <oldsource>Daemon is running and waiting</oldsource>
         <translation>Le service tourne en arrière plan</translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="55"/>
+        <location filename="systemtrayicon.cpp" line="57"/>
         <source>TAKE_NEW_FULLSCREEN</source>
         <oldsource>Take new screen</oldsource>
         <translation>Capturer l&apos;écran entier</translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="56"/>
+        <location filename="systemtrayicon.cpp" line="58"/>
         <source>TAKE_NEW_AREA_SELECTED_SCREEN</source>
         <oldsource>Take new selected screen</oldsource>
         <translation>Capturer une zone précise de l&apos;écran</translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="57"/>
+        <location filename="systemtrayicon.cpp" line="59"/>
         <source>UPLOAD_CHOOSED_FILE</source>
         <oldsource>Upload specific file</oldsource>
         <translation>Envoyer un fichier...</translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="58"/>
+        <location filename="systemtrayicon.cpp" line="60"/>
         <source>UPLOAD_CLIPBOARD</source>
         <oldsource>Upload clipboard</oldsource>
         <translation>Envoyer le contenu du presse papier</translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="60"/>
+        <location filename="systemtrayicon.cpp" line="62"/>
         <source>CONFIGURATION</source>
         <oldsource>Configuration...</oldsource>
         <comment>In system tray icon</comment>
         <translation>Paramètres</translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="61"/>
+        <location filename="systemtrayicon.cpp" line="63"/>
         <source>EXIT</source>
         <oldsource>Exit !</oldsource>
         <translation>Quitter</translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="101"/>
+        <location filename="systemtrayicon.cpp" line="103"/>
         <source>SELECT_FILE</source>
         <oldsource>Select file</oldsource>
         <translation>Selectionnez un fichier</translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="138"/>
+        <location filename="systemtrayicon.cpp" line="142"/>
         <source>UPLOAD_SUCCESS_WITH_URL</source>
         <comment>Congratulation !
 Upload success. The URL is :
@@ -371,18 +371,28 @@ L&apos;envoi est un succès. Le lien est :
 </translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="146"/>
+        <location filename="systemtrayicon.cpp" line="150"/>
         <source>UPLOAD_SUCCESS_LOCAL</source>
         <translation>Votre image est désormais sauvegardé locallement.</translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="260"/>
+        <location filename="systemtrayicon.cpp" line="163"/>
+        <source>OPEN_TO_BROWSER</source>
+        <translation>Ouvrir dans le navigateur</translation>
+    </message>
+    <message>
+        <location filename="systemtrayicon.cpp" line="164"/>
+        <source>COPY_TO_CLIPBOARD</source>
+        <translation>Copier dans le presse papier</translation>
+    </message>
+    <message>
+        <location filename="systemtrayicon.cpp" line="295"/>
         <source>UPLOAD_FAILED</source>
         <translation>Echec de l&apos;envoi.
 Vous devez vérifier votre configuration d&apos;Uplimg ou votre configuration internet pour corriger le problème.</translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="265"/>
+        <location filename="systemtrayicon.cpp" line="300"/>
         <source>NO_METHOD_TO_UPLOAD_CHOOSED</source>
         <translation>Nous ne pouvons rien envoyer.
 Vous devez sélectionner une méthode d&apos;envoi avant.</translation>

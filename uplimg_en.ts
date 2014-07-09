@@ -297,56 +297,56 @@
 <context>
     <name>SystemTrayIcon</name>
     <message>
-        <location filename="systemtrayicon.cpp" line="13"/>
+        <location filename="systemtrayicon.cpp" line="15"/>
         <source>DAEMON_RUNNING</source>
         <oldsource>Daemon is running and waiting</oldsource>
         <translation>Daemon is running and waiting</translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="55"/>
+        <location filename="systemtrayicon.cpp" line="57"/>
         <source>TAKE_NEW_FULLSCREEN</source>
         <oldsource>Take new screen</oldsource>
         <translation>Take new fullscreen</translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="56"/>
+        <location filename="systemtrayicon.cpp" line="58"/>
         <source>TAKE_NEW_AREA_SELECTED_SCREEN</source>
         <oldsource>Take new selected screen</oldsource>
         <translation>Take new selected screen</translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="57"/>
+        <location filename="systemtrayicon.cpp" line="59"/>
         <source>UPLOAD_CHOOSED_FILE</source>
         <oldsource>Upload specific file</oldsource>
         <translation>Upload file...</translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="58"/>
+        <location filename="systemtrayicon.cpp" line="60"/>
         <source>UPLOAD_CLIPBOARD</source>
         <oldsource>Upload clipboard</oldsource>
         <translation>Upload clipboard</translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="60"/>
+        <location filename="systemtrayicon.cpp" line="62"/>
         <source>CONFIGURATION</source>
         <oldsource>Configuration...</oldsource>
         <comment>In system tray icon</comment>
         <translation>Options</translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="61"/>
+        <location filename="systemtrayicon.cpp" line="63"/>
         <source>EXIT</source>
         <oldsource>Exit !</oldsource>
         <translation>Exit</translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="101"/>
+        <location filename="systemtrayicon.cpp" line="103"/>
         <source>SELECT_FILE</source>
         <oldsource>Select file</oldsource>
         <translation>Select file</translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="138"/>
+        <location filename="systemtrayicon.cpp" line="142"/>
         <source>UPLOAD_SUCCESS_WITH_URL</source>
         <comment>Congratulation !
 Upload success. The URL is :
@@ -356,18 +356,28 @@ Upload success. URL is :
 </translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="146"/>
+        <location filename="systemtrayicon.cpp" line="150"/>
         <source>UPLOAD_SUCCESS_LOCAL</source>
         <translation>Your picture is now locally saved.</translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="260"/>
+        <location filename="systemtrayicon.cpp" line="163"/>
+        <source>OPEN_TO_BROWSER</source>
+        <translation>Open in browser</translation>
+    </message>
+    <message>
+        <location filename="systemtrayicon.cpp" line="164"/>
+        <source>COPY_TO_CLIPBOARD</source>
+        <translation>Copy to clipboard</translation>
+    </message>
+    <message>
+        <location filename="systemtrayicon.cpp" line="295"/>
         <source>UPLOAD_FAILED</source>
         <translation>Upload failed.
 You must verify Uplimg&apos;s configuration or your Internet configuration to solve the problem.</translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="265"/>
+        <location filename="systemtrayicon.cpp" line="300"/>
         <source>NO_METHOD_TO_UPLOAD_CHOOSED</source>
         <translation>We can&apos;t upload anything.
 You must configure upload method before.</translation>

@@ -8,6 +8,8 @@ SystemTrayIcon::SystemTrayIcon(QObject *qobject) :
         firstStart();
 
     configurationWindow = 0;
+    lastUploadedFileSeparatorInserted = false;
+    lastUploadedFileCounter = 0;
 
     setIcon(QIcon(":/icon/waiting.png"));
     setToolTip(tr("DAEMON_RUNNING"));
@@ -128,11 +130,13 @@ void SystemTrayIcon::fileSended(QString fileName)
                     lastUrl.setUrl(urlPath);
                 }
 
+            addUploadedFileInContextMenu();
+
             if(settings.value(Reg::autoOpenToBrowser).toBool())
                 openLastUrl();
 
             if(settings.value(Reg::copyToClipboard).toBool())
-                QApplication::clipboard()->setText(lastUrl.toString());
+                copyLastUrlToClipboard();
 
             if(settings.value(Reg::showNotifications).toBool())
                 this->showMessage(Uplimg::applicationName, tr("UPLOAD_SUCCESS_WITH_URL", "Congratulation !\nUpload success. The URL is :\n") + lastUrl.toString());
@@ -147,6 +151,37 @@ void SystemTrayIcon::fileSended(QString fileName)
         }
 }
 
+void SystemTrayIcon::addUploadedFileInContextMenu()
+{
+    if(!lastUploadedFileSeparatorInserted)
+    {
+        lastUploadedFileSeparator = systemTrayMenu->insertSeparator(systemTrayMenu->actions().at(0));
+        lastUploadedFileSeparatorInserted = true;
+    }
+
+    QMenu * pictureMenu = new QMenu(lastUrl.fileName());
+    QAction * openToBrowser = pictureMenu->addAction(tr("OPEN_TO_BROWSER"));
+    QAction * copyToClipboard = pictureMenu->addAction(tr("COPY_TO_CLIPBOARD"));
+    systemTrayMenu->insertMenu(lastUploadedFileSeparator, pictureMenu);
+
+    QObject::connect(pictureMenu->menuAction(), SIGNAL(toggled(bool)), this, SLOT(openLastUrl())); //Don't work
+    QObject::connect(openToBrowser, SIGNAL(triggered()), this, SLOT(openLastUrl()));
+    QObject::connect(copyToClipboard, SIGNAL(triggered()), this, SLOT(copyLastUrlToClipboard()));
+
+    if(lastUploadedFileCounter == 5)
+    {
+        QAction * lastAction = systemTrayMenu->actions().at(0);
+        systemTrayMenu->removeAction(lastAction);
+    }
+    else
+        ++lastUploadedFileCounter;
+}
+
+void SystemTrayIcon::copyLastUrlToClipboard()
+{
+    QApplication::clipboard()->setText(lastUrl.toString());
+}
+
 void SystemTrayIcon::setWaitingIcon()
 {
     setIcon(QIcon(":/icon/waiting.png"));
@@ -154,7 +189,7 @@ void SystemTrayIcon::setWaitingIcon()
 
 void SystemTrayIcon::uploadClipboardTriggered()
 {
-    /* ONLY SUPPORTED FOR WINDOWS, NEVER TESTED ON X11 OR MAX */
+    /* ONLY SUPPORTED FOR WINDOWS, NEVER TESTED ON X11 OR MAC */
     /* IF CLIPBOARD POINT TO FILE, WE UPLOAD IT INSTEAD FILE PATH */
     QString clipboard = QApplication::clipboard()->text();
     clipboard = clipboard.right(clipboard.size()-8); //Windows automatically put file:/// at begin
@@ -280,7 +315,7 @@ void SystemTrayIcon::firstStart()
     settings.setValue(Reg::takeSelectedAreaScreenShortcut, "Alt+2");
     settings.setValue(Reg::uploadFileShortcut, "Alt+3");
     settings.setValue(Reg::uploadClipboardShortcut, "Alt+4");
-    settings.setValue(Reg::imageFormat, "PNG");
+    settings.setValue(Reg::imageFormat, "JPEG");
     settings.setValue(Reg::imageQuality, 100);
     settings.setValue(Reg::localSavePath, QStandardPaths::standardLocations(QStandardPaths::PicturesLocation));
     settings.setValue(Reg::redArea, 10);
