@@ -9,6 +9,7 @@
 
 Uplimg is an instant user-frendly file sharing tool.
 It permits you to share images and multiples other files in less time.
+You can build it without any problem.
 
 ~~Uplimg can control your brain, so this text is not writed but you also can read it !~~ :D
 
@@ -18,7 +19,7 @@ Uplimg is actually in development, so it's in evolution. Options are added in th
 
 ### Downloads
 
-In the time, only the Windows version is stable and available in downloads. If you want to use Uplimg on MAC ou LINUX, you can try to compilate, you should have somes bugs. You need the latest version of Qt, Qxt and SFML.
+In the time, only the Windows version is stable and available in downloads. If you want to use Uplimg on MAC ou LINUX, you can try to build it. You need the latest version of Qt, Qxt and SFML. All commits pushed to master branch are stable and working so no error can be happening.
 
 [Let's see all pre-releases](https://github.com/Imote/Uplimg/releases)
 
@@ -48,7 +49,7 @@ Vous avez la possibilité de contribuer au projet en ajoutant une/des issue(s) e
 ### Téléchargements
 
 Pour le moment, seul la version Windows de Uplimg est stable et est disponible au téléchargement.
-Si vous souhaitez utiliser Umpling sous MAC ou Linux, vous pouvez tenter de compiler Umpling, il n'est pas exclu que vous rencontriez cependant quelques problèmes.
+Si vous souhaitez utiliser Umpling sous MAC ou Linux, vous pouvez tenter de compiler Umpling, il n'est pas exclu que vous rencontriez cependant quelques problèmes. Mais, la branche master de Uplimg est totalement stable, vous pouvez l'utiliser sans soucis avec en plus les dernières fonctionnalités :-D
 Pour cela, les dernières versions de Qt, de Qxt et de SFML sont nécessaires.
 
 [Accès à toutes les pre-releases](https://github.com/Imote/Uplimg/releases)
