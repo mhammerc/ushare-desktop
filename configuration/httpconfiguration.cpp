@@ -21,10 +21,10 @@ HTTPConfiguration::HTTPConfiguration(QWidget * parent) :
     if(settings.value(Reg::HTTPLinkFrom).toString() == "FROM_FIXED")
         webPathFromFixed->setChecked(true);
     else
-    {
-        webPath->setDisabled(true);
-        webPathFromHTTPResponse->setChecked(true);
-    }
+        {
+            webPath->setDisabled(true);
+            webPathFromHTTPResponse->setChecked(true);
+        }
 
     QObject::connect(host, SIGNAL(textChanged(QString)), this, SLOT(hostSettingModified(QString)));
     QObject::connect(port, SIGNAL(valueChanged(int)), this, SLOT(portSettingModified(int)));
@@ -136,8 +136,8 @@ void HTTPConfiguration::webPathFromFixedSettingModified(bool checked)
 void HTTPConfiguration::webPathFromHTTPResponseSettingModified(bool checked)
 {
     if(checked)
-    {
-        settings.setValue(Reg::HTTPLinkFrom, "FROM_HTTP");
-        webPath->setDisabled(checked);
-    }
+        {
+            settings.setValue(Reg::HTTPLinkFrom, "FROM_HTTP");
+            webPath->setDisabled(checked);
+        }
 }

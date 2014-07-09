@@ -14,6 +14,8 @@
 #include <QPoint>
 #include <QCursor>
 #include <QPalette>
+#include <cstdlib>
+#include <ctime>
 
 #include "shared.h"
 

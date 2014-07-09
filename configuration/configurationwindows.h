@@ -67,6 +67,7 @@ protected:
     QColor selectingAreaColor;
     QLabel * selectingAreaColorShower;
     QPushButton * selectingAreaColorOpener;
+    QCheckBox * selectingAreaColorRandomize;
 
     //On successfull upload settings
     QGroupBox * onSuccessSettings;
@@ -167,6 +168,7 @@ public slots :
     void FTPMethodSettingModified(bool);
     void HTTPMethodSettingModified(bool);
     void selectingAreaColorClicked();
+    void selectingAreaColorRandomizer(bool);
 
     void configureFTP();
     void configureHTTP();

@@ -80,7 +80,7 @@ void SystemTrayIcon::takeSelectedAreaScreenTriggered()
 }
 
 void SystemTrayIcon::sendSelectedArea()
-{  
+{
     if (screenManager->autoSendFile(pathToFile))
         fileSended(fileName);
     else
@@ -154,10 +154,10 @@ void SystemTrayIcon::fileSended(QString fileName)
 void SystemTrayIcon::addUploadedFileInContextMenu()
 {
     if(!lastUploadedFileSeparatorInserted)
-    {
-        lastUploadedFileSeparator = systemTrayMenu->insertSeparator(systemTrayMenu->actions().at(0));
-        lastUploadedFileSeparatorInserted = true;
-    }
+        {
+            lastUploadedFileSeparator = systemTrayMenu->insertSeparator(systemTrayMenu->actions().at(0));
+            lastUploadedFileSeparatorInserted = true;
+        }
 
     QMenu * pictureMenu = new QMenu(lastUrl.fileName());
     QAction * openToBrowser = pictureMenu->addAction(tr("OPEN_TO_BROWSER"));
@@ -169,10 +169,10 @@ void SystemTrayIcon::addUploadedFileInContextMenu()
     QObject::connect(copyToClipboard, SIGNAL(triggered()), this, SLOT(copyLastUrlToClipboard()));
 
     if(lastUploadedFileCounter == 5)
-    {
-        QAction * lastAction = systemTrayMenu->actions().at(0);
-        systemTrayMenu->removeAction(lastAction);
-    }
+        {
+            QAction * lastAction = systemTrayMenu->actions().at(0);
+            systemTrayMenu->removeAction(lastAction);
+        }
     else
         ++lastUploadedFileCounter;
 }
@@ -195,14 +195,14 @@ void SystemTrayIcon::uploadClipboardTriggered()
     clipboard = clipboard.right(clipboard.size()-8); //Windows automatically put file:/// at begin
 
     if(QFile::exists(clipboard)) //Clipboard is pointing to file
-    {
-        if(screenManager->autoSendFile(clipboard))
         {
-            QFileInfo fi(clipboard);
-            fileSended(fi.fileName());
+            if(screenManager->autoSendFile(clipboard))
+                {
+                    QFileInfo fi(clipboard);
+                    fileSended(fi.fileName());
+                }
+            return;
         }
-        return;
-    }
     /* WINDOWS ONLY END */
 
     const QString fileName = getNewFileName(".txt");

@@ -68,6 +68,7 @@ ConfigurationWindows::ConfigurationWindows(SystemTrayIcon * parent, QWidget *qwi
     selectingAreaColor.setRed(settings.value(Reg::redArea).toInt());
     selectingAreaColor.setGreen(settings.value(Reg::greenArea).toInt());
     selectingAreaColor.setBlue(settings.value(Reg::blueArea).toInt());
+    selectingAreaColorRandomizer(settings.value(Reg::randomizeArea).toBool());
 
     QPalette pal;
     pal.setColor(QPalette::Window, selectingAreaColor);
@@ -86,6 +87,7 @@ ConfigurationWindows::ConfigurationWindows(SystemTrayIcon * parent, QWidget *qwi
     QObject::connect(imageQuality, SIGNAL(valueChanged(int)), this, SLOT(imageQualitySettingModified(int)));
     QObject::connect(imageQuality, SIGNAL(valueChanged(int)), imageQualityShower, SLOT(setNum(int)));
     QObject::connect(selectingAreaColorOpener, SIGNAL(clicked()), this, SLOT(selectingAreaColorClicked()));
+    QObject::connect(selectingAreaColorRandomize, SIGNAL(toggled(bool)), this, SLOT(selectingAreaColorRandomizer(bool)));
 
     QObject::connect(localMethod, SIGNAL(toggled(bool)), this, SLOT(localMethodSettingsModified(bool)));
     QObject::connect(localMethodPath, SIGNAL(textChanged(QString)), this, SLOT(localMethodPathSettingsModified(QString)));
@@ -255,8 +257,10 @@ void ConfigurationWindows::setUpGeneralSectionUI()
     selectingAreaColorShower->setFixedWidth(50);
     selectingAreaColorOpener = new QPushButton("..");
     selectingAreaColorOpener->setFixedWidth(30);
+    selectingAreaColorRandomize = new QCheckBox(tr("Randomize color"));
     selectingAreaColorLayout->addWidget(selectingAreaColorShower);
     selectingAreaColorLayout->addWidget(selectingAreaColorOpener);
+    selectingAreaColorLayout->addWidget(selectingAreaColorRandomize);
     generalFormLayout->addRow(tr("CHOOSE_COLOR_FOR_SELECTING_AREA_SCREEN"), selectingAreaColorLayout);
 
     generalSettings->setLayout(generalFormLayout);
@@ -508,4 +512,17 @@ void ConfigurationWindows::selectingAreaColorClicked()
     settings.setValue(Reg::redArea, selectingAreaColor.red());
     settings.setValue(Reg::greenArea, selectingAreaColor.green());
     settings.setValue(Reg::blueArea, selectingAreaColor.blue());
+}
+
+void ConfigurationWindows::selectingAreaColorRandomizer(bool checked)
+{
+    selectingAreaColorRandomize->setChecked(checked);
+
+    if(checked)
+        selectingAreaColorOpener->setDisabled(true);
+    else
+        selectingAreaColorOpener->setEnabled(true);
+
+    settings.setValue(Reg::randomizeArea, checked);
+
 }

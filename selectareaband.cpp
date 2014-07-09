@@ -5,11 +5,24 @@
 SelectAreaBand::SelectAreaBand(ScreenManager *manager, QWidget * parent) :
     QLabel(parent)
 {
-    QColor color;
     QSettings settings;
-    color.setRed(settings.value(Reg::redArea).toInt());
-    color.setGreen(settings.value(Reg::greenArea).toInt());
-    color.setBlue(settings.value(Reg::blueArea).toInt());
+    QColor color;
+
+    if(settings.value(Reg::randomizeArea).toBool())
+        {
+            std::srand(std::time(0));
+            color.setRed((std::rand()%254)+1);
+            color.setGreen((std::rand()%254)+1);
+            color.setBlue((std::rand()%254)+1);
+
+        }
+    else
+        {
+            color.setRed(settings.value(Reg::redArea).toInt());
+            color.setGreen(settings.value(Reg::greenArea).toInt());
+            color.setBlue(settings.value(Reg::blueArea).toInt());
+        }
+
     QPalette palette;
     palette.setBrush(QPalette::Highlight, QBrush(color));
     setPalette(palette);
