@@ -321,6 +321,7 @@ void SystemTrayIcon::firstStart()
     settings.setValue(Reg::redArea, 10);
     settings.setValue(Reg::greenArea, 210);
     settings.setValue(Reg::blueArea, 10);
+    settings.setValue(Reg::HTTPLinkFrom, "FROM_HTTP");
 }
 
 void SystemTrayIcon::enableEasterEgg()
