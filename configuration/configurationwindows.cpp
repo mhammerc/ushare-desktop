@@ -495,7 +495,12 @@ void ConfigurationWindows::localMethodPathSettingsClicked()
 
 void ConfigurationWindows::selectingAreaColorClicked()
 {
-    selectingAreaColor = QColorDialog::getColor(selectingAreaColor, this);
+
+    QColor tempColor = QColorDialog::getColor(selectingAreaColor, this);
+
+    if(!tempColor.isValid())
+        return;
+    selectingAreaColor = tempColor;
 
     QPalette pal;
     pal.setColor(QPalette::Window, selectingAreaColor);
