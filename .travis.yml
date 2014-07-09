@@ -1,8 +1,12 @@
 language: cpp
-install:
-  - sudo apt-get install libqt5-dev qt5-qmake
-
-script:
-  - qmake -project
-  - qmake Uplimg.pro
-  - make
+compiler:
+    - gcc
+    - clang
+env:
+    - CONFIG=debug QT=qt5
+    - CONFIG=release QT=qt5
+before_install:
+    - sudo apt-get update -qq
+    - sh -c "if [ '$QT' = 'qt5' ]; then sudo apt-add-repository -y ppa:beineri/opt-qt50; sudo apt-get update -qq; sudo apt-get install -qq qt5-meta-minimal libgstreamer0.10-dev libgstreamer-plugins-base0.10-dev; fi"
+    - sudo apt-get install -qq xvfb xauth
+script: sh -c "mkdir _build; cd _build; export QMAKE=/opt/qt5/bin/qmake; fi; \$QMAKE QMAKE_CXX=$CXX CONFIG+=$CONFIG PREFIX=/usr ../Uplimg.pro && make && xvfb-run -a make test && sudo make install"
