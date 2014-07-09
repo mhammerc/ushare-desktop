@@ -14,7 +14,7 @@ bool ScreenManager::autoSendFile(const QString &pathToFile)
 {
     parent->setIcon(QIcon(":/icon/uploading.png"));
 
-    Uplimg::UploadMethod method = parent->getUploadMethod();
+    Uplimg::UploadMethod method = Uplimg::Utils::getUploadMethod();
 
     if (method == Uplimg::UploadMethod::ERROR)
         parent->throwErrorAlert(Uplimg::ErrorList::UPLOAD_METHOD_NOT_CHOOSED);
@@ -112,9 +112,9 @@ void ScreenManager::areaPictureTaken(QRect area)
 {
     originalScreenshot = originalScreenshot.copy(area);
 
-    if(parent->getImageFormat() == Uplimg::ImageFormat::JPEG)
-        originalScreenshot.save(pathToFile, 0, parent->getImageQuality());
-    else if(parent->getImageFormat() == Uplimg::ImageFormat::PNG)
+    if(Uplimg::Utils::getImageFormat() == Uplimg::ImageFormat::JPEG)
+        originalScreenshot.save(pathToFile, 0, Uplimg::Utils::getImageQuality());
+    else if(Uplimg::Utils::getImageFormat() == Uplimg::ImageFormat::PNG)
         originalScreenshot.save(pathToFile, 0, 0);
 
     emit canSend();
@@ -153,12 +153,12 @@ QString ScreenManager::captureFullScreen(const QString &pathToScreen)
         {
             screenshot = screen->grabWindow(0);
 
-            if(parent->getImageFormat() == Uplimg::ImageFormat::JPEG)
+            if(Uplimg::Utils::getImageFormat() == Uplimg::ImageFormat::JPEG)
                 {
-                    if (!screenshot.save(pathToScreen, 0, parent->getImageQuality()))
+                    if (!screenshot.save(pathToScreen, 0, Uplimg::Utils::getImageQuality()))
                         return "error";
                 }
-            else if(parent->getImageFormat() == Uplimg::ImageFormat::PNG)
+            else if(Uplimg::Utils::getImageFormat() == Uplimg::ImageFormat::PNG)
                 {
                     if (!screenshot.save(pathToScreen, 0, 0))
                         return "error";

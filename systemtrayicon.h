@@ -37,10 +37,6 @@ class SystemTrayIcon : public QSystemTrayIcon
 public:
     explicit SystemTrayIcon(QObject *qobject = 0);
     ~SystemTrayIcon();
-    Uplimg::UploadMethod
-    getUploadMethod() const;
-    Uplimg::ImageFormat getImageFormat() const;
-    int getImageQuality() const;
 
     QUrl lastUrl;
 

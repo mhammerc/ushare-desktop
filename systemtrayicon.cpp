@@ -72,7 +72,7 @@ void SystemTrayIcon::setUpContextMenu()
 
 void SystemTrayIcon::takeSelectedAreaScreenTriggered()
 {
-    fileName = getNewFileName(getImageFormat());
+    fileName = getNewFileName(Uplimg::Utils::getImageFormat());
     pathToFile = getFileTempPath(fileName);
     screenManager->captureSelectedZone(pathToFile);
 }
@@ -87,7 +87,7 @@ void SystemTrayIcon::sendSelectedArea()
 
 void SystemTrayIcon::takeFullScrenTriggered()
 {
-    QString fileName = getNewFileName(getImageFormat());
+    QString fileName = getNewFileName(Uplimg::Utils::getImageFormat());
     QString pathToFile = getFileTempPath(fileName);
 
     if (screenManager->autoSendFile(screenManager->captureFullScreen(pathToFile)))
@@ -117,12 +117,12 @@ void SystemTrayIcon::fileSended(QString fileName)
     setIcon(QIcon(":/icon/success.png"));
     iconTimer->start();
 
-    if(getUploadMethod() != Uplimg::UploadMethod::LOCAL && getUploadMethod() != Uplimg::UploadMethod::ERROR)
+    if(Uplimg::Utils::getUploadMethod() != Uplimg::UploadMethod::LOCAL && Uplimg::Utils::getUploadMethod() != Uplimg::UploadMethod::ERROR)
         {
             if(settings.value(Reg::playSound).toBool())
                 fileSendedSound->play();
 
-            if(settings.value(Reg::linkFrom).toString() != "FROM_HTTP" || getUploadMethod() != Uplimg::UploadMethod::HTTP)
+            if(settings.value(Reg::linkFrom).toString() != "FROM_HTTP" || Uplimg::Utils::getUploadMethod() != Uplimg::UploadMethod::HTTP)
                 {
                     const QString urlPath = getUploadedFileURL(fileName);
                     lastUrl.setUrl(urlPath);
@@ -137,7 +137,7 @@ void SystemTrayIcon::fileSended(QString fileName)
             if(settings.value(Reg::showNotifications).toBool())
                 this->showMessage(Uplimg::applicationName, tr("UPLOAD_SUCCESS_WITH_URL", "Congratulation !\nUpload success. The URL is :\n") + lastUrl.toString());
         }
-    else if(getUploadMethod()  == Uplimg::UploadMethod::LOCAL)
+    else if(Uplimg::Utils::getUploadMethod()  == Uplimg::UploadMethod::LOCAL)
         {
             if(settings.value(Reg::playSound).toBool())
                 fileSendedSound->play();
@@ -229,9 +229,9 @@ QString SystemTrayIcon::getFileTempPath(const QString &screenName)
 
 QString SystemTrayIcon::getUploadedFileURL(const QString &fileName)
 {
-    if(getUploadMethod()  == Uplimg::UploadMethod::FTP)
+    if(Uplimg::Utils::getUploadMethod()  == Uplimg::UploadMethod::FTP)
         return settings.value(Reg::FTPWebPath, "http://").toString() + fileName;
-    else if(getUploadMethod()  == Uplimg::UploadMethod::HTTP)
+    else if(Uplimg::Utils::getUploadMethod()  == Uplimg::UploadMethod::HTTP)
         return settings.value(Reg::HTTPWebPath, "http://").toString() + fileName;
     else
         return "error";
@@ -265,18 +265,6 @@ void SystemTrayIcon::throwErrorAlert(const Uplimg::ErrorList &error)
             const QString text(tr("NO_METHOD_TO_UPLOAD_CHOOSED"));
             this->showMessage(Uplimg::applicationName, text);
         }
-}
-
-Uplimg::UploadMethod SystemTrayIcon::getUploadMethod() const
-{
-    if (settings.value(Reg::choosedMethod).toString().toStdString() == "FTP")
-        return Uplimg::UploadMethod::FTP;
-    else if (settings.value(Reg::choosedMethod).toString().toStdString() == "HTTP")
-        return Uplimg::UploadMethod::HTTP;
-    else if (settings.value(Reg::choosedMethod).toString().toStdString() == "LOCAL")
-        return Uplimg::UploadMethod::LOCAL;
-    else
-        return Uplimg::UploadMethod::ERROR;
 }
 
 void SystemTrayIcon::firstStart()
@@ -316,21 +304,6 @@ void SystemTrayIcon::activatedTrigerred(QSystemTrayIcon::ActivationReason reason
 {
     if(reason == QSystemTrayIcon::ActivationReason::Trigger)
         this->openLastUrl();
-}
-
-Uplimg::ImageFormat SystemTrayIcon::getImageFormat() const
-{
-    if(settings.value(Reg::imageFormat).toString() == "PNG")
-        return Uplimg::ImageFormat::PNG;
-    else if(settings.value(Reg::imageFormat).toString() == "JPEG")
-        return Uplimg::ImageFormat::JPEG;
-    else
-        return Uplimg::ImageFormat::INVALID_FORMAT;
-}
-
-int SystemTrayIcon::getImageQuality() const
-{
-    return settings.value(Reg::imageQuality).toInt();
 }
 
 SystemTrayIcon::~SystemTrayIcon()
