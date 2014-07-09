@@ -283,6 +283,9 @@ void SystemTrayIcon::firstStart()
     settings.setValue(Reg::imageFormat, "PNG");
     settings.setValue(Reg::imageQuality, 100);
     settings.setValue(Reg::localSavePath, QStandardPaths::standardLocations(QStandardPaths::PicturesLocation));
+    settings.setValue(Reg::redArea, 10);
+    settings.setValue(Reg::greenArea, 210);
+    settings.setValue(Reg::blueArea, 10);
 }
 
 void SystemTrayIcon::enableEasterEgg()
