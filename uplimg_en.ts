@@ -341,7 +341,7 @@
         <location filename="systemtrayicon.cpp" line="15"/>
         <source>DAEMON_RUNNING</source>
         <oldsource>Daemon is running and waiting</oldsource>
-        <translation>Daemon is running and waiting</translation>
+        <translation>Uplimg</translation>
     </message>
     <message>
         <location filename="systemtrayicon.cpp" line="57"/>

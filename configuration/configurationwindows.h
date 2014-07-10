@@ -59,7 +59,9 @@ protected:
     //General settings
     QGroupBox * generalSettings;
     QFormLayout * generalFormLayout;
+#ifdef _WIN32
     QCheckBox * runOnStartup;
+#endif
     QComboBox * lang;
     QSlider * imageQuality;
     QLabel * imageQualityShower;

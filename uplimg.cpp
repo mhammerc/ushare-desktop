@@ -47,6 +47,7 @@ int main(int argc, char *argv[])
 
     SystemTrayIcon systemTray;
     systemTray.show();
+    systemTray.setVisible(true);
 
     return app.exec();
 }

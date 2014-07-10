@@ -198,7 +198,7 @@
     <message>
         <location filename="configuration/configurationwindows.cpp" line="356"/>
         <source>WARNING_HOTKEYS_DISABLED</source>
-        <translation type="unfinished">&lt;span style=&quot;color:red;&quot;&gt;Attention : les raccourcis clavier sont désactivé dans cette section !&lt;/span&gt;</translation>
+        <translation>&lt;span style=&quot;color:red;&quot;&gt;Attention : les raccourcis clavier sont désactivé dans cette section !&lt;/span&gt;</translation>
     </message>
     <message>
         <location filename="configuration/configurationwindows.cpp" line="363"/>
@@ -356,7 +356,7 @@
         <location filename="systemtrayicon.cpp" line="15"/>
         <source>DAEMON_RUNNING</source>
         <oldsource>Daemon is running and waiting</oldsource>
-        <translation>Le service tourne en arrière plan</translation>
+        <translation>Uplimg</translation>
     </message>
     <message>
         <location filename="systemtrayicon.cpp" line="57"/>

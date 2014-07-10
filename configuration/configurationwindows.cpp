@@ -80,7 +80,9 @@ ConfigurationWindows::ConfigurationWindows(SystemTrayIcon * parent, QWidget *qwi
     selectingAreaColorShower->setPalette(pal);
 
     QObject::connect(windowContent, SIGNAL(currentChanged(int)), this, SLOT(currentTabChanged(int)));
+#ifdef _WIN32
     QObject::connect(runOnStartup, SIGNAL(toggled(bool)), this, SLOT(runOnStartupSettingModified(bool)));
+#endif
     QObject::connect(showNotifications, SIGNAL(toggled(bool)), this, SLOT(showNotificationSettingModified(bool)));
     QObject::connect(playSound, SIGNAL(toggled(bool)), this, SLOT(playSoundSettingModified(bool)));
     QObject::connect(copyToClipboard, SIGNAL(toggled(bool)), this, SLOT(copyToClipboardSettingModified(bool)));
@@ -211,9 +213,10 @@ void ConfigurationWindows::setUpGeneralSectionUI()
     //General settings
     generalSettings = new QGroupBox(tr("GENERAL_SETTINGS"));
     generalFormLayout = new QFormLayout;
-
+#ifdef _WIN32
     runOnStartup = new QCheckBox;
     generalFormLayout->addRow(tr("RUN_ON_STARTUP"), runOnStartup);
+#endif
 
     lang = new QComboBox;
     lang->addItem("English");
@@ -418,13 +421,11 @@ void ConfigurationWindows::runOnStartupSettingModified(bool checked)
     settings.setValue(Reg::runOnStartup, checked);
 
 #ifdef _WIN32
-    /*QSettings startSettings("HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run");
-        if (checked)
-            startSettings.setValue("MyAppli", "aa");//QCoreApplication::applicationFilePath().replace('/','\\'));
-         else
-            startSettings.remove("MyAppli");
-
-        std::cerr << "AA";*/
+    QSettings startSettings("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run", QSettings::NativeFormat);
+    if (checked)
+        startSettings.setValue("Uplimg", QCoreApplication::applicationFilePath().replace('/','\\'));
+    else
+        startSettings.remove("Uplimg");
 #endif
 }
 
