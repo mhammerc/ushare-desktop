@@ -345,6 +345,34 @@ void SystemTrayIcon::activatedTrigerred(QSystemTrayIcon::ActivationReason reason
         this->openLastUrl();
 }
 
+void SystemTrayIcon::takeFullScreenShortcutChanged(QString shortcut)
+{
+    takeFullScreenKeySequence = QKeySequence(shortcut);
+    takeFullScreenShortcut->setShortcut(takeFullScreenKeySequence);
+    takeScreen->setShortcut(takeFullScreenKeySequence);
+}
+
+void SystemTrayIcon::takeSelectedAreaScreenShortcutChanged(QString shortcut)
+{
+    takeSelectedAreaKeySequence = QKeySequence(shortcut);
+    takeSelectedAreaScreenShortcut->setShortcut(takeSelectedAreaKeySequence);
+    takeSelectedScreen->setShortcut(takeSelectedAreaKeySequence);
+}
+
+void SystemTrayIcon::uploadClipboardShortcutChanged(QString shortcut)
+{
+    uploadClipboardKeySequence = QKeySequence(shortcut);
+    uploadClipboardShortcut->setShortcut(uploadClipboardKeySequence);
+    uploadClipboard->setShortcut(uploadClipboardKeySequence);
+}
+
+void SystemTrayIcon::uploadFileShortcutChanged(QString shortcut)
+{
+    uploadFileKeySequence = QKeySequence(shortcut);
+    uploadFileShortcut->setShortcut(uploadFileKeySequence);
+    uploadFile->setShortcut(uploadFileKeySequence);
+}
+
 SystemTrayIcon::~SystemTrayIcon()
 {
     configurationWindow->deleteLater();

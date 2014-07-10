@@ -28,6 +28,11 @@ ConfigurationWindows::ConfigurationWindows(SystemTrayIcon * parent, QWidget *qwi
     imageQuality->setValue(settings.value(Reg::imageQuality, 100).toInt());
     imageQualityShower->setNum(settings.value(Reg::imageQuality, 100).toInt());
 
+    takeFullScreenShortcut->setText(settings.value(Reg::takeFullScrenShortcut).toString());
+    takeSelectedScreenShortcut->setText(settings.value(Reg::takeSelectedAreaScreenShortcut).toString());
+    uploadFileShortcut->setText(settings.value(Reg::uploadFileShortcut).toString());
+    uploadClipboardShortcut->setText(settings.value(Reg::uploadClipboardShortcut).toString());
+
     if(!settings.value(Reg::localSave).toBool())
         {
             localSavePath->setDisabled(true);
@@ -97,6 +102,11 @@ ConfigurationWindows::ConfigurationWindows(SystemTrayIcon * parent, QWidget *qwi
 
     QObject::connect(configureFTPButton, SIGNAL(clicked()), this, SLOT(configureFTP()));
     QObject::connect(configureHTTPButton, SIGNAL(clicked()), this, SLOT(configureHTTP()));
+
+    QObject::connect(takeFullScreenShortcut, SIGNAL(textChanged(QString)), this, SLOT(takeFullScreenShortcutChanged(QString)));
+    QObject::connect(takeSelectedScreenShortcut, SIGNAL(textChanged(QString)), this, SLOT(takeSelectedAreaScreenShortcutChanged(QString)));
+    QObject::connect(uploadFileShortcut, SIGNAL(textChanged(QString)), this, SLOT(uploadFileShortcutChanged(QString)));
+    QObject::connect(uploadClipboardShortcut, SIGNAL(textChanged(QString)), this, SLOT(uploadClipboardShortcutChanged(QString)));
 
     QObject::connect(validateGeneral, SIGNAL(clicked()), this, SLOT(hide()));
     QObject::connect(validateUpload, SIGNAL(clicked()), this, SLOT(hide()));
@@ -192,24 +202,6 @@ void ConfigurationWindows::setUpCreditsSectionUI()
     windowContent->addTab(creditSection, tr("Credits"));
 }
 
-void ConfigurationWindows::setUpHotkeysSectionUI()
-{
-    hotkeysSection = new QWidget;
-    hotkeysLayout = new QVBoxLayout;
-
-    validateHotkeys = new QPushButton("Ok");
-    validateHotkeysLayout = new QHBoxLayout;
-    validateHotkeysLayout->addStretch();
-    validateHotkeysLayout->addWidget(validateHotkeys);
-
-    hotkeysLayout->addStretch();
-    hotkeysLayout->addLayout(validateHotkeysLayout);
-
-    hotkeysSection->setLayout(hotkeysLayout);
-
-    windowContent->addTab(hotkeysSection, tr("HOTKEYS_SECTION"));
-}
-
 void ConfigurationWindows::setUpGeneralSectionUI()
 {
     generalSection = new QWidget;
@@ -257,7 +249,7 @@ void ConfigurationWindows::setUpGeneralSectionUI()
     selectingAreaColorShower->setFixedWidth(50);
     selectingAreaColorOpener = new QPushButton("..");
     selectingAreaColorOpener->setFixedWidth(30);
-    selectingAreaColorRandomize = new QCheckBox(tr("Randomize color"));
+    selectingAreaColorRandomize = new QCheckBox(tr("RANDOMIZE_COLOR"));
     selectingAreaColorLayout->addWidget(selectingAreaColorShower);
     selectingAreaColorLayout->addWidget(selectingAreaColorOpener);
     selectingAreaColorLayout->addWidget(selectingAreaColorRandomize);
@@ -348,6 +340,45 @@ void ConfigurationWindows::setUpUploadSectionUI()
     uploadSection->setLayout(uploadLayout);
 
     windowContent->addTab(uploadSection, tr("UPLOAD_SECTION"));
+}
+
+void ConfigurationWindows::setUpHotkeysSectionUI()
+{
+    hotkeysSection = new QWidget;
+    hotkeysLayout = new QVBoxLayout;
+    hotkeysGroupBox = new QGroupBox(tr("KEYBOARD_CONFIGURATION"));
+    hotkeysBindingLayout = new QVBoxLayout;
+    hotkeysFormLayout = new QFormLayout;
+
+    hotkeysWelcomeText = new QLabel(tr("HOTKEYS_WELCOME_TEXT"));
+
+    takeFullScreenShortcut = new ShortcutGetter;
+    takeSelectedScreenShortcut = new ShortcutGetter;
+    uploadFileShortcut = new ShortcutGetter;
+    uploadClipboardShortcut = new ShortcutGetter;
+
+    hotkeysFormLayout->addRow(tr("TAKE_FULL_SCREEN_HOTKEYS"), takeFullScreenShortcut);
+    hotkeysFormLayout->addRow(tr("TAKE_SELECTED_SCREEN_HOTKEYS"), takeSelectedScreenShortcut);
+    hotkeysFormLayout->addRow(tr("UPLOAD_FILE_SHORTCUT"), uploadFileShortcut);
+    hotkeysFormLayout->addRow(tr("UPLOAD_CLIPBOARD_SHORTCUT"), uploadClipboardShortcut);
+
+    validateHotkeys = new QPushButton("Ok");
+    validateHotkeysLayout = new QHBoxLayout;
+    validateHotkeysLayout->addStretch();
+    validateHotkeysLayout->addWidget(validateHotkeys);
+
+    hotkeysBindingLayout->addWidget(hotkeysWelcomeText);
+    hotkeysBindingLayout->addLayout(hotkeysFormLayout);
+
+    hotkeysGroupBox->setLayout(hotkeysBindingLayout);
+
+    hotkeysLayout->addWidget(hotkeysGroupBox);
+    hotkeysLayout->addStretch();
+    hotkeysLayout->addLayout(validateHotkeysLayout);
+
+    hotkeysSection->setLayout(hotkeysLayout);
+
+    windowContent->addTab(hotkeysSection, tr("HOTKEYS_SECTION"));
 }
 
 void ConfigurationWindows::configureFTP()
@@ -524,5 +555,28 @@ void ConfigurationWindows::selectingAreaColorRandomizer(bool checked)
         selectingAreaColorOpener->setEnabled(true);
 
     settings.setValue(Reg::randomizeArea, checked);
+}
 
+void ConfigurationWindows::takeFullScreenShortcutChanged(QString shortcut)
+{
+    settings.setValue(Reg::takeFullScrenShortcut, shortcut);
+    parent->takeFullScreenShortcutChanged(shortcut);
+}
+
+void ConfigurationWindows::takeSelectedAreaScreenShortcutChanged(QString shortcut)
+{
+    settings.setValue(Reg::takeSelectedAreaScreenShortcut, shortcut);
+    parent->takeSelectedAreaScreenShortcutChanged(shortcut);
+}
+
+void ConfigurationWindows::uploadFileShortcutChanged(QString shortcut)
+{
+    settings.setValue(Reg::uploadFileShortcut, shortcut);
+    parent->uploadFileShortcutChanged(shortcut);
+}
+
+void ConfigurationWindows::uploadClipboardShortcutChanged(QString shortcut)
+{
+    settings.setValue(Reg::uploadClipboardShortcut, shortcut);
+    parent->uploadClipboardShortcutChanged(shortcut);
 }

@@ -24,11 +24,13 @@
 #include <QFileDialog>
 #include <QLocale>
 #include <QColorDialog>
+#include <QTableView>
 
 #include <iostream>
 
 #include "ftpconfiguration.h"
 #include "httpconfiguration.h"
+#include "shortcutgetter.h"
 #include "shared.h"
 
 class SystemTrayIcon;
@@ -112,6 +114,14 @@ protected:
     /* HotKeys */
     QWidget * hotkeysSection;
     QVBoxLayout * hotkeysLayout;
+    QGroupBox * hotkeysGroupBox;
+    QVBoxLayout * hotkeysBindingLayout;
+    QLabel * hotkeysWelcomeText;
+    QFormLayout * hotkeysFormLayout;
+    ShortcutGetter * takeFullScreenShortcut;
+    ShortcutGetter * takeSelectedScreenShortcut;
+    ShortcutGetter * uploadFileShortcut;
+    ShortcutGetter * uploadClipboardShortcut;
     QHBoxLayout * validateHotkeysLayout;
     QPushButton * validateHotkeys;
 
@@ -169,6 +179,12 @@ public slots :
     void HTTPMethodSettingModified(bool);
     void selectingAreaColorClicked();
     void selectingAreaColorRandomizer(bool);
+
+    void takeFullScreenShortcutChanged(QString);
+    void takeSelectedAreaScreenShortcutChanged(QString);
+    void uploadFileShortcutChanged(QString);
+    void uploadClipboardShortcutChanged(QString);
+
 
     void configureFTP();
     void configureHTTP();

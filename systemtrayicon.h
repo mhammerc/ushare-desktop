@@ -107,6 +107,11 @@ public slots :
     void copyLastUrlToClipboard();
 
     void activatedTrigerred(QSystemTrayIcon::ActivationReason);
+
+    void takeFullScreenShortcutChanged(QString);
+    void takeSelectedAreaScreenShortcutChanged(QString);
+    void uploadFileShortcutChanged(QString);
+    void uploadClipboardShortcutChanged(QString);
 };
 
 #endif // SYSTEMTRAYICON_H

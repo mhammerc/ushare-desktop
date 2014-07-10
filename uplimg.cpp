@@ -5,7 +5,6 @@
 #include <QAction>
 #include <QList>
 #include "systemtrayicon.h"
-#include "configuration/configurationwindows.h"
 
 #include <QHttpMultiPart>
 #include <QHttpPart>

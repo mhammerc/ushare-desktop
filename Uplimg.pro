@@ -21,7 +21,8 @@ HEADERS += \
     selectareaband.h \
     systemtrayicon.h \
     shared.h \
-    configuration/httpconfiguration.h
+    configuration/httpconfiguration.h \
+    configuration/shortcutgetter.h
 
 SOURCES += \
     configuration/configurationwindows.cpp \
@@ -32,7 +33,8 @@ SOURCES += \
     selectareaband.cpp \
     systemtrayicon.cpp \
     uplimg.cpp \
-    configuration/httpconfiguration.cpp
+    configuration/httpconfiguration.cpp \
+    configuration/shortcutgetter.cpp
 
 
 INCLUDEPATH += D:\Development\SFML\SFML-master\include
