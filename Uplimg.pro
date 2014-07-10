@@ -8,6 +8,8 @@ TRANSLATIONS = uplimg_fr.ts uplimg_en.ts
 
 QMAKE_CXXFLAGS += -std=c++11
 
+RC_ICONS = resources/uplimg.ico
+
 RESOURCES += \
     resources/resources.qrc \
     langs.qrc
