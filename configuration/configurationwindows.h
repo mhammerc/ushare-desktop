@@ -43,6 +43,8 @@ public:
     ~ConfigurationWindows();
 
 protected:
+    virtual void hideEvent(QHideEvent *);
+
     SystemTrayIcon * parent;
     const QString windowTitle;
     QSettings settings;
@@ -115,6 +117,7 @@ protected:
     QWidget * hotkeysSection;
     QVBoxLayout * hotkeysLayout;
     QGroupBox * hotkeysGroupBox;
+    QGroupBox * hotkeysIntermediateGroupBox;
     QVBoxLayout * hotkeysBindingLayout;
     QLabel * hotkeysWelcomeText;
     QFormLayout * hotkeysFormLayout;
@@ -122,6 +125,7 @@ protected:
     ShortcutGetter * takeSelectedScreenShortcut;
     ShortcutGetter * uploadFileShortcut;
     ShortcutGetter * uploadClipboardShortcut;
+    QLabel * warningHotkeysDisabled;
     QHBoxLayout * validateHotkeysLayout;
     QPushButton * validateHotkeys;
 
@@ -179,6 +183,8 @@ public slots :
     void HTTPMethodSettingModified(bool);
     void selectingAreaColorClicked();
     void selectingAreaColorRandomizer(bool);
+    void currentTabChanged(int);
+    void resetTab();
 
     void takeFullScreenShortcutChanged(QString);
     void takeSelectedAreaScreenShortcutChanged(QString);

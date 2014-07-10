@@ -87,6 +87,9 @@ protected:
 signals:
 
 public slots :
+    void disableHotkeys();
+    void enableHotkeys();
+
     void showWindowConfigurationTriggered();
     void takeFullScrenTriggered();
     void takeSelectedAreaScreenTriggered();

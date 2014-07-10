@@ -10,18 +10,18 @@
         <translation>Configuration d&apos;Uplimg</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="148"/>
+        <location filename="configuration/configurationwindows.cpp" line="149"/>
         <source>SFML Licence</source>
         <translation>Licence de SFML</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="215"/>
+        <location filename="configuration/configurationwindows.cpp" line="216"/>
         <source>RUN_ON_STARTUP</source>
         <oldsource>Run on startup</oldsource>
         <translation>Lancer le logiciel lors du démarrage de l&apos;OS</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="269"/>
+        <location filename="configuration/configurationwindows.cpp" line="270"/>
         <source>SHOW_NOTIFICATION</source>
         <oldsource>Show notifications when event take place</oldsource>
         <translation>Afficher des notifications</translation>
@@ -31,7 +31,7 @@
         <translation type="vanished">Jouer un son lors d&apos;un événement</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="272"/>
+        <location filename="configuration/configurationwindows.cpp" line="273"/>
         <source>COPY_FILE_LINK_CLIPBOARD</source>
         <oldsource>Copy file&apos;s link when it is uploaded to clipboard</oldsource>
         <translation>Copier le lien</translation>
@@ -45,25 +45,25 @@
         <translation type="vanished">Utiliser FTP pour envoyer les images</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="310"/>
+        <location filename="configuration/configurationwindows.cpp" line="311"/>
         <source>CONFIGURE_FTP</source>
         <oldsource>Configure FTP...</oldsource>
         <translation>Configurer le serveur FTP</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="317"/>
+        <location filename="configuration/configurationwindows.cpp" line="318"/>
         <source>CONFIGURE_HTTP</source>
         <oldsource>Configure HTTP POST...</oldsource>
         <translation>Configurer la requête HTTP</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="328"/>
+        <location filename="configuration/configurationwindows.cpp" line="329"/>
         <source>ONLINE_SERVICES_GROUPBOX</source>
         <oldsource>Online services</oldsource>
         <translation>Services Internet</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="290"/>
+        <location filename="configuration/configurationwindows.cpp" line="291"/>
         <source>GENERAL</source>
         <oldsource>General</oldsource>
         <comment>Configuration menu, general section</comment>
@@ -74,161 +74,166 @@
         <translation type="vanished">Raccourcis clavier</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="141"/>
+        <location filename="configuration/configurationwindows.cpp" line="142"/>
         <source>SOFTWARE_FREE_OPEN_SOURCE</source>
         <comment>This software is open source and entirely free to use.</comment>
         <translation>Ce logiciel est Open-Source et entièrement gratuit.</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="162"/>
+        <location filename="configuration/configurationwindows.cpp" line="163"/>
         <source>MADE_WITH_QT</source>
         <comment>Made with the flexibility of Qt</comment>
         <translation>Avec la fléxibilité de Qt</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="161"/>
+        <location filename="configuration/configurationwindows.cpp" line="162"/>
         <source>MADE_WITH_SFML</source>
         <comment>Made with the lightness of SFML</comment>
         <translation>Avec la légèreté de SFML</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="156"/>
+        <location filename="configuration/configurationwindows.cpp" line="157"/>
         <source>LGPL Licence</source>
         <translation>Licence LGPL</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="163"/>
+        <location filename="configuration/configurationwindows.cpp" line="164"/>
         <source>MADE_WITH_QXT</source>
         <comment>Made with the powerfull of Qxt</comment>
         <translation>Avec la puissance de Qxt</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="174"/>
+        <location filename="configuration/configurationwindows.cpp" line="175"/>
         <source>MAIN_DEVELOPPER</source>
         <comment>Main developper and project manager : &lt;span style=&quot;color:red;&quot;&gt;Martin Hammerchmidt alias Imote&lt;/span&gt;</comment>
         <translation>Développeur principal et leader du projet : &lt;span style=&quot;color:red;&quot;&gt;Martin Hammerchmidt alias Imote&lt;/span&gt;</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="186"/>
+        <location filename="configuration/configurationwindows.cpp" line="187"/>
         <source>HAPPY4EVER</source>
         <comment>And, don&apos;t forget to be Happy 4 Ever</comment>
         <translation>Enfin, n&apos;oubliez jamais le but même de la vie. Soyez &quot;Happy 4 Ever&quot; !</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="202"/>
+        <location filename="configuration/configurationwindows.cpp" line="203"/>
         <source>Credits</source>
         <translation>Crédits</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="378"/>
+        <location filename="configuration/configurationwindows.cpp" line="387"/>
         <source>HOTKEYS_SECTION</source>
         <translation>Raccourcis clavier</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="211"/>
+        <location filename="configuration/configurationwindows.cpp" line="212"/>
         <source>GENERAL_SETTINGS</source>
         <translation>Paramètres généraux</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="225"/>
+        <location filename="configuration/configurationwindows.cpp" line="226"/>
         <source>IMAGE_TYPE</source>
         <translation>Format de l&apos;image</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="234"/>
+        <location filename="configuration/configurationwindows.cpp" line="235"/>
         <source>IMAGE_QUALITY</source>
         <translation>Qualité de l&apos;image</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="244"/>
+        <location filename="configuration/configurationwindows.cpp" line="245"/>
         <source>LOCAL_SAVE</source>
         <translation>Sauvegarde locale de l&apos;image</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="252"/>
+        <location filename="configuration/configurationwindows.cpp" line="253"/>
         <source>RANDOMIZE_COLOR</source>
         <oldsource>Randomize color</oldsource>
         <translation>Couleur aléatoire</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="256"/>
+        <location filename="configuration/configurationwindows.cpp" line="257"/>
         <source>CHOOSE_COLOR_FOR_SELECTING_AREA_SCREEN</source>
         <translation>Couleur de la sélection de zone</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="262"/>
+        <location filename="configuration/configurationwindows.cpp" line="263"/>
         <source>ON_SUCCESS</source>
         <translation>Lors d&apos;un upload réussi</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="266"/>
+        <location filename="configuration/configurationwindows.cpp" line="267"/>
         <source>PLAY_SOUND</source>
         <translation>Jouer des sons</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="300"/>
+        <location filename="configuration/configurationwindows.cpp" line="301"/>
         <source>USE_UPLOADMETHOD_LOCAL</source>
         <translation>Stocker localement (image uniquement)</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="309"/>
+        <location filename="configuration/configurationwindows.cpp" line="310"/>
         <source>USE_UPLOADMETHOD_FTP</source>
         <translation>Utiliser un serveur FTP</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="316"/>
+        <location filename="configuration/configurationwindows.cpp" line="317"/>
         <source>USE_UPLOADMETHOD_HTTP</source>
         <translation>Utiliser une requête HTTP</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="342"/>
+        <location filename="configuration/configurationwindows.cpp" line="343"/>
         <source>UPLOAD_SECTION</source>
         <translation>Enregistrement</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="349"/>
+        <location filename="configuration/configurationwindows.cpp" line="350"/>
         <source>KEYBOARD_CONFIGURATION</source>
         <translation>Configuration du clavier</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="352"/>
+        <location filename="configuration/configurationwindows.cpp" line="355"/>
         <source>HOTKEYS_WELCOME_TEXT</source>
         <translation>Ici vous pouvez modifier les raccourcis clavier afin qu&apos;Uplimg vous corresponde vraiment.</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="359"/>
+        <location filename="configuration/configurationwindows.cpp" line="356"/>
+        <source>WARNING_HOTKEYS_DISABLED</source>
+        <translation type="unfinished">&lt;span style=&quot;color:red;&quot;&gt;Attention : les raccourcis clavier sont désactivé dans cette section !&lt;/span&gt;</translation>
+    </message>
+    <message>
+        <location filename="configuration/configurationwindows.cpp" line="363"/>
         <source>TAKE_FULL_SCREEN_HOTKEYS</source>
         <translation>Capturer l&apos;écran entier</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="360"/>
+        <location filename="configuration/configurationwindows.cpp" line="364"/>
         <source>TAKE_SELECTED_SCREEN_HOTKEYS</source>
         <translation>Capturer une zone spécifique de l&apos;écran</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="361"/>
+        <location filename="configuration/configurationwindows.cpp" line="365"/>
         <source>UPLOAD_FILE_SHORTCUT</source>
         <translation>Choisir et envoyer n&apos;importe quel fichier</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="362"/>
+        <location filename="configuration/configurationwindows.cpp" line="366"/>
         <source>UPLOAD_CLIPBOARD_SHORTCUT</source>
         <translation>Envoyer le contenu du presse papier</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="500"/>
-        <location filename="configuration/configurationwindows.cpp" line="522"/>
+        <location filename="configuration/configurationwindows.cpp" line="509"/>
+        <location filename="configuration/configurationwindows.cpp" line="531"/>
         <source>CHOOSE_DIRECTORY</source>
         <translation>Choisissez un dossier</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="220"/>
+        <location filename="configuration/configurationwindows.cpp" line="221"/>
         <source>APPLICATION_LANG</source>
         <comment>Application&apos;s lang :</comment>
         <translation>Langue de l&apos;application</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="275"/>
+        <location filename="configuration/configurationwindows.cpp" line="276"/>
         <source>AUTO_OPEN_FILE_IN_BROWSER</source>
         <translation>Ouvrir le fichier dans le navigateur</translation>
     </message>
@@ -241,7 +246,7 @@
         <translation type="vanished">Utiliser des requêtes HTTP</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="320"/>
+        <location filename="configuration/configurationwindows.cpp" line="321"/>
         <source>ONLY_ADVANCED_USERS</source>
         <comment>&lt;font size=&apos;2&apos;&gt;&lt;span style=&apos;color:blue;&apos;&gt;(!)&lt;/span&gt; Only for advanced users&lt;/font&gt;</comment>
         <translation>&lt;font size=&apos;2&apos;&gt;&lt;span style=&apos;color:blue;&apos;&gt;(!)&lt;/span&gt; Uniquement pour les utilisateurs avancés&lt;/font&gt;</translation>

@@ -79,6 +79,7 @@ ConfigurationWindows::ConfigurationWindows(SystemTrayIcon * parent, QWidget *qwi
     pal.setColor(QPalette::Window, selectingAreaColor);
     selectingAreaColorShower->setPalette(pal);
 
+    QObject::connect(windowContent, SIGNAL(currentChanged(int)), this, SLOT(currentTabChanged(int)));
     QObject::connect(runOnStartup, SIGNAL(toggled(bool)), this, SLOT(runOnStartupSettingModified(bool)));
     QObject::connect(showNotifications, SIGNAL(toggled(bool)), this, SLOT(showNotificationSettingModified(bool)));
     QObject::connect(playSound, SIGNAL(toggled(bool)), this, SLOT(playSoundSettingModified(bool)));
@@ -347,10 +348,12 @@ void ConfigurationWindows::setUpHotkeysSectionUI()
     hotkeysSection = new QWidget;
     hotkeysLayout = new QVBoxLayout;
     hotkeysGroupBox = new QGroupBox(tr("KEYBOARD_CONFIGURATION"));
+    hotkeysIntermediateGroupBox = new QGroupBox;
     hotkeysBindingLayout = new QVBoxLayout;
     hotkeysFormLayout = new QFormLayout;
 
     hotkeysWelcomeText = new QLabel(tr("HOTKEYS_WELCOME_TEXT"));
+    warningHotkeysDisabled = new QLabel(tr("WARNING_HOTKEYS_DISABLED"));
 
     takeFullScreenShortcut = new ShortcutGetter;
     takeSelectedScreenShortcut = new ShortcutGetter;
@@ -367,12 +370,15 @@ void ConfigurationWindows::setUpHotkeysSectionUI()
     validateHotkeysLayout->addStretch();
     validateHotkeysLayout->addWidget(validateHotkeys);
 
+    hotkeysIntermediateGroupBox->setLayout(hotkeysFormLayout);
+
     hotkeysBindingLayout->addWidget(hotkeysWelcomeText);
-    hotkeysBindingLayout->addLayout(hotkeysFormLayout);
+    hotkeysBindingLayout->addWidget(hotkeysIntermediateGroupBox);
 
     hotkeysGroupBox->setLayout(hotkeysBindingLayout);
 
     hotkeysLayout->addWidget(hotkeysGroupBox);
+    hotkeysLayout->addWidget(warningHotkeysDisabled);
     hotkeysLayout->addStretch();
     hotkeysLayout->addLayout(validateHotkeysLayout);
 
@@ -478,6 +484,12 @@ ConfigurationWindows::~ConfigurationWindows()
     HTTPConf->deleteLater();
 }
 
+void ConfigurationWindows::hideEvent(QHideEvent *event)
+{
+    parent->enableHotkeys();
+    event->accept();
+}
+
 void ConfigurationWindows::keyPressEvent(QKeyEvent * event)
 {
     if(event->key() == Qt::Key_E)
@@ -579,4 +591,17 @@ void ConfigurationWindows::uploadClipboardShortcutChanged(QString shortcut)
 {
     settings.setValue(Reg::uploadClipboardShortcut, shortcut);
     parent->uploadClipboardShortcutChanged(shortcut);
+}
+
+void ConfigurationWindows::currentTabChanged(int index)
+{
+    if(index == 2)
+        parent->disableHotkeys();
+    else
+        parent->enableHotkeys();
+}
+
+void ConfigurationWindows::resetTab()
+{
+    windowContent->setCurrentIndex(0);
 }

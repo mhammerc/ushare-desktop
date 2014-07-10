@@ -276,6 +276,7 @@ void SystemTrayIcon::showWindowConfigurationTriggered()
 {
     if(configurationWindow == 0)
         configurationWindow = new ConfigurationWindows(this);
+    configurationWindow->resetTab();
     configurationWindow->show();
     configurationWindow->setWindowState(Qt::WindowActive);
 }
@@ -322,6 +323,22 @@ void SystemTrayIcon::firstStart()
     settings.setValue(Reg::greenArea, 210);
     settings.setValue(Reg::blueArea, 10);
     settings.setValue(Reg::HTTPLinkFrom, "FROM_HTTP");
+}
+
+void SystemTrayIcon::disableHotkeys()
+{
+    takeFullScreenShortcut->setDisabled(true);
+    takeSelectedAreaScreenShortcut->setDisabled(true);
+    uploadFileShortcut->setDisabled(true);
+    uploadClipboardShortcut->setDisabled(true);
+}
+
+void SystemTrayIcon::enableHotkeys()
+{
+    takeFullScreenShortcut->setEnabled(true);
+    takeSelectedAreaScreenShortcut->setEnabled(true);
+    uploadFileShortcut->setEnabled(true);
+    uploadClipboardShortcut->setEnabled(true);
 }
 
 void SystemTrayIcon::enableEasterEgg()
