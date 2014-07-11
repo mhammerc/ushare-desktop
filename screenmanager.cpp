@@ -121,6 +121,12 @@ void ScreenManager::areaPictureTaken(QRect area)
     fullScreenPicture->deleteLater();
 }
 
+void ScreenManager::areaPictureCanceled()
+{
+    fullScreenPicture->deleteLater();
+    parent->lastActionFinished();
+}
+
 QPixmap ScreenManager::darkenPicture(const QPixmap &picture)
 {
     QImage image = picture.toImage();

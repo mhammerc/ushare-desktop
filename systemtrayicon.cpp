@@ -10,6 +10,7 @@ SystemTrayIcon::SystemTrayIcon(QObject *qobject) :
     configurationWindow = 0;
     lastUploadedFileSeparatorInserted = false;
     lastUploadedFileCounter = 0;
+    actionBeing = false;
 
     setIcon(QIcon(":/icon/waiting.png"));
     setToolTip(tr("DAEMON_RUNNING"));
@@ -74,9 +75,13 @@ void SystemTrayIcon::setUpContextMenu()
 
 void SystemTrayIcon::takeSelectedAreaScreenTriggered()
 {
-    fileName = getNewFileName(Uplimg::Utils::getImageFormat());
-    pathToFile = getFileTempPath(fileName);
-    screenManager->captureSelectedZone(pathToFile);
+    if(!actionBeing)
+        {
+            newActionStarted();
+            fileName = getNewFileName(Uplimg::Utils::getImageFormat());
+            pathToFile = getFileTempPath(fileName);
+            screenManager->captureSelectedZone(pathToFile);
+        }
 }
 
 void SystemTrayIcon::sendSelectedArea()
@@ -89,33 +94,42 @@ void SystemTrayIcon::sendSelectedArea()
 
 void SystemTrayIcon::takeFullScrenTriggered()
 {
-    QString fileName = getNewFileName(Uplimg::Utils::getImageFormat());
-    QString pathToFile = getFileTempPath(fileName);
-
-    if (screenManager->autoSendFile(screenManager->captureFullScreen(pathToFile)))
-        fileSended(fileName);
-    else
-        throwErrorAlert(Uplimg::ErrorList::UPLOAD_FAIL);
-}
-
-void SystemTrayIcon::uploadSelectedFileTriggered()
-{
-    QString path = QFileDialog::getOpenFileName(0, tr("SELECT_FILE"));
-
-    if(!path.isNull())
+    if(!actionBeing)
         {
-            if (screenManager->autoSendFile(path))
-                {
-                    QFileInfo fileInfo(path);
-                    fileSended(fileInfo.fileName());
-                }
+            newActionStarted();
+            QString fileName = getNewFileName(Uplimg::Utils::getImageFormat());
+            QString pathToFile = getFileTempPath(fileName);
+
+            if (screenManager->autoSendFile(screenManager->captureFullScreen(pathToFile)))
+                fileSended(fileName);
             else
                 throwErrorAlert(Uplimg::ErrorList::UPLOAD_FAIL);
         }
 }
 
+void SystemTrayIcon::uploadSelectedFileTriggered()
+{
+    if(!actionBeing)
+        {
+            newActionStarted();
+            QString path = QFileDialog::getOpenFileName(0, tr("SELECT_FILE"));
+
+            if(!path.isNull())
+                {
+                    if (screenManager->autoSendFile(path))
+                        {
+                            QFileInfo fileInfo(path);
+                            fileSended(fileInfo.fileName());
+                        }
+                    else
+                        throwErrorAlert(Uplimg::ErrorList::UPLOAD_FAIL);
+                }
+        }
+}
+
 void SystemTrayIcon::fileSended(QString fileName)
 {
+    lastActionFinished();
     setIcon(QIcon(":/icon/success.png"));
     iconTimer->start();
 
@@ -149,6 +163,16 @@ void SystemTrayIcon::fileSended(QString fileName)
             if(settings.value(Reg::showNotifications).toBool())
                 this->showMessage(Uplimg::applicationName, tr("UPLOAD_SUCCESS_LOCAL"));
         }
+}
+
+void SystemTrayIcon::lastActionFinished()
+{
+    actionBeing = false;
+}
+
+void SystemTrayIcon::newActionStarted()
+{
+    actionBeing = true;
 }
 
 void SystemTrayIcon::addUploadedFileInContextMenu()
@@ -189,34 +213,39 @@ void SystemTrayIcon::setWaitingIcon()
 
 void SystemTrayIcon::uploadClipboardTriggered()
 {
-    /* ONLY SUPPORTED FOR WINDOWS, NEVER TESTED ON X11 OR MAC */
-    /* IF CLIPBOARD POINT TO FILE, WE UPLOAD IT INSTEAD FILE PATH */
-    QString clipboard = QApplication::clipboard()->text();
-    clipboard = clipboard.right(clipboard.size()-8); //Windows automatically put file:/// at begin
-
-    if(QFile::exists(clipboard)) //Clipboard is pointing to file
+    if(!actionBeing)
         {
-            if(screenManager->autoSendFile(clipboard))
+
+            newActionStarted();
+            /* ONLY SUPPORTED FOR WINDOWS, NEVER TESTED ON X11 OR MAC */
+            /* IF CLIPBOARD POINT TO FILE, WE UPLOAD IT INSTEAD FILE PATH */
+            QString clipboard = QApplication::clipboard()->text();
+            clipboard = clipboard.right(clipboard.size()-8); //Windows automatically put file:/// at begin
+
+            if(QFile::exists(clipboard)) //Clipboard is pointing to file
                 {
-                    QFileInfo fi(clipboard);
-                    fileSended(fi.fileName());
+                    if(screenManager->autoSendFile(clipboard))
+                        {
+                            QFileInfo fi(clipboard);
+                            fileSended(fi.fileName());
+                        }
+                    return;
                 }
-            return;
-        }
-    /* WINDOWS ONLY END */
+            /* WINDOWS ONLY END */
 
-    const QString fileName = getNewFileName(".txt");
-    const QString filePath = getFileTempPath(fileName);
-    std::ofstream file(filePath.toStdString().c_str());
+            const QString fileName = getNewFileName(".txt");
+            const QString filePath = getFileTempPath(fileName);
+            std::ofstream file(filePath.toStdString().c_str());
 
-    if (file)
-        {
-            file << QApplication::clipboard()->text().toStdString();
-            file.close();
-            if (screenManager->autoSendFile(filePath))
-                fileSended(fileName);
-            else
-                throwErrorAlert(Uplimg::ErrorList::UPLOAD_FAIL);
+            if (file)
+                {
+                    file << QApplication::clipboard()->text().toStdString();
+                    file.close();
+                    if (screenManager->autoSendFile(filePath))
+                        fileSended(fileName);
+                    else
+                        throwErrorAlert(Uplimg::ErrorList::UPLOAD_FAIL);
+                }
         }
 }
 
@@ -293,11 +322,13 @@ void SystemTrayIcon::throwErrorAlert(const Uplimg::ErrorList &error)
 
     if (error == Uplimg::ErrorList::UPLOAD_FAIL)
         {
+            lastActionFinished();
             const QString text(tr("UPLOAD_FAILED"));
             this->showMessage(Uplimg::applicationName, text);
         }
     else if(error == Uplimg::ErrorList::UPLOAD_METHOD_NOT_CHOOSED)
         {
+            lastActionFinished();
             const QString text(tr("NO_METHOD_TO_UPLOAD_CHOOSED"));
             this->showMessage(Uplimg::applicationName, text);
         }
@@ -318,11 +349,14 @@ void SystemTrayIcon::firstStart()
     settings.setValue(Reg::uploadClipboardShortcut, "Alt+4");
     settings.setValue(Reg::imageFormat, "JPEG");
     settings.setValue(Reg::imageQuality, 100);
-    settings.setValue(Reg::localSavePath, QStandardPaths::standardLocations(QStandardPaths::PicturesLocation));
     settings.setValue(Reg::redArea, 10);
     settings.setValue(Reg::greenArea, 210);
     settings.setValue(Reg::blueArea, 10);
     settings.setValue(Reg::HTTPLinkFrom, "FROM_HTTP");
+    QDir pictureDir(QStandardPaths::standardLocations(QStandardPaths::PicturesLocation).at(0));
+    pictureDir.mkdir("Uplimg");
+    pictureDir.cd("Uplimg");
+    settings.setValue(Reg::localSavePath, pictureDir.absolutePath());
 }
 
 void SystemTrayIcon::disableHotkeys()

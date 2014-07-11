@@ -23,6 +23,7 @@
 #include <QVariant>
 #include <QStandardPaths>
 #include <QTimer>
+#include <QDir>
 
 #include <QxtCore/Qxt>
 #include <QxtWidgets/QxtGlobalShortcut>
@@ -78,6 +79,7 @@ protected:
     //Temp
     QString fileName;
     QString pathToFile;
+    bool actionBeing;
 
     bool lastUploadedFileSeparatorInserted;
     QAction * lastUploadedFileSeparator;
@@ -96,6 +98,8 @@ public slots :
     void uploadSelectedFileTriggered();
     void uploadClipboardTriggered();
     void fileSended(QString fileName);
+    void lastActionFinished();
+    void newActionStarted();
     void setWaitingIcon();
     void addUploadedFileInContextMenu();
 

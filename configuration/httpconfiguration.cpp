@@ -33,6 +33,10 @@ HTTPConfiguration::HTTPConfiguration(QWidget * parent) :
     QObject::connect(webPathFromFixed, SIGNAL(toggled(bool)), this, SLOT(webPathFromFixedSettingModified(bool)));
     QObject::connect(webPath, SIGNAL(textChanged(QString)), this, SLOT(webPathSettingModified(QString)));
 
+    QObject::connect(host, SIGNAL(returnPressed()), this, SLOT(close()));
+    QObject::connect(fileFieldName, SIGNAL(returnPressed()), this, SLOT(close()));
+    QObject::connect(webPath, SIGNAL(returnPressed()), this, SLOT(close()));
+
     QObject::connect(validate, SIGNAL(clicked()), this, SLOT(close()));
 
 }

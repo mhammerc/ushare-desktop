@@ -43,6 +43,7 @@ protected:
 
 signals:
     void areaTaken(QRect);
+    void areaCanceled();
 };
 
 #endif // SELECTAREABAND_H

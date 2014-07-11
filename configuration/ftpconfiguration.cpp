@@ -24,6 +24,12 @@ FTPConfiguration::FTPConfiguration(QWidget *parent) :
     QObject::connect(basePath, SIGNAL(textChanged(QString)), this, SLOT(basePathSettingModified(QString)));
     QObject::connect(webPath, SIGNAL(textChanged(QString)), this, SLOT(webPathSettingModified(QString)));
 
+    QObject::connect(host, SIGNAL(returnPressed()), this, SLOT(close()));
+    QObject::connect(username, SIGNAL(returnPressed()), this, SLOT(close()));
+    QObject::connect(password, SIGNAL(returnPressed()), this, SLOT(close()));
+    QObject::connect(basePath, SIGNAL(returnPressed()), this, SLOT(close()));
+    QObject::connect(webPath, SIGNAL(returnPressed()), this, SLOT(close()));
+
     QObject::connect(validate, SIGNAL(clicked()), this, SLOT(close()));
 }
 

@@ -95,10 +95,7 @@ protected:
     QGroupBox * onlineServices;
     QVBoxLayout * onlineServicesLayout;
 
-    QHBoxLayout * localMethodLayout;
     QRadioButton * localMethod;
-    QLineEdit * localMethodPath;
-    QPushButton * localMethodPathChooser;
 
     QRadioButton * FTPMethod;
     QPushButton * configureFTPButton;

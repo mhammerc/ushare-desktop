@@ -47,13 +47,10 @@ ConfigurationWindows::ConfigurationWindows(SystemTrayIcon * parent, QWidget *qwi
     else if (settings.value(Reg::choosedMethod).toString() == "HTTP")
         HTTPMethod->setChecked(true);
     else if(settings.value(Reg::choosedMethod).toString() == "LOCAL")
+    {
         localMethod->setChecked(true);
-
-    if(settings.value(Reg::choosedMethod).toString() != "LOCAL")
-        {
-            localMethodPath->setDisabled(true);
-            localMethodPathChooser->setDisabled(true);
-        }
+        localSave->setChecked(true);
+    }
 
     if(settings.value(Reg::lang).toString().isNull())
         {
@@ -67,8 +64,6 @@ ConfigurationWindows::ConfigurationWindows(SystemTrayIcon * parent, QWidget *qwi
                     lang->setCurrentText("English");
                 }
         }
-
-    localMethodPath->setText(settings.value(Reg::localSavePath).toString());
 
     selectingAreaColor.setRed(settings.value(Reg::redArea).toInt());
     selectingAreaColor.setGreen(settings.value(Reg::greenArea).toInt());
@@ -98,8 +93,6 @@ ConfigurationWindows::ConfigurationWindows(SystemTrayIcon * parent, QWidget *qwi
     QObject::connect(selectingAreaColorRandomize, SIGNAL(toggled(bool)), this, SLOT(selectingAreaColorRandomizer(bool)));
 
     QObject::connect(localMethod, SIGNAL(toggled(bool)), this, SLOT(localMethodSettingsModified(bool)));
-    QObject::connect(localMethodPath, SIGNAL(textChanged(QString)), this, SLOT(localMethodPathSettingsModified(QString)));
-    QObject::connect(localMethodPathChooser, SIGNAL(clicked()), this, SLOT(localMethodPathSettingsClicked()));
     QObject::connect(FTPMethod, SIGNAL(toggled(bool)), this, SLOT(FTPMethodSettingModified(bool)));
     QObject::connect(HTTPMethod, SIGNAL(toggled(bool)), this, SLOT(HTTPMethodSettingModified(bool)));
 
@@ -133,76 +126,6 @@ void ConfigurationWindows::setUpUI()
     this->setUpCreditsSectionUI();
 
     mainLayout->addWidget(windowContent);
-}
-
-void ConfigurationWindows::setUpCreditsSectionUI()
-{
-    creditSection = new QWidget;
-    creditLayout = new QVBoxLayout;
-
-    //Header
-    openSourceText = new QLabel(tr("SOFTWARE_FREE_OPEN_SOURCE", "This software is open source and entirely free to use."));
-
-    //Made with
-    SFMLLicence = new QTextEdit;
-    QFile SFMLLicenceFile(":/SFML_LICENCE.txt");
-    SFMLLicenceFile.open(QIODevice::ReadOnly);
-    SFMLLicence->setText(SFMLLicenceFile.readAll());
-    SFMLLicence->setWindowTitle(tr("SFML Licence"));
-    SFMLLicence->setReadOnly(true);
-    SFMLLicence->setFixedSize(400,280);
-
-    LGPLLicence = new QTextEdit;
-    QFile LGPLLicenceFile(":/lgpl-2.1.txt");
-    LGPLLicenceFile.open(QIODevice::ReadOnly);
-    LGPLLicence->setText(LGPLLicenceFile.readAll());
-    LGPLLicence->setWindowTitle(tr("LGPL Licence"));
-    LGPLLicence->setReadOnly(true);
-    LGPLLicence->setFixedSize(400,450);
-
-    madeWithLayout = new QHBoxLayout;
-    madeWithSFML = new QPushButton(tr("MADE_WITH_SFML", "Made with the lightness of SFML"));
-    madeWithQt = new QPushButton(tr("MADE_WITH_QT", "Made with the flexibility of Qt"));
-    madeWithQxt = new QPushButton(tr("MADE_WITH_QXT", "Made with the powerfull of Qxt"));
-    madeWithLayout->addWidget(madeWithSFML);
-    madeWithLayout->addWidget(madeWithQt);
-    madeWithLayout->addWidget(madeWithQxt);
-
-
-    QObject::connect(madeWithSFML, SIGNAL(clicked()), SFMLLicence, SLOT(show()));
-    QObject::connect(madeWithQt, SIGNAL(clicked()), qApp, SLOT(aboutQt()));
-    QObject::connect(madeWithQxt, SIGNAL(clicked()), LGPLLicence, SLOT(show()));
-
-    //Contributors
-    leadDevelopper = new QLabel(tr("MAIN_DEVELOPPER", "Main developper and project manager : <span style=\"color:red;\">Martin Hammerchmidt alias Imote</span>"));
-    allContributorsLayout = new QHBoxLayout;
-    allContributorsOne = new QListWidget;
-    allContributorsTwo = new QListWidget;
-    allContributorsLayout->addWidget(allContributorsOne);
-    allContributorsLayout->addWidget(allContributorsTwo);
-    new QListWidgetItem("You <3", allContributorsOne);
-    new QListWidgetItem("si0ls", allContributorsTwo);
-    new QListWidgetItem("Yohann Hammad", allContributorsOne);
-    new QListWidgetItem("Krayon973", allContributorsTwo);
-    new QListWidgetItem("Eldraeildor", allContributorsOne);
-    new QListWidgetItem("Mrs025", allContributorsTwo);
-    happy4Ever = new QLabel(tr("HAPPY4EVER", "And, don't forget to be Happy 4 Ever"));
-
-    validateCredit = new QPushButton("Ok");
-    validateCreditLayout = new QHBoxLayout;
-    validateCreditLayout->addStretch();
-    validateCreditLayout->addWidget(validateCredit);
-
-    creditLayout->addWidget(openSourceText);
-    creditLayout->addLayout(madeWithLayout);
-    creditLayout->addWidget(leadDevelopper);
-    creditLayout->addLayout(allContributorsLayout);
-    creditLayout->addWidget(happy4Ever);
-    creditLayout->addStretch();
-    creditLayout->addLayout(validateCreditLayout);
-
-    creditSection->setLayout(creditLayout);
-    windowContent->addTab(creditSection, tr("Credits"));
 }
 
 void ConfigurationWindows::setUpGeneralSectionUI()
@@ -300,14 +223,7 @@ void ConfigurationWindows::setUpUploadSectionUI()
     uploadLayout = new QVBoxLayout;
     onlineServicesLayout = new QVBoxLayout;
 
-    localMethodLayout = new QHBoxLayout;
     localMethod = new QRadioButton(tr("USE_UPLOADMETHOD_LOCAL"));
-    localMethodPath = new QLineEdit;
-    localMethodPathChooser = new QPushButton("..");
-    localMethodPathChooser->setFixedWidth(30);
-    localMethodLayout->addWidget(localMethod);
-    localMethodLayout->addWidget(localMethodPath);
-    localMethodLayout->addWidget(localMethodPathChooser);
 
     FTPLayout = new QHBoxLayout;
     FTPMethod = new QRadioButton(tr("USE_UPLOADMETHOD_FTP"));
@@ -325,7 +241,7 @@ void ConfigurationWindows::setUpUploadSectionUI()
     HTTPLayout->addLayout(HTTPLayoutForRadioAndPushButton);
     HTTPLayout->addWidget(HTTPWarning);
 
-    onlineServicesLayout->addLayout(localMethodLayout);
+    onlineServicesLayout->addWidget(localMethod);
     onlineServicesLayout->addLayout(FTPLayout);
     onlineServicesLayout->addLayout(HTTPLayout);
 
@@ -388,6 +304,76 @@ void ConfigurationWindows::setUpHotkeysSectionUI()
     hotkeysSection->setLayout(hotkeysLayout);
 
     windowContent->addTab(hotkeysSection, tr("HOTKEYS_SECTION"));
+}
+
+void ConfigurationWindows::setUpCreditsSectionUI()
+{
+    creditSection = new QWidget;
+    creditLayout = new QVBoxLayout;
+
+    //Header
+    openSourceText = new QLabel(tr("SOFTWARE_FREE_OPEN_SOURCE", "This software is open source and entirely free to use."));
+
+    //Made with
+    SFMLLicence = new QTextEdit;
+    QFile SFMLLicenceFile(":/SFML_LICENCE.txt");
+    SFMLLicenceFile.open(QIODevice::ReadOnly);
+    SFMLLicence->setText(SFMLLicenceFile.readAll());
+    SFMLLicence->setWindowTitle(tr("SFML Licence"));
+    SFMLLicence->setReadOnly(true);
+    SFMLLicence->setFixedSize(400,280);
+
+    LGPLLicence = new QTextEdit;
+    QFile LGPLLicenceFile(":/lgpl-2.1.txt");
+    LGPLLicenceFile.open(QIODevice::ReadOnly);
+    LGPLLicence->setText(LGPLLicenceFile.readAll());
+    LGPLLicence->setWindowTitle(tr("LGPL Licence"));
+    LGPLLicence->setReadOnly(true);
+    LGPLLicence->setFixedSize(400,450);
+
+    madeWithLayout = new QHBoxLayout;
+    madeWithSFML = new QPushButton(tr("MADE_WITH_SFML", "Made with the lightness of SFML"));
+    madeWithQt = new QPushButton(tr("MADE_WITH_QT", "Made with the flexibility of Qt"));
+    madeWithQxt = new QPushButton(tr("MADE_WITH_QXT", "Made with the powerfull of Qxt"));
+    madeWithLayout->addWidget(madeWithSFML);
+    madeWithLayout->addWidget(madeWithQt);
+    madeWithLayout->addWidget(madeWithQxt);
+
+
+    QObject::connect(madeWithSFML, SIGNAL(clicked()), SFMLLicence, SLOT(show()));
+    QObject::connect(madeWithQt, SIGNAL(clicked()), qApp, SLOT(aboutQt()));
+    QObject::connect(madeWithQxt, SIGNAL(clicked()), LGPLLicence, SLOT(show()));
+
+    //Contributors
+    leadDevelopper = new QLabel(tr("MAIN_DEVELOPPER", "Main developper and project manager : <span style=\"color:red;\">Martin Hammerchmidt alias Imote</span>"));
+    allContributorsLayout = new QHBoxLayout;
+    allContributorsOne = new QListWidget;
+    allContributorsTwo = new QListWidget;
+    allContributorsLayout->addWidget(allContributorsOne);
+    allContributorsLayout->addWidget(allContributorsTwo);
+    new QListWidgetItem("You <3", allContributorsOne);
+    new QListWidgetItem("si0ls", allContributorsTwo);
+    new QListWidgetItem("Yohann Hammad", allContributorsOne);
+    new QListWidgetItem("Krayon973", allContributorsTwo);
+    new QListWidgetItem("Eldraeildor", allContributorsOne);
+    new QListWidgetItem("Mrs025", allContributorsTwo);
+    happy4Ever = new QLabel(tr("HAPPY4EVER", "And, don't forget to be Happy 4 Ever"));
+
+    validateCredit = new QPushButton("Ok");
+    validateCreditLayout = new QHBoxLayout;
+    validateCreditLayout->addStretch();
+    validateCreditLayout->addWidget(validateCredit);
+
+    creditLayout->addWidget(openSourceText);
+    creditLayout->addLayout(madeWithLayout);
+    creditLayout->addWidget(leadDevelopper);
+    creditLayout->addLayout(allContributorsLayout);
+    creditLayout->addWidget(happy4Ever);
+    creditLayout->addStretch();
+    creditLayout->addLayout(validateCreditLayout);
+
+    creditSection->setLayout(creditLayout);
+    windowContent->addTab(creditSection, tr("Credits"));
 }
 
 void ConfigurationWindows::configureFTP()
@@ -508,7 +494,6 @@ void ConfigurationWindows::localSaveSettingsModified(bool checked)
 void ConfigurationWindows::localSavePathSettingsModified(QString path)
 {
     settings.setValue(Reg::localSavePath, path);
-    localMethodPath->setText(path);
 }
 
 void ConfigurationWindows::localSavePathSettingsClicked()
@@ -520,11 +505,16 @@ void ConfigurationWindows::localSavePathSettingsClicked()
 
 void ConfigurationWindows::localMethodSettingsModified(bool checked)
 {
-    localMethodPath->setEnabled(checked);
-    localMethodPathChooser->setEnabled(checked);
-
     if(checked)
+    {
         settings.setValue(Reg::choosedMethod, "LOCAL");
+        localSave->setChecked(true);
+        localSave->setDisabled(true);
+    }
+    else
+    {
+        localSave->setEnabled(true);
+    }
 }
 
 void ConfigurationWindows::localMethodPathSettingsModified(QString path)
@@ -537,7 +527,6 @@ void ConfigurationWindows::localMethodPathSettingsClicked()
 {
     QString path = QFileDialog::getExistingDirectory(this, tr("CHOOSE_DIRECTORY"), localSavePath->text());
     localSavePath->setText(path);
-    localMethodPath->setText(path);
     settings.setValue(Reg::localSavePath, path);
 }
 

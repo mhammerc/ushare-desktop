@@ -60,6 +60,7 @@ protected:
 
 public slots:
     void areaPictureTaken(QRect);
+    void areaPictureCanceled();
     bool autoSendFile(const QString &pathToFile);
     void fileSendedTroughHTTP();
 

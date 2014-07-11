@@ -30,7 +30,9 @@ SelectAreaBand::SelectAreaBand(ScreenManager *manager, QWidget * parent) :
     setCursor(Qt::CrossCursor);
     rubberBand = new QRubberBand(QRubberBand::Rectangle, this);
     this->manager = manager;
+
     QObject::connect(this, SIGNAL(areaTaken(QRect)), manager, SLOT(areaPictureTaken(QRect)));
+    QObject::connect(this, SIGNAL(areaCanceled()), manager, SLOT(areaPictureCanceled()));
 }
 
 void SelectAreaBand::selectArea()
@@ -67,7 +69,9 @@ void SelectAreaBand::keyPressEvent(QKeyEvent * event)
 {
     if(event->key() == Qt::Key_Escape)
         {
-            this->close();
+            rubberBand->deleteLater();
+            this->deleteLater();
+            emit areaCanceled();
         }
 }
 
