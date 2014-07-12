@@ -42,15 +42,17 @@ ConfigurationWindows::ConfigurationWindows(SystemTrayIcon * parent, QWidget *qwi
     if(settings.value(Reg::imageFormat).toString() != "JPEG")
         imageQuality->setDisabled(true);
 
-    if (settings.value(Reg::choosedMethod).toString() == "FTP")
+    if(settings.value(Reg::choosedMethod).toString() == "UPLIMG_WEB")
+        uplimgWeb->setChecked(true);
+    else if (settings.value(Reg::choosedMethod).toString() == "FTP")
         FTPMethod->setChecked(true);
     else if (settings.value(Reg::choosedMethod).toString() == "HTTP")
         HTTPMethod->setChecked(true);
     else if(settings.value(Reg::choosedMethod).toString() == "LOCAL")
-    {
-        localMethod->setChecked(true);
-        localSave->setChecked(true);
-    }
+        {
+            localMethod->setChecked(true);
+            localSave->setChecked(true);
+        }
 
     if(settings.value(Reg::lang).toString().isNull())
         {
@@ -93,6 +95,7 @@ ConfigurationWindows::ConfigurationWindows(SystemTrayIcon * parent, QWidget *qwi
     QObject::connect(selectingAreaColorRandomize, SIGNAL(toggled(bool)), this, SLOT(selectingAreaColorRandomizer(bool)));
 
     QObject::connect(localMethod, SIGNAL(toggled(bool)), this, SLOT(localMethodSettingsModified(bool)));
+    QObject::connect(uplimgWeb, SIGNAL(toggled(bool)), this, SLOT(uplimgWebMethodSettingModified(bool)));
     QObject::connect(FTPMethod, SIGNAL(toggled(bool)), this, SLOT(FTPMethodSettingModified(bool)));
     QObject::connect(HTTPMethod, SIGNAL(toggled(bool)), this, SLOT(HTTPMethodSettingModified(bool)));
 
@@ -204,8 +207,10 @@ void ConfigurationWindows::setUpGeneralSectionUI()
     onSuccessSettings->setLayout(onSuccessFormLayout);
     generalLayout->addWidget(onSuccessSettings);
 
-    validateGeneral = new QPushButton("Ok");
     validateGeneralLayout = new QHBoxLayout;
+    version = new QLabel(Uplimg::version);
+    validateGeneral = new QPushButton("Ok");
+    validateGeneralLayout->addWidget(version);
     validateGeneralLayout->addStretch();
     validateGeneralLayout->addWidget(validateGeneral);
 
@@ -223,6 +228,7 @@ void ConfigurationWindows::setUpUploadSectionUI()
     uploadLayout = new QVBoxLayout;
     onlineServicesLayout = new QVBoxLayout;
 
+    uplimgWeb = new QRadioButton(tr("USE_UPLOADMETHOD_UPLIMGWEB"));
     localMethod = new QRadioButton(tr("USE_UPLOADMETHOD_LOCAL"));
 
     FTPLayout = new QHBoxLayout;
@@ -241,9 +247,10 @@ void ConfigurationWindows::setUpUploadSectionUI()
     HTTPLayout->addLayout(HTTPLayoutForRadioAndPushButton);
     HTTPLayout->addWidget(HTTPWarning);
 
-    onlineServicesLayout->addWidget(localMethod);
+    onlineServicesLayout->addWidget(uplimgWeb);
     onlineServicesLayout->addLayout(FTPLayout);
     onlineServicesLayout->addLayout(HTTPLayout);
+    onlineServicesLayout->addWidget(localMethod);
 
     onlineServices = new QGroupBox(tr("ONLINE_SERVICES_GROUPBOX"));
     onlineServices->setLayout(onlineServicesLayout);
@@ -459,6 +466,12 @@ void ConfigurationWindows::imageQualitySettingModified(int value)
     settings.setValue(Reg::imageQuality, value);
 }
 
+void ConfigurationWindows::uplimgWebMethodSettingModified(bool checked)
+{
+    if(checked)
+        settings.setValue(Reg::choosedMethod, "UPLIMG_WEB");
+}
+
 void ConfigurationWindows::closeEvent(QCloseEvent *event)
 {
     event->ignore();
@@ -506,28 +519,15 @@ void ConfigurationWindows::localSavePathSettingsClicked()
 void ConfigurationWindows::localMethodSettingsModified(bool checked)
 {
     if(checked)
-    {
-        settings.setValue(Reg::choosedMethod, "LOCAL");
-        localSave->setChecked(true);
-        localSave->setDisabled(true);
-    }
+        {
+            settings.setValue(Reg::choosedMethod, "LOCAL");
+            localSave->setChecked(true);
+            localSave->setDisabled(true);
+        }
     else
-    {
-        localSave->setEnabled(true);
-    }
-}
-
-void ConfigurationWindows::localMethodPathSettingsModified(QString path)
-{
-    settings.setValue(Reg::localSavePath, path);
-    localSavePath->setText(path);
-}
-
-void ConfigurationWindows::localMethodPathSettingsClicked()
-{
-    QString path = QFileDialog::getExistingDirectory(this, tr("CHOOSE_DIRECTORY"), localSavePath->text());
-    localSavePath->setText(path);
-    settings.setValue(Reg::localSavePath, path);
+        {
+            localSave->setEnabled(true);
+        }
 }
 
 void ConfigurationWindows::selectingAreaColorClicked()

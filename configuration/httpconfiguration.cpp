@@ -53,6 +53,8 @@ void HTTPConfiguration::setUpUI()
 
     host = new QLineEdit;
     port = new QSpinBox;
+    port->setMaximum(99999);
+    port->setMinimum(0);
     fileFieldName = new QLineEdit;
 
     webPathBox = new QGroupBox(tr("FROM_LINK_TO_DISTRIBUTE"));

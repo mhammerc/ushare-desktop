@@ -42,9 +42,17 @@ QString const uploadClipboardShortcut("configuration/shortcut/uploadClipboard");
 QString const uploadFileShortcut("configuration/shortcut/uploadFile");
 }
 
+namespace UplimgWeb
+{
+int const port(5656);
+QString const host("http://uplmg.com/upload.php");
+QString const fileFieldName("uplimgFile");
+}
+
 namespace Uplimg
 {
 QString const applicationName("Uplimg");
+QString const version("0.9");
 
 enum HTTP_ACCESS_FILE_LINK { FROM_RESPONSE /* From HTTP response */, FROM_FIXED_LINK /* Web path */}; //From what link return the user on successfull HTTP upload : from HTTP response or from fixed choosed link
 
@@ -87,6 +95,8 @@ public:
             return Uplimg::UploadMethod::FTP;
         else if (settings.value(Reg::choosedMethod).toString().toStdString() == "HTTP")
             return Uplimg::UploadMethod::HTTP;
+        else if(settings.value(Reg::choosedMethod).toString().toStdString() == "UPLIMG_WEB")
+            return Uplimg::UploadMethod::UPLIMG_WEB;
         else if (settings.value(Reg::choosedMethod).toString().toStdString() == "LOCAL")
             return Uplimg::UploadMethod::LOCAL;
         else

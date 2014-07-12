@@ -86,6 +86,7 @@ protected:
     QHBoxLayout * imageQualityLayout;
 
     QHBoxLayout * validateGeneralLayout;
+    QLabel * version;
     QPushButton * validateGeneral;
 
 
@@ -94,6 +95,8 @@ protected:
     QVBoxLayout * uploadLayout;
     QGroupBox * onlineServices;
     QVBoxLayout * onlineServicesLayout;
+
+    QRadioButton * uplimgWeb;
 
     QRadioButton * localMethod;
 
@@ -174,10 +177,9 @@ public slots :
     void localSavePathSettingsModified(QString);
     void localSavePathSettingsClicked();
     void localMethodSettingsModified(bool);
-    void localMethodPathSettingsModified(QString);
-    void localMethodPathSettingsClicked();
     void imageTypeSettingModified(QString);
     void imageQualitySettingModified(int);
+    void uplimgWebMethodSettingModified(bool);
     void FTPMethodSettingModified(bool);
     void HTTPMethodSettingModified(bool);
     void selectingAreaColorClicked();

@@ -138,11 +138,8 @@ void SystemTrayIcon::fileSended(QString fileName)
             if(settings.value(Reg::playSound).toBool())
                 fileSendedSound->play();
 
-            if(settings.value(Reg::linkFrom).toString() != "FROM_HTTP" || Uplimg::Utils::getUploadMethod() != Uplimg::UploadMethod::HTTP)
-                {
-                    const QString urlPath = getUploadedFileURL(fileName);
-                    lastUrl.setUrl(urlPath);
-                }
+            else if(settings.value(Reg::linkFrom).toString() != "FROM_HTTP" || Uplimg::Utils::getUploadMethod() != Uplimg::UploadMethod::HTTP || Uplimg::Utils::getUploadMethod() != Uplimg::UploadMethod::UPLIMG_WEB)
+                lastUrl.setUrl(getUploadedFileURL(fileName));
 
             addUploadedFileInContextMenu();
 
@@ -153,7 +150,7 @@ void SystemTrayIcon::fileSended(QString fileName)
                 copyLastUrlToClipboard();
 
             if(settings.value(Reg::showNotifications).toBool())
-                this->showMessage(Uplimg::applicationName, tr("UPLOAD_SUCCESS_WITH_URL", "Congratulation !\nUpload success. The URL is :\n") + lastUrl.toString());
+                this->showMessage(Uplimg::applicationName, tr("UPLOAD_SUCCESS_WITH_URL") + lastUrl.toDisplayString());
         }
     else if(Uplimg::Utils::getUploadMethod()  == Uplimg::UploadMethod::LOCAL)
         {

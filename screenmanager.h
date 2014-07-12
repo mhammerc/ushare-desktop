@@ -42,6 +42,7 @@ public:
 
     bool sendFileTroughHTTP(const QString &pathToFile);
     bool sendFileTroughFTP(const QString &pathToFile);
+    bool sendFileTroughUplimgWeb(const QString &pathToFile);
 
 protected:
     SystemTrayIcon * parent;

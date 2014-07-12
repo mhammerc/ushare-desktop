@@ -25,6 +25,9 @@ bool ScreenManager::autoSendFile(const QString &pathToFile)
     else if (method == Uplimg::UploadMethod::HTTP)
         return sendFileTroughHTTP(pathToFile);
 
+    else if (method == Uplimg::UploadMethod::UPLIMG_WEB)
+        return sendFileTroughUplimgWeb(pathToFile);
+
     else if (method == Uplimg::UploadMethod::LOCAL)
         return true;
 
@@ -49,6 +52,39 @@ bool ScreenManager::sendFileTroughFTP(const QString &pathToFile)
     else std::clog << "can't co\n";
 
     return false;
+}
+
+bool ScreenManager::sendFileTroughUplimgWeb(const QString &pathToFile)
+{
+    HTTPPostUpload * http = new HTTPPostUpload;
+    http->setHost(UplimgWeb::host, UplimgWeb::port);
+    http->setFile(pathToFile, UplimgWeb::fileFieldName);
+    http->setContentType("image/png");
+    http->start();
+
+    sf::Clock clock;
+
+    while(true)
+        {
+            if(clock.getElapsedTime() >= sf::seconds(10))
+                return false;
+
+            sf::sleep(sf::milliseconds(30));
+
+            if(http->canGetReply() && http->reply->isFinished() && http->reply->error() == QNetworkReply::NetworkError::NoError)
+                {
+                    http->terminate();
+                    parent->lastUrl.setUrl(QString(http->reply->readAll()));
+                    http->deleteLater();
+                    return true;
+                }
+            else if(http->canGetReply() && http->reply->isFinished() && http->reply->error() != QNetworkReply::NetworkError::NoError)
+                {
+                    http->terminate();
+                    http->deleteLater();
+                    return false;
+                }
+        }
 }
 
 bool ScreenManager::sendFileTroughHTTP(const QString &pathToFile)
