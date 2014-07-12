@@ -40,6 +40,7 @@ public:
     ~SystemTrayIcon();
 
     QUrl lastUrl;
+    QString receivedMessage;
 
 protected:
     QSettings settings;

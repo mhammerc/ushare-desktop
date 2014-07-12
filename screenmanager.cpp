@@ -59,14 +59,13 @@ bool ScreenManager::sendFileTroughUplimgWeb(const QString &pathToFile)
     HTTPPostUpload * http = new HTTPPostUpload;
     http->setHost(UplimgWeb::host, UplimgWeb::port);
     http->setFile(pathToFile, UplimgWeb::fileFieldName);
-    http->setContentType("image/png");
     http->start();
 
     sf::Clock clock;
 
     while(true)
         {
-            if(clock.getElapsedTime() >= sf::seconds(10))
+            if(clock.getElapsedTime() >= sf::seconds(30))
                 return false;
 
             sf::sleep(sf::milliseconds(30));
@@ -74,7 +73,7 @@ bool ScreenManager::sendFileTroughUplimgWeb(const QString &pathToFile)
             if(http->canGetReply() && http->reply->isFinished() && http->reply->error() == QNetworkReply::NetworkError::NoError)
                 {
                     http->terminate();
-                    parent->lastUrl.setUrl(QString(http->reply->readAll()));
+                    parent->receivedMessage = QString(http->reply->readAll());
                     http->deleteLater();
                     return true;
                 }
@@ -92,7 +91,6 @@ bool ScreenManager::sendFileTroughHTTP(const QString &pathToFile)
     HTTPPostUpload * http = new HTTPPostUpload;
     http->setHost(settings.value(Reg::HTTPHost).toString(), settings.value(Reg::HTTPPort).toInt());
     http->setFile(pathToFile, settings.value(Reg::HTTPFileFieldName, "uplimgFile").toString());
-    http->setContentType("image/png");
     http->start();
 
     sf::Clock clock;

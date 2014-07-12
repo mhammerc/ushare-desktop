@@ -133,12 +133,21 @@ void SystemTrayIcon::fileSended(QString fileName)
     setIcon(QIcon(":/icon/success.png"));
     iconTimer->start();
 
+    if(Uplimg::Utils::getUploadMethod() == Uplimg::UploadMethod::UPLIMG_WEB)
+    {
+        if(Uplimg::Utils::isValidURL(receivedMessage.toStdString()))
+                lastUrl.setUrl(receivedMessage);
+        else
+            return throwErrorAlert(receivedMessage);
+
+    }
+
     if(Uplimg::Utils::getUploadMethod() != Uplimg::UploadMethod::LOCAL && Uplimg::Utils::getUploadMethod() != Uplimg::UploadMethod::ERROR)
         {
             if(settings.value(Reg::playSound).toBool())
                 fileSendedSound->play();
 
-            else if(settings.value(Reg::linkFrom).toString() != "FROM_HTTP" || Uplimg::Utils::getUploadMethod() != Uplimg::UploadMethod::HTTP || Uplimg::Utils::getUploadMethod() != Uplimg::UploadMethod::UPLIMG_WEB)
+            if(settings.value(Reg::linkFrom).toString() != "FROM_HTTP" || Uplimg::Utils::getUploadMethod() != Uplimg::UploadMethod::HTTP && Uplimg::Utils::getUploadMethod() != Uplimg::UploadMethod::UPLIMG_WEB)
                 lastUrl.setUrl(getUploadedFileURL(fileName));
 
             addUploadedFileInContextMenu();
@@ -309,6 +318,7 @@ void SystemTrayIcon::showWindowConfigurationTriggered()
 
 void SystemTrayIcon::throwErrorAlert(const QString &text)
 {
+    lastActionFinished();
     QMessageBox::critical(0, "Uplimg", text);
 }
 
