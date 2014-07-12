@@ -3,7 +3,6 @@
 SystemTrayIcon::SystemTrayIcon(QObject *qobject) :
     QSystemTrayIcon(qobject)
 {
-
     if(settings.value(Reg::runOnStartup).isNull()) //First time the application is started
         firstStart();
 
@@ -271,7 +270,6 @@ QString SystemTrayIcon::getNewFileName(Uplimg::ImageFormat ending)
         return fileName + ".jpg";
     else
         return fileName;
-
 }
 
 
@@ -349,7 +347,7 @@ void SystemTrayIcon::firstStart()
     settings.setValue(Reg::copyToClipboard, true);
     settings.setValue(Reg::autoOpenToBrowser, false);
     settings.setValue(Reg::localSave, false);
-    settings.setValue(Reg::choosedMethod, "FTP");
+    settings.setValue(Reg::choosedMethod, "UPLIMG_WEB");
     settings.setValue(Reg::takeFullScrenShortcut, "Alt+1");
     settings.setValue(Reg::takeSelectedAreaScreenShortcut, "Alt+2");
     settings.setValue(Reg::uploadFileShortcut, "Alt+3");

@@ -13,8 +13,6 @@ ConfigurationWindows::ConfigurationWindows(SystemTrayIcon * parent, QWidget *qwi
 
     this->setUpUI();
 
-    this->setFixedSize(530, 380);
-
     /* Load Settings */
     runOnStartup->setChecked(settings.value(Reg::runOnStartup, true).toBool());
     showNotifications->setChecked(settings.value(Reg::showNotifications, true).toBool());
@@ -116,6 +114,8 @@ ConfigurationWindows::ConfigurationWindows(SystemTrayIcon * parent, QWidget *qwi
     HTTPConf = new HTTPConfiguration();
 
     this->setLayout(mainLayout);
+
+    this->setFixedSize(530, this->minimumHeight());
 }
 
 void ConfigurationWindows::setUpUI()

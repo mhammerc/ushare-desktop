@@ -11,10 +11,9 @@ SelectAreaBand::SelectAreaBand(ScreenManager *manager, QWidget * parent) :
     if(settings.value(Reg::randomizeArea).toBool())
         {
             std::srand(std::time(0));
-            color.setRed((std::rand()%254)+1);
-            color.setGreen((std::rand()%254)+1);
-            color.setBlue((std::rand()%254)+1);
-
+            color.setRed(std::rand()%255);
+            color.setGreen(std::rand()%255);
+            color.setBlue(std::rand()%255);
         }
     else
         {
