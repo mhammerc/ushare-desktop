@@ -63,12 +63,6 @@ protected:
     QCheckBox * runOnStartup;
 #endif
     QComboBox * lang;
-    QSlider * imageQuality;
-    QLabel * imageQualityShower;
-    QHBoxLayout * localSaveLayout;
-    QCheckBox * localSave;
-    QLineEdit * localSavePath;
-    QPushButton * localSavePathChooser;
     QHBoxLayout * selectingAreaColorLayout;
     QColor selectingAreaColor;
     QLabel * selectingAreaColorShower;
@@ -82,13 +76,6 @@ protected:
     QCheckBox * showNotifications;
     QCheckBox * copyToClipboard;
     QCheckBox * autoOpenToBrowser;
-    QComboBox * imageType;
-    QHBoxLayout * imageQualityLayout;
-
-    QHBoxLayout * validateGeneralLayout;
-    QLabel * version;
-    QPushButton * validateGeneral;
-
 
     /* Online Services */
     QWidget * uploadSection;
@@ -112,8 +99,17 @@ protected:
     QVBoxLayout * HTTPLayout;
     HTTPConfiguration * HTTPConf;
 
-    QHBoxLayout * validateUploadLayout;
-    QPushButton * validateUpload;
+    QFormLayout * pictureLayout;
+    QGroupBox * picture;
+    QComboBox * imageType;
+    QHBoxLayout * imageQualityLayout;
+    QSlider * imageQuality;
+    QLabel * imageQualityShower;
+    QHBoxLayout * localSaveLayout;
+    QCheckBox * localSave;
+    QLineEdit * localSavePath;
+    QPushButton * localSavePathChooser;
+
 
     /* HotKeys */
     QWidget * hotkeysSection;
@@ -128,8 +124,6 @@ protected:
     ShortcutGetter * uploadFileShortcut;
     ShortcutGetter * uploadClipboardShortcut;
     QLabel * warningHotkeysDisabled;
-    QHBoxLayout * validateHotkeysLayout;
-    QPushButton * validateHotkeys;
 
     /* Credits */
     QWidget * creditSection;
@@ -150,8 +144,9 @@ protected:
     QListWidget * allContributorsTwo;
     QLabel * happy4Ever;
 
-    QHBoxLayout * validateCreditLayout;
-    QPushButton * validateCredit;
+    QHBoxLayout * validateLayout;
+    QLabel * version;
+    QPushButton * validate;
 
     //Fonctions
     void setUpUI();

@@ -52,7 +52,7 @@ QString const fileFieldName("uplimgFile");
 namespace Uplimg
 {
 QString const applicationName("Uplimg");
-QString const version("Preversion dédié aux tests 0.9 -> Uplimg web :-D");
+QString const version("0.10 -> Need to be fully stable !");
 
 enum HTTP_ACCESS_FILE_LINK { FROM_RESPONSE /* From HTTP response */, FROM_FIXED_LINK /* Web path */}; //From what link return the user on successfull HTTP upload : from HTTP response or from fixed choosed link
 

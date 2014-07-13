@@ -133,13 +133,13 @@ void SystemTrayIcon::fileSended(QString fileName)
     iconTimer->start();
 
     if(Uplimg::Utils::getUploadMethod() == Uplimg::UploadMethod::UPLIMG_WEB)
-    {
-        if(Uplimg::Utils::isValidURL(receivedMessage.toStdString()))
+        {
+            if(Uplimg::Utils::isValidURL(receivedMessage.toStdString()))
                 lastUrl.setUrl(receivedMessage);
-        else
-            return throwErrorAlert(receivedMessage);
+            else
+                return throwErrorAlert(receivedMessage);
 
-    }
+        }
 
     if(Uplimg::Utils::getUploadMethod() != Uplimg::UploadMethod::LOCAL && Uplimg::Utils::getUploadMethod() != Uplimg::UploadMethod::ERROR)
         {

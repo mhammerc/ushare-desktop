@@ -1,7 +1,9 @@
 #include "shortcutgetter.h"
+#include "configurationwindows.h"
 
-ShortcutGetter::ShortcutGetter(QWidget *parent) : QLineEdit(parent)
+ShortcutGetter::ShortcutGetter(QWidget * widget) : QPushButton(widget)
 {
+    QObject::connect(this, SIGNAL(clicked()), this, SLOT(shortcutClicked()));
 }
 
 void ShortcutGetter::keyPressEvent(QKeyEvent *e)
@@ -48,7 +50,7 @@ void ShortcutGetter::keyPressEvent(QKeyEvent *e)
 
     if (!isEnabled())
         {
-            QLineEdit::keyPressEvent(e);
+            QPushButton::keyPressEvent(e);
             return;
         }
 
@@ -58,5 +60,13 @@ void ShortcutGetter::keyPressEvent(QKeyEvent *e)
         {
             QKeySequence sequence(key | e->modifiers());
             setText(sequence.toString());
+            setStyleSheet("color:black;");
+            emit textChanged(sequence.toString());
         }
+}
+
+void ShortcutGetter::shortcutClicked()
+{
+    setStyleSheet("color:red;");
+    setText(tr("CHANGE_SHORTCUT_NOW"));
 }
