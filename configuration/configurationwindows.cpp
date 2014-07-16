@@ -11,6 +11,9 @@ ConfigurationWindows::ConfigurationWindows(SystemTrayIcon * parent, QWidget *qwi
     this->setWindowIcon(QIcon(":/icon/base.png"));
     this->setWindowTitle(windowTitle);
 
+    updateManager = new QNetworkAccessManager(this);
+    connect(updateManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(verifyUpdateFinished(QNetworkReply*)));
+
     this->setUpUI();
 
     /* Load Settings */
@@ -92,6 +95,9 @@ ConfigurationWindows::ConfigurationWindows(SystemTrayIcon * parent, QWidget *qwi
     QObject::connect(selectingAreaColorOpener, SIGNAL(clicked()), this, SLOT(selectingAreaColorClicked()));
     QObject::connect(selectingAreaColorRandomize, SIGNAL(toggled(bool)), this, SLOT(selectingAreaColorRandomizer(bool)));
 
+    QObject::connect(verifyUpdatePushButton, SIGNAL(clicked()), this, SLOT(verifyUpdate()));
+    QObject::connect(updatePushButton, SIGNAL(clicked()), this, SLOT(downloadUpdate()));
+
     QObject::connect(localMethod, SIGNAL(toggled(bool)), this, SLOT(localMethodSettingsModified(bool)));
     QObject::connect(uplimgWeb, SIGNAL(toggled(bool)), this, SLOT(uplimgWebMethodSettingModified(bool)));
     QObject::connect(FTPMethod, SIGNAL(toggled(bool)), this, SLOT(FTPMethodSettingModified(bool)));
@@ -123,11 +129,12 @@ void ConfigurationWindows::setUpUI()
     this->setUpGeneralSectionUI();
     this->setUpUploadSectionUI();
     this->setUpHotkeysSectionUI();
+    this->setUpUpdateSectionUI();
     this->setUpCreditsSectionUI();
 
 
     validateLayout = new QHBoxLayout;
-    version = new QLabel(Uplimg::version);
+    version = new QLabel(Uplimg::versionText);
     validate = new QPushButton("Ok");
     validateLayout->addWidget(version);
     validateLayout->addStretch();
@@ -302,6 +309,34 @@ void ConfigurationWindows::setUpHotkeysSectionUI()
     hotkeysSection->setLayout(hotkeysLayout);
 
     windowContent->addTab(hotkeysSection, tr("HOTKEYS_SECTION"));
+}
+
+void ConfigurationWindows::setUpUpdateSectionUI()
+{
+    updateSection = new QWidget;
+    updateMainLayout = new QVBoxLayout;
+    updateGroupBox = new QGroupBox(tr("UPDATE_GROUPBOX"));
+    updateLayout = new QHBoxLayout;
+    updateVersionLayout = new QFormLayout;
+    updateVersionLayout->addRow(new QLabel(tr("ACTUAL_VERSION")), new QLabel(Uplimg::version));
+    lastVersion = new QLabel(Uplimg::version);
+    updateVersionLayout->addRow(new QLabel(tr("LATEST_VERSION")), lastVersion);
+    updateButtonLayout = new QVBoxLayout;
+    verifyUpdatePushButton = new QPushButton(tr("VERIFY_NEW_VERSION"));
+    updatePushButton = new QPushButton(tr("UPDATE_NOW"));
+    updatePushButton->setDisabled(true);
+    updateButtonLayout->addWidget(verifyUpdatePushButton);
+    updateButtonLayout->addWidget(updatePushButton);
+
+    updateLayout->addLayout(updateVersionLayout);
+    updateLayout->addLayout(updateButtonLayout);
+    updateGroupBox->setLayout(updateLayout);
+    updateMainLayout->addWidget(updateGroupBox);
+    updateMainLayout->addStretch();
+    updateSection->setLayout(updateMainLayout);
+
+    windowContent->addTab(updateSection, tr("UPDATE_SECTION"));
+
 }
 
 void ConfigurationWindows::setUpCreditsSectionUI()
@@ -566,6 +601,30 @@ void ConfigurationWindows::uploadClipboardShortcutChanged(QString shortcut)
 {
     settings.setValue(Reg::uploadClipboardShortcut, shortcut);
     parent->uploadClipboardShortcutChanged(shortcut);
+}
+
+void ConfigurationWindows::verifyUpdate()
+{
+    updateManager->get(QNetworkRequest(QUrl(Uplimg::updateVersionLink)));
+}
+
+void ConfigurationWindows::verifyUpdateFinished(QNetworkReply * reply)
+{
+    QByteArray array = reply->readLine();
+    array = array.remove(array.length()-1, 1);
+    lastVersion->setText(array);
+
+    array = reply->readLine();
+    array = array.remove(array.length()-1, 1);
+    updateLink.setUrl(array);
+
+    if(lastVersion->text() != Uplimg::version)
+        updatePushButton->setEnabled(true);
+}
+
+void ConfigurationWindows::downloadUpdate()
+{
+    QDesktopServices::openUrl(updateLink);
 }
 
 void ConfigurationWindows::currentTabChanged(int index)

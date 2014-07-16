@@ -44,15 +44,17 @@ QString const uploadFileShortcut("configuration/shortcut/uploadFile");
 
 namespace UplimgWeb
 {
-int const port(5656);
-QString const host("http://uplmg.com/upload.php");
+int const port(9375);
+QString const host("http://insert.uplmg.com/upload.php");
 QString const fileFieldName("uplimgFile");
 }
 
 namespace Uplimg
 {
 QString const applicationName("Uplimg");
-QString const version("0.10 -> Need to be fully stable !");
+QString const versionText("0.11 -> Yeah :-D");
+QString const version("0.11a");
+QString const updateVersionLink("http://update.uplmg.com/latest.html");
 
 enum HTTP_ACCESS_FILE_LINK { FROM_RESPONSE /* From HTTP response */, FROM_FIXED_LINK /* Web path */}; //From what link return the user on successfull HTTP upload : from HTTP response or from fixed choosed link
 

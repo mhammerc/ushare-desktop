@@ -25,6 +25,8 @@
 #include <QLocale>
 #include <QColorDialog>
 #include <QTableView>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
 
 #include <iostream>
 
@@ -110,7 +112,6 @@ protected:
     QLineEdit * localSavePath;
     QPushButton * localSavePathChooser;
 
-
     /* HotKeys */
     QWidget * hotkeysSection;
     QVBoxLayout * hotkeysLayout;
@@ -124,6 +125,20 @@ protected:
     ShortcutGetter * uploadFileShortcut;
     ShortcutGetter * uploadClipboardShortcut;
     QLabel * warningHotkeysDisabled;
+
+    /* Update */
+    QWidget * updateSection;
+    QVBoxLayout * updateMainLayout;
+    QGroupBox * updateGroupBox;
+    QHBoxLayout * updateLayout;
+    QFormLayout * updateVersionLayout;
+    QLabel * lastVersion;
+    QUrl updateLink;
+    QVBoxLayout * updateButtonLayout;
+    QPushButton * verifyUpdatePushButton;
+    QPushButton * updatePushButton;
+
+    QNetworkAccessManager * updateManager;
 
     /* Credits */
     QWidget * creditSection;
@@ -153,6 +168,7 @@ protected:
     void setUpGeneralSectionUI();
     void setUpUploadSectionUI();
     void setUpHotkeysSectionUI();
+    void setUpUpdateSectionUI();
     void setUpCreditsSectionUI();
 
     virtual void closeEvent(QCloseEvent *event);
@@ -186,6 +202,10 @@ public slots :
     void takeSelectedAreaScreenShortcutChanged(QString);
     void uploadFileShortcutChanged(QString);
     void uploadClipboardShortcutChanged(QString);
+
+    void verifyUpdate();
+    void verifyUpdateFinished(QNetworkReply*);
+    void downloadUpdate();
 
 
     void configureFTP();

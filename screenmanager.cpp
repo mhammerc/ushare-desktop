@@ -157,6 +157,7 @@ void ScreenManager::areaPictureTaken(QRect area)
 
 void ScreenManager::areaPictureCanceled()
 {
+    parent->lastActionFinished();
     fullScreenPicture->deleteLater();
     parent->lastActionFinished();
 }
