@@ -146,7 +146,7 @@ void SystemTrayIcon::fileSended(QString fileName)
             if(settings.value(Reg::playSound).toBool())
                 fileSendedSound->play();
 
-            if(settings.value(Reg::linkFrom).toString() != "FROM_HTTP" || Uplimg::Utils::getUploadMethod() != Uplimg::UploadMethod::HTTP && Uplimg::Utils::getUploadMethod() != Uplimg::UploadMethod::UPLIMG_WEB)
+            if((settings.value(Reg::linkFrom).toString() != "FROM_HTTP" || Uplimg::Utils::getUploadMethod() != Uplimg::UploadMethod::HTTP) && Uplimg::Utils::getUploadMethod() != Uplimg::UploadMethod::UPLIMG_WEB)
                 lastUrl.setUrl(getUploadedFileURL(fileName));
 
             addUploadedFileInContextMenu();
