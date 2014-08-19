@@ -1,7 +1,7 @@
 #include "shortcutgetter.h"
 #include "configurationwindows.h"
 
-ShortcutGetter::ShortcutGetter(QWidget * widget) : QPushButton(widget)
+ShortcutGetter::ShortcutGetter(QWidget * widget) : ButtonBlue(widget)
 {
     QObject::connect(this, SIGNAL(clicked()), this, SLOT(shortcutClicked()));
 }
@@ -50,7 +50,7 @@ void ShortcutGetter::keyPressEvent(QKeyEvent *e)
 
     if (!isEnabled())
         {
-            QPushButton::keyPressEvent(e);
+            ButtonBlue::keyPressEvent(e);
             return;
         }
 

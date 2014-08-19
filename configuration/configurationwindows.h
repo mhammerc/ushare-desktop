@@ -27,6 +27,7 @@
 #include <QTableView>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
+#include <QPainter>
 
 #include <iostream>
 
@@ -43,6 +44,7 @@ class ConfigurationWindows : public QWidget
 public:
     explicit ConfigurationWindows(SystemTrayIcon * parent, QWidget *qwidget = 0);
     ~ConfigurationWindows();
+    void paintEvent(QPaintEvent *);
 
 protected:
     virtual void hideEvent(QHideEvent *);
@@ -58,26 +60,34 @@ protected:
     QWidget * generalSection;
     QVBoxLayout * generalLayout;
 
+    //Top bar
+    TopBarWidget * topBarWidget;
+    QHBoxLayout * topBarLayout;
+    UplimgIcon * topBarIcon;
+    UplimgTitle * topBarTitle;
+    MinimizeButton * topBarMinimizeButton;
+    CloseButton * topBarCloseButton;
+
     //General settings
     QGroupBox * generalSettings;
     QFormLayout * generalFormLayout;
 #ifdef _WIN32
-    QCheckBox * runOnStartup;
+    CheckBoxGreen * runOnStartup;
 #endif
     QComboBox * lang;
     QHBoxLayout * selectingAreaColorLayout;
     QColor selectingAreaColor;
-    QLabel * selectingAreaColorShower;
-    QPushButton * selectingAreaColorOpener;
-    QCheckBox * selectingAreaColorRandomize;
+    LabelWithoutBackground * selectingAreaColorShower;
+    ButtonBlue * selectingAreaColorOpener;
+    CheckBoxGreen * selectingAreaColorRandomize;
 
     //On successfull upload settings
     QGroupBox * onSuccessSettings;
     QFormLayout * onSuccessFormLayout;
-    QCheckBox * playSound;
-    QCheckBox * showNotifications;
-    QCheckBox * copyToClipboard;
-    QCheckBox * autoOpenToBrowser;
+    CheckBoxGreen * playSound;
+    CheckBoxGreen * showNotifications;
+    CheckBoxGreen * copyToClipboard;
+    CheckBoxGreen * autoOpenToBrowser;
 
     /* Online Services */
     QWidget * uploadSection;
@@ -90,13 +100,13 @@ protected:
     QRadioButton * localMethod;
 
     QRadioButton * FTPMethod;
-    QPushButton * configureFTPButton;
+    ButtonBlue * configureFTPButton;
     QHBoxLayout * FTPLayout;
     FTPConfiguration * FTPConf;
 
     QRadioButton * HTTPMethod;
-    QLabel * HTTPWarning;
-    QPushButton * configureHTTPButton;
+    LabelRed * HTTPWarning;
+    ButtonBlue * configureHTTPButton;
     QHBoxLayout * HTTPLayoutForRadioAndPushButton;
     QVBoxLayout * HTTPLayout;
     HTTPConfiguration * HTTPConf;
@@ -106,11 +116,11 @@ protected:
     QComboBox * imageType;
     QHBoxLayout * imageQualityLayout;
     QSlider * imageQuality;
-    QLabel * imageQualityShower;
+    LabelOrange * imageQualityShower;
     QHBoxLayout * localSaveLayout;
-    QCheckBox * localSave;
+    CheckBoxGreen * localSave;
     QLineEdit * localSavePath;
-    QPushButton * localSavePathChooser;
+    ButtonBlue * localSavePathChooser;
 
     /* HotKeys */
     QWidget * hotkeysSection;
@@ -124,7 +134,7 @@ protected:
     ShortcutGetter * takeSelectedScreenShortcut;
     ShortcutGetter * uploadFileShortcut;
     ShortcutGetter * uploadClipboardShortcut;
-    QLabel * warningHotkeysDisabled;
+    LabelOrange * warningHotkeysDisabled;
 
     /* Update */
     QWidget * updateSection;
@@ -135,8 +145,8 @@ protected:
     QLabel * lastVersion;
     QUrl updateLink;
     QVBoxLayout * updateButtonLayout;
-    QPushButton * verifyUpdatePushButton;
-    QPushButton * updatePushButton;
+    ButtonBlue * verifyUpdatePushButton;
+    ButtonBlue * updatePushButton;
 
     QNetworkAccessManager * updateManager;
 
@@ -147,24 +157,25 @@ protected:
     QLabel * openSourceText;
     //Made with
     QHBoxLayout * madeWithLayout;
-    QPushButton * madeWithSFML;
-    QPushButton * madeWithQt;
-    QPushButton * madeWithQxt;
+    ButtonBlue * madeWithSFML;
+    ButtonBlue * madeWithQt;
+    ButtonBlue * madeWithQxt;
     QTextEdit * SFMLLicence;
     QTextEdit * LGPLLicence;
     //Contributors
-    QLabel * leadDevelopper;
+    LabelOrange * leadDevelopper;
     QHBoxLayout * allContributorsLayout;
     QListWidget * allContributorsOne;
     QListWidget * allContributorsTwo;
-    QLabel * happy4Ever;
+    LabelBlue * happy4Ever;
 
     QHBoxLayout * validateLayout;
-    QLabel * version;
-    QPushButton * validate;
+    LabelBlue * version;
+    ButtonBlue * validate;
 
     //Fonctions
     void setUpUI();
+    void setUpTopBarUI();
     void setUpGeneralSectionUI();
     void setUpUploadSectionUI();
     void setUpHotkeysSectionUI();
@@ -211,7 +222,7 @@ public slots :
     void configureFTP();
     void configureHTTP();
 
-
+    void refreshCSS();
 };
 
 #endif // CONFIGURATIONWINDOWS_H

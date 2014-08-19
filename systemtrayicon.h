@@ -24,13 +24,19 @@
 #include <QStandardPaths>
 #include <QTimer>
 #include <QDir>
-
-#include <QxtCore/Qxt>
-#include <QxtWidgets/QxtGlobalShortcut>
+#include "shared.h"
 
 #include "configuration/configurationwindows.h"
+#include "filesendedsound.h"
 #include "screenmanager.h"
-#include "shared.h"
+
+#include <qxtglobal.h>
+#include <QxtWidgets/QxtGlobalShortcut>
+
+#ifdef _WIN32
+#include <shortcut/shortcutmanager_win.h>
+#endif
+
 
 class SystemTrayIcon : public QSystemTrayIcon
 {
@@ -46,29 +52,26 @@ protected:
     QSettings settings;
 
     ConfigurationWindows * configurationWindow;
-    ScreenManager * screenManager;
+    FileManager * screenManager;
 
     QMenu * systemTrayMenu;
     QAction * takeScreen;
     QAction * takeSelectedScreen;
+    QAction * sendPaste;
     QAction * uploadFile;
     QAction * uploadClipboard;
     QAction * showConfiguration;
     QAction * quit;
 
     void setUpContextMenu();
-    QString getNewFileName(Uplimg::ImageFormat ending);
-    QString getNewFileName(QString ending);
-    QString getFileTempPath(const QString &screenName);
-    QString getUploadedFileURL(const QString &fileName);
     void firstStart();
 
-    QSound * fileSendedSound;
+    FileSendedSound fileSendedSound;
 
-    QxtGlobalShortcut * takeFullScreenShortcut;
-    QxtGlobalShortcut * takeSelectedAreaScreenShortcut;
-    QxtGlobalShortcut * uploadFileShortcut;
-    QxtGlobalShortcut * uploadClipboardShortcut;
+    ShortcutManager * takeFullScreenShortcut;
+    ShortcutManager * takeSelectedAreaScreenShortcut;
+    ShortcutManager * uploadFileShortcut;
+    ShortcutManager * uploadClipboardShortcut;
 
     QKeySequence takeFullScreenKeySequence;
     QKeySequence takeSelectedAreaKeySequence;
@@ -96,6 +99,7 @@ public slots :
     void showWindowConfigurationTriggered();
     void takeFullScrenTriggered();
     void takeSelectedAreaScreenTriggered();
+    void sendPasteTriggered();
     void uploadSelectedFileTriggered();
     void uploadClipboardTriggered();
     void fileSended(QString fileName);
@@ -111,15 +115,15 @@ public slots :
 
     void enableEasterEgg();
 
-    void openLastUrl();
-    void copyLastUrlToClipboard();
-
-    void activatedTrigerred(QSystemTrayIcon::ActivationReason);
+    void iconActivated(QSystemTrayIcon::ActivationReason);
 
     void takeFullScreenShortcutChanged(QString);
     void takeSelectedAreaScreenShortcutChanged(QString);
     void uploadFileShortcutChanged(QString);
     void uploadClipboardShortcutChanged(QString);
+
+    void openLastUrl();
+    void copyLastUrlToClipboard();
 };
 
 #endif // SYSTEMTRAYICON_H

@@ -2,7 +2,7 @@
 #include "screenmanager.h"
 
 
-SelectAreaBand::SelectAreaBand(ScreenManager *manager, QWidget * parent) :
+SelectAreaBand::SelectAreaBand(FileManager *manager, QWidget * parent) :
     QLabel(parent)
 {
     QSettings settings;

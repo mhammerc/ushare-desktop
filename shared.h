@@ -1,10 +1,21 @@
-#pragma once
 #ifndef SHARED_H
 #define SHARED_H
 
 #include <QApplication>
+#include <QObject>
 #include <QString>
 #include <QSettings>
+#include <QStandardPaths>
+#include <QTime>
+#include <QUrl>
+#include <QDesktopServices>
+#include <QClipboard>
+
+#include "widgets/label.h"
+#include "widgets/button.h"
+#include "widgets/topbar.h"
+#include "widgets/checkbox.h"
+#include "widgets/radiobutton.h"
 
 /* Contain all registry access */
 namespace Reg
@@ -42,6 +53,12 @@ QString const uploadClipboardShortcut("configuration/shortcut/uploadClipboard");
 QString const uploadFileShortcut("configuration/shortcut/uploadFile");
 }
 
+class var
+{
+public:
+    static QUrl lastUrl;
+};
+
 namespace UplimgWeb
 {
 int const port(9375);
@@ -69,13 +86,16 @@ enum UploadMethod
     HTTP,
     UPLIMG_WEB,
     LOCAL,
-    ERROR
+    U_ERROR
 };
 
-class Utils
+class Utils : public QObject
 {
+    Q_OBJECT
 public:
     Utils();
+
+public slots:
 
     static Uplimg::ImageFormat getImageFormat()
     {
@@ -102,7 +122,7 @@ public:
         else if (settings.value(Reg::choosedMethod).toString().toStdString() == "LOCAL")
             return Uplimg::UploadMethod::LOCAL;
         else
-            return Uplimg::UploadMethod::ERROR;
+            return Uplimg::UploadMethod::U_ERROR;
     }
 
     static bool isValidURL(const std::string url)
@@ -120,6 +140,72 @@ public:
     {
         QSettings settings;
         return settings.value(Reg::imageQuality).toInt();
+    }
+
+    static QString getNewFileName(Uplimg::ImageFormat ending)
+    {
+        QTime time = QTime::currentTime();
+        QDate date = QDate::currentDate();
+
+        QString fileName = QString::number(date.dayOfYear())
+                           + QString::number(time.hour())
+                           + QString::number(time.minute())
+                           + QString::number(time.second());
+
+        if(ending == Uplimg::ImageFormat::PNG)
+            return fileName + ".png";
+        else if(ending == Uplimg::ImageFormat::JPEG)
+            return fileName + ".jpg";
+        else
+            return fileName;
+    }
+
+
+    static QString getNewFileName(QString ending)
+    {
+        QTime time = QTime::currentTime();
+        QDate date = QDate::currentDate();
+
+        return QString::number(date.dayOfYear())
+               + QString::number(time.hour())
+               + QString::number(time.minute())
+               + QString::number(time.second())
+               + ending;
+    }
+
+    static QString getFileTempPath(const QString &screenName)
+    {
+        QSettings settings;
+
+        if(settings.value(Reg::localSave).toBool() || settings.value(Reg::choosedMethod).toString() == "LOCAL")
+            return settings.value(Reg::localSavePath).toString() + "/" + screenName;
+        else
+            return QStandardPaths::writableLocation(QStandardPaths::TempLocation)
+                   + "/"
+                   + screenName;
+    }
+
+    static QString getUploadedFileURL(const QString &fileName)
+    {
+        QSettings settings;
+
+        if(Uplimg::Utils::getUploadMethod()  == Uplimg::UploadMethod::FTP)
+            return settings.value(Reg::FTPWebPath, "http://").toString() + fileName;
+        else if(Uplimg::Utils::getUploadMethod()  == Uplimg::UploadMethod::HTTP)
+            return settings.value(Reg::HTTPWebPath, "http://").toString() + fileName;
+        else
+            return "error";
+    }
+
+    static void openLastUrl()
+    {
+        if(!var::lastUrl.toString().isNull())
+            QDesktopServices::openUrl(var::lastUrl);
+    }
+
+    static void copyLastUrlToClipboard()
+    {
+        QApplication::clipboard()->setText(var::lastUrl.toString());
     }
 };
 }

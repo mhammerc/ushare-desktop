@@ -3,9 +3,10 @@
 
 
 ConfigurationWindows::ConfigurationWindows(SystemTrayIcon * parent, QWidget *qwidget) :
-    QWidget(qwidget), windowTitle(tr("UPLIMG_CONFIGURATION"))
+    QWidget(qwidget, Qt::WindowFlags(Qt::FramelessWindowHint | Qt::WindowMinMaxButtonsHint | Qt::WindowSystemMenuHint)), windowTitle(tr("UPLIMG_CONFIGURATION"))
 {
     this->parent = parent;
+    setObjectName("windowWithoutFrameBlue");
     QObject::connect(this, SIGNAL(easterEgg()), parent, SLOT(enableEasterEgg()));
 
     this->setWindowIcon(QIcon(":/icon/base.png"));
@@ -77,6 +78,9 @@ ConfigurationWindows::ConfigurationWindows(SystemTrayIcon * parent, QWidget *qwi
     pal.setColor(QPalette::Window, selectingAreaColor);
     selectingAreaColorShower->setPalette(pal);
 
+    QObject::connect(topBarMinimizeButton, SIGNAL(clicked()), this, SLOT(showMinimized()));
+    QObject::connect(topBarCloseButton, SIGNAL(clicked()), this, SLOT(close()));
+
     QObject::connect(windowContent, SIGNAL(currentChanged(int)), this, SLOT(currentTabChanged(int)));
 #ifdef _WIN32
     QObject::connect(runOnStartup, SIGNAL(toggled(bool)), this, SLOT(runOnStartupSettingModified(bool)));
@@ -111,7 +115,8 @@ ConfigurationWindows::ConfigurationWindows(SystemTrayIcon * parent, QWidget *qwi
     QObject::connect(uploadFileShortcut, SIGNAL(textChanged(QString)), this, SLOT(uploadFileShortcutChanged(QString)));
     QObject::connect(uploadClipboardShortcut, SIGNAL(textChanged(QString)), this, SLOT(uploadClipboardShortcutChanged(QString)));
 
-    QObject::connect(validate, SIGNAL(clicked()), this, SLOT(hide()));
+    //QObject::connect(validate, SIGNAL(clicked()), this, SLOT(hide()));
+    QObject::connect(validate, SIGNAL(clicked()), this, SLOT(refreshCSS()));
 
     FTPConf = new FTPConfiguration();
     HTTPConf = new HTTPConfiguration();
@@ -126,6 +131,7 @@ void ConfigurationWindows::setUpUI()
     windowContent = new QTabWidget();
     mainLayout = new QVBoxLayout();
 
+    this->setUpTopBarUI();
     this->setUpGeneralSectionUI();
     this->setUpUploadSectionUI();
     this->setUpHotkeysSectionUI();
@@ -134,14 +140,33 @@ void ConfigurationWindows::setUpUI()
 
 
     validateLayout = new QHBoxLayout;
-    version = new QLabel(Uplimg::versionText);
-    validate = new QPushButton("Ok");
+    version = new LabelBlue(Uplimg::versionText);
+    validate = new ButtonBlue("Ok");
     validateLayout->addWidget(version);
     validateLayout->addStretch();
     validateLayout->addWidget(validate);
 
+    mainLayout->addWidget(topBarWidget);
     mainLayout->addWidget(windowContent);
     mainLayout->addLayout(validateLayout);
+}
+
+void ConfigurationWindows::setUpTopBarUI()
+{
+    topBarWidget = new TopBarWidget(this);
+    topBarLayout = new QHBoxLayout;
+    topBarIcon = new UplimgIcon;
+    topBarTitle = new UplimgTitle(Uplimg::applicationName);
+    topBarMinimizeButton = new MinimizeButton;
+    topBarCloseButton = new CloseButton;
+
+    //--
+    topBarLayout->addWidget(topBarIcon);
+    topBarLayout->addWidget(topBarTitle);
+    topBarLayout->addStretch();
+    topBarLayout->addWidget(topBarMinimizeButton);
+    topBarLayout->addWidget(topBarCloseButton);
+    topBarWidget->setLayout(topBarLayout);
 }
 
 void ConfigurationWindows::setUpGeneralSectionUI()
@@ -152,8 +177,9 @@ void ConfigurationWindows::setUpGeneralSectionUI()
     //General settings
     generalSettings = new QGroupBox(tr("GENERAL_SETTINGS"));
     generalFormLayout = new QFormLayout;
+    generalFormLayout->setFormAlignment(Qt::AlignRight);
 #ifdef _WIN32
-    runOnStartup = new QCheckBox;
+    runOnStartup = new CheckBoxGreen;
     generalFormLayout->addRow(tr("RUN_ON_STARTUP"), runOnStartup);
 #endif
 
@@ -163,12 +189,12 @@ void ConfigurationWindows::setUpGeneralSectionUI()
     generalFormLayout->addRow(tr("APPLICATION_LANG", "Application's lang :"), lang);
 
     selectingAreaColorLayout = new QHBoxLayout;
-    selectingAreaColorShower = new QLabel;
+    selectingAreaColorShower = new LabelWithoutBackground;
     selectingAreaColorShower->setAutoFillBackground(true);
     selectingAreaColorShower->setFixedWidth(50);
-    selectingAreaColorOpener = new QPushButton("..");
+    selectingAreaColorOpener = new ButtonBlue("..");
     selectingAreaColorOpener->setFixedWidth(30);
-    selectingAreaColorRandomize = new QCheckBox(tr("RANDOMIZE_COLOR"));
+    selectingAreaColorRandomize = new CheckBoxGreen(tr("RANDOMIZE_COLOR"));
     selectingAreaColorLayout->addWidget(selectingAreaColorShower);
     selectingAreaColorLayout->addWidget(selectingAreaColorOpener);
     selectingAreaColorLayout->addWidget(selectingAreaColorRandomize);
@@ -181,16 +207,16 @@ void ConfigurationWindows::setUpGeneralSectionUI()
     onSuccessSettings = new QGroupBox(tr("ON_SUCCESS"));
     onSuccessFormLayout = new QFormLayout;
 
-    playSound = new QCheckBox;
+    playSound = new CheckBoxGreen;
     onSuccessFormLayout->addRow(tr("PLAY_SOUND"), playSound);
 
-    showNotifications = new QCheckBox;
+    showNotifications = new CheckBoxGreen;
     onSuccessFormLayout->addRow(tr("SHOW_NOTIFICATION"), showNotifications);
 
-    copyToClipboard = new QCheckBox;
+    copyToClipboard = new CheckBoxGreen;
     onSuccessFormLayout->addRow(tr("COPY_FILE_LINK_CLIPBOARD"), copyToClipboard);
 
-    autoOpenToBrowser = new QCheckBox;
+    autoOpenToBrowser = new CheckBoxGreen;
     onSuccessFormLayout->addRow(tr("AUTO_OPEN_FILE_IN_BROWSER"), autoOpenToBrowser);
 
     onSuccessSettings->setLayout(onSuccessFormLayout);
@@ -208,22 +234,22 @@ void ConfigurationWindows::setUpUploadSectionUI()
     uploadLayout = new QVBoxLayout;
     onlineServicesLayout = new QVBoxLayout;
 
-    uplimgWeb = new QRadioButton(tr("USE_UPLOADMETHOD_UPLIMGWEB"));
-    localMethod = new QRadioButton(tr("USE_UPLOADMETHOD_LOCAL"));
+    uplimgWeb = new RadioButtonGreen(tr("USE_UPLOADMETHOD_UPLIMGWEB"));
+    localMethod = new RadioButtonGreen(tr("USE_UPLOADMETHOD_LOCAL"));
 
     FTPLayout = new QHBoxLayout;
-    FTPMethod = new QRadioButton(tr("USE_UPLOADMETHOD_FTP"));
-    configureFTPButton = new QPushButton(tr("CONFIGURE_FTP"));
+    FTPMethod = new RadioButtonGreen(tr("USE_UPLOADMETHOD_FTP"));
+    configureFTPButton = new ButtonBlue(tr("CONFIGURE_FTP"));
     FTPLayout->addWidget(FTPMethod);
     FTPLayout->addWidget(configureFTPButton);
 
     HTTPLayout = new QVBoxLayout;
     HTTPLayoutForRadioAndPushButton = new QHBoxLayout;
-    HTTPMethod = new QRadioButton(tr("USE_UPLOADMETHOD_HTTP"));
-    configureHTTPButton = new QPushButton(tr("CONFIGURE_HTTP"));
+    HTTPMethod = new RadioButtonGreen(tr("USE_UPLOADMETHOD_HTTP"));
+    configureHTTPButton = new ButtonBlue(tr("CONFIGURE_HTTP"));
     HTTPLayoutForRadioAndPushButton->addWidget(HTTPMethod);
     HTTPLayoutForRadioAndPushButton->addWidget(configureHTTPButton);
-    HTTPWarning = new QLabel(tr("ONLY_ADVANCED_USERS", "<font size='2'><span style='color:blue;'>(!)</span> Only for advanced users</font>"));
+    HTTPWarning = new LabelRed(tr("ONLY_ADVANCED_USERS", "<font size='2'><span style='color:blue;'>(!)</span> Only for advanced users</font>"));
     HTTPLayout->addLayout(HTTPLayoutForRadioAndPushButton);
     HTTPLayout->addWidget(HTTPWarning);
 
@@ -246,15 +272,15 @@ void ConfigurationWindows::setUpUploadSectionUI()
     imageQuality = new QSlider(Qt::Horizontal);
     imageQuality->setMinimum(0);
     imageQuality->setMaximum(100);
-    imageQualityShower = new QLabel("0");
+    imageQualityShower = new LabelOrange("0");
     imageQualityLayout->addWidget(imageQuality);
     imageQualityLayout->addWidget(imageQualityShower);
     pictureLayout->addRow(tr("IMAGE_QUALITY"), imageQualityLayout);
 
     localSaveLayout = new QHBoxLayout;
-    localSave = new QCheckBox;
+    localSave = new CheckBoxGreen;
     localSavePath = new QLineEdit;
-    localSavePathChooser = new QPushButton("..");
+    localSavePathChooser = new ButtonBlue("..");
     localSavePathChooser->setFixedWidth(30);
     localSaveLayout->addWidget(localSave);
     localSaveLayout->addWidget(localSavePath);
@@ -283,7 +309,7 @@ void ConfigurationWindows::setUpHotkeysSectionUI()
     hotkeysFormLayout = new QFormLayout;
 
     hotkeysWelcomeText = new QLabel(tr("HOTKEYS_WELCOME_TEXT"));
-    warningHotkeysDisabled = new QLabel(tr("WARNING_HOTKEYS_DISABLED"));
+    warningHotkeysDisabled = new LabelOrange(tr("WARNING_HOTKEYS_DISABLED"));
 
     takeFullScreenShortcut = new ShortcutGetter;
     takeSelectedScreenShortcut = new ShortcutGetter;
@@ -322,8 +348,8 @@ void ConfigurationWindows::setUpUpdateSectionUI()
     lastVersion = new QLabel(Uplimg::version);
     updateVersionLayout->addRow(new QLabel(tr("LATEST_VERSION")), lastVersion);
     updateButtonLayout = new QVBoxLayout;
-    verifyUpdatePushButton = new QPushButton(tr("VERIFY_NEW_VERSION"));
-    updatePushButton = new QPushButton(tr("UPDATE_NOW"));
+    verifyUpdatePushButton = new ButtonBlue(tr("VERIFY_NEW_VERSION"));
+    updatePushButton = new ButtonBlue(tr("UPDATE_NOW"));
     updatePushButton->setDisabled(true);
     updateButtonLayout->addWidget(verifyUpdatePushButton);
     updateButtonLayout->addWidget(updatePushButton);
@@ -365,9 +391,9 @@ void ConfigurationWindows::setUpCreditsSectionUI()
     LGPLLicence->setFixedSize(400,450);
 
     madeWithLayout = new QHBoxLayout;
-    madeWithSFML = new QPushButton(tr("MADE_WITH_SFML", "Made with the lightness of SFML"));
-    madeWithQt = new QPushButton(tr("MADE_WITH_QT", "Made with the flexibility of Qt"));
-    madeWithQxt = new QPushButton(tr("MADE_WITH_QXT", "Made with the powerfull of Qxt"));
+    madeWithSFML = new ButtonBlue(tr("MADE_WITH_SFML", "Made with the lightness of SFML"));
+    madeWithQt = new ButtonBlue(tr("MADE_WITH_QT", "Made with the flexibility of Qt"));
+    madeWithQxt = new ButtonBlue(tr("MADE_WITH_QXT", "Made with the powerfull of Qxt"));
     madeWithLayout->addWidget(madeWithSFML);
     madeWithLayout->addWidget(madeWithQt);
     madeWithLayout->addWidget(madeWithQxt);
@@ -378,7 +404,7 @@ void ConfigurationWindows::setUpCreditsSectionUI()
     QObject::connect(madeWithQxt, SIGNAL(clicked()), LGPLLicence, SLOT(show()));
 
     //Contributors
-    leadDevelopper = new QLabel(tr("MAIN_DEVELOPPER", "Main developper and project manager : <span style=\"color:red;\">Martin Hammerchmidt alias Imote</span>"));
+    leadDevelopper = new LabelOrange(tr("MAIN_DEVELOPPER", "Main developper and project manager : <span style=\"color:red;\">Martin Hammerchmidt alias Imote</span>"));
     allContributorsLayout = new QHBoxLayout;
     allContributorsOne = new QListWidget;
     allContributorsTwo = new QListWidget;
@@ -390,7 +416,7 @@ void ConfigurationWindows::setUpCreditsSectionUI()
     new QListWidgetItem("Krayon973", allContributorsTwo);
     new QListWidgetItem("Eldraeildor", allContributorsOne);
     new QListWidgetItem("Mrs025", allContributorsTwo);
-    happy4Ever = new QLabel(tr("HAPPY4EVER", "And, don't forget to be Happy 4 Ever"));
+    happy4Ever = new LabelBlue(tr("HAPPY4EVER", "And, don't forget to be Happy 4 Ever"));
 
     creditLayout->addWidget(openSourceText);
     creditLayout->addLayout(madeWithLayout);
@@ -411,6 +437,14 @@ void ConfigurationWindows::configureFTP()
 void ConfigurationWindows::configureHTTP()
 {
     HTTPConf->show();
+}
+
+void ConfigurationWindows::refreshCSS()
+{
+    QFile css("styleSheet.css");
+    css.open(QIODevice::ReadOnly);
+    QString sheet(css.readAll());
+    qApp->setStyleSheet(sheet);
 }
 
 void ConfigurationWindows::FTPMethodSettingModified(bool checked)
@@ -638,4 +672,12 @@ void ConfigurationWindows::currentTabChanged(int index)
 void ConfigurationWindows::resetTab()
 {
     windowContent->setCurrentIndex(0);
+}
+
+void ConfigurationWindows::paintEvent(QPaintEvent *)
+{
+    QStyleOption opt;
+    opt.init (this);
+    QPainter p (this);
+    style ()->drawPrimitive (QStyle::PE_Widget, &opt, &p, this);
 }

@@ -1,0 +1,13 @@
+QPushButton{
+background-color : #3498DB;
+color : #FFFFFF;
+border-radius: 15px;
+font-family : Arial;
+border-width: 5px;
+border-style: solid;
+border-color:3498DB;
+margin-top : 5px;
+margin-bottom : 5px;
+margin-right : 15px;
+margin-left : 15px;
+}

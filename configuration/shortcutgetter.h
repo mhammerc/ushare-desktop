@@ -5,10 +5,11 @@
 #include <QPushButton>
 #include <QKeyEvent>
 #include <iostream>
+#include "shared.h"
 
 class ConfigurationWindows;
 
-class ShortcutGetter : public QPushButton
+class ShortcutGetter : public ButtonBlue
 {
     Q_OBJECT
 public:

@@ -1,7 +1,7 @@
 #include "systemtrayicon.h"
 
 SystemTrayIcon::SystemTrayIcon(QObject *qobject) :
-    QSystemTrayIcon(qobject)
+    QSystemTrayIcon(qobject), fileSendedSound(this)
 {
     if(settings.value(Reg::runOnStartup).isNull()) //First time the application is started
         firstStart();
@@ -19,30 +19,30 @@ SystemTrayIcon::SystemTrayIcon(QObject *qobject) :
     iconTimer->setInterval(3000);
     QObject::connect(iconTimer, SIGNAL(timeout()), this, SLOT(setWaitingIcon()));
 
-    screenManager = new ScreenManager(this);
-    fileSendedSound = new QSound(":/fileSended.wav", this);
+    screenManager = new FileManager(this);
 
     takeFullScreenKeySequence = QKeySequence(settings.value(Reg::takeFullScrenShortcut).toString());
     takeSelectedAreaKeySequence = QKeySequence(settings.value(Reg::takeSelectedAreaScreenShortcut).toString());
     uploadFileKeySequence = QKeySequence(settings.value(Reg::uploadFileShortcut).toString());
     uploadClipboardKeySequence = QKeySequence(settings.value(Reg::uploadClipboardShortcut).toString());
 
-    takeFullScreenShortcut = new QxtGlobalShortcut(takeFullScreenKeySequence, this);
-    takeSelectedAreaScreenShortcut = new QxtGlobalShortcut(takeSelectedAreaKeySequence, this);
-    uploadFileShortcut = new QxtGlobalShortcut(uploadFileKeySequence, this);
-    uploadClipboardShortcut = new QxtGlobalShortcut(uploadClipboardKeySequence, this);
+    takeFullScreenShortcut = new ShortcutManager(takeFullScreenKeySequence, this);
+    takeSelectedAreaScreenShortcut = new ShortcutManager(takeSelectedAreaKeySequence, this);
+    uploadFileShortcut = new ShortcutManager(uploadFileKeySequence, this);
+    uploadClipboardShortcut = new ShortcutManager(uploadClipboardKeySequence, this);
 
     setUpContextMenu();
 
     QObject::connect(takeScreen, SIGNAL(triggered()), this, SLOT(takeFullScrenTriggered()));
     QObject::connect(takeSelectedScreen, SIGNAL(triggered()), this, SLOT(takeSelectedAreaScreenTriggered()));
+    QObject::connect(sendPaste, SIGNAL(triggered()), this, SLOT(sendPasteTriggered()));
     QObject::connect(uploadFile, SIGNAL(triggered()), this, SLOT(uploadSelectedFileTriggered()));
     QObject::connect(uploadClipboard, SIGNAL(triggered()), this, SLOT(uploadClipboardTriggered()));
     QObject::connect(showConfiguration, SIGNAL(triggered()), this, SLOT(showWindowConfigurationTriggered()));
     QObject::connect(quit, SIGNAL(triggered()), qApp, SLOT(quit()));
 
     QObject::connect(this, SIGNAL(messageClicked()), this, SLOT(openLastUrl()));
-    QObject::connect(this, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(activatedTrigerred(QSystemTrayIcon::ActivationReason)));
+    QObject::connect(this, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(iconActivated(QSystemTrayIcon::ActivationReason)));
 
     QObject::connect(takeFullScreenShortcut, SIGNAL(activated()), this, SLOT(takeFullScrenTriggered()));
     QObject::connect(takeSelectedAreaScreenShortcut, SIGNAL(activated()), this, SLOT(takeSelectedAreaScreenTriggered()));
@@ -56,6 +56,7 @@ void SystemTrayIcon::setUpContextMenu()
 
     takeScreen = systemTrayMenu->addAction(QIcon(":/contextMenu/icon/fullscreen.png"), tr("TAKE_NEW_FULLSCREEN"));
     takeSelectedScreen = systemTrayMenu->addAction(QIcon(":/contextMenu/icon/selectedScreen.png"), tr("TAKE_NEW_AREA_SELECTED_SCREEN"));
+    sendPaste = systemTrayMenu->addAction(tr("SEND_PASTE"));
     uploadFile = systemTrayMenu->addAction(QIcon(":/contextMenu/icon/file.png"), tr("UPLOAD_CHOOSED_FILE"));
     uploadClipboard = systemTrayMenu->addAction(QIcon(":/contextMenu/icon/clipboard.png"), tr("UPLOAD_CLIPBOARD"));
     systemTrayMenu->addSeparator();
@@ -77,10 +78,15 @@ void SystemTrayIcon::takeSelectedAreaScreenTriggered()
     if(!actionBeing)
         {
             newActionStarted();
-            fileName = getNewFileName(Uplimg::Utils::getImageFormat());
-            pathToFile = getFileTempPath(fileName);
+            fileName = Uplimg::Utils::getNewFileName(Uplimg::Utils::getImageFormat());
+            pathToFile = Uplimg::Utils::getFileTempPath(fileName);
             screenManager->captureSelectedZone(pathToFile);
         }
+}
+
+void SystemTrayIcon::sendPasteTriggered()
+{
+    screenManager->startPastMode();
 }
 
 void SystemTrayIcon::sendSelectedArea()
@@ -96,8 +102,8 @@ void SystemTrayIcon::takeFullScrenTriggered()
     if(!actionBeing)
         {
             newActionStarted();
-            QString fileName = getNewFileName(Uplimg::Utils::getImageFormat());
-            QString pathToFile = getFileTempPath(fileName);
+            QString fileName = Uplimg::Utils::getNewFileName(Uplimg::Utils::getImageFormat());
+            QString pathToFile = Uplimg::Utils::getFileTempPath(fileName);
 
             if (screenManager->autoSendFile(screenManager->captureFullScreen(pathToFile)))
                 fileSended(fileName);
@@ -135,35 +141,35 @@ void SystemTrayIcon::fileSended(QString fileName)
     if(Uplimg::Utils::getUploadMethod() == Uplimg::UploadMethod::UPLIMG_WEB)
         {
             if(Uplimg::Utils::isValidURL(receivedMessage.toStdString()))
-                lastUrl.setUrl(receivedMessage);
+                var::lastUrl.setUrl(receivedMessage);
             else
                 return throwErrorAlert(receivedMessage);
 
         }
 
-    if(Uplimg::Utils::getUploadMethod() != Uplimg::UploadMethod::LOCAL && Uplimg::Utils::getUploadMethod() != Uplimg::UploadMethod::ERROR)
+    if(Uplimg::Utils::getUploadMethod() != Uplimg::UploadMethod::LOCAL && Uplimg::Utils::getUploadMethod() != Uplimg::UploadMethod::U_ERROR)
         {
             if(settings.value(Reg::playSound).toBool())
-                fileSendedSound->play();
+                fileSendedSound.play();
 
             if((settings.value(Reg::linkFrom).toString() != "FROM_HTTP" || Uplimg::Utils::getUploadMethod() != Uplimg::UploadMethod::HTTP) && Uplimg::Utils::getUploadMethod() != Uplimg::UploadMethod::UPLIMG_WEB)
-                lastUrl.setUrl(getUploadedFileURL(fileName));
+                var::lastUrl.setUrl(Uplimg::Utils::getUploadedFileURL(fileName));
 
             addUploadedFileInContextMenu();
 
             if(settings.value(Reg::autoOpenToBrowser).toBool())
-                openLastUrl();
+                Uplimg::Utils::openLastUrl();
 
             if(settings.value(Reg::copyToClipboard).toBool())
-                copyLastUrlToClipboard();
+                Uplimg::Utils::copyLastUrlToClipboard();
 
             if(settings.value(Reg::showNotifications).toBool())
-                this->showMessage(Uplimg::applicationName, tr("UPLOAD_SUCCESS_WITH_URL") + lastUrl.toDisplayString());
+                this->showMessage(Uplimg::applicationName, tr("UPLOAD_SUCCESS_WITH_URL") + var::lastUrl.toDisplayString());
         }
     else if(Uplimg::Utils::getUploadMethod()  == Uplimg::UploadMethod::LOCAL)
         {
             if(settings.value(Reg::playSound).toBool())
-                fileSendedSound->play();
+                fileSendedSound.play();
 
             if(settings.value(Reg::showNotifications).toBool())
                 this->showMessage(Uplimg::applicationName, tr("UPLOAD_SUCCESS_LOCAL"));
@@ -188,7 +194,7 @@ void SystemTrayIcon::addUploadedFileInContextMenu()
             lastUploadedFileSeparatorInserted = true;
         }
 
-    QMenu * pictureMenu = new QMenu(lastUrl.fileName());
+    QMenu * pictureMenu = new QMenu(var::lastUrl.fileName());
     QAction * openToBrowser = pictureMenu->addAction(tr("OPEN_TO_BROWSER"));
     QAction * copyToClipboard = pictureMenu->addAction(tr("COPY_TO_CLIPBOARD"));
     systemTrayMenu->insertMenu(lastUploadedFileSeparator, pictureMenu);
@@ -204,11 +210,6 @@ void SystemTrayIcon::addUploadedFileInContextMenu()
         }
     else
         ++lastUploadedFileCounter;
-}
-
-void SystemTrayIcon::copyLastUrlToClipboard()
-{
-    QApplication::clipboard()->setText(lastUrl.toString());
 }
 
 void SystemTrayIcon::setWaitingIcon()
@@ -238,8 +239,8 @@ void SystemTrayIcon::uploadClipboardTriggered()
                 }
             /* WINDOWS ONLY END */
 
-            const QString fileName = getNewFileName(".txt");
-            const QString filePath = getFileTempPath(fileName);
+            const QString fileName = Uplimg::Utils::getNewFileName(".txt");
+            const QString filePath = Uplimg::Utils::getFileTempPath(fileName);
             std::ofstream file(filePath.toStdString().c_str());
 
             if (file)
@@ -252,57 +253,6 @@ void SystemTrayIcon::uploadClipboardTriggered()
                         throwErrorAlert(Uplimg::ErrorList::UPLOAD_FAIL);
                 }
         }
-}
-
-QString SystemTrayIcon::getNewFileName(Uplimg::ImageFormat ending)
-{
-    QTime time = QTime::currentTime();
-    QDate date = QDate::currentDate();
-
-    QString fileName = QString::number(date.dayOfYear())
-                       + QString::number(time.hour())
-                       + QString::number(time.minute())
-                       + QString::number(time.second());
-
-    if(ending == Uplimg::ImageFormat::PNG)
-        return fileName + ".png";
-    else if(ending == Uplimg::ImageFormat::JPEG)
-        return fileName + ".jpg";
-    else
-        return fileName;
-}
-
-
-QString SystemTrayIcon::getNewFileName(QString ending)
-{
-    QTime time = QTime::currentTime();
-    QDate date = QDate::currentDate();
-
-    return QString::number(date.dayOfYear())
-           + QString::number(time.hour())
-           + QString::number(time.minute())
-           + QString::number(time.second())
-           + ending;
-}
-
-QString SystemTrayIcon::getFileTempPath(const QString &screenName)
-{
-    if(settings.value(Reg::localSave).toBool() || settings.value(Reg::choosedMethod).toString() == "LOCAL")
-        return settings.value(Reg::localSavePath).toString() + "/" + screenName;
-    else
-        return QStandardPaths::writableLocation(QStandardPaths::TempLocation)
-               + "/"
-               + screenName;
-}
-
-QString SystemTrayIcon::getUploadedFileURL(const QString &fileName)
-{
-    if(Uplimg::Utils::getUploadMethod()  == Uplimg::UploadMethod::FTP)
-        return settings.value(Reg::FTPWebPath, "http://").toString() + fileName;
-    else if(Uplimg::Utils::getUploadMethod()  == Uplimg::UploadMethod::HTTP)
-        return settings.value(Reg::HTTPWebPath, "http://").toString() + fileName;
-    else
-        return "error";
 }
 
 void SystemTrayIcon::showWindowConfigurationTriggered()
@@ -382,23 +332,13 @@ void SystemTrayIcon::enableHotkeys()
 
 void SystemTrayIcon::enableEasterEgg()
 {
-    if(fileSendedSound->fileName() != ":/Easter_Egg.wav")
-        {
-            fileSendedSound->deleteLater();
-            fileSendedSound = new QSound(":/Easter_Egg.wav");
-        }
+    fileSendedSound.enableEasterEgg();
 }
 
-void SystemTrayIcon::openLastUrl()
-{
-    if(!lastUrl.toString().isNull())
-        QDesktopServices::openUrl(lastUrl);
-}
-
-void SystemTrayIcon::activatedTrigerred(QSystemTrayIcon::ActivationReason reason)
+void SystemTrayIcon::iconActivated(QSystemTrayIcon::ActivationReason reason)
 {
     if(reason == QSystemTrayIcon::ActivationReason::Trigger)
-        this->openLastUrl();
+        Uplimg::Utils::openLastUrl();
 }
 
 void SystemTrayIcon::takeFullScreenShortcutChanged(QString shortcut)
@@ -420,6 +360,16 @@ void SystemTrayIcon::uploadClipboardShortcutChanged(QString shortcut)
     uploadClipboardKeySequence = QKeySequence(shortcut);
     uploadClipboardShortcut->setShortcut(uploadClipboardKeySequence);
     uploadClipboard->setShortcut(uploadClipboardKeySequence);
+}
+
+void SystemTrayIcon::openLastUrl()
+{
+    Uplimg::Utils::openLastUrl();
+}
+
+void SystemTrayIcon::copyLastUrlToClipboard()
+{
+    Uplimg::Utils::copyLastUrlToClipboard();
 }
 
 void SystemTrayIcon::uploadFileShortcutChanged(QString shortcut)

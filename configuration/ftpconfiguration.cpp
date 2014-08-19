@@ -56,7 +56,7 @@ void FTPConfiguration::setUpUI()
     mainGroupLayout->setLayout(formLayout);
 
     validateLayout = new QHBoxLayout;
-    validate = new QPushButton(tr("Ok"));
+    validate = new ButtonBlue(tr("Ok"));
     validateLayout->addStretch();
     validateLayout->addWidget(validate);
 

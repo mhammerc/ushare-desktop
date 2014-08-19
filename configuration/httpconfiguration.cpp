@@ -82,7 +82,7 @@ void HTTPConfiguration::setUpUI()
     mainGroupLayout->setLayout(secondLayout);
 
     validateLayout = new QHBoxLayout;
-    validate = new QPushButton(tr("Ok"));
+    validate = new ButtonBlue(tr("Ok"));
     validateLayout->addStretch();
     validateLayout->addWidget(validate);
 

@@ -19,13 +19,13 @@
 
 #include "shared.h"
 
-class ScreenManager;
+class FileManager;
 
 class SelectAreaBand : public QLabel
 {
     Q_OBJECT
 public:
-    SelectAreaBand(ScreenManager * manager, QWidget * parent = 0);
+    SelectAreaBand(FileManager * manager, QWidget * parent = 0);
     virtual ~SelectAreaBand();
 
     void selectArea();
@@ -33,7 +33,7 @@ public:
 protected:
     QRubberBand * rubberBand;
     QPoint origin;
-    ScreenManager * manager;
+    FileManager * manager;
 
     virtual void mousePressEvent(QMouseEvent * event);
     virtual void mouseMoveEvent(QMouseEvent * event);

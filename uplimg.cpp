@@ -4,6 +4,7 @@
 #include <QMenu>
 #include <QAction>
 #include <QList>
+#include <QObject>
 #include "systemtrayicon.h"
 
 #include <QHttpMultiPart>
@@ -14,19 +15,32 @@
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QSignalMapper>
+#include <QString>
+#include <thread>
+#include <chrono>
 
+#include <QStyleFactory>
+#include <QStringList>
+
+#include "shared.h"
 
 #include <fstream>
 
 #include <iostream>
 
+QUrl var::lastUrl;
+
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
     app.setQuitOnLastWindowClosed(false);
-
     QCoreApplication::setOrganizationName("ImoteSystem");
     QCoreApplication::setApplicationName("Uplimg");
+
+    QFile css("styleSheet.css");
+    css.open(QIODevice::ReadOnly);
+    QString sheet(css.readAll());
+    app.setStyleSheet(sheet);
 
     QTranslator translator;
 

@@ -42,7 +42,7 @@ protected:
     QLineEdit * webPath;
 
     QHBoxLayout * validateLayout;
-    QPushButton * validate;
+    ButtonBlue * validate;
 
     void setUpUI();
 

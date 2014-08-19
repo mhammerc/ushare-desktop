@@ -25,20 +25,23 @@
 #include "selectareaband.h"
 #include "uploadMethod/ftpupload.h"
 #include "uploadMethod/httppostupload.h"
+#include "paste/pastewindow.h"
+#include "paste/pastecontent.h"
 
 #include "shared.h"
 
 class SystemTrayIcon;
 
-class ScreenManager : public QObject
+class FileManager : public QObject
 {
     Q_OBJECT
 public:
-    ScreenManager(SystemTrayIcon * parent);
-    ~ScreenManager();
+    FileManager(SystemTrayIcon * parent);
+    ~FileManager();
 
     QString captureSelectedZone(const QString &pathToScreen);
     QString captureFullScreen(const QString &pathToScreen);
+    void startPastMode();
 
     bool sendFileTroughHTTP(const QString &pathToFile);
     bool sendFileTroughFTP(const QString &pathToFile);
@@ -59,11 +62,15 @@ protected:
     SelectAreaBand * fullScreenPicture;
     QScreen * screen;
 
+    PasteWindow * paste;
+
 public slots:
     void areaPictureTaken(QRect);
     void areaPictureCanceled();
     bool autoSendFile(const QString &pathToFile);
     void fileSendedTroughHTTP();
+
+    void pasteReady(PasteContent const &paste);
 
 
 signals:

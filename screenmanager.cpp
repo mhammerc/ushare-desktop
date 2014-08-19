@@ -2,7 +2,7 @@
 #include "systemtrayicon.h"
 
 
-ScreenManager::ScreenManager(SystemTrayIcon *parent) :
+FileManager::FileManager(SystemTrayIcon *parent) :
     parent(parent),
     darkenFactor(10)
 {
@@ -10,16 +10,16 @@ ScreenManager::ScreenManager(SystemTrayIcon *parent) :
     isFileSended = false;
 }
 
-bool ScreenManager::autoSendFile(const QString &pathToFile)
+bool FileManager::autoSendFile(const QString &pathToFile)
 {
     parent->setIcon(QIcon(":/icon/uploading.png"));
 
     Uplimg::UploadMethod method = Uplimg::Utils::getUploadMethod();
 
-    if (method == Uplimg::UploadMethod::ERROR)
-        parent->throwErrorAlert(Uplimg::ErrorList::UPLOAD_METHOD_NOT_CHOOSED);
+    //if (method == Uplimg::UploadMethod::ERROR)
+        //parent->throwErrorAlert(Uplimg::ErrorList::UPLOAD_METHOD_NOT_CHOOSED);
 
-    else if (method == Uplimg::UploadMethod::FTP)
+    if (method == Uplimg::UploadMethod::FTP)
         return sendFileTroughFTP(pathToFile);
 
     else if (method == Uplimg::UploadMethod::HTTP)
@@ -34,7 +34,7 @@ bool ScreenManager::autoSendFile(const QString &pathToFile)
     return false;
 }
 
-bool ScreenManager::sendFileTroughFTP(const QString &pathToFile)
+bool FileManager::sendFileTroughFTP(const QString &pathToFile)
 {
     std::unique_ptr<FTPUpload> ftp(new FTPUpload(settings.value(Reg::FTPHost).toString().toStdString(),
                                    settings.value(Reg::FTPPort).toInt(),
@@ -54,7 +54,7 @@ bool ScreenManager::sendFileTroughFTP(const QString &pathToFile)
     return false;
 }
 
-bool ScreenManager::sendFileTroughUplimgWeb(const QString &pathToFile)
+bool FileManager::sendFileTroughUplimgWeb(const QString &pathToFile)
 {
     HTTPPostUpload * http = new HTTPPostUpload;
     http->setHost(UplimgWeb::host, UplimgWeb::port);
@@ -86,7 +86,7 @@ bool ScreenManager::sendFileTroughUplimgWeb(const QString &pathToFile)
         }
 }
 
-bool ScreenManager::sendFileTroughHTTP(const QString &pathToFile)
+bool FileManager::sendFileTroughHTTP(const QString &pathToFile)
 {
     HTTPPostUpload * http = new HTTPPostUpload;
     http->setHost(settings.value(Reg::HTTPHost).toString(), settings.value(Reg::HTTPPort).toInt());
@@ -105,7 +105,7 @@ bool ScreenManager::sendFileTroughHTTP(const QString &pathToFile)
             if(http->canGetReply() && http->reply->isFinished() && http->reply->error() == QNetworkReply::NetworkError::NoError)
                 {
                     http->terminate();
-                    parent->lastUrl.setUrl(QString(http->reply->readAll()));
+                    var::lastUrl.setUrl(QString(http->reply->readAll()));
                     http->deleteLater();
                     return true;
                 }
@@ -118,7 +118,7 @@ bool ScreenManager::sendFileTroughHTTP(const QString &pathToFile)
         }
 }
 
-QString ScreenManager::captureSelectedZone(const QString &pathToScreen)
+QString FileManager::captureSelectedZone(const QString &pathToScreen)
 {
     //QPixmap fullScreenshot;
     screen = QGuiApplication::primaryScreen();
@@ -142,7 +142,7 @@ QString ScreenManager::captureSelectedZone(const QString &pathToScreen)
     return pathToScreen;
 }
 
-void ScreenManager::areaPictureTaken(QRect area)
+void FileManager::areaPictureTaken(QRect area)
 {
     originalScreenshot = originalScreenshot.copy(area);
 
@@ -155,14 +155,14 @@ void ScreenManager::areaPictureTaken(QRect area)
     fullScreenPicture->deleteLater();
 }
 
-void ScreenManager::areaPictureCanceled()
+void FileManager::areaPictureCanceled()
 {
     parent->lastActionFinished();
     fullScreenPicture->deleteLater();
     parent->lastActionFinished();
 }
 
-QPixmap ScreenManager::darkenPicture(const QPixmap &picture)
+QPixmap FileManager::darkenPicture(const QPixmap &picture)
 {
     QImage image = picture.toImage();
     const int width = image.width();
@@ -185,7 +185,7 @@ QPixmap ScreenManager::darkenPicture(const QPixmap &picture)
     return QPixmap::fromImage(image);
 }
 
-QString ScreenManager::captureFullScreen(const QString &pathToScreen)
+QString FileManager::captureFullScreen(const QString &pathToScreen)
 {
     QScreen *screen = QGuiApplication::primaryScreen();
     QPixmap screenshot;
@@ -212,10 +212,32 @@ QString ScreenManager::captureFullScreen(const QString &pathToScreen)
 
 }
 
-ScreenManager::~ScreenManager() {}
+void FileManager::startPastMode()
+{
+    paste = new PasteWindow(this);
+    paste->show();
+}
+
+FileManager::~FileManager() {}
 
 
-void ScreenManager::fileSendedTroughHTTP()
+void FileManager::fileSendedTroughHTTP()
 {
     isFileSended = true;
+}
+
+void FileManager::pasteReady(const PasteContent &pasteContent)
+{
+    paste->deleteLater();
+    paste = 0;
+
+    QString fileName = Uplimg::Utils::getNewFileName(".txt");
+    QString filePath = Uplimg::Utils::getFileTempPath(fileName);
+    QFile file(filePath);
+    file.open(QIODevice::WriteOnly);
+    file.write(pasteContent.fileContent.toLatin1());
+    file.close();
+    parent->newActionStarted();
+    if(autoSendFile(filePath))
+        parent->fileSended(fileName);
 }
