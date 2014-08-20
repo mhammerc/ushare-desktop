@@ -4,6 +4,7 @@
 
 HTTPPostUpload::HTTPPostUpload()
 {
+    contentType = "image";
     isFileSended = false;
     reply = 0;
 }
@@ -34,6 +35,8 @@ void HTTPPostUpload::setContentType(const QString &contentType)
 void HTTPPostUpload::sendFile()
 {
     container = new QHttpMultiPart(QHttpMultiPart::FormDataType);
+
+    /* File Part */
     QHttpPart filePart;
     file = new QFile(pathToFile);
 
@@ -44,7 +47,14 @@ void HTTPPostUpload::sendFile()
     filePart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"" + fileFieldName + "\"; filename=\"" + file->fileName() + "\""));
     filePart.setHeader(QNetworkRequest::ContentTypeHeader, QVariant(contentType));
 
+    /* File type part */
+    QHttpPart fileTypePart;
+    fileTypePart.setHeader(QNetworkRequest::ContentTypeHeader, QVariant("text/plain"));
+    fileTypePart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"uplimgFileType\""));
+    fileTypePart.setBody(contentType.toLatin1());
+
     container->append(filePart);
+    container->append(fileTypePart);
 
     QNetworkRequest request;
     request.setUrl(url);

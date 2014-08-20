@@ -24,14 +24,12 @@
 #include <QStandardPaths>
 #include <QTimer>
 #include <QDir>
+#include <QGraphicsDropShadowEffect>
 #include "shared.h"
 
 #include "configuration/configurationwindows.h"
 #include "filesendedsound.h"
 #include "screenmanager.h"
-
-#include <qxtglobal.h>
-#include <QxtWidgets/QxtGlobalShortcut>
 
 #ifdef _WIN32
 #include <shortcut/shortcutmanager_win.h>
@@ -81,14 +79,16 @@ protected:
     QTimer * iconTimer;
 
     //Temp
-    QString fileName;
-    QString pathToFile;
+    File fileInfo;
     bool actionBeing;
 
     bool lastUploadedFileSeparatorInserted;
     QAction * lastUploadedFileSeparator;
     short lastUploadedFileCounter;
 
+    //shadow
+    QGraphicsDropShadowEffect * shadow;
+    QWidget * configurationWindowShadow;
 
 signals:
 
@@ -102,7 +102,7 @@ public slots :
     void sendPasteTriggered();
     void uploadSelectedFileTriggered();
     void uploadClipboardTriggered();
-    void fileSended(QString fileName);
+    void fileSended(const File &file);
     void lastActionFinished();
     void newActionStarted();
     void setWaitingIcon();

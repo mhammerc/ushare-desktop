@@ -1,6 +1,4 @@
 QT       += core gui network multimedia widgets
-#CONFIG += qxt
-#QXT += core gui widgets
 
 TARGET = Uplimg
 TEMPLATE = app
@@ -26,7 +24,6 @@ HEADERS += \
     configuration/httpconfiguration.h \
     configuration/shortcutgetter.h \
     filesendedsound.h \
-    screentaker.h \
     widgets/label.h \
     paste/pastewindow.h \
     paste/pastecontent.h \
@@ -35,7 +32,8 @@ HEADERS += \
     widgets/checkbox.h \
     uploadMethod/cmsuplimgupload.h \
     widgets/radiobutton.h \
-    shortcut/shortcutmanager_win.h
+    shortcut/shortcutmanager_win.h \
+    uploadMethod/file.h
 
 SOURCES += \
     configuration/configurationwindows.cpp \
@@ -49,10 +47,13 @@ SOURCES += \
     configuration/httpconfiguration.cpp \
     configuration/shortcutgetter.cpp \
     filesendedsound.cpp \
-    screentaker.cpp \
     paste/pastewindow.cpp \
     uploadMethod/cmsuplimgupload.cpp \
     shortcut/shortcutmanager_win.cpp
+
+
+OTHER_FILES += \
+    resources/styleSheet.css
 
 
 INCLUDEPATH += D:\Development\SFML\SFML-master\include
@@ -61,13 +62,3 @@ LIBS += -LD:\Development\SFML\SFML-master-build-gcc-32\lib
 
 CONFIG(release, debug|release): LIBS += -lsfml-audio -lsfml-graphics -lsfml-network -lsfml-window -lsfml-system
 CONFIG(debug, debug|release): LIBS += -lsfml-audio-d -lsfml-graphics-d -lsfml-network-d -lsfml-window-d -lsfml-system-d
-
-#INCLUDEPATH += D:\Development\libqxt-qt5\include
-#DEPENDPATH += D:\Development\libqxt-qt5\include
-#LIBS += -LD:\Development\libqxt-qt5\lib
-
-#CONFIG(release, debug|release): LIBS += -lQxtCore -lQxtDesignerPlugins -lQxtNetwork -lQxtSql -lQxtWeb -lQxtWidgets
-#CONFIG(debug, debug|release): LIBS += -lQxtCored -lQxtDesignerPluginsd -lQxtNetworkd -lQxtSqld -lQxtWebd -lQxtWidgetsd
-
-OTHER_FILES += \
-    resources/styleSheet.css

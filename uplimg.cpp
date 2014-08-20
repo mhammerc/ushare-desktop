@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
     app.setQuitOnLastWindowClosed(false);
     QCoreApplication::setOrganizationName("ImoteSystem");
-    QCoreApplication::setApplicationName("Uplimg");
+    QCoreApplication::setApplicationName(Uplimg::applicationName);
 
     QFile css("styleSheet.css");
     css.open(QIODevice::ReadOnly);

@@ -8,13 +8,44 @@
 #include <QMouseEvent>
 #include <QStyleOption>
 #include <QPainter>
+#include <QHBoxLayout>
+#include "shared.h"
 
 class TopBarWidget : public QWidget
 {
+    Q_OBJECT
 public:
-    TopBarWidget(QWidget * parent): parent(parent) {}
+    TopBarWidget(QWidget * parent): parent(parent)
+    {
+        setContentsMargins(-10,-10,-10,-10);
+        layout = new QHBoxLayout;
+        icon = new UplimgIcon;
+        title = new UplimgTitle("Uplimg");
+        minimizeButton = new MinimizeButton;
+        closeButton = new CloseButton;
+
+        //--
+        layout->addWidget(icon);
+        layout->addWidget(title);
+        layout->addStretch();
+        layout->addWidget(minimizeButton);
+        layout->addWidget(closeButton);
+        setLayout(layout);
+
+        QObject::connect(minimizeButton, SIGNAL(clicked()), this, SIGNAL(minimize()));
+        QObject::connect(closeButton, SIGNAL(clicked()), this, SIGNAL(close()));
+    }
+
+signals:
+    void minimize();
+    void close();
 
 protected:
+    QHBoxLayout * layout;
+    UplimgIcon * icon;
+    UplimgTitle * title;
+    MinimizeButton * minimizeButton;
+    CloseButton * closeButton;
 
     void mousePressEvent(QMouseEvent *event)
     {

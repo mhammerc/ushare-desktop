@@ -39,13 +39,13 @@ public:
     FileManager(SystemTrayIcon * parent);
     ~FileManager();
 
-    QString captureSelectedZone(const QString &pathToScreen);
-    QString captureFullScreen(const QString &pathToScreen);
+    File captureSelectedZone(const File &file);
+    File captureFullScreen(File &file);
     void startPastMode();
 
-    bool sendFileTroughHTTP(const QString &pathToFile);
-    bool sendFileTroughFTP(const QString &pathToFile);
-    bool sendFileTroughUplimgWeb(const QString &pathToFile);
+    bool sendFileTroughHTTP(const File &file);
+    bool sendFileTroughFTP(const File &file);
+    bool sendFileTroughUplimgWeb(const File &file);
 
 protected:
     SystemTrayIcon * parent;
@@ -67,7 +67,7 @@ protected:
 public slots:
     void areaPictureTaken(QRect);
     void areaPictureCanceled();
-    bool autoSendFile(const QString &pathToFile);
+    bool autoSendFile(const File &file);
     void fileSendedTroughHTTP();
 
     void pasteReady(PasteContent const &paste);

@@ -10,23 +10,23 @@ FileManager::FileManager(SystemTrayIcon *parent) :
     isFileSended = false;
 }
 
-bool FileManager::autoSendFile(const QString &pathToFile)
+bool FileManager::autoSendFile(File const &file)
 {
     parent->setIcon(QIcon(":/icon/uploading.png"));
 
     Uplimg::UploadMethod method = Uplimg::Utils::getUploadMethod();
 
-    //if (method == Uplimg::UploadMethod::ERROR)
-        //parent->throwErrorAlert(Uplimg::ErrorList::UPLOAD_METHOD_NOT_CHOOSED);
+    if (method == Uplimg::UploadMethod::U_ERROR)
+        parent->throwErrorAlert(Uplimg::ErrorList::UPLOAD_METHOD_NOT_CHOOSED);
 
     if (method == Uplimg::UploadMethod::FTP)
-        return sendFileTroughFTP(pathToFile);
+        return sendFileTroughFTP(file);
 
     else if (method == Uplimg::UploadMethod::HTTP)
-        return sendFileTroughHTTP(pathToFile);
+        return sendFileTroughHTTP(file);
 
     else if (method == Uplimg::UploadMethod::UPLIMG_WEB)
-        return sendFileTroughUplimgWeb(pathToFile);
+        return sendFileTroughUplimgWeb(file);
 
     else if (method == Uplimg::UploadMethod::LOCAL)
         return true;
@@ -34,7 +34,7 @@ bool FileManager::autoSendFile(const QString &pathToFile)
     return false;
 }
 
-bool FileManager::sendFileTroughFTP(const QString &pathToFile)
+bool FileManager::sendFileTroughFTP(File const &file)
 {
     std::unique_ptr<FTPUpload> ftp(new FTPUpload(settings.value(Reg::FTPHost).toString().toStdString(),
                                    settings.value(Reg::FTPPort).toInt(),
@@ -43,22 +43,23 @@ bool FileManager::sendFileTroughFTP(const QString &pathToFile)
                                    settings.value(Reg::FTPBasePath).toString().toStdString()));
 
     if (ftp->openConnexion())
-        if (ftp->sendFile(pathToFile.toStdString()))
+        if (ftp->sendFile(file.path.toStdString()))
             if (ftp->closeConnexion())
                 return true;
 
-            else std::clog << "can't close\n";
-        else std::clog << "can't send\n";
-    else std::clog << "can't co\n";
+            else std::clog << "FTP module : can't close connection\n";
+        else std::clog << "FTP module : can't send file\n";
+    else std::clog << "FTP module : can't connect to server\n";
 
     return false;
 }
 
-bool FileManager::sendFileTroughUplimgWeb(const QString &pathToFile)
+bool FileManager::sendFileTroughUplimgWeb(File const &file)
 {
     HTTPPostUpload * http = new HTTPPostUpload;
     http->setHost(UplimgWeb::host, UplimgWeb::port);
-    http->setFile(pathToFile, UplimgWeb::fileFieldName);
+    http->setFile(file.path, UplimgWeb::fileFieldName);
+    http->setContentType(file.type);
     http->start();
 
     sf::Clock clock;
@@ -86,11 +87,12 @@ bool FileManager::sendFileTroughUplimgWeb(const QString &pathToFile)
         }
 }
 
-bool FileManager::sendFileTroughHTTP(const QString &pathToFile)
+bool FileManager::sendFileTroughHTTP(File const &file)
 {
     HTTPPostUpload * http = new HTTPPostUpload;
     http->setHost(settings.value(Reg::HTTPHost).toString(), settings.value(Reg::HTTPPort).toInt());
-    http->setFile(pathToFile, settings.value(Reg::HTTPFileFieldName, "uplimgFile").toString());
+    http->setFile(file.path, settings.value(Reg::HTTPFileFieldName, "uplimgFile").toString());
+    http->setContentType(file.type);
     http->start();
 
     sf::Clock clock;
@@ -118,12 +120,11 @@ bool FileManager::sendFileTroughHTTP(const QString &pathToFile)
         }
 }
 
-QString FileManager::captureSelectedZone(const QString &pathToScreen)
+File FileManager::captureSelectedZone(File const &file)
 {
-    //QPixmap fullScreenshot;
     screen = QGuiApplication::primaryScreen();
 
-    this->pathToFile = pathToScreen;
+    this->pathToFile = file.path;
 
     if (screen)
         {
@@ -131,15 +132,13 @@ QString FileManager::captureSelectedZone(const QString &pathToScreen)
 
             if (!originalScreenshot.isNull())
                 {
-                    //originalScreenshot = fullScreenshot;
-                    //fullScreenshot = darkenPicture(fullScreenshot);
                     fullScreenPicture = new SelectAreaBand(this);
                     fullScreenPicture->setPixmap(originalScreenshot);
                     fullScreenPicture->selectArea();
                 }
         }
 
-    return pathToScreen;
+    return file;
 }
 
 void FileManager::areaPictureTaken(QRect area)
@@ -185,7 +184,7 @@ QPixmap FileManager::darkenPicture(const QPixmap &picture)
     return QPixmap::fromImage(image);
 }
 
-QString FileManager::captureFullScreen(const QString &pathToScreen)
+File FileManager::captureFullScreen(File &file)
 {
     QScreen *screen = QGuiApplication::primaryScreen();
     QPixmap screenshot;
@@ -196,19 +195,24 @@ QString FileManager::captureFullScreen(const QString &pathToScreen)
 
             if(Uplimg::Utils::getImageFormat() == Uplimg::ImageFormat::JPEG)
                 {
-                    if (!screenshot.save(pathToScreen, 0, Uplimg::Utils::getImageQuality()))
-                        return "error";
+                    if (!screenshot.save(file.path, 0, Uplimg::Utils::getImageQuality()))
+                    {
+                        file.error();
+                        return file;
+                    }
                 }
             else if(Uplimg::Utils::getImageFormat() == Uplimg::ImageFormat::PNG)
                 {
-                    if (!screenshot.save(pathToScreen, 0, 0))
-                        return "error";
-                }
-
-            return pathToScreen;
+                    if (!screenshot.save(file.path, 0, 0))
+                    {
+                        file.error();
+                        return file;
+                    }
+                }     
         }
 
-    return "error";
+    file.error();
+    return file;
 
 }
 
@@ -228,16 +232,20 @@ void FileManager::fileSendedTroughHTTP()
 
 void FileManager::pasteReady(const PasteContent &pasteContent)
 {
+    paste->close();
     paste->deleteLater();
     paste = 0;
 
-    QString fileName = Uplimg::Utils::getNewFileName(".txt");
-    QString filePath = Uplimg::Utils::getFileTempPath(fileName);
-    QFile file(filePath);
-    file.open(QIODevice::WriteOnly);
-    file.write(pasteContent.fileContent.toLatin1());
-    file.close();
+    File file;
+    file.name = Uplimg::Utils::getNewFileName(".txt");
+    file.path = Uplimg::Utils::getFileTempPath(file.name);
+    file.type = "paste";
+    QFile physicFile(file.path);
+    physicFile.open(QIODevice::WriteOnly);
+    physicFile.write(pasteContent.fileContent.toLatin1());
+    physicFile.close();
     parent->newActionStarted();
-    if(autoSendFile(filePath))
-        parent->fileSended(fileName);
+
+    if(autoSendFile(file))
+        parent->fileSended(file);
 }

@@ -5,6 +5,7 @@
 ConfigurationWindows::ConfigurationWindows(SystemTrayIcon * parent, QWidget *qwidget) :
     QWidget(qwidget, Qt::WindowFlags(Qt::FramelessWindowHint | Qt::WindowMinMaxButtonsHint | Qt::WindowSystemMenuHint)), windowTitle(tr("UPLIMG_CONFIGURATION"))
 {
+    setContentsMargins(-10,-10,-10,-10);
     this->parent = parent;
     setObjectName("windowWithoutFrameBlue");
     QObject::connect(this, SIGNAL(easterEgg()), parent, SLOT(enableEasterEgg()));
@@ -78,8 +79,8 @@ ConfigurationWindows::ConfigurationWindows(SystemTrayIcon * parent, QWidget *qwi
     pal.setColor(QPalette::Window, selectingAreaColor);
     selectingAreaColorShower->setPalette(pal);
 
-    QObject::connect(topBarMinimizeButton, SIGNAL(clicked()), this, SLOT(showMinimized()));
-    QObject::connect(topBarCloseButton, SIGNAL(clicked()), this, SLOT(close()));
+    QObject::connect(topBarWidget, SIGNAL(minimize()), this, SLOT(showMinimized()));
+    QObject::connect(topBarWidget, SIGNAL(close()), this, SLOT(close()));
 
     QObject::connect(windowContent, SIGNAL(currentChanged(int)), this, SLOT(currentTabChanged(int)));
 #ifdef _WIN32
@@ -154,19 +155,19 @@ void ConfigurationWindows::setUpUI()
 void ConfigurationWindows::setUpTopBarUI()
 {
     topBarWidget = new TopBarWidget(this);
-    topBarLayout = new QHBoxLayout;
-    topBarIcon = new UplimgIcon;
-    topBarTitle = new UplimgTitle(Uplimg::applicationName);
-    topBarMinimizeButton = new MinimizeButton;
-    topBarCloseButton = new CloseButton;
+//    topBarLayout = new QHBoxLayout;
+//    topBarIcon = new UplimgIcon;
+//    topBarTitle = new UplimgTitle(Uplimg::applicationName);
+//    topBarMinimizeButton = new MinimizeButton;
+//    topBarCloseButton = new CloseButton;
 
-    //--
-    topBarLayout->addWidget(topBarIcon);
-    topBarLayout->addWidget(topBarTitle);
-    topBarLayout->addStretch();
-    topBarLayout->addWidget(topBarMinimizeButton);
-    topBarLayout->addWidget(topBarCloseButton);
-    topBarWidget->setLayout(topBarLayout);
+//    //--
+//    topBarLayout->addWidget(topBarIcon);
+//    topBarLayout->addWidget(topBarTitle);
+//    topBarLayout->addStretch();
+//    topBarLayout->addWidget(topBarMinimizeButton);
+//    topBarLayout->addWidget(topBarCloseButton);
+//    topBarWidget->setLayout(topBarLayout);
 }
 
 void ConfigurationWindows::setUpGeneralSectionUI()

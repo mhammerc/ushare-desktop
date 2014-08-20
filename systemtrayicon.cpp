@@ -78,9 +78,10 @@ void SystemTrayIcon::takeSelectedAreaScreenTriggered()
     if(!actionBeing)
         {
             newActionStarted();
-            fileName = Uplimg::Utils::getNewFileName(Uplimg::Utils::getImageFormat());
-            pathToFile = Uplimg::Utils::getFileTempPath(fileName);
-            screenManager->captureSelectedZone(pathToFile);
+            fileInfo.name = Uplimg::Utils::getNewFileName(Uplimg::Utils::getImageFormat());
+            fileInfo.path = Uplimg::Utils::getFileTempPath(fileInfo.name);
+            fileInfo.type = "image";
+            screenManager->captureSelectedZone(fileInfo);
         }
 }
 
@@ -91,8 +92,8 @@ void SystemTrayIcon::sendPasteTriggered()
 
 void SystemTrayIcon::sendSelectedArea()
 {
-    if (screenManager->autoSendFile(pathToFile))
-        fileSended(fileName);
+    if (screenManager->autoSendFile(fileInfo))
+        fileSended(fileInfo);
     else
         throwErrorAlert(Uplimg::ErrorList::UPLOAD_FAIL);
 }
@@ -102,11 +103,12 @@ void SystemTrayIcon::takeFullScrenTriggered()
     if(!actionBeing)
         {
             newActionStarted();
-            QString fileName = Uplimg::Utils::getNewFileName(Uplimg::Utils::getImageFormat());
-            QString pathToFile = Uplimg::Utils::getFileTempPath(fileName);
+            File file;
+            file.name = Uplimg::Utils::getNewFileName(Uplimg::Utils::getImageFormat());
+            file.path = Uplimg::Utils::getFileTempPath(file.name);
 
-            if (screenManager->autoSendFile(screenManager->captureFullScreen(pathToFile)))
-                fileSended(fileName);
+            if (screenManager->autoSendFile(screenManager->captureFullScreen(file)))
+                fileSended(file);
             else
                 throwErrorAlert(Uplimg::ErrorList::UPLOAD_FAIL);
         }
@@ -117,14 +119,16 @@ void SystemTrayIcon::uploadSelectedFileTriggered()
     if(!actionBeing)
         {
             newActionStarted();
-            QString path = QFileDialog::getOpenFileName(0, tr("SELECT_FILE"));
+            File file;
+            file.path = QFileDialog::getOpenFileName(0, tr("SELECT_FILE"));
 
-            if(!path.isNull())
+            if(!file.path.isNull())
                 {
-                    if (screenManager->autoSendFile(path))
+                    if (screenManager->autoSendFile(file))
                         {
-                            QFileInfo fileInfo(path);
-                            fileSended(fileInfo.fileName());
+                            QFileInfo fileInfo(file.path);
+                            file.name = fileInfo.fileName();
+                            fileSended(file);
                         }
                     else
                         throwErrorAlert(Uplimg::ErrorList::UPLOAD_FAIL);
@@ -132,7 +136,7 @@ void SystemTrayIcon::uploadSelectedFileTriggered()
         }
 }
 
-void SystemTrayIcon::fileSended(QString fileName)
+void SystemTrayIcon::fileSended(File const &file)
 {
     lastActionFinished();
     setIcon(QIcon(":/icon/success.png"));
@@ -153,7 +157,7 @@ void SystemTrayIcon::fileSended(QString fileName)
                 fileSendedSound.play();
 
             if((settings.value(Reg::linkFrom).toString() != "FROM_HTTP" || Uplimg::Utils::getUploadMethod() != Uplimg::UploadMethod::HTTP) && Uplimg::Utils::getUploadMethod() != Uplimg::UploadMethod::UPLIMG_WEB)
-                var::lastUrl.setUrl(Uplimg::Utils::getUploadedFileURL(fileName));
+                var::lastUrl.setUrl(Uplimg::Utils::getUploadedFileURL(file.name));
 
             addUploadedFileInContextMenu();
 
@@ -221,34 +225,35 @@ void SystemTrayIcon::uploadClipboardTriggered()
 {
     if(!actionBeing)
         {
-
             newActionStarted();
+            File file;
             /* ONLY SUPPORTED FOR WINDOWS, NEVER TESTED ON X11 OR MAC */
             /* IF CLIPBOARD POINT TO FILE, WE UPLOAD IT INSTEAD FILE PATH */
-            QString clipboard = QApplication::clipboard()->text();
-            clipboard = clipboard.right(clipboard.size()-8); //Windows automatically put file:/// at begin
+            file.path = QApplication::clipboard()->text();
+            file.path = file.path.right(file.path.size()-8); //Windows automatically put file:/// at begin
 
-            if(QFile::exists(clipboard)) //Clipboard is pointing to file
+            if(QFile::exists(file.path)) //Clipboard is pointing to file
                 {
-                    if(screenManager->autoSendFile(clipboard))
+                    if(screenManager->autoSendFile(file))
                         {
-                            QFileInfo fi(clipboard);
-                            fileSended(fi.fileName());
+                            QFileInfo fi(file.path);
+                            file.name = fi.fileName();
+                            fileSended(file);
                         }
                     return;
                 }
             /* WINDOWS ONLY END */
 
-            const QString fileName = Uplimg::Utils::getNewFileName(".txt");
-            const QString filePath = Uplimg::Utils::getFileTempPath(fileName);
-            std::ofstream file(filePath.toStdString().c_str());
+            file.name = Uplimg::Utils::getNewFileName(".txt");
+            file.path = Uplimg::Utils::getFileTempPath(file.name);
+            std::ofstream physicFile(file.path.toStdString().c_str());
 
-            if (file)
+            if (physicFile)
                 {
-                    file << QApplication::clipboard()->text().toStdString();
-                    file.close();
-                    if (screenManager->autoSendFile(filePath))
-                        fileSended(fileName);
+                    physicFile << QApplication::clipboard()->text().toStdString();
+                    physicFile.close();
+                    if (screenManager->autoSendFile(file))
+                        fileSended(file);
                     else
                         throwErrorAlert(Uplimg::ErrorList::UPLOAD_FAIL);
                 }
@@ -258,10 +263,11 @@ void SystemTrayIcon::uploadClipboardTriggered()
 void SystemTrayIcon::showWindowConfigurationTriggered()
 {
     if(configurationWindow == 0)
+    {
         configurationWindow = new ConfigurationWindows(this);
+    }
     configurationWindow->resetTab();
     configurationWindow->show();
-    configurationWindow->setWindowState(Qt::WindowActive);
 }
 
 void SystemTrayIcon::throwErrorAlert(const QString &text)

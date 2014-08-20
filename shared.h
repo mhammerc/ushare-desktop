@@ -17,6 +17,8 @@
 #include "widgets/checkbox.h"
 #include "widgets/radiobutton.h"
 
+#include "uploadMethod/file.h"
+
 /* Contain all registry access */
 namespace Reg
 {

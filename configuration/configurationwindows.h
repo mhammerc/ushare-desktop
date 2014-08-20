@@ -28,6 +28,7 @@
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QPainter>
+#include <QGraphicsDropShadowEffect>
 
 #include <iostream>
 
@@ -62,11 +63,6 @@ protected:
 
     //Top bar
     TopBarWidget * topBarWidget;
-    QHBoxLayout * topBarLayout;
-    UplimgIcon * topBarIcon;
-    UplimgTitle * topBarTitle;
-    MinimizeButton * topBarMinimizeButton;
-    CloseButton * topBarCloseButton;
 
     //General settings
     QGroupBox * generalSettings;

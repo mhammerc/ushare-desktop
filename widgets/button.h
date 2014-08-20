@@ -25,15 +25,15 @@ class MinimizeButton : public QPushButton
 public:
     MinimizeButton(QWidget * parent = 0) : QPushButton(parent)
     {
-        setObjectName("BlackMinimizeButton16");
+        setObjectName("MinimizeButton");
     }
     MinimizeButton(const QString & text, QWidget * parent = 0): QPushButton(text, parent)
     {
-        setObjectName("BlackMinimizeButton16");
+        setObjectName("MinimizeButton");
     }
     MinimizeButton(const QIcon & icon, const QString & text, QWidget * parent = 0) : QPushButton(icon, text, parent)
     {
-        setObjectName("BlackMinimizeButton16");
+        setObjectName("MinimizeButton");
     }
 };
 
@@ -42,15 +42,15 @@ class CloseButton : public QPushButton
 public:
     CloseButton(QWidget * parent = 0) : QPushButton(parent)
     {
-        setObjectName("BlackCloseButton16");
+        setObjectName("CloseButton");
     }
     CloseButton(const QString & text, QWidget * parent = 0): QPushButton(text, parent)
     {
-        setObjectName("BlackCloseButton16");
+        setObjectName("CloseButton");
     }
     CloseButton(const QIcon & icon, const QString & text, QWidget * parent = 0) : QPushButton(icon, text, parent)
     {
-        setObjectName("BlackCloseButton16");
+        setObjectName("CloseButton");
     }
 };
 
