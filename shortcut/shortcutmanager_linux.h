@@ -1,17 +1,16 @@
-#ifndef ISHORTCUTMANAGER_H
-#define ISHORTCUTMANAGER_H
+#ifndef SHORTCUTMANAGER_LINUX_H
+#define SHORTCUTMANAGER_LINUX_H
 
-#ifdef __win32
+#ifdef __linux__
 #include <QKeySequence>
-#include <qt_windows.h>
 #include <QObject>
 #include <QAbstractEventDispatcher>
 #include <QAbstractNativeEventFilter>
 
 
-class ShortcutManager : public QObject, public QAbstractNativeEventFilter
+class ShortcutManager : public QObject
 {
-    Q_OBJECT
+
 public:
     ShortcutManager(QKeySequence sequence, QObject * parent = 0);
     ShortcutManager(QObject * parent = 0);
@@ -19,7 +18,7 @@ public:
     bool unregisterShortcut();
     quint32 nativeModifiers(Qt::KeyboardModifiers modifiers);
     quint32 nativeKeycode(Qt::Key key);
-    virtual bool nativeEventFilter(const QByteArray & eventType,void * message, long * result);
+    bool nativeeEventFilter(const QByteArray & eventType,void * message, long * result);
 
     QKeySequence shortcut();
     bool setShortcut(QKeySequence sequence);
@@ -40,5 +39,5 @@ signals:
     void activated();
 };
 
-#endif //__win32
-#endif // ISHORTCUTMANAGER_H
+#endif //__linux__
+#endif // ISHORTCUTMANAGER_LINUX_H

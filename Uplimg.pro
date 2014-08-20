@@ -32,8 +32,7 @@ HEADERS += \
     widgets/checkbox.h \
     uploadMethod/cmsuplimgupload.h \
     widgets/radiobutton.h \
-    shortcut/shortcutmanager_win.h \
-    uploadMethod/file.h
+    uploadMethod/file.h \
 
 SOURCES += \
     configuration/configurationwindows.cpp \
@@ -49,16 +48,32 @@ SOURCES += \
     filesendedsound.cpp \
     paste/pastewindow.cpp \
     uploadMethod/cmsuplimgupload.cpp \
-    shortcut/shortcutmanager_win.cpp
 
 
 OTHER_FILES += \
     resources/styleSheet.css
 
+#Windows specific
+win32 {
+HEADERS += shortcut/shortcutmanager_win.h
+SOURCES += shortcut/shortcut/shortcutmanager_win.cpp
 
 INCLUDEPATH += D:\Development\SFML\SFML-master\include
 DEPENDPATH += D:\Development\SFML\SFML-master\include
 LIBS += -LD:\Development\SFML\SFML-master-build-gcc-32\lib
-
 CONFIG(release, debug|release): LIBS += -lsfml-audio -lsfml-graphics -lsfml-network -lsfml-window -lsfml-system
 CONFIG(debug, debug|release): LIBS += -lsfml-audio-d -lsfml-graphics-d -lsfml-network-d -lsfml-window-d -lsfml-system-d
+}
+
+#Linux specific
+unix {
+HEADERS += shortcut/shortcutmanager_linux.h
+SOURCES += shortcut/shortcutmanager_linux.cpp
+
+INCLUDEPATH += "/home/imote/Documents/Development/SFML/SFML/include"
+DEPENDPATH += "/home/imote/Documents/Development/SFML/SFML/include"
+LIBS += -L"/home/imote/Documents/Development/SFML/64/lib"
+
+CONFIG(release, debug|release): LIBS += -lsfml-audio -lsfml-graphics -lsfml-network -lsfml-window -lsfml-system
+#CONFIG(debug, debug|release): LIBS += -lsfml-audio-d -lsfml-graphics-d -lsfml-network-d -lsfml-window-d -lsfml-system-d
+}

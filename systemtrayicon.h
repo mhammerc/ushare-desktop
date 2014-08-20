@@ -34,6 +34,9 @@
 #ifdef _WIN32
 #include <shortcut/shortcutmanager_win.h>
 #endif
+#ifdef __linux
+#include <shortcut/shortcutmanager_linux.h>
+#endif
 
 
 class SystemTrayIcon : public QSystemTrayIcon

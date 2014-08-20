@@ -19,7 +19,9 @@ ConfigurationWindows::ConfigurationWindows(SystemTrayIcon * parent, QWidget *qwi
     this->setUpUI();
 
     /* Load Settings */
+#ifdef _win32
     runOnStartup->setChecked(settings.value(Reg::runOnStartup, true).toBool());
+#endif
     showNotifications->setChecked(settings.value(Reg::showNotifications, true).toBool());
     playSound->setChecked(settings.value(Reg::playSound, true).toBool());
     copyToClipboard->setChecked(settings.value(Reg::copyToClipboard, true).toBool());
