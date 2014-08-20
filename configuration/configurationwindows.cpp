@@ -7,7 +7,7 @@ ConfigurationWindows::ConfigurationWindows(SystemTrayIcon * parent, QWidget *qwi
 {
     setContentsMargins(-10,-10,-10,-10);
     this->parent = parent;
-    setObjectName("windowWithoutFrameBlue");
+    setObjectName("windowWithoutFrameBlack");
     QObject::connect(this, SIGNAL(easterEgg()), parent, SLOT(enableEasterEgg()));
 
     this->setWindowIcon(QIcon(":/icon/base.png"));
@@ -119,7 +119,7 @@ ConfigurationWindows::ConfigurationWindows(SystemTrayIcon * parent, QWidget *qwi
     QObject::connect(uploadClipboardShortcut, SIGNAL(textChanged(QString)), this, SLOT(uploadClipboardShortcutChanged(QString)));
 
     //QObject::connect(validate, SIGNAL(clicked()), this, SLOT(hide()));
-    QObject::connect(validate, SIGNAL(clicked()), this, SLOT(refreshCSS()));
+    QObject::connect(bottomBar, SIGNAL(validate()), this, SLOT(refreshCSS()));
 
     FTPConf = new FTPConfiguration();
     HTTPConf = new HTTPConfiguration();
@@ -131,8 +131,8 @@ ConfigurationWindows::ConfigurationWindows(SystemTrayIcon * parent, QWidget *qwi
 
 void ConfigurationWindows::setUpUI()
 {
-    windowContent = new QTabWidget();
-    mainLayout = new QVBoxLayout();
+    windowContent = new TabWidgetBlue;
+    mainLayout = new QVBoxLayout;
 
     this->setUpTopBarUI();
     this->setUpGeneralSectionUI();
@@ -142,34 +142,16 @@ void ConfigurationWindows::setUpUI()
     this->setUpCreditsSectionUI();
 
 
-    validateLayout = new QHBoxLayout;
-    version = new LabelBlue(Uplimg::versionText);
-    validate = new ButtonBlue("Ok");
-    validateLayout->addWidget(version);
-    validateLayout->addStretch();
-    validateLayout->addWidget(validate);
+    bottomBar = new BottomBarConfigurationWindow;
 
     mainLayout->addWidget(topBarWidget);
     mainLayout->addWidget(windowContent);
-    mainLayout->addLayout(validateLayout);
+    mainLayout->addWidget(bottomBar);
 }
 
 void ConfigurationWindows::setUpTopBarUI()
 {
     topBarWidget = new TopBarWidget(this);
-//    topBarLayout = new QHBoxLayout;
-//    topBarIcon = new UplimgIcon;
-//    topBarTitle = new UplimgTitle(Uplimg::applicationName);
-//    topBarMinimizeButton = new MinimizeButton;
-//    topBarCloseButton = new CloseButton;
-
-//    //--
-//    topBarLayout->addWidget(topBarIcon);
-//    topBarLayout->addWidget(topBarTitle);
-//    topBarLayout->addStretch();
-//    topBarLayout->addWidget(topBarMinimizeButton);
-//    topBarLayout->addWidget(topBarCloseButton);
-//    topBarWidget->setLayout(topBarLayout);
 }
 
 void ConfigurationWindows::setUpGeneralSectionUI()
@@ -178,7 +160,7 @@ void ConfigurationWindows::setUpGeneralSectionUI()
     generalLayout = new QVBoxLayout;
 
     //General settings
-    generalSettings = new QGroupBox(tr("GENERAL_SETTINGS"));
+    generalSettings = new GroupBoxBlue(tr("GENERAL_SETTINGS"));
     generalFormLayout = new QFormLayout;
     generalFormLayout->setFormAlignment(Qt::AlignRight);
 #ifdef _WIN32
@@ -186,7 +168,7 @@ void ConfigurationWindows::setUpGeneralSectionUI()
     generalFormLayout->addRow(tr("RUN_ON_STARTUP"), runOnStartup);
 #endif
 
-    lang = new QComboBox;
+    lang = new ComboBoxBlue;
     lang->addItem("English");
     lang->addItem("Français");
     generalFormLayout->addRow(tr("APPLICATION_LANG", "Application's lang :"), lang);
@@ -207,7 +189,7 @@ void ConfigurationWindows::setUpGeneralSectionUI()
     generalLayout->addWidget(generalSettings);
 
     //On sucess settings
-    onSuccessSettings = new QGroupBox(tr("ON_SUCCESS"));
+    onSuccessSettings = new GroupBoxBlue(tr("ON_SUCCESS"));
     onSuccessFormLayout = new QFormLayout;
 
     playSound = new CheckBoxGreen;
@@ -261,18 +243,18 @@ void ConfigurationWindows::setUpUploadSectionUI()
     onlineServicesLayout->addLayout(HTTPLayout);
     onlineServicesLayout->addWidget(localMethod);
 
-    onlineServices = new QGroupBox(tr("ONLINE_SERVICES_GROUPBOX"));
+    onlineServices = new GroupBoxBlue(tr("ONLINE_SERVICES_GROUPBOX"));
     onlineServices->setLayout(onlineServicesLayout);
 
     pictureLayout = new QFormLayout;
 
-    imageType = new QComboBox;
+    imageType = new ComboBoxBlue;
     imageType->addItem("PNG");
     imageType->addItem("JPEG");
     pictureLayout->addRow(tr("IMAGE_TYPE"), imageType);
 
     imageQualityLayout = new QHBoxLayout;
-    imageQuality = new QSlider(Qt::Horizontal);
+    imageQuality = new SliderBlue(Qt::Horizontal);
     imageQuality->setMinimum(0);
     imageQuality->setMaximum(100);
     imageQualityShower = new LabelOrange("0");
@@ -290,7 +272,7 @@ void ConfigurationWindows::setUpUploadSectionUI()
     localSaveLayout->addWidget(localSavePathChooser);
     pictureLayout->addRow(tr("LOCAL_SAVE"), localSaveLayout);
 
-    picture = new QGroupBox(tr("PICTURE_GROUPBOX"));
+    picture = new GroupBoxBlue(tr("PICTURE_GROUPBOX"));
     picture->setLayout(pictureLayout);
 
     uploadLayout->addWidget(onlineServices);
@@ -306,8 +288,8 @@ void ConfigurationWindows::setUpHotkeysSectionUI()
 {
     hotkeysSection = new QWidget;
     hotkeysLayout = new QVBoxLayout;
-    hotkeysGroupBox = new QGroupBox(tr("KEYBOARD_CONFIGURATION"));
-    hotkeysIntermediateGroupBox = new QGroupBox;
+    hotkeysGroupBox = new GroupBoxBlue(tr("KEYBOARD_CONFIGURATION"));
+    hotkeysIntermediateGroupBox = new GroupBoxBlue;
     hotkeysBindingLayout = new QVBoxLayout;
     hotkeysFormLayout = new QFormLayout;
 
@@ -385,32 +367,23 @@ void ConfigurationWindows::setUpCreditsSectionUI()
     SFMLLicence->setReadOnly(true);
     SFMLLicence->setFixedSize(400,280);
 
-    LGPLLicence = new QTextEdit;
-    QFile LGPLLicenceFile(":/lgpl-2.1.txt");
-    LGPLLicenceFile.open(QIODevice::ReadOnly);
-    LGPLLicence->setText(LGPLLicenceFile.readAll());
-    LGPLLicence->setWindowTitle(tr("LGPL Licence"));
-    LGPLLicence->setReadOnly(true);
-    LGPLLicence->setFixedSize(400,450);
-
     madeWithLayout = new QHBoxLayout;
     madeWithSFML = new ButtonBlue(tr("MADE_WITH_SFML", "Made with the lightness of SFML"));
     madeWithQt = new ButtonBlue(tr("MADE_WITH_QT", "Made with the flexibility of Qt"));
-    madeWithQxt = new ButtonBlue(tr("MADE_WITH_QXT", "Made with the powerfull of Qxt"));
-    madeWithLayout->addWidget(madeWithSFML);
+    madeWithLayout->addStretch();
     madeWithLayout->addWidget(madeWithQt);
-    madeWithLayout->addWidget(madeWithQxt);
-
+    madeWithLayout->addWidget(madeWithSFML);
+    madeWithLayout->addStretch();
 
     QObject::connect(madeWithSFML, SIGNAL(clicked()), SFMLLicence, SLOT(show()));
     QObject::connect(madeWithQt, SIGNAL(clicked()), qApp, SLOT(aboutQt()));
-    QObject::connect(madeWithQxt, SIGNAL(clicked()), LGPLLicence, SLOT(show()));
 
     //Contributors
-    leadDevelopper = new LabelOrange(tr("MAIN_DEVELOPPER", "Main developper and project manager : <span style=\"color:red;\">Martin Hammerchmidt alias Imote</span>"));
+    leadDevelopper = new LabelOrange(tr("MAIN_DEVELOPPER"));
+    si0ls = new LabelOrange(tr("SI0LS"));
     allContributorsLayout = new QHBoxLayout;
-    allContributorsOne = new QListWidget;
-    allContributorsTwo = new QListWidget;
+    allContributorsOne = new ListWidgetGreen;
+    allContributorsTwo = new ListWidgetOrange;
     allContributorsLayout->addWidget(allContributorsOne);
     allContributorsLayout->addWidget(allContributorsTwo);
     new QListWidgetItem("You <3", allContributorsOne);
@@ -419,11 +392,12 @@ void ConfigurationWindows::setUpCreditsSectionUI()
     new QListWidgetItem("Krayon973", allContributorsTwo);
     new QListWidgetItem("Eldraeildor", allContributorsOne);
     new QListWidgetItem("Mrs025", allContributorsTwo);
-    happy4Ever = new LabelBlue(tr("HAPPY4EVER", "And, don't forget to be Happy 4 Ever"));
+    happy4Ever = new LabelBlue(tr("HAPPY4EVER"));
 
     creditLayout->addWidget(openSourceText);
     creditLayout->addLayout(madeWithLayout);
     creditLayout->addWidget(leadDevelopper);
+    creditLayout->addWidget(si0ls);
     creditLayout->addLayout(allContributorsLayout);
     creditLayout->addWidget(happy4Ever);
     creditLayout->addStretch();

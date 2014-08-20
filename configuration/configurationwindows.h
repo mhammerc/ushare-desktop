@@ -35,6 +35,7 @@
 #include "ftpconfiguration.h"
 #include "httpconfiguration.h"
 #include "shortcutgetter.h"
+#include "widgets/bottombar.h"
 #include "shared.h"
 
 class SystemTrayIcon;
@@ -160,14 +161,13 @@ protected:
     QTextEdit * LGPLLicence;
     //Contributors
     LabelOrange * leadDevelopper;
+    LabelOrange * si0ls;
     QHBoxLayout * allContributorsLayout;
     QListWidget * allContributorsOne;
     QListWidget * allContributorsTwo;
     LabelBlue * happy4Ever;
 
-    QHBoxLayout * validateLayout;
-    LabelBlue * version;
-    ButtonBlue * validate;
+    BottomBarConfigurationWindow * bottomBar;
 
     //Fonctions
     void setUpUI();

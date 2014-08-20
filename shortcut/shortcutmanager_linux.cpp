@@ -1,5 +1,3 @@
-#ifdef __linux__
-
 #include "shortcut/shortcutmanager_linux.h"
 
 ShortcutManager::ShortcutManager(QKeySequence sequence, QObject * parent) : QObject(parent), sequence(sequence)
@@ -110,5 +108,3 @@ void ShortcutManager::activateShortcut(quint32 nativeKey, quint32 nativeMods)
 {
 
 }
-
-#endif

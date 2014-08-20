@@ -1,5 +1,3 @@
-#ifdef _WIN32
-
 #include "shortcut/shortcutmanager_win.h"
 
 ShortcutManager::ShortcutManager(QKeySequence sequence, QObject * parent) : QObject(parent), sequence(sequence)
@@ -303,5 +301,3 @@ void ShortcutManager::activateShortcut(quint32 nativeKey, quint32 nativeMods)
     if(nativeKey == this->nativeKey && nativeMods == this->nativeMods)
         emit activated();
 }
-
-#endif

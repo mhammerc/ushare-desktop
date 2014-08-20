@@ -33,6 +33,12 @@ HEADERS += \
     uploadMethod/cmsuplimgupload.h \
     widgets/radiobutton.h \
     uploadMethod/file.h \
+    widgets/bottombar.h \
+    widgets/slider.h \
+    widgets/combobox.h \
+    widgets/listwidget.h \
+    widgets/groupbox.h \
+    widgets/tabwidget.h
 
 SOURCES += \
     configuration/configurationwindows.cpp \
@@ -56,7 +62,7 @@ OTHER_FILES += \
 #Windows specific
 win32 {
 HEADERS += shortcut/shortcutmanager_win.h
-SOURCES += shortcut/shortcut/shortcutmanager_win.cpp
+SOURCES += shortcut/shortcutmanager_win.cpp
 
 INCLUDEPATH += D:\Development\SFML\SFML-master\include
 DEPENDPATH += D:\Development\SFML\SFML-master\include

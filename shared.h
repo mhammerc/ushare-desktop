@@ -16,6 +16,11 @@
 #include "widgets/topbar.h"
 #include "widgets/checkbox.h"
 #include "widgets/radiobutton.h"
+#include "widgets/slider.h"
+#include "widgets/combobox.h"
+#include "widgets/listwidget.h"
+#include "widgets/groupbox.h"
+#include "widgets/tabwidget.h"
 
 #include "uploadMethod/file.h"
 
@@ -71,7 +76,7 @@ QString const fileFieldName("uplimgFile");
 namespace Uplimg
 {
 QString const applicationName("Uplimg");
-QString const versionText("0.11 -> Yeah :-D");
+QString const versionText("0.12 -> Alpha testing | leaks unautorized without express authorization");
 QString const version("0.11b");
 QString const updateVersionLink("http://update.uplmg.com/latest.html");
 

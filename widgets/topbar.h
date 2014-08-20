@@ -9,9 +9,12 @@
 #include <QStyleOption>
 #include <QPainter>
 #include <QHBoxLayout>
+#include <QFrame>
 #include "shared.h"
+#include "button.h"
+#include "label.h"
 
-class TopBarWidget : public QWidget
+class TopBarWidget : public QFrame
 {
     Q_OBJECT
 public:
@@ -31,6 +34,10 @@ public:
         layout->addWidget(minimizeButton);
         layout->addWidget(closeButton);
         setLayout(layout);
+
+        minimizeButton->setContentsMargins(0,0,0,0);
+        closeButton->setContentsMargins(0,0,0,0);
+        layout->setSpacing(0);
 
         QObject::connect(minimizeButton, SIGNAL(clicked()), this, SIGNAL(minimize()));
         QObject::connect(closeButton, SIGNAL(clicked()), this, SIGNAL(close()));
@@ -65,12 +72,13 @@ protected:
             }
     }
 
+
     void paintEvent(QPaintEvent *)
     {
         QStyleOption opt;
-        opt.init (this);
-        QPainter p (this);
-        style ()->drawPrimitive (QStyle::PE_Widget, &opt, &p, this);
+        opt.init(this);
+        QPainter p(this);
+        style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
     }
 
     QPoint dragPosition;

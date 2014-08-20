@@ -86,11 +86,11 @@ class UplimgTitle : public QLabel
 public:
     UplimgTitle(QWidget * parent = 0, Qt::WindowFlags f = 0) : QLabel(parent,f)
     {
-        setObjectName("UplimgText16");
+        setObjectName("UplimgText");
     }
     UplimgTitle(const QString & text, QWidget * parent = 0, Qt::WindowFlags f = 0): QLabel(text, parent, f)
     {
-        setObjectName("UplimgText16");
+        setObjectName("UplimgText");
     }
 };
 

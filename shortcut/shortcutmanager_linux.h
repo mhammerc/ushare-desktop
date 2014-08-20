@@ -1,7 +1,6 @@
 #ifndef SHORTCUTMANAGER_LINUX_H
 #define SHORTCUTMANAGER_LINUX_H
 
-#ifdef __linux__
 #include <QKeySequence>
 #include <QObject>
 #include <QAbstractEventDispatcher>
@@ -39,5 +38,4 @@ signals:
     void activated();
 };
 
-#endif //__linux__
 #endif // ISHORTCUTMANAGER_LINUX_H

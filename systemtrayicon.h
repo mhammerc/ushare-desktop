@@ -34,7 +34,7 @@
 #ifdef _WIN32
 #include <shortcut/shortcutmanager_win.h>
 #endif
-#ifdef __linux
+#ifdef __linux__
 #include <shortcut/shortcutmanager_linux.h>
 #endif
 

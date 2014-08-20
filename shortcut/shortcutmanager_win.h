@@ -1,10 +1,10 @@
 #ifndef ISHORTCUTMANAGER_H
 #define ISHORTCUTMANAGER_H
 
-#ifdef __win32
+
+#include <QObject>
 #include <QKeySequence>
 #include <qt_windows.h>
-#include <QObject>
 #include <QAbstractEventDispatcher>
 #include <QAbstractNativeEventFilter>
 
@@ -40,5 +40,5 @@ signals:
     void activated();
 };
 
-#endif //__win32
+
 #endif // ISHORTCUTMANAGER_H
