@@ -71,11 +71,13 @@ protected:
 
     ShortcutManager * takeFullScreenShortcut;
     ShortcutManager * takeSelectedAreaScreenShortcut;
+    ShortcutManager * sendPasteShortcut;
     ShortcutManager * uploadFileShortcut;
     ShortcutManager * uploadClipboardShortcut;
 
     QKeySequence takeFullScreenKeySequence;
     QKeySequence takeSelectedAreaKeySequence;
+    QKeySequence sendPasteKeySequence;
     QKeySequence uploadFileKeySequence;
     QKeySequence uploadClipboardKeySequence;
 
@@ -122,6 +124,7 @@ public slots :
 
     void takeFullScreenShortcutChanged(QString);
     void takeSelectedAreaScreenShortcutChanged(QString);
+    void sendPasteShortcutChanged(QString);
     void uploadFileShortcutChanged(QString);
     void uploadClipboardShortcutChanged(QString);
 

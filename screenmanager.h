@@ -43,32 +43,35 @@ public:
     File captureFullScreen(File &file);
     void startPastMode();
 
-    bool sendFileTroughHTTP(const File &file);
-    bool sendFileTroughFTP(const File &file);
-    bool sendFileTroughUplimgWeb(const File &file);
+    void sendFileTroughHTTP(const File &file);
+    void sendFileTroughFTP(const File &file);
+    void sendFileTroughUplimgWeb(const File &file);
 
 protected:
     SystemTrayIcon * parent;
     QSettings settings;
 
     const int darkenFactor;
-    bool isFileSended;
 
     QPixmap darkenPicture(const QPixmap &picture);
 
     QPixmap originalScreenshot;
-    QString pathToFile;
+    File lastFile;
 
     SelectAreaBand * fullScreenPicture;
     QScreen * screen;
 
     PasteWindow * paste;
 
+    HTTPPostUpload * http;
+    FTPUpload * ftp;
+
 public slots:
     void areaPictureTaken(QRect);
     void areaPictureCanceled();
-    bool autoSendFile(const File &file);
+    void autoSendFile(const File &file);
     void fileSendedTroughHTTP();
+    void fileSendedTroughFTP();
 
     void pasteReady(PasteContent const &paste);
 

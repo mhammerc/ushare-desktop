@@ -17,11 +17,13 @@
 
 #include <iostream>
 
+class FileManager;
+
 class HTTPPostUpload : public QThread
 {
     Q_OBJECT
 public:
-    HTTPPostUpload();
+    HTTPPostUpload(FileManager * parent);
     ~HTTPPostUpload();
 
     bool isFileSended;
@@ -56,5 +58,7 @@ protected:
     QString pathToFile;
     QString fileFieldName;
     QString contentType;
+
+    FileManager * parent;
 };
 

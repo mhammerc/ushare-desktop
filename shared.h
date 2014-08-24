@@ -56,6 +56,7 @@ QString const runOnStartup("configuration/runOnStartup");
 QString const showNotifications("configuration/showNotifications");
 QString const takeFullScrenShortcut("configuration/shortcut/takeFullScreen");
 QString const takeSelectedAreaScreenShortcut("configuration/shortcut/takeSelectedArea");
+QString const sendPasteShortcut("configuration/shortcut/sendPaste");
 QString const uploadClipboardShortcut("configuration/shortcut/uploadClipboard");
 QString const uploadFileShortcut("configuration/shortcut/uploadFile");
 }
@@ -94,6 +95,17 @@ enum UploadMethod
     UPLIMG_WEB,
     LOCAL,
     U_ERROR
+};
+
+enum FTPStatus
+{
+    FTP_SUCCESS,
+    FTP_UNKNOWN_ERROR,
+    FTP_CANT_CONNECT,
+    FTP_SENDING,
+    FTP_CONNECTING,
+    FTP_CONNECTED,
+    FTP_WAITING
 };
 
 class Utils : public QObject

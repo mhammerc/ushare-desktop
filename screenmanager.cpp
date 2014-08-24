@@ -7,13 +7,12 @@ FileManager::FileManager(SystemTrayIcon *parent) :
     darkenFactor(10)
 {
     QObject::connect(this, SIGNAL(canSend()), parent, SLOT(sendSelectedArea()));
-    isFileSended = false;
 }
 
-bool FileManager::autoSendFile(File const &file)
+void FileManager::autoSendFile(File const &file)
 {
     parent->setIcon(QIcon(":/icon/uploading.png"));
-
+    lastFile = file;
     Uplimg::UploadMethod method = Uplimg::Utils::getUploadMethod();
 
     if (method == Uplimg::UploadMethod::U_ERROR)
@@ -29,102 +28,58 @@ bool FileManager::autoSendFile(File const &file)
         return sendFileTroughUplimgWeb(file);
 
     else if (method == Uplimg::UploadMethod::LOCAL)
-        return true;
+        return;
 
-    return false;
+    return;
 }
 
-bool FileManager::sendFileTroughFTP(File const &file)
+void FileManager::sendFileTroughFTP(File const &file)
 {
-    std::unique_ptr<FTPUpload> ftp(new FTPUpload(settings.value(Reg::FTPHost).toString().toStdString(),
-                                   settings.value(Reg::FTPPort).toInt(),
-                                   settings.value(Reg::FTPUsername).toString().toStdString(),
-                                   settings.value(Reg::FTPPassword).toString().toStdString(),
-                                   settings.value(Reg::FTPBasePath).toString().toStdString()));
+    ftp = new FTPUpload(file,
+                        settings.value(Reg::FTPHost).toString(),
+                        settings.value(Reg::FTPPort).toInt(),
+                        settings.value(Reg::FTPUsername).toString(),
+                        settings.value(Reg::FTPPassword).toString(),
+                        settings.value(Reg::FTPBasePath).toString(),
+                        this);
 
-    if (ftp->openConnexion())
-        if (ftp->sendFile(file.path.toStdString()))
-            if (ftp->closeConnexion())
-                return true;
+    QObject::connect(ftp, SIGNAL(operationFinished()), this, SLOT(fileSendedTroughFTP()));
+    ftp->run();
 
-            else std::clog << "FTP module : can't close connection\n";
-        else std::clog << "FTP module : can't send file\n";
-    else std::clog << "FTP module : can't connect to server\n";
+//    if (ftp->openConnexion())
+//        if (ftp->sendFile(file.path.toStdString()))
+//            if (ftp->closeConnexion())
+//                return;
 
-    return false;
+//            else std::clog << "FTP module : can't close connection\n";
+//        else std::clog << "FTP module : can't send file\n";
+//    else std::clog << "FTP module : can't connect to server\n";
+
 }
 
-bool FileManager::sendFileTroughUplimgWeb(File const &file)
+void FileManager::sendFileTroughUplimgWeb(File const &file)
 {
-    HTTPPostUpload * http = new HTTPPostUpload;
+    http = new HTTPPostUpload(this);
     http->setHost(UplimgWeb::host, UplimgWeb::port);
     http->setFile(file.path, UplimgWeb::fileFieldName);
     http->setContentType(file.type);
     http->start();
-
-    sf::Clock clock;
-
-    while(true)
-        {
-            if(clock.getElapsedTime() >= sf::seconds(30))
-                return false;
-
-            sf::sleep(sf::milliseconds(30));
-
-            if(http->canGetReply() && http->reply->isFinished() && http->reply->error() == QNetworkReply::NetworkError::NoError)
-                {
-                    http->terminate();
-                    parent->receivedMessage = QString(http->reply->readAll());
-                    http->deleteLater();
-                    return true;
-                }
-            else if(http->canGetReply() && http->reply->isFinished() && http->reply->error() != QNetworkReply::NetworkError::NoError)
-                {
-                    http->terminate();
-                    http->deleteLater();
-                    return false;
-                }
-        }
 }
 
-bool FileManager::sendFileTroughHTTP(File const &file)
+void FileManager::sendFileTroughHTTP(File const &file)
 {
-    HTTPPostUpload * http = new HTTPPostUpload;
+    http = new HTTPPostUpload(this);
     http->setHost(settings.value(Reg::HTTPHost).toString(), settings.value(Reg::HTTPPort).toInt());
     http->setFile(file.path, settings.value(Reg::HTTPFileFieldName, "uplimgFile").toString());
     http->setContentType(file.type);
     http->start();
-
-    sf::Clock clock;
-
-    while(true)
-        {
-            if(clock.getElapsedTime() >= sf::seconds(10))
-                return false;
-
-            sf::sleep(sf::milliseconds(30));
-
-            if(http->canGetReply() && http->reply->isFinished() && http->reply->error() == QNetworkReply::NetworkError::NoError)
-                {
-                    http->terminate();
-                    var::lastUrl.setUrl(QString(http->reply->readAll()));
-                    http->deleteLater();
-                    return true;
-                }
-            else if(http->canGetReply() && http->reply->isFinished() && http->reply->error() != QNetworkReply::NetworkError::NoError)
-                {
-                    http->terminate();
-                    http->deleteLater();
-                    return false;
-                }
-        }
 }
 
 File FileManager::captureSelectedZone(File const &file)
 {
     screen = QGuiApplication::primaryScreen();
 
-    this->pathToFile = file.path;
+    this->lastFile = file;
 
     if (screen)
         {
@@ -146,9 +101,9 @@ void FileManager::areaPictureTaken(QRect area)
     originalScreenshot = originalScreenshot.copy(area);
 
     if(Uplimg::Utils::getImageFormat() == Uplimg::ImageFormat::JPEG)
-        originalScreenshot.save(pathToFile, 0, Uplimg::Utils::getImageQuality());
+        originalScreenshot.save(lastFile.path, 0, Uplimg::Utils::getImageQuality());
     else if(Uplimg::Utils::getImageFormat() == Uplimg::ImageFormat::PNG)
-        originalScreenshot.save(pathToFile, 0, 0);
+        originalScreenshot.save(lastFile.path, 0, 0);
 
     emit canSend();
     fullScreenPicture->deleteLater();
@@ -196,19 +151,19 @@ File FileManager::captureFullScreen(File &file)
             if(Uplimg::Utils::getImageFormat() == Uplimg::ImageFormat::JPEG)
                 {
                     if (!screenshot.save(file.path, 0, Uplimg::Utils::getImageQuality()))
-                    {
-                        file.error();
-                        return file;
-                    }
+                        {
+                            file.error();
+                            return file;
+                        }
                 }
             else if(Uplimg::Utils::getImageFormat() == Uplimg::ImageFormat::PNG)
                 {
                     if (!screenshot.save(file.path, 0, 0))
-                    {
-                        file.error();
-                        return file;
-                    }
-                }     
+                        {
+                            file.error();
+                            return file;
+                        }
+                }
         }
 
     file.error();
@@ -224,17 +179,50 @@ void FileManager::startPastMode()
 
 FileManager::~FileManager() {}
 
-
 void FileManager::fileSendedTroughHTTP()
 {
-    isFileSended = true;
+    if(http->reply->error() == QNetworkReply::NetworkError::NoError)
+        {
+            http->terminate();
+            var::lastUrl.setUrl(QString(http->reply->readAll()));
+            http->deleteLater();
+            http = nullptr;
+            parent->fileSended(lastFile);
+
+        }
+    else if(http->reply->error() != QNetworkReply::NetworkError::NoError)
+        {
+            http->terminate();
+            http->deleteLater();
+            http = nullptr;
+            parent->throwErrorAlert(Uplimg::UPLOAD_FAIL);
+        }
+
+}
+
+void FileManager::fileSendedTroughFTP()
+{
+    if(ftp->status == Uplimg::FTP_SUCCESS)
+        {
+            ftp->terminate();
+            ftp->deleteLater();
+            ftp = nullptr;
+            parent->fileSended(lastFile);
+        }
+    else if(ftp->status == Uplimg::FTP_UNKNOWN_ERROR || ftp->status == Uplimg::FTP_CANT_CONNECT)
+        {
+            ftp->terminate();
+            ftp->deleteLater();
+            ftp = nullptr;
+            parent->throwErrorAlert(Uplimg::UPLOAD_FAIL);
+        }
 }
 
 void FileManager::pasteReady(const PasteContent &pasteContent)
 {
     paste->close();
     paste->deleteLater();
-    paste = 0;
+    paste = nullptr;
 
     File file;
     file.name = Uplimg::Utils::getNewFileName(".txt");
@@ -245,7 +233,5 @@ void FileManager::pasteReady(const PasteContent &pasteContent)
     physicFile.write(pasteContent.fileContent.toLatin1());
     physicFile.close();
     parent->newActionStarted();
-
-    if(autoSendFile(file))
-        parent->fileSended(file);
+    autoSendFile(file);
 }

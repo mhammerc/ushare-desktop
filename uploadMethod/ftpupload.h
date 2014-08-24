@@ -3,31 +3,50 @@
 
 #include <SFML/Network.hpp>
 
-#include <memory>
 #include <string>
+#include <memory>
 #include <iostream>
+#include <QThread>
+#include <QString>
+#include "shared.h"
 
-class FTPUpload
+class FileManager;
+
+class FTPUpload : public QThread
 {
+    Q_OBJECT
 public:
     ~FTPUpload();
-    FTPUpload(const std::string &host, unsigned short port, const std::string &username, const std::string &password, const std::string &basePath);
+    FTPUpload(File const& file, QString const &host, unsigned int const port, QString const &username, QString const &password, QString const &basePath, FileManager * parent);
 
-    bool openConnexion();
-    bool closeConnexion();
+    void autoSendFile();
+    Uplimg::FTPStatus status;
 
-    bool sendFile(std::string pathToLocalFile);
+    void run() Q_DECL_OVERRIDE
+    {
+        this->autoSendFile();
+        this->exec();
+    }
 
 protected:
+    bool openConnexion();
+    bool closeConnexion();
+    bool sendFile();
+
     std::unique_ptr<sf::Ftp> ftpClient;
 
-    std::string host;
-    unsigned short port;
-    std::string username;
-    std::string password;
-    std::string basePath;
+    File file;
+    QString host;
+    unsigned int port;
+    QString username;
+    QString password;
+    QString basePath;
 
+    FileManager * parent;
     bool isOpenedConnection;
+
+signals:
+    void operationFinished();
 
 };
 

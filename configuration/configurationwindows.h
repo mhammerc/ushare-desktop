@@ -129,6 +129,7 @@ protected:
     QFormLayout * hotkeysFormLayout;
     ShortcutGetter * takeFullScreenShortcut;
     ShortcutGetter * takeSelectedScreenShortcut;
+    ShortcutGetter * sendPasteShortcut;
     ShortcutGetter * uploadFileShortcut;
     ShortcutGetter * uploadClipboardShortcut;
     LabelOrange * warningHotkeysDisabled;
@@ -207,6 +208,7 @@ public slots :
 
     void takeFullScreenShortcutChanged(QString);
     void takeSelectedAreaScreenShortcutChanged(QString);
+    void sendPasteShortcutChanged(const QString &shortcut);
     void uploadFileShortcutChanged(QString);
     void uploadClipboardShortcutChanged(QString);
 

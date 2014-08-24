@@ -7,11 +7,11 @@ PasteWindow::PasteWindow(FileManager* parent, QWidget * qwidgetParent) : parent(
     QIcon icon(":/icon/iconBase.png");
     setWindowIcon(icon);
 
-    setUpContextMenu();
-    setUpConnexion();
+    setUpWidgets();
+    setUpConnections();
 }
 
-void PasteWindow::setUpContextMenu()
+void PasteWindow::setUpWidgets()
 {
     /* file name */
     fileNameLayout = new QHBoxLayout;
@@ -42,8 +42,10 @@ void PasteWindow::setUpContextMenu()
     setLayout(mainLayout);
 }
 
-void PasteWindow::setUpConnexion()
+void PasteWindow::setUpConnections()
 {
+    QShortcut * enterShortcut = new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_Return), this);
+    QObject::connect(enterShortcut, SIGNAL(activated()), this, SLOT(sendTriggered()));
     QObject::connect(cancel, SIGNAL(clicked()), this, SLOT(deleteLater()));
     QObject::connect(send, SIGNAL(clicked()), this, SLOT(sendTriggered()));
 }

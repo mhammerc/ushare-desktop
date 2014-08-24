@@ -2,11 +2,12 @@
 #include "screenmanager.h"
 
 
-HTTPPostUpload::HTTPPostUpload()
+HTTPPostUpload::HTTPPostUpload(FileManager *parent)
 {
     contentType = "image";
     isFileSended = false;
     reply = 0;
+    this->parent = parent;
 }
 
 HTTPPostUpload::~HTTPPostUpload()
@@ -64,4 +65,6 @@ void HTTPPostUpload::sendFile()
 
     reply->setParent(container);
     manager->setParent(reply);
+
+    QObject::connect(reply, SIGNAL(finished()), parent, SLOT(fileSendedTroughHTTP()));
 }

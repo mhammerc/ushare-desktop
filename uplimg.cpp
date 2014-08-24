@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
     app.setQuitOnLastWindowClosed(false);
-    QCoreApplication::setOrganizationName("ImoteSystem");
+    QCoreApplication::setOrganizationName("Uplimg corporation");
     QCoreApplication::setApplicationName(Uplimg::applicationName);
 
     QFile css("styleSheet.css");

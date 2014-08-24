@@ -35,6 +35,7 @@ ConfigurationWindows::ConfigurationWindows(SystemTrayIcon * parent, QWidget *qwi
 
     takeFullScreenShortcut->setText(settings.value(Reg::takeFullScrenShortcut).toString());
     takeSelectedScreenShortcut->setText(settings.value(Reg::takeSelectedAreaScreenShortcut).toString());
+    sendPasteShortcut->setText(settings.value(Reg::sendPasteShortcut).toString());
     uploadFileShortcut->setText(settings.value(Reg::uploadFileShortcut).toString());
     uploadClipboardShortcut->setText(settings.value(Reg::uploadClipboardShortcut).toString());
 
@@ -115,6 +116,7 @@ ConfigurationWindows::ConfigurationWindows(SystemTrayIcon * parent, QWidget *qwi
 
     QObject::connect(takeFullScreenShortcut, SIGNAL(textChanged(QString)), this, SLOT(takeFullScreenShortcutChanged(QString)));
     QObject::connect(takeSelectedScreenShortcut, SIGNAL(textChanged(QString)), this, SLOT(takeSelectedAreaScreenShortcutChanged(QString)));
+    QObject::connect(sendPasteShortcut, SIGNAL(textChanged(QString)), this, SLOT(sendPasteShortcutChanged(QString)));
     QObject::connect(uploadFileShortcut, SIGNAL(textChanged(QString)), this, SLOT(uploadFileShortcutChanged(QString)));
     QObject::connect(uploadClipboardShortcut, SIGNAL(textChanged(QString)), this, SLOT(uploadClipboardShortcutChanged(QString)));
 
@@ -298,11 +300,13 @@ void ConfigurationWindows::setUpHotkeysSectionUI()
 
     takeFullScreenShortcut = new ShortcutGetter;
     takeSelectedScreenShortcut = new ShortcutGetter;
+    sendPasteShortcut = new ShortcutGetter;
     uploadFileShortcut = new ShortcutGetter;
     uploadClipboardShortcut = new ShortcutGetter;
 
     hotkeysFormLayout->addRow(tr("TAKE_FULL_SCREEN_HOTKEYS"), takeFullScreenShortcut);
     hotkeysFormLayout->addRow(tr("TAKE_SELECTED_SCREEN_HOTKEYS"), takeSelectedScreenShortcut);
+    hotkeysFormLayout->addRow(tr("SEND_PASTE_HOTKEYS"), sendPasteShortcut);
     hotkeysFormLayout->addRow(tr("UPLOAD_FILE_SHORTCUT"), uploadFileShortcut);
     hotkeysFormLayout->addRow(tr("UPLOAD_CLIPBOARD_SHORTCUT"), uploadClipboardShortcut);
 
@@ -600,6 +604,12 @@ void ConfigurationWindows::takeSelectedAreaScreenShortcutChanged(QString shortcu
 {
     settings.setValue(Reg::takeSelectedAreaScreenShortcut, shortcut);
     parent->takeSelectedAreaScreenShortcutChanged(shortcut);
+}
+
+void ConfigurationWindows::sendPasteShortcutChanged(QString const &shortcut)
+{
+    settings.setValue(Reg::sendPasteShortcut, shortcut);
+    parent->sendPasteShortcutChanged(shortcut);
 }
 
 void ConfigurationWindows::uploadFileShortcutChanged(QString shortcut)

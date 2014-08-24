@@ -9,6 +9,7 @@
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QLineEdit>
+#include <QShortcut>
 #include "shared.h"
 #include "pastecontent.h"
 
@@ -21,8 +22,8 @@ public:
     explicit PasteWindow(FileManager*, QWidget * qwidgetParent = 0);
 
 protected:
-    void setUpContextMenu();
-    void setUpConnexion();
+    void setUpWidgets();
+    void setUpConnections();
 
     QVBoxLayout * mainLayout;
 

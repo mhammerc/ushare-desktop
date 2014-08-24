@@ -23,11 +23,13 @@ SystemTrayIcon::SystemTrayIcon(QObject *qobject) :
 
     takeFullScreenKeySequence = QKeySequence(settings.value(Reg::takeFullScrenShortcut).toString());
     takeSelectedAreaKeySequence = QKeySequence(settings.value(Reg::takeSelectedAreaScreenShortcut).toString());
+    sendPasteKeySequence = QKeySequence(settings.value(Reg::sendPasteShortcut).toString());
     uploadFileKeySequence = QKeySequence(settings.value(Reg::uploadFileShortcut).toString());
     uploadClipboardKeySequence = QKeySequence(settings.value(Reg::uploadClipboardShortcut).toString());
 
     takeFullScreenShortcut = new ShortcutManager(takeFullScreenKeySequence, this);
     takeSelectedAreaScreenShortcut = new ShortcutManager(takeSelectedAreaKeySequence, this);
+    sendPasteShortcut = new ShortcutManager(sendPasteKeySequence, this);
     uploadFileShortcut = new ShortcutManager(uploadFileKeySequence, this);
     uploadClipboardShortcut = new ShortcutManager(uploadClipboardKeySequence, this);
 
@@ -46,6 +48,7 @@ SystemTrayIcon::SystemTrayIcon(QObject *qobject) :
 
     QObject::connect(takeFullScreenShortcut, SIGNAL(activated()), this, SLOT(takeFullScrenTriggered()));
     QObject::connect(takeSelectedAreaScreenShortcut, SIGNAL(activated()), this, SLOT(takeSelectedAreaScreenTriggered()));
+    QObject::connect(sendPasteShortcut, SIGNAL(activated()), this, SLOT(sendPasteTriggered()));
     QObject::connect(uploadFileShortcut, SIGNAL(activated()), this, SLOT(uploadSelectedFileTriggered()));
     QObject::connect(uploadClipboardShortcut, SIGNAL(activated()), this, SLOT(uploadClipboardTriggered()));
 }
@@ -65,6 +68,7 @@ void SystemTrayIcon::setUpContextMenu()
 
     takeScreen->setShortcut(takeFullScreenShortcut->shortcut());
     takeSelectedScreen->setShortcut(takeSelectedAreaScreenShortcut->shortcut());
+    sendPaste->setShortcut(sendPasteShortcut->shortcut());
     uploadFile->setShortcut(uploadFileShortcut->shortcut());
     uploadClipboard->setShortcut(uploadClipboardShortcut->shortcut());
 
@@ -92,10 +96,7 @@ void SystemTrayIcon::sendPasteTriggered()
 
 void SystemTrayIcon::sendSelectedArea()
 {
-    if (screenManager->autoSendFile(fileInfo))
-        fileSended(fileInfo);
-    else
-        throwErrorAlert(Uplimg::ErrorList::UPLOAD_FAIL);
+    screenManager->autoSendFile(fileInfo);
 }
 
 void SystemTrayIcon::takeFullScrenTriggered()
@@ -107,10 +108,7 @@ void SystemTrayIcon::takeFullScrenTriggered()
             file.name = Uplimg::Utils::getNewFileName(Uplimg::Utils::getImageFormat());
             file.path = Uplimg::Utils::getFileTempPath(file.name);
 
-            if (screenManager->autoSendFile(screenManager->captureFullScreen(file)))
-                fileSended(file);
-            else
-                throwErrorAlert(Uplimg::ErrorList::UPLOAD_FAIL);
+            screenManager->autoSendFile(screenManager->captureFullScreen(file));
         }
 }
 
@@ -124,14 +122,11 @@ void SystemTrayIcon::uploadSelectedFileTriggered()
 
             if(!file.path.isNull())
                 {
-                    if (screenManager->autoSendFile(file))
-                        {
-                            QFileInfo fileInfo(file.path);
-                            file.name = fileInfo.fileName();
-                            fileSended(file);
-                        }
-                    else
-                        throwErrorAlert(Uplimg::ErrorList::UPLOAD_FAIL);
+                    QFileInfo fileInfo(file.path);
+                    file.name = fileInfo.fileName();
+                    fileSended(file);
+                    screenManager->autoSendFile(file);
+
                 }
         }
 }
@@ -144,10 +139,8 @@ void SystemTrayIcon::fileSended(File const &file)
 
     if(Uplimg::Utils::getUploadMethod() == Uplimg::UploadMethod::UPLIMG_WEB)
         {
-            if(Uplimg::Utils::isValidURL(receivedMessage.toStdString()))
-                var::lastUrl.setUrl(receivedMessage);
-            else
-                return throwErrorAlert(receivedMessage);
+            if(!Uplimg::Utils::isValidURL(var::lastUrl.toString().toStdString()))
+                return throwErrorAlert(var::lastUrl.toString());
 
         }
 
@@ -234,12 +227,10 @@ void SystemTrayIcon::uploadClipboardTriggered()
 
             if(QFile::exists(file.path)) //Clipboard is pointing to file
                 {
-                    if(screenManager->autoSendFile(file))
-                        {
-                            QFileInfo fi(file.path);
-                            file.name = fi.fileName();
-                            fileSended(file);
-                        }
+                    QFileInfo fi(file.path);
+                    file.name = fi.fileName();
+                    fileSended(file);
+                    screenManager->autoSendFile(file);
                     return;
                 }
             /* WINDOWS ONLY END */
@@ -252,10 +243,7 @@ void SystemTrayIcon::uploadClipboardTriggered()
                 {
                     physicFile << QApplication::clipboard()->text().toStdString();
                     physicFile.close();
-                    if (screenManager->autoSendFile(file))
-                        fileSended(file);
-                    else
-                        throwErrorAlert(Uplimg::ErrorList::UPLOAD_FAIL);
+                    screenManager->autoSendFile(file);
                 }
         }
 }
@@ -263,9 +251,9 @@ void SystemTrayIcon::uploadClipboardTriggered()
 void SystemTrayIcon::showWindowConfigurationTriggered()
 {
     if(configurationWindow == 0)
-    {
-        configurationWindow = new ConfigurationWindows(this);
-    }
+        {
+            configurationWindow = new ConfigurationWindows(this);
+        }
     configurationWindow->resetTab();
     configurationWindow->show();
 }
@@ -306,8 +294,9 @@ void SystemTrayIcon::firstStart()
     settings.setValue(Reg::choosedMethod, "UPLIMG_WEB");
     settings.setValue(Reg::takeFullScrenShortcut, "Alt+1");
     settings.setValue(Reg::takeSelectedAreaScreenShortcut, "Alt+2");
-    settings.setValue(Reg::uploadFileShortcut, "Alt+3");
-    settings.setValue(Reg::uploadClipboardShortcut, "Alt+4");
+    settings.setValue(Reg::sendPasteShortcut, "Alt+3");
+    settings.setValue(Reg::uploadFileShortcut, "Alt+4");
+    settings.setValue(Reg::uploadClipboardShortcut, "Alt+5");
     settings.setValue(Reg::imageFormat, "JPEG");
     settings.setValue(Reg::imageQuality, 100);
     settings.setValue(Reg::redArea, 10);
@@ -324,6 +313,7 @@ void SystemTrayIcon::disableHotkeys()
 {
     takeFullScreenShortcut->setDisabled(true);
     takeSelectedAreaScreenShortcut->setDisabled(true);
+    sendPasteShortcut->setDisabled(true);
     uploadFileShortcut->setDisabled(true);
     uploadClipboardShortcut->setDisabled(true);
 }
@@ -332,6 +322,7 @@ void SystemTrayIcon::enableHotkeys()
 {
     takeFullScreenShortcut->setEnabled(true);
     takeSelectedAreaScreenShortcut->setEnabled(true);
+    sendPasteShortcut->setEnabled(true);
     uploadFileShortcut->setEnabled(true);
     uploadClipboardShortcut->setEnabled(true);
 }
@@ -356,9 +347,16 @@ void SystemTrayIcon::takeFullScreenShortcutChanged(QString shortcut)
 
 void SystemTrayIcon::takeSelectedAreaScreenShortcutChanged(QString shortcut)
 {
-    takeSelectedAreaKeySequence = QKeySequence(shortcut);
-    takeSelectedAreaScreenShortcut->setShortcut(takeSelectedAreaKeySequence);
-    takeSelectedScreen->setShortcut(takeSelectedAreaKeySequence);
+    sendPasteKeySequence = QKeySequence(shortcut);
+    sendPasteShortcut->setShortcut(sendPasteKeySequence);
+    sendPaste->setShortcut(sendPasteKeySequence);
+}
+
+void SystemTrayIcon::sendPasteShortcutChanged(QString shortcut)
+{
+    sendPasteKeySequence = QKeySequence(shortcut);
+    sendPasteShortcut->setShortcut(sendPasteKeySequence);
+    sendPaste->setShortcut(sendPasteKeySequence);
 }
 
 void SystemTrayIcon::uploadClipboardShortcutChanged(QString shortcut)
@@ -366,6 +364,13 @@ void SystemTrayIcon::uploadClipboardShortcutChanged(QString shortcut)
     uploadClipboardKeySequence = QKeySequence(shortcut);
     uploadClipboardShortcut->setShortcut(uploadClipboardKeySequence);
     uploadClipboard->setShortcut(uploadClipboardKeySequence);
+}
+
+void SystemTrayIcon::uploadFileShortcutChanged(QString shortcut)
+{
+    uploadFileKeySequence = QKeySequence(shortcut);
+    uploadFileShortcut->setShortcut(uploadFileKeySequence);
+    uploadFile->setShortcut(uploadFileKeySequence);
 }
 
 void SystemTrayIcon::openLastUrl()
@@ -376,13 +381,6 @@ void SystemTrayIcon::openLastUrl()
 void SystemTrayIcon::copyLastUrlToClipboard()
 {
     Uplimg::Utils::copyLastUrlToClipboard();
-}
-
-void SystemTrayIcon::uploadFileShortcutChanged(QString shortcut)
-{
-    uploadFileKeySequence = QKeySequence(shortcut);
-    uploadFileShortcut->setShortcut(uploadFileKeySequence);
-    uploadFile->setShortcut(uploadFileKeySequence);
 }
 
 SystemTrayIcon::~SystemTrayIcon()
