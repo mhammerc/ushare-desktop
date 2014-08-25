@@ -120,14 +120,16 @@ void SystemTrayIcon::uploadSelectedFileTriggered()
             File file;
             file.path = QFileDialog::getOpenFileName(0, tr("SELECT_FILE"));
 
+
             if(!file.path.isNull())
                 {
                     QFileInfo fileInfo(file.path);
                     file.name = fileInfo.fileName();
                     fileSended(file);
                     screenManager->autoSendFile(file);
-
                 }
+            else
+                lastActionFinished();
         }
 }
 
@@ -161,7 +163,7 @@ void SystemTrayIcon::fileSended(File const &file)
                 Uplimg::Utils::copyLastUrlToClipboard();
 
             if(settings.value(Reg::showNotifications).toBool())
-                this->showMessage(Uplimg::applicationName, tr("UPLOAD_SUCCESS_WITH_URL") + var::lastUrl.toDisplayString());
+                this->showNotification(Uplimg::applicationName, tr("UPLOAD_SUCCESS_WITH_URL") + var::lastUrl.toDisplayString());
         }
     else if(Uplimg::Utils::getUploadMethod()  == Uplimg::UploadMethod::LOCAL)
         {
@@ -169,7 +171,7 @@ void SystemTrayIcon::fileSended(File const &file)
                 fileSendedSound.play();
 
             if(settings.value(Reg::showNotifications).toBool())
-                this->showMessage(Uplimg::applicationName, tr("UPLOAD_SUCCESS_LOCAL"));
+                this->showNotification(Uplimg::applicationName, tr("UPLOAD_SUCCESS_LOCAL"));
         }
 }
 
@@ -223,13 +225,12 @@ void SystemTrayIcon::uploadClipboardTriggered()
             /* ONLY SUPPORTED FOR WINDOWS, NEVER TESTED ON X11 OR MAC */
             /* IF CLIPBOARD POINT TO FILE, WE UPLOAD IT INSTEAD FILE PATH */
             file.path = QApplication::clipboard()->text();
-            file.path = file.path.right(file.path.size()-8); //Windows automatically put file:/// at begin
+            file.path = file.path.right(file.path.size()-8); //Windows automatically insert file:/// at begin
 
             if(QFile::exists(file.path)) //Clipboard is pointing to file
                 {
                     QFileInfo fi(file.path);
                     file.name = fi.fileName();
-                    fileSended(file);
                     screenManager->autoSendFile(file);
                     return;
                 }
@@ -238,7 +239,6 @@ void SystemTrayIcon::uploadClipboardTriggered()
             file.name = Uplimg::Utils::getNewFileName(".txt");
             file.path = Uplimg::Utils::getFileTempPath(file.name);
             std::ofstream physicFile(file.path.toStdString().c_str());
-
             if (physicFile)
                 {
                     physicFile << QApplication::clipboard()->text().toStdString();
@@ -264,23 +264,36 @@ void SystemTrayIcon::throwErrorAlert(const QString &text)
     QMessageBox::critical(0, "Uplimg", text);
 }
 
-void SystemTrayIcon::throwErrorAlert(const Uplimg::ErrorList &error)
+void SystemTrayIcon::throwErrorAlert(const Uplimg::ErrorList error)
 {
     setIcon(QIcon(":/icon/error.png"));
     iconTimer->start();
+    lastActionFinished();
 
     if (error == Uplimg::ErrorList::UPLOAD_FAIL)
         {
-            lastActionFinished();
             const QString text(tr("UPLOAD_FAILED"));
-            this->showMessage(Uplimg::applicationName, text);
+            this->showNotification(Uplimg::applicationName, text);
         }
     else if(error == Uplimg::ErrorList::UPLOAD_METHOD_NOT_CHOOSED)
         {
-            lastActionFinished();
             const QString text(tr("NO_METHOD_TO_UPLOAD_CHOOSED"));
-            this->showMessage(Uplimg::applicationName, text);
+            this->showNotification(Uplimg::applicationName, text);
         }
+}
+
+void SystemTrayIcon::throwErrorAlert(Uplimg::FTPStatus const error)
+{
+    setIcon(QIcon(":/icon/error.png"));
+    iconTimer->start();
+    lastActionFinished();
+
+    if(error == Uplimg::FTP_CANT_CONNECT)
+        showNotification(Uplimg::applicationName, tr("FTP_CANT_CONNECT"));
+    else if(error == Uplimg::FTP_CANT_LOGIN)
+        showNotification(Uplimg::applicationName, tr("FTP_CANT_LOGIN"));
+    else if(error == Uplimg::FTP_CANT_PUT_FILE)
+        showNotification(Uplimg::applicationName, tr("FTP_CANT_PUT_FILE"));
 }
 
 void SystemTrayIcon::firstStart()
@@ -386,4 +399,9 @@ void SystemTrayIcon::copyLastUrlToClipboard()
 SystemTrayIcon::~SystemTrayIcon()
 {
     configurationWindow->deleteLater();
+}
+
+void SystemTrayIcon::showNotification(const QString &title, const QString &message)
+{
+    new NotificationWindow(title, message, this);
 }

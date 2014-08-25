@@ -34,7 +34,7 @@
 
 #include "ftpconfiguration.h"
 #include "httpconfiguration.h"
-#include "shortcutgetter.h"
+#include "widgets/shortcutgetter.h"
 #include "widgets/bottombar.h"
 #include "shared.h"
 
@@ -151,6 +151,8 @@ protected:
     /* Credits */
     QWidget * creditSection;
     QVBoxLayout * creditLayout;
+    QVBoxLayout * creditMainLayout;
+    QGroupBox * creditGroupBox;
     //Header
     QLabel * openSourceText;
     //Made with

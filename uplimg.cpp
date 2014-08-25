@@ -1,32 +1,9 @@
 #include <QApplication>
 #include <QTranslator>
-#include <QSystemTrayIcon>
-#include <QMenu>
-#include <QAction>
-#include <QList>
-#include <QObject>
-#include "systemtrayicon.h"
-
-#include <QHttpMultiPart>
-#include <QHttpPart>
-#include <QNetworkRequest>
-#include <QUrl>
 #include <QFile>
-#include <QNetworkAccessManager>
-#include <QNetworkReply>
-#include <QSignalMapper>
-#include <QString>
-#include <thread>
-#include <chrono>
+#include <QUrl>
 
-#include <QStyleFactory>
-#include <QStringList>
-
-#include "shared.h"
-
-#include <fstream>
-
-#include <iostream>
+#include "systemtrayicon.h"
 
 QUrl var::lastUrl;
 

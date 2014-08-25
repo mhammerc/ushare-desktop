@@ -1,4 +1,5 @@
 #pragma once
+#include <QObject>
 #include <QHttpMultiPart>
 #include <QHttpPart>
 #include <QNetworkRequest>
@@ -7,15 +8,11 @@
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QString>
-#include <QObject>
 #include <QThread>
 #include <QMessageBox>
 
 #include <fstream>
 
-#include <SFML/System.hpp>
-
-#include <iostream>
 
 class FileManager;
 
@@ -26,12 +23,10 @@ public:
     HTTPPostUpload(FileManager * parent);
     ~HTTPPostUpload();
 
-    bool isFileSended;
-
-    void setHost(const QString &host, int port);
-
-    void setFile(const QString &pathToFile, const QString &fileFieldName);
-    void setContentType(const QString &contentType = "image/png");
+    void setHost(QString const &host, int port);
+    void setFile(QString const &pathToFile, const QString &fileFieldName);
+    void setContentType(QString const &contentType = "image");
+    void setDestinationFileName(QString const& destinationFilename);
 
     void sendFile();
 
@@ -46,18 +41,13 @@ public:
     QHttpMultiPart * container;
     QFile * file;
 
-    bool canGetReply()
-    {
-        if(reply != 0) return true;
-        else return false;
-    }
-
 protected:
     QUrl url;
 
     QString pathToFile;
     QString fileFieldName;
     QString contentType;
+    QString destinationFilename; //Needed file name for downloading
 
     FileManager * parent;
 };

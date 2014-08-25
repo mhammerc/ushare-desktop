@@ -1,7 +1,3 @@
-/**
-  This file simply represent the area band when selecting area for take screen.
- */
-
 #ifndef SELECTAREABAND_H
 #define SELECTAREABAND_H
 
@@ -21,6 +17,9 @@
 
 class FileManager;
 
+/**
+  This class simply represent the area band showed when selecting area to select area for new screen.
+ */
 class SelectAreaBand : public QLabel
 {
     Q_OBJECT

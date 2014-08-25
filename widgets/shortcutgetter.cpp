@@ -1,5 +1,5 @@
 #include "shortcutgetter.h"
-#include "configurationwindows.h"
+#include "configuration/configurationwindows.h"
 
 ShortcutGetter::ShortcutGetter(QWidget * widget) : ButtonBlue(widget)
 {

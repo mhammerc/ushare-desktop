@@ -1,7 +1,7 @@
 #include "pastewindow.h"
 #include "screenmanager.h"
 
-PasteWindow::PasteWindow(FileManager* parent, QWidget * qwidgetParent) : parent(parent), QWidget(qwidgetParent)
+PasteWindow::PasteWindow(FileManager* parent, QWidget * qwidgetParent) : QWidget(qwidgetParent), parent(parent)
 {
     setWindowTitle(Uplimg::applicationName);
     QIcon icon(":/icon/iconBase.png");

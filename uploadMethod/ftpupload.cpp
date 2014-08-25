@@ -2,25 +2,50 @@
 #include "screenmanager.h"
 
 
-FTPUpload::FTPUpload(const File &file, QString const &host, unsigned int const port, QString const &username, QString const &password, QString const &basePath, FileManager * parent)
-    : ftpClient(new sf::Ftp()), status(Uplimg::FTP_WAITING)
+FTPUpload::FTPUpload(FileManager * parent)
+    : status(Uplimg::FTP_WAITING), ftpClient(new sf::Ftp())
+{
+    this->parent = parent;
+}
+
+void FTPUpload::setHost(const QString &host)
+{
+    this->host = host;
+}
+
+void FTPUpload::setPort(const unsigned int port)
+{
+    this->port = port;
+}
+
+void FTPUpload::setUsername(const QString &username)
+{
+    this->username = username;
+}
+
+void FTPUpload::setPassword(const QString &password)
+{
+    this->password = password;
+}
+
+void FTPUpload::setBasepath(const QString &basePath)
+{
+    this->basePath = basePath;
+}
+
+void FTPUpload::insertFile(const File &file)
 {
     this->file = file;
-    this->parent = parent;
-    this->host = host;
-    this->port = port;
-    this->username = username;
-    this->password = password;
-    this->basePath = basePath;
 }
 
 void FTPUpload::autoSendFile()
 {
-    if(openConnexion())
-        {
-            sendFile();
-            closeConnexion();
-        }
+    if(!openConnexion())
+            return;
+
+    sendFile();
+    closeConnexion();
+
     emit operationFinished();
 }
 
@@ -37,7 +62,7 @@ bool FTPUpload::sendFile()
                 }
             else if (!response.isOk())
                 {
-                    status = Uplimg::FTP_UNKNOWN_ERROR;
+                    status = Uplimg::FTP_CANT_PUT_FILE;
                     std::cerr << response.getMessage();
                     return false;
                 }
@@ -58,7 +83,7 @@ bool FTPUpload::openConnexion()
                 }
             else
                 {
-                    status = Uplimg::FTP_CANT_CONNECT;
+                    status = Uplimg::FTP_CANT_LOGIN;
                     return false;
                 }
         }

@@ -7,7 +7,7 @@ ConfigurationWindows::ConfigurationWindows(SystemTrayIcon * parent, QWidget *qwi
 {
     setContentsMargins(-10,-10,-10,-10);
     this->parent = parent;
-    setObjectName("windowWithoutFrameBlack");
+    setObjectName("windowWithoutFrameBlue");
     QObject::connect(this, SIGNAL(easterEgg()), parent, SLOT(enableEasterEgg()));
 
     this->setWindowIcon(QIcon(":/icon/base.png"));
@@ -78,10 +78,6 @@ ConfigurationWindows::ConfigurationWindows(SystemTrayIcon * parent, QWidget *qwi
     selectingAreaColor.setBlue(settings.value(Reg::blueArea).toInt());
     selectingAreaColorRandomizer(settings.value(Reg::randomizeArea).toBool());
 
-    QPalette pal;
-    pal.setColor(QPalette::Window, selectingAreaColor);
-    selectingAreaColorShower->setPalette(pal);
-
     QObject::connect(topBarWidget, SIGNAL(minimize()), this, SLOT(showMinimized()));
     QObject::connect(topBarWidget, SIGNAL(close()), this, SLOT(close()));
 
@@ -121,7 +117,7 @@ ConfigurationWindows::ConfigurationWindows(SystemTrayIcon * parent, QWidget *qwi
     QObject::connect(uploadClipboardShortcut, SIGNAL(textChanged(QString)), this, SLOT(uploadClipboardShortcutChanged(QString)));
 
     //QObject::connect(validate, SIGNAL(clicked()), this, SLOT(hide()));
-    QObject::connect(bottomBar, SIGNAL(validate()), this, SLOT(refreshCSS()));
+    QObject::connect(bottomBar, SIGNAL(validate()), this, SLOT(refreshCSS())); /* Used when making design. This button refresh all the design according to modified css file. */
 
     FTPConf = new FTPConfiguration();
     HTTPConf = new HTTPConfiguration();
@@ -129,6 +125,10 @@ ConfigurationWindows::ConfigurationWindows(SystemTrayIcon * parent, QWidget *qwi
     this->setLayout(mainLayout);
 
     this->setFixedSize(530, this->minimumHeight());
+
+    QPalette pal;
+    pal.setColor(QPalette::Window, selectingAreaColor);
+    selectingAreaColorShower->setPalette(pal);
 }
 
 void ConfigurationWindows::setUpUI()
@@ -291,7 +291,6 @@ void ConfigurationWindows::setUpHotkeysSectionUI()
     hotkeysSection = new QWidget;
     hotkeysLayout = new QVBoxLayout;
     hotkeysGroupBox = new GroupBoxBlue(tr("KEYBOARD_CONFIGURATION"));
-    hotkeysIntermediateGroupBox = new GroupBoxBlue;
     hotkeysBindingLayout = new QVBoxLayout;
     hotkeysFormLayout = new QFormLayout;
 
@@ -310,15 +309,13 @@ void ConfigurationWindows::setUpHotkeysSectionUI()
     hotkeysFormLayout->addRow(tr("UPLOAD_FILE_SHORTCUT"), uploadFileShortcut);
     hotkeysFormLayout->addRow(tr("UPLOAD_CLIPBOARD_SHORTCUT"), uploadClipboardShortcut);
 
-    hotkeysIntermediateGroupBox->setLayout(hotkeysFormLayout);
-
     hotkeysBindingLayout->addWidget(hotkeysWelcomeText);
-    hotkeysBindingLayout->addWidget(hotkeysIntermediateGroupBox);
+    hotkeysBindingLayout->addLayout(hotkeysFormLayout);
+    hotkeysBindingLayout->addWidget(warningHotkeysDisabled);
 
     hotkeysGroupBox->setLayout(hotkeysBindingLayout);
 
     hotkeysLayout->addWidget(hotkeysGroupBox);
-    hotkeysLayout->addWidget(warningHotkeysDisabled);
     hotkeysLayout->addStretch();
 
     hotkeysSection->setLayout(hotkeysLayout);
@@ -330,7 +327,7 @@ void ConfigurationWindows::setUpUpdateSectionUI()
 {
     updateSection = new QWidget;
     updateMainLayout = new QVBoxLayout;
-    updateGroupBox = new QGroupBox(tr("UPDATE_GROUPBOX"));
+    updateGroupBox = new GroupBoxBlue(tr("UPDATE_GROUPBOX"));
     updateLayout = new QHBoxLayout;
     updateVersionLayout = new QFormLayout;
     updateVersionLayout->addRow(new QLabel(tr("ACTUAL_VERSION")), new QLabel(Uplimg::version));
@@ -358,6 +355,8 @@ void ConfigurationWindows::setUpCreditsSectionUI()
 {
     creditSection = new QWidget;
     creditLayout = new QVBoxLayout;
+    creditMainLayout = new QVBoxLayout;
+    creditGroupBox = new GroupBoxBlue(tr("CREDIT_GROUPBOX"));
 
     //Header
     openSourceText = new QLabel(tr("SOFTWARE_FREE_OPEN_SOURCE", "This software is open source and entirely free to use."));
@@ -406,7 +405,10 @@ void ConfigurationWindows::setUpCreditsSectionUI()
     creditLayout->addWidget(happy4Ever);
     creditLayout->addStretch();
 
-    creditSection->setLayout(creditLayout);
+    creditGroupBox->setLayout(creditLayout);
+    creditMainLayout->addWidget(creditGroupBox);
+    creditMainLayout->addStretch();
+    creditSection->setLayout(creditMainLayout);
     windowContent->addTab(creditSection, tr("Credits"));
 }
 

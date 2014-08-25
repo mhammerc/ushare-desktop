@@ -51,18 +51,18 @@ void HTTPConfiguration::setUpUI()
     mainFormLayout = new QFormLayout;
     mainGroupLayout = new QGroupBox;
 
-    host = new QLineEdit;
+    host = new LineEditBlue;
     port = new QSpinBox;
     port->setMaximum(99999);
     port->setMinimum(0);
-    fileFieldName = new QLineEdit;
+    fileFieldName = new LineEditBlue;
 
-    webPathBox = new QGroupBox(tr("FROM_LINK_TO_DISTRIBUTE"));
+    webPathBox = new GroupBoxBlue(tr("FROM_LINK_TO_DISTRIBUTE"));
     webPathLayout = new QVBoxLayout;
-    webPathFromHTTPResponse = new QRadioButton(tr("LINK_FROM_HTTP_RESPONSE"));
+    webPathFromHTTPResponse = new RadioButtonGreen(tr("LINK_FROM_HTTP_RESPONSE"));
     webPathFromFixedLayout = new QHBoxLayout;
-    webPathFromFixed = new QRadioButton(tr("LINK_FROM_FIXED_WEBPATH"));
-    webPath = new QLineEdit;
+    webPathFromFixed = new RadioButtonGreen(tr("LINK_FROM_FIXED_WEBPATH"));
+    webPath = new LineEditBlue;
     webPathFromFixedLayout->addWidget(webPathFromFixed);
     webPathFromFixedLayout->addWidget(webPath);
     webPathLayout->addWidget(webPathFromHTTPResponse);
@@ -78,7 +78,7 @@ void HTTPConfiguration::setUpUI()
     secondLayout->addLayout(mainFormLayout);
     secondLayout->addWidget(webPathBox);
 
-    mainGroupLayout = new QGroupBox(tr("SET_HTTP_CREDENTIALS"));
+    mainGroupLayout = new GroupBoxBlue(tr("SET_HTTP_CREDENTIALS"));
     mainGroupLayout->setLayout(secondLayout);
 
     validateLayout = new QHBoxLayout;

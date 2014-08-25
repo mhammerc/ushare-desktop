@@ -22,23 +22,24 @@ HEADERS += \
     systemtrayicon.h \
     shared.h \
     configuration/httpconfiguration.h \
-    configuration/shortcutgetter.h \
+    widgets/shortcutgetter.h \
     filesendedsound.h \
     widgets/label.h \
     paste/pastewindow.h \
-    paste/pastecontent.h \
+    containers/pastecontent.h \
     widgets/button.h \
     widgets/topbar.h \
     widgets/checkbox.h \
-    uploadMethod/cmsuplimgupload.h \
     widgets/radiobutton.h \
-    uploadMethod/file.h \
+    containers/file.h \
     widgets/bottombar.h \
     widgets/slider.h \
     widgets/combobox.h \
     widgets/listwidget.h \
     widgets/groupbox.h \
-    widgets/tabwidget.h
+    widgets/tabwidget.h \
+    notificationwindow.h \
+    widgets/lineedit.h
 
 SOURCES += \
     configuration/configurationwindows.cpp \
@@ -50,10 +51,10 @@ SOURCES += \
     systemtrayicon.cpp \
     uplimg.cpp \
     configuration/httpconfiguration.cpp \
-    configuration/shortcutgetter.cpp \
+    widgets/shortcutgetter.cpp \
     filesendedsound.cpp \
     paste/pastewindow.cpp \
-    uploadMethod/cmsuplimgupload.cpp \
+    notificationwindow.cpp
 
 
 OTHER_FILES += \

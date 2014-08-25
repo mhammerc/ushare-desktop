@@ -26,7 +26,7 @@
 #include "uploadMethod/ftpupload.h"
 #include "uploadMethod/httppostupload.h"
 #include "paste/pastewindow.h"
-#include "paste/pastecontent.h"
+#include "containers/pastecontent.h"
 
 #include "shared.h"
 

@@ -37,13 +37,13 @@ void FTPConfiguration::setUpUI()
 {
     formLayout = new QFormLayout;
 
-    host = new QLineEdit();
+    host = new LineEditBlue();
     port = new QSpinBox();
-    username = new QLineEdit();
-    password = new QLineEdit();
+    username = new LineEditBlue();
+    password = new LineEditBlue();
     password->setEchoMode(QLineEdit::Password);
-    basePath = new QLineEdit();
-    webPath = new QLineEdit();
+    basePath = new LineEditBlue();
+    webPath = new LineEditBlue();
 
     formLayout->addRow(tr("SET_HOST"), host);
     formLayout->addRow(tr("SET_PORT"), port);
@@ -52,7 +52,7 @@ void FTPConfiguration::setUpUI()
     formLayout->addRow(tr("PATh_ON_DISTANT_SERVER"), basePath);
     formLayout->addRow(tr("ONLINE_URL"), webPath);
 
-    mainGroupLayout = new QGroupBox(tr("SET_FTP_CREDENTIALS"));
+    mainGroupLayout = new GroupBoxBlue(tr("SET_FTP_CREDENTIALS"));
     mainGroupLayout->setLayout(formLayout);
 
     validateLayout = new QHBoxLayout;

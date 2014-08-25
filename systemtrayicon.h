@@ -46,6 +46,8 @@ public:
     explicit SystemTrayIcon(QObject *qobject = 0);
     ~SystemTrayIcon();
 
+    void showNotification(QString const& title, QString const& message);
+
     QUrl lastUrl;
     QString receivedMessage;
 
@@ -116,7 +118,8 @@ public slots :
     void sendSelectedArea();
 
     void throwErrorAlert(const QString &text);
-    void throwErrorAlert(const Uplimg::ErrorList &error);
+    void throwErrorAlert(Uplimg::ErrorList const error);
+    void throwErrorAlert(Uplimg::FTPStatus const error);
 
     void enableEasterEgg();
 

@@ -11,7 +11,7 @@
 #include <QLineEdit>
 #include <QShortcut>
 #include "shared.h"
-#include "pastecontent.h"
+#include "containers/pastecontent.h"
 
 class FileManager;
 

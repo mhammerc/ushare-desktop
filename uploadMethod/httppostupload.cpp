@@ -1,13 +1,10 @@
 #include "httppostupload.h"
 #include "screenmanager.h"
+#include <iostream>
 
-
-HTTPPostUpload::HTTPPostUpload(FileManager *parent)
-{
-    contentType = "image";
-    isFileSended = false;
-    reply = 0;
-    this->parent = parent;
+HTTPPostUpload::HTTPPostUpload(FileManager *parent) : contentType("undefined"), destinationFilename("undefined"), parent(parent)
+{    
+    reply = nullptr;
 }
 
 HTTPPostUpload::~HTTPPostUpload()
@@ -16,28 +13,33 @@ HTTPPostUpload::~HTTPPostUpload()
     file->deleteLater();
 }
 
-void HTTPPostUpload::setHost(const QString &host, int port)
+void HTTPPostUpload::setHost(QString const &host, int port)
 {
     url.setUrl(host);
     url.setPort(port);
 }
 
-void HTTPPostUpload::setFile(const QString &pathToFile, const QString &fileFieldName)
+void HTTPPostUpload::setFile(QString const &pathToFile, const QString &fileFieldName)
 {
     this->pathToFile = pathToFile;
     this->fileFieldName = fileFieldName;
 }
 
-void HTTPPostUpload::setContentType(const QString &contentType)
+void HTTPPostUpload::setContentType(QString const &contentType)
 {
     this->contentType = contentType;
+}
+
+void HTTPPostUpload::setDestinationFileName(QString const &destinationFilename)
+{
+    this->destinationFilename = destinationFilename;
 }
 
 void HTTPPostUpload::sendFile()
 {
     container = new QHttpMultiPart(QHttpMultiPart::FormDataType);
 
-    /* File Part */
+    /* We include all the file in part */
     QHttpPart filePart;
     file = new QFile(pathToFile);
 
@@ -48,14 +50,20 @@ void HTTPPostUpload::sendFile()
     filePart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"" + fileFieldName + "\"; filename=\"" + file->fileName() + "\""));
     filePart.setHeader(QNetworkRequest::ContentTypeHeader, QVariant(contentType));
 
-    /* File type part */
+    /* We include informations about file in other parts */
     QHttpPart fileTypePart;
     fileTypePart.setHeader(QNetworkRequest::ContentTypeHeader, QVariant("text/plain"));
     fileTypePart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"uplimgFileType\""));
-    fileTypePart.setBody(contentType.toLatin1());
+    fileTypePart.setBody(contentType.toUtf8());
+
+    QHttpPart destinationFilenamePart;
+    destinationFilenamePart.setHeader(QNetworkRequest::ContentTypeHeader, QVariant("text/plain"));
+    destinationFilenamePart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"uplimgFilename\""));
+    destinationFilenamePart.setBody(destinationFilename.toUtf8());
 
     container->append(filePart);
     container->append(fileTypePart);
+    container->append(destinationFilenamePart);
 
     QNetworkRequest request;
     request.setUrl(url);

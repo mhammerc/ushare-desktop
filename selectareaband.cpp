@@ -22,16 +22,17 @@ SelectAreaBand::SelectAreaBand(FileManager *manager, QWidget * parent) :
             color.setBlue(settings.value(Reg::blueArea).toInt());
         }
 
-    QPalette palette;
-    palette.setBrush(QPalette::Highlight, QBrush(color));
-    setPalette(palette);
-
     setCursor(Qt::CrossCursor);
     rubberBand = new QRubberBand(QRubberBand::Rectangle, this);
     this->manager = manager;
 
     QObject::connect(this, SIGNAL(areaTaken(QRect)), manager, SLOT(areaPictureTaken(QRect)));
     QObject::connect(this, SIGNAL(areaCanceled()), manager, SLOT(areaPictureCanceled()));
+
+    QPalette palette;
+    palette.setColor(QPalette::Normal, QPalette::Highlight, color);
+    setPalette(palette);
+    rubberBand->setPalette(palette);
 }
 
 void SelectAreaBand::selectArea()

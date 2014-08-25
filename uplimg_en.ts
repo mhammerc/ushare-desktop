@@ -10,24 +10,24 @@
         <translation>Uplimg&apos;s configuration</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="366"/>
+        <location filename="configuration/configurationwindows.cpp" line="369"/>
         <source>SFML Licence</source>
         <translation>SFML Licence</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="359"/>
+        <location filename="configuration/configurationwindows.cpp" line="362"/>
         <source>SOFTWARE_FREE_OPEN_SOURCE</source>
         <comment>This software is open source and entirely free to use.</comment>
         <translation>This software is open source and entirely free to use.</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="372"/>
+        <location filename="configuration/configurationwindows.cpp" line="375"/>
         <source>MADE_WITH_QT</source>
         <comment>Made with the flexibility of Qt</comment>
         <translation>With the flexibility of Qt</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="371"/>
+        <location filename="configuration/configurationwindows.cpp" line="374"/>
         <source>MADE_WITH_SFML</source>
         <comment>Made with the lightness of SFML</comment>
         <translation>With the lightness of SFML</translation>
@@ -52,7 +52,7 @@
         <translation type="vanished">And, don&apos;t forget to be Happy 4 Ever !</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="405"/>
+        <location filename="configuration/configurationwindows.cpp" line="412"/>
         <source>Credits</source>
         <translation>Credits</translation>
     </message>
@@ -61,166 +61,176 @@
         <translation type="vanished">Hotkeys</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="168"/>
+        <location filename="configuration/configurationwindows.cpp" line="170"/>
         <source>RUN_ON_STARTUP</source>
         <oldsource>Run on startup</oldsource>
         <translation>Run on startup</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="199"/>
+        <location filename="configuration/configurationwindows.cpp" line="201"/>
         <source>SHOW_NOTIFICATION</source>
         <oldsource>Show notifications when event take place</oldsource>
         <translation>Show notifications</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="196"/>
+        <location filename="configuration/configurationwindows.cpp" line="198"/>
         <source>PLAY_SOUND</source>
         <translation>Play sounds</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="322"/>
+        <location filename="configuration/configurationwindows.cpp" line="323"/>
         <source>HOTKEYS_SECTION</source>
         <translation>Keys binding</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="163"/>
+        <location filename="configuration/configurationwindows.cpp" line="165"/>
         <source>GENERAL_SETTINGS</source>
         <translation>General settings</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="174"/>
+        <location filename="configuration/configurationwindows.cpp" line="176"/>
         <source>APPLICATION_LANG</source>
         <comment>Application&apos;s lang :</comment>
         <translation>Uplimg&apos;s lang</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="254"/>
+        <location filename="configuration/configurationwindows.cpp" line="256"/>
         <source>IMAGE_TYPE</source>
         <translation>Image format</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="263"/>
+        <location filename="configuration/configurationwindows.cpp" line="265"/>
         <source>IMAGE_QUALITY</source>
         <translation>Image quality</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="273"/>
+        <location filename="configuration/configurationwindows.cpp" line="275"/>
         <source>LOCAL_SAVE</source>
         <translation>Local save of the picture</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="182"/>
+        <location filename="configuration/configurationwindows.cpp" line="184"/>
         <source>RANDOMIZE_COLOR</source>
         <oldsource>Randomize color</oldsource>
         <translation>Randomize color</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="186"/>
+        <location filename="configuration/configurationwindows.cpp" line="188"/>
         <source>CHOOSE_COLOR_FOR_SELECTING_AREA_SCREEN</source>
         <translation>Couleur de la sélection de zone</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="192"/>
+        <location filename="configuration/configurationwindows.cpp" line="194"/>
         <source>ON_SUCCESS</source>
         <translation>On successfull upload</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="205"/>
+        <location filename="configuration/configurationwindows.cpp" line="207"/>
         <source>AUTO_OPEN_FILE_IN_BROWSER</source>
         <translation>Open file in web browser</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="222"/>
+        <location filename="configuration/configurationwindows.cpp" line="224"/>
         <source>USE_UPLOADMETHOD_UPLIMGWEB</source>
         <translation>Upload to Uplimg Web</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="275"/>
+        <location filename="configuration/configurationwindows.cpp" line="277"/>
         <source>PICTURE_GROUPBOX</source>
         <translation>Picture settings</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="291"/>
+        <location filename="configuration/configurationwindows.cpp" line="293"/>
         <source>KEYBOARD_CONFIGURATION</source>
         <translation>Keyboard bindings</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="296"/>
+        <location filename="configuration/configurationwindows.cpp" line="297"/>
         <source>HOTKEYS_WELCOME_TEXT</source>
         <translation>In this tab you can edit your hotkeys to get Uplimg better.</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="297"/>
+        <location filename="configuration/configurationwindows.cpp" line="298"/>
         <source>WARNING_HOTKEYS_DISABLED</source>
         <translation>Warning : global hotkeys disabled in this tab !</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="304"/>
+        <location filename="configuration/configurationwindows.cpp" line="306"/>
         <source>TAKE_FULL_SCREEN_HOTKEYS</source>
         <translation>Capture full screen</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="305"/>
+        <location filename="configuration/configurationwindows.cpp" line="307"/>
         <source>TAKE_SELECTED_SCREEN_HOTKEYS</source>
         <translation>Capture selected area</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="306"/>
+        <location filename="configuration/configurationwindows.cpp" line="308"/>
+        <source>SEND_PASTE_HOTKEYS</source>
+        <translation>Send new paste</translation>
+    </message>
+    <message>
+        <location filename="configuration/configurationwindows.cpp" line="309"/>
         <source>UPLOAD_FILE_SHORTCUT</source>
         <translation>Choose and upload any file</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="307"/>
+        <location filename="configuration/configurationwindows.cpp" line="310"/>
         <source>UPLOAD_CLIPBOARD_SHORTCUT</source>
         <translation>Upload clipboard content</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="329"/>
+        <location filename="configuration/configurationwindows.cpp" line="330"/>
         <source>UPDATE_GROUPBOX</source>
         <translation>Update manager</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="332"/>
+        <location filename="configuration/configurationwindows.cpp" line="333"/>
         <source>ACTUAL_VERSION</source>
         <translation>Actual version</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="334"/>
+        <location filename="configuration/configurationwindows.cpp" line="335"/>
         <source>LATEST_VERSION</source>
         <translation>Latest version</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="336"/>
+        <location filename="configuration/configurationwindows.cpp" line="337"/>
         <source>VERIFY_NEW_VERSION</source>
         <translation>Check for updates</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="337"/>
+        <location filename="configuration/configurationwindows.cpp" line="338"/>
         <source>UPDATE_NOW</source>
         <translation>Update now...</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="349"/>
+        <location filename="configuration/configurationwindows.cpp" line="350"/>
         <source>UPDATE_SECTION</source>
         <translation>Updates</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="381"/>
+        <location filename="configuration/configurationwindows.cpp" line="359"/>
+        <source>CREDIT_GROUPBOX</source>
+        <translation>Credits</translation>
+    </message>
+    <message>
+        <location filename="configuration/configurationwindows.cpp" line="385"/>
         <source>MAIN_DEVELOPPER</source>
         <translation>Main developper and project manager : Martin Hammerchmidt alias Imote</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="382"/>
+        <location filename="configuration/configurationwindows.cpp" line="386"/>
         <source>SI0LS</source>
         <translation>Designer and main contributor : si0ls</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="394"/>
+        <location filename="configuration/configurationwindows.cpp" line="398"/>
         <source>HAPPY4EVER</source>
         <translation>And, don&apos;t forget to be Happy 4 Ever !</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="544"/>
+        <location filename="configuration/configurationwindows.cpp" line="551"/>
         <source>CHOOSE_DIRECTORY</source>
         <translation>Choose directory</translation>
     </message>
@@ -233,57 +243,57 @@
         <translation type="vanished">Use HTTP server</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="237"/>
+        <location filename="configuration/configurationwindows.cpp" line="239"/>
         <source>ONLY_ADVANCED_USERS</source>
         <comment>&lt;font size=&apos;2&apos;&gt;&lt;span style=&apos;color:blue;&apos;&gt;(!)&lt;/span&gt; Only for advanced users&lt;/font&gt;</comment>
         <translation>&lt;font size=&apos;2&apos;&gt;&lt;span style=&apos;color:blue;&apos;&gt;(!)&lt;/span&gt; Only for advanced users&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="284"/>
+        <location filename="configuration/configurationwindows.cpp" line="286"/>
         <source>UPLOAD_SECTION</source>
         <translation>Online Services</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="202"/>
+        <location filename="configuration/configurationwindows.cpp" line="204"/>
         <source>COPY_FILE_LINK_CLIPBOARD</source>
         <oldsource>Copy file&apos;s link when it is uploaded to clipboard</oldsource>
         <translation>Copy web link</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="223"/>
+        <location filename="configuration/configurationwindows.cpp" line="225"/>
         <source>USE_UPLOADMETHOD_LOCAL</source>
         <translation>Don&apos;t send file over Internet</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="226"/>
+        <location filename="configuration/configurationwindows.cpp" line="228"/>
         <source>USE_UPLOADMETHOD_FTP</source>
         <translation>Upload trough FTP</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="227"/>
+        <location filename="configuration/configurationwindows.cpp" line="229"/>
         <source>CONFIGURE_FTP</source>
         <oldsource>Configure FTP...</oldsource>
         <translation>Set FTP server</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="233"/>
+        <location filename="configuration/configurationwindows.cpp" line="235"/>
         <source>USE_UPLOADMETHOD_HTTP</source>
         <translation>Upload trough HTTP</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="234"/>
+        <location filename="configuration/configurationwindows.cpp" line="236"/>
         <source>CONFIGURE_HTTP</source>
         <oldsource>Configure HTTP POST...</oldsource>
         <translation>Set HTTP parameters</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="246"/>
+        <location filename="configuration/configurationwindows.cpp" line="248"/>
         <source>ONLINE_SERVICES_GROUPBOX</source>
         <oldsource>Online services</oldsource>
         <translation>Online services</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="213"/>
+        <location filename="configuration/configurationwindows.cpp" line="215"/>
         <source>GENERAL</source>
         <oldsource>General</oldsource>
         <comment>Configuration menu, general section</comment>
@@ -406,7 +416,7 @@
 <context>
     <name>ShortcutGetter</name>
     <message>
-        <location filename="configuration/shortcutgetter.cpp" line="71"/>
+        <location filename="widgets/shortcutgetter.cpp" line="71"/>
         <source>CHANGE_SHORTCUT_NOW</source>
         <translation>Now, type your new shortcut !</translation>
     </message>
@@ -420,59 +430,78 @@
         <translation>Uplimg</translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="57"/>
+        <location filename="systemtrayicon.cpp" line="60"/>
         <source>TAKE_NEW_FULLSCREEN</source>
         <oldsource>Take new screen</oldsource>
         <translation>Take new fullscreen</translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="58"/>
+        <location filename="systemtrayicon.cpp" line="61"/>
         <source>TAKE_NEW_AREA_SELECTED_SCREEN</source>
         <oldsource>Take new selected screen</oldsource>
         <translation>Take new selected screen</translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="59"/>
+        <location filename="systemtrayicon.cpp" line="62"/>
         <source>SEND_PASTE</source>
         <translation>Send new paste</translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="60"/>
+        <location filename="systemtrayicon.cpp" line="63"/>
         <source>UPLOAD_CHOOSED_FILE</source>
         <oldsource>Upload specific file</oldsource>
         <translation>Upload file...</translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="61"/>
+        <location filename="systemtrayicon.cpp" line="64"/>
         <source>UPLOAD_CLIPBOARD</source>
         <oldsource>Upload clipboard</oldsource>
         <translation>Upload clipboard</translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="63"/>
+        <location filename="systemtrayicon.cpp" line="66"/>
         <source>CONFIGURATION</source>
         <oldsource>Configuration...</oldsource>
         <comment>In system tray icon</comment>
         <translation>Options</translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="64"/>
+        <location filename="systemtrayicon.cpp" line="67"/>
         <source>EXIT</source>
         <oldsource>Exit !</oldsource>
         <translation>Exit</translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="123"/>
+        <location filename="systemtrayicon.cpp" line="121"/>
         <source>SELECT_FILE</source>
         <oldsource>Select file</oldsource>
         <translation>Select file</translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="171"/>
+        <location filename="systemtrayicon.cpp" line="166"/>
         <source>UPLOAD_SUCCESS_WITH_URL</source>
         <translation>Congratulations !
 Upload success. URL is :
 </translation>
+    </message>
+    <message>
+        <location filename="systemtrayicon.cpp" line="292"/>
+        <source>FTP_CANT_CONNECT</source>
+        <translation>We can&apos;t connect to your FTP server.
+You must verify your server adress and your port.</translation>
+    </message>
+    <message>
+        <location filename="systemtrayicon.cpp" line="294"/>
+        <source>FTP_CANT_LOGIN</source>
+        <translation>We can&apos;t login into your FTP server.
+You must verify your FTP credentials.</translation>
+    </message>
+    <message>
+        <location filename="systemtrayicon.cpp" line="296"/>
+        <source>FTP_CANT_PUT_FILE</source>
+        <translation>We got error while uploading file but we can connect to you server.
+If you own the FTP server, verify if you&apos;ve right to save file.
+Otherwise, contact you sysadmin.</translation>
     </message>
     <message>
         <source>UPLOAD_SUCCESS_WITH_URL</source>
@@ -484,28 +513,28 @@ Upload success. URL is :
 </translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="179"/>
+        <location filename="systemtrayicon.cpp" line="174"/>
         <source>UPLOAD_SUCCESS_LOCAL</source>
         <translation>Your picture is now locally saved.</translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="202"/>
+        <location filename="systemtrayicon.cpp" line="197"/>
         <source>OPEN_TO_BROWSER</source>
         <translation>Open in browser</translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="203"/>
+        <location filename="systemtrayicon.cpp" line="198"/>
         <source>COPY_TO_CLIPBOARD</source>
         <translation>Copy to clipboard</translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="287"/>
+        <location filename="systemtrayicon.cpp" line="275"/>
         <source>UPLOAD_FAILED</source>
         <translation>Upload failed.
 You must verify Uplimg&apos;s configuration or your Internet configuration to solve the problem.</translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="293"/>
+        <location filename="systemtrayicon.cpp" line="280"/>
         <source>NO_METHOD_TO_UPLOAD_CHOOSED</source>
         <translation>We can&apos;t upload anything.
 You must configure upload method before.</translation>

@@ -21,8 +21,11 @@
 #include "widgets/listwidget.h"
 #include "widgets/groupbox.h"
 #include "widgets/tabwidget.h"
+#include "widgets/lineedit.h"
 
-#include "uploadMethod/file.h"
+#include "notificationwindow.h"
+
+#include "containers/file.h"
 
 /* Contain all registry access */
 namespace Reg
@@ -78,7 +81,7 @@ namespace Uplimg
 {
 QString const applicationName("Uplimg");
 QString const versionText("0.12 -> Alpha testing | leaks unautorized without express authorization");
-QString const version("0.11b");
+QString const version("0.12");
 QString const updateVersionLink("http://update.uplmg.com/latest.html");
 
 enum HTTP_ACCESS_FILE_LINK { FROM_RESPONSE /* From HTTP response */, FROM_FIXED_LINK /* Web path */}; //From what link return the user on successfull HTTP upload : from HTTP response or from fixed choosed link
@@ -102,6 +105,8 @@ enum FTPStatus
     FTP_SUCCESS,
     FTP_UNKNOWN_ERROR,
     FTP_CANT_CONNECT,
+    FTP_CANT_LOGIN,
+    FTP_CANT_PUT_FILE,
     FTP_SENDING,
     FTP_CONNECTING,
     FTP_CONNECTED,
@@ -115,7 +120,6 @@ public:
     Utils();
 
 public slots:
-
     static Uplimg::ImageFormat getImageFormat()
     {
         QSettings settings;

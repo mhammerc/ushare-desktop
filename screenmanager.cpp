@@ -35,26 +35,38 @@ void FileManager::autoSendFile(File const &file)
 
 void FileManager::sendFileTroughFTP(File const &file)
 {
-    ftp = new FTPUpload(file,
-                        settings.value(Reg::FTPHost).toString(),
-                        settings.value(Reg::FTPPort).toInt(),
-                        settings.value(Reg::FTPUsername).toString(),
-                        settings.value(Reg::FTPPassword).toString(),
-                        settings.value(Reg::FTPBasePath).toString(),
-                        this);
+    ftp = new FTPUpload(this);
+
+    ftp->setHost(settings.value(Reg::FTPHost).toString());
+    ftp->setPort(settings.value(Reg::FTPPort).toInt());
+    ftp->setUsername(settings.value(Reg::FTPUsername).toString());
+    ftp->setPassword(settings.value(Reg::FTPPassword).toString());
+    ftp->setBasepath(settings.value(Reg::FTPBasePath).toString());
+    ftp->insertFile(file);
 
     QObject::connect(ftp, SIGNAL(operationFinished()), this, SLOT(fileSendedTroughFTP()));
+
     ftp->run();
+}
 
-//    if (ftp->openConnexion())
-//        if (ftp->sendFile(file.path.toStdString()))
-//            if (ftp->closeConnexion())
-//                return;
+void FileManager::fileSendedTroughFTP()
+{
+    Uplimg::FTPStatus status = ftp->status;
 
-//            else std::clog << "FTP module : can't close connection\n";
-//        else std::clog << "FTP module : can't send file\n";
-//    else std::clog << "FTP module : can't connect to server\n";
+    ftp->terminate();
+    ftp->deleteLater();
+    ftp = nullptr;
 
+    if(status == Uplimg::FTP_SUCCESS)
+        parent->fileSended(lastFile);
+    else if(status == Uplimg::FTP_UNKNOWN_ERROR)
+        parent->throwErrorAlert(Uplimg::UPLOAD_FAIL);
+    else if(status == Uplimg::FTP_CANT_CONNECT)
+        parent->throwErrorAlert(Uplimg::FTP_CANT_CONNECT);
+    else if(status == Uplimg::FTP_CANT_LOGIN)
+        parent->throwErrorAlert(Uplimg::FTP_CANT_LOGIN);
+    else if(status == Uplimg::FTP_CANT_PUT_FILE)
+        parent->throwErrorAlert(Uplimg::FTP_CANT_PUT_FILE);
 }
 
 void FileManager::sendFileTroughUplimgWeb(File const &file)
@@ -198,24 +210,6 @@ void FileManager::fileSendedTroughHTTP()
             parent->throwErrorAlert(Uplimg::UPLOAD_FAIL);
         }
 
-}
-
-void FileManager::fileSendedTroughFTP()
-{
-    if(ftp->status == Uplimg::FTP_SUCCESS)
-        {
-            ftp->terminate();
-            ftp->deleteLater();
-            ftp = nullptr;
-            parent->fileSended(lastFile);
-        }
-    else if(ftp->status == Uplimg::FTP_UNKNOWN_ERROR || ftp->status == Uplimg::FTP_CANT_CONNECT)
-        {
-            ftp->terminate();
-            ftp->deleteLater();
-            ftp = nullptr;
-            parent->throwErrorAlert(Uplimg::UPLOAD_FAIL);
-        }
 }
 
 void FileManager::pasteReady(const PasteContent &pasteContent)
