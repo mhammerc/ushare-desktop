@@ -8,7 +8,7 @@
 class PasteContent
 {
 public:
-    PasteContent(){}
+    PasteContent():fileTitle("undefined"){}
 
     QString fileTitle;
     QString fileContent;

@@ -12,6 +12,7 @@
 #include <QPushButton>
 #include <QGroupBox>
 #include <QRadioButton>
+#include <QCryptographicHash>
 
 #include "shared.h"
 
@@ -33,7 +34,10 @@ protected:
 
     QLineEdit * host;
     QSpinBox * port;
-    QLineEdit * fileFieldName;
+    QLineEdit * username;
+    QLineEdit * password;
+    QLineEdit * privateKey;
+    QLabel * privateKeyWarning;
     QGroupBox * webPathBox;
     QVBoxLayout * webPathLayout;
     QRadioButton * webPathFromHTTPResponse;
@@ -49,6 +53,9 @@ protected:
 public slots :
     void hostSettingModified(QString);
     void portSettingModified(int);
+    void usernameSettingModified(QString);
+    void passwordSettingModified(QString);
+    void refillPrivateKey();
     void fileFieldNameSettingModified(QString);
     void webPathSettingModified(QString);
     void webPathFromHTTPResponseSettingModified(bool);

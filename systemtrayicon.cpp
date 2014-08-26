@@ -119,13 +119,13 @@ void SystemTrayIcon::uploadSelectedFileTriggered()
             newActionStarted();
             File file;
             file.path = QFileDialog::getOpenFileName(0, tr("SELECT_FILE"));
+            file.type = "file";
 
 
             if(!file.path.isNull())
                 {
                     QFileInfo fileInfo(file.path);
                     file.realName = fileInfo.fileName();
-                    fileSended(file);
                     screenManager->autoSendFile(file);
                 }
             else
@@ -139,7 +139,7 @@ void SystemTrayIcon::fileSended(File const &file)
     setIcon(QIcon(":/icon/success.png"));
     iconTimer->start();
 
-    if(Uplimg::Utils::getUploadMethod() == Uplimg::UploadMethod::UPLIMG_WEB)
+    if(Uplimg::Utils::getUploadMethod() == Uplimg::UploadMethod::UPLIMG_WEB || Uplimg::Utils::getUploadMethod() == Uplimg::UploadMethod::HTTP)
         {
             if(!Uplimg::Utils::isValidURL(var::lastUrl.toString().toStdString()))
                 return throwErrorAlert(var::lastUrl.toString());
@@ -226,7 +226,7 @@ void SystemTrayIcon::uploadClipboardTriggered()
             /* IF CLIPBOARD POINT TO FILE, WE UPLOAD IT INSTEAD FILE PATH */
             file.path = QApplication::clipboard()->text();
             file.path = file.path.right(file.path.size()-8); //Windows automatically insert file:/// at begin
-
+            file.type = "file";
             if(QFile::exists(file.path)) //Clipboard is pointing to file
                 {
                     QFileInfo fi(file.path);
@@ -236,6 +236,7 @@ void SystemTrayIcon::uploadClipboardTriggered()
                 }
             /* WINDOWS ONLY END */
 
+            file.type = "paste";
             file.realName = Uplimg::Utils::getNewFileName(".txt");
             file.path = Uplimg::Utils::getFileTempPath(file.realName);
             std::ofstream physicFile(file.path.toStdString().c_str());

@@ -54,7 +54,7 @@
         <location filename="configuration/configurationwindows.cpp" line="236"/>
         <source>CONFIGURE_HTTP</source>
         <oldsource>Configure HTTP POST...</oldsource>
-        <translation>Configurer la requête HTTP</translation>
+        <translation>Configurer les paramètres de Uplimg CMS</translation>
     </message>
     <message>
         <location filename="configuration/configurationwindows.cpp" line="248"/>
@@ -111,7 +111,7 @@
         <translation type="vanished">Enfin, n&apos;oubliez jamais le but même de la vie. Soyez &quot;Happy 4 Ever&quot; !</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="412"/>
+        <location filename="configuration/configurationwindows.cpp" line="413"/>
         <source>Credits</source>
         <translation>Crédits</translation>
     </message>
@@ -179,7 +179,7 @@
     <message>
         <location filename="configuration/configurationwindows.cpp" line="235"/>
         <source>USE_UPLOADMETHOD_HTTP</source>
-        <translation>Utiliser une requête HTTP</translation>
+        <translation>Envoyer dans Uplimg CMS</translation>
     </message>
     <message>
         <location filename="configuration/configurationwindows.cpp" line="277"/>
@@ -277,12 +277,12 @@
         <translation>Designer et contributeur principal : si0ls</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="398"/>
+        <location filename="configuration/configurationwindows.cpp" line="399"/>
         <source>HAPPY4EVER</source>
         <translation>Enfin, n&apos;oubliez jamais le but même de la vie. Soyez &quot;Happy 4 Ever&quot; !</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="551"/>
+        <location filename="configuration/configurationwindows.cpp" line="552"/>
         <source>CHOOSE_DIRECTORY</source>
         <translation>Choisissez un dossier</translation>
     </message>
@@ -363,6 +363,11 @@
 <context>
     <name>HTTPConfiguration</name>
     <message>
+        <location filename="configuration/httpconfiguration.cpp" line="58"/>
+        <source>KEY_WARNING</source>
+        <translation type="unfinished">&lt;font size=&apos;2&apos;&gt;&lt;span style=&apos;color:blue;&apos;&gt;(!)&lt;/span&gt;Mélange de pseudo/password&lt;/font&gt;</translation>
+    </message>
+    <message>
         <location filename="configuration/httpconfiguration.cpp" line="60"/>
         <source>FROM_LINK_TO_DISTRIBUTE</source>
         <translation>Origine du lien</translation>
@@ -391,21 +396,32 @@
     </message>
     <message>
         <location filename="configuration/httpconfiguration.cpp" line="75"/>
-        <source>YOUR_FILE_FIED_NAME</source>
-        <translation>Nom du champ de destination de l&apos;image :</translation>
+        <source>YOUR_USERNAME</source>
+        <oldsource>YOUR_FILE_FIED_NAME</oldsource>
+        <translation>Nom d&apos;utilisateur (optionnel) :</translation>
+    </message>
+    <message>
+        <location filename="configuration/httpconfiguration.cpp" line="76"/>
+        <source>YOUR_PASSWORD</source>
+        <translation>Votre mot de passe (optionnel) :</translation>
+    </message>
+    <message>
+        <location filename="configuration/httpconfiguration.cpp" line="77"/>
+        <source>YOUR_KEY</source>
+        <translation>Votre clé (auto-générée) :</translation>
     </message>
     <message>
         <source>YOUR_WEB_PATH</source>
         <translation type="vanished">Lien d&apos;accès sur Internet :</translation>
     </message>
     <message>
-        <location filename="configuration/httpconfiguration.cpp" line="81"/>
+        <location filename="configuration/httpconfiguration.cpp" line="84"/>
         <source>SET_HTTP_CREDENTIALS</source>
         <oldsource>Modify HTTP credentials</oldsource>
-        <translation>Configurer la requête HTTP</translation>
+        <translation>Configurer les informations d&apos;Uplimg CMS</translation>
     </message>
     <message>
-        <location filename="configuration/httpconfiguration.cpp" line="85"/>
+        <location filename="configuration/httpconfiguration.cpp" line="88"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
@@ -500,19 +516,19 @@ L&apos;envoi est un succès. Le lien est :
 </translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="292"/>
+        <location filename="systemtrayicon.cpp" line="293"/>
         <source>FTP_CANT_CONNECT</source>
         <translation>Nous ne pouvons pas nous connecter à votre serveur FTP.
 Vous devez vérifier votre adresse de connection et votre port.</translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="294"/>
+        <location filename="systemtrayicon.cpp" line="295"/>
         <source>FTP_CANT_LOGIN</source>
         <translation>Nous ne pouvons pas vous authentifier dans votre serveur FTP.
 Vous devez vérifier vos identifiants.</translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="296"/>
+        <location filename="systemtrayicon.cpp" line="297"/>
         <source>FTP_CANT_PUT_FILE</source>
         <translation>Nous avons eu une erreur lors de l&apos;envoi du fichier mais la connexion c&apos;est bien passé.
 Si le serveur vous appartient, vérifiez que vous avez bien les autorisations nécessaires afin de sauvegarder un fichier.
@@ -543,13 +559,13 @@ L&apos;envoi est un succès. Le lien est :
         <translation>Copier dans le presse papier</translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="275"/>
+        <location filename="systemtrayicon.cpp" line="276"/>
         <source>UPLOAD_FAILED</source>
         <translation>Echec de l&apos;envoi.
 Vous devez vérifier votre configuration d&apos;Uplimg ou votre configuration internet pour corriger le problème.</translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="280"/>
+        <location filename="systemtrayicon.cpp" line="281"/>
         <source>NO_METHOD_TO_UPLOAD_CHOOSED</source>
         <translation>Nous ne pouvons rien envoyer.
 Vous devez sélectionner une méthode d&apos;envoi avant.</translation>

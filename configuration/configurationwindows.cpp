@@ -395,6 +395,7 @@ void ConfigurationWindows::setUpCreditsSectionUI()
     new QListWidgetItem("Krayon973", allContributorsTwo);
     new QListWidgetItem("Eldraeildor", allContributorsOne);
     new QListWidgetItem("Mrs025", allContributorsTwo);
+    new QListWidgetItem("Malobre", allContributorsOne);
     happy4Ever = new LabelBlue(tr("HAPPY4EVER"));
 
     creditLayout->addWidget(openSourceText);

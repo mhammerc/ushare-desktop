@@ -73,9 +73,11 @@ void FileManager::sendFileTroughUplimgWeb(File const &file)
 {
     http = new HTTPPostUpload(this);
     http->setHost(UplimgWeb::host, UplimgWeb::port);
-    http->setFile(file.path, UplimgWeb::fileFieldName);
+    http->setFile(file.path);
     http->setContentType(file.type);
-    http->setWantedFileName(file.wantedName);
+    http->setUsername(settings.value(Reg::HTTPUsername).toString());
+    http->setPassword(settings.value(Reg::HTTPPassword).toString());
+    http->setPrivateKey(settings.value(Reg::HTTPPrivateKey).toString());
     http->start();
 }
 
@@ -83,9 +85,11 @@ void FileManager::sendFileTroughHTTP(File const &file)
 {
     http = new HTTPPostUpload(this);
     http->setHost(settings.value(Reg::HTTPHost).toString(), settings.value(Reg::HTTPPort).toInt());
-    http->setFile(file.path, settings.value(Reg::HTTPFileFieldName, "uplimgFile").toString());
+    http->setFile(file.path);
     http->setContentType(file.type);
-    http->setWantedFileName(file.wantedName);
+    http->setUsername(settings.value(Reg::HTTPUsername).toString());
+    http->setPassword(settings.value(Reg::HTTPPassword).toString());
+    http->setPrivateKey(settings.value(Reg::HTTPPrivateKey).toString());
     http->start();
 }
 
@@ -221,9 +225,17 @@ void FileManager::pasteReady(const PasteContent &pasteContent)
     paste = nullptr;
 
     File file;
-    file.realName = Uplimg::Utils::getNewFileName(".txt");
-    file.wantedName = pasteContent.fileTitle;
-    file.path = Uplimg::Utils::getFileTempPath(file.realName);
+    if(pasteContent.fileTitle == "undefined")
+        {
+            file.wantedName = pasteContent.fileTitle;
+            file.path = Uplimg::Utils::getFileTempPath(file.wantedName);
+        }
+    else
+        {
+            file.realName = Uplimg::Utils::getNewFileName(".txt");
+            file.path = Uplimg::Utils::getFileTempPath(file.realName);
+        }
+
     file.type = "paste";
     QFile physicFile(file.path);
     physicFile.open(QIODevice::WriteOnly);

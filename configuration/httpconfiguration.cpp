@@ -15,7 +15,6 @@ HTTPConfiguration::HTTPConfiguration(QWidget * parent) :
 
     host->setText(settings.value(Reg::HTTPHost).toString());
     port->setValue(settings.value(Reg::HTTPPort, 80).toInt());
-    fileFieldName->setText(settings.value(Reg::HTTPFileFieldName, "uplimgFile").toString());
     webPath->setText(settings.value(Reg::HTTPWebPath).toString());
 
     if(settings.value(Reg::HTTPLinkFrom).toString() == "FROM_FIXED")
@@ -28,13 +27,13 @@ HTTPConfiguration::HTTPConfiguration(QWidget * parent) :
 
     QObject::connect(host, SIGNAL(textChanged(QString)), this, SLOT(hostSettingModified(QString)));
     QObject::connect(port, SIGNAL(valueChanged(int)), this, SLOT(portSettingModified(int)));
-    QObject::connect(fileFieldName, SIGNAL(textChanged(QString)), this, SLOT(fileFieldNameSettingModified(QString)));
+    QObject::connect(username, SIGNAL(textChanged(QString)), this, SLOT(usernameSettingModified(QString)));
+    QObject::connect(password, SIGNAL(textChanged(QString)), this, SLOT(passwordSettingModified(QString)));
     QObject::connect(webPathFromHTTPResponse, SIGNAL(toggled(bool)), this, SLOT(webPathFromHTTPResponseSettingModified(bool)));
     QObject::connect(webPathFromFixed, SIGNAL(toggled(bool)), this, SLOT(webPathFromFixedSettingModified(bool)));
     QObject::connect(webPath, SIGNAL(textChanged(QString)), this, SLOT(webPathSettingModified(QString)));
 
     QObject::connect(host, SIGNAL(returnPressed()), this, SLOT(close()));
-    QObject::connect(fileFieldName, SIGNAL(returnPressed()), this, SLOT(close()));
     QObject::connect(webPath, SIGNAL(returnPressed()), this, SLOT(close()));
 
     QObject::connect(validate, SIGNAL(clicked()), this, SLOT(close()));
@@ -55,7 +54,12 @@ void HTTPConfiguration::setUpUI()
     port = new QSpinBox;
     port->setMaximum(99999);
     port->setMinimum(0);
-    fileFieldName = new LineEditBlue;
+    username = new LineEditBlue;
+    password = new LineEditBlue;
+    privateKey = new LineEditBlue;
+    privateKey->setDisabled(true);
+    privateKeyWarning = new LabelRed(tr("KEY_WARNING"));
+
 
     webPathBox = new GroupBoxBlue(tr("FROM_LINK_TO_DISTRIBUTE"));
     webPathLayout = new QVBoxLayout;
@@ -72,7 +76,10 @@ void HTTPConfiguration::setUpUI()
 
     mainFormLayout->addRow(tr("YOUR_HOST"), host);
     mainFormLayout->addRow(tr("YOUR_PORT"), port);
-    mainFormLayout->addRow(tr("YOUR_FILE_FIED_NAME"), fileFieldName);
+    mainFormLayout->addRow(tr("YOUR_USERNAME"), username);
+    mainFormLayout->addRow(tr("YOUR_PASSWORD"), password);
+    //mainFormLayout->addRow(tr("YOUR_KEY"), privateKey);
+    //mainFormLayout->addRow("", privateKeyWarning);
 
     secondLayout = new QVBoxLayout;
     secondLayout->addLayout(mainFormLayout);
@@ -106,6 +113,26 @@ void HTTPConfiguration::hostSettingModified(QString text)
 void HTTPConfiguration::portSettingModified(int value)
 {
     settings.setValue(Reg::HTTPPort, value);
+}
+
+void HTTPConfiguration::usernameSettingModified(QString content)
+{
+    settings.setValue(Reg::HTTPUsername, content);
+    refillPrivateKey();
+}
+
+void HTTPConfiguration::passwordSettingModified(QString content)
+{
+    settings.setValue(Reg::HTTPPassword, content);
+    refillPrivateKey();
+}
+
+void HTTPConfiguration::refillPrivateKey()
+{
+    QString unhashedKey = username->text() + "|oOo|" + password->text();
+    QString hashedKey = QCryptographicHash::hash(unhashedKey.toUtf8(), QCryptographicHash::Md5);
+    settings.setValue(Reg::HTTPPrivateKey, hashedKey);
+    privateKey->setText(hashedKey);
 }
 
 void HTTPConfiguration::fileFieldNameSettingModified(QString content)

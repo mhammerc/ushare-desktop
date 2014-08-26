@@ -2,8 +2,8 @@
 #include "screenmanager.h"
 #include <iostream>
 
-HTTPPostUpload::HTTPPostUpload(FileManager *parent) : contentType("undefined"), destinationFilename("undefined"), parent(parent)
-{    
+HTTPPostUpload::HTTPPostUpload(FileManager *parent) : contentType("undefined"), parent(parent)
+{
     reply = nullptr;
 }
 
@@ -19,10 +19,9 @@ void HTTPPostUpload::setHost(QString const &host, int port)
     url.setPort(port);
 }
 
-void HTTPPostUpload::setFile(QString const &pathToFile, const QString &fileFieldName)
+void HTTPPostUpload::setFile(QString const &pathToFile)
 {
     this->pathToFile = pathToFile;
-    this->fileFieldName = fileFieldName;
 }
 
 void HTTPPostUpload::setContentType(QString const &contentType)
@@ -30,40 +29,58 @@ void HTTPPostUpload::setContentType(QString const &contentType)
     this->contentType = contentType;
 }
 
-void HTTPPostUpload::setWantedFileName(QString const &destinationFilename)
+void HTTPPostUpload::setUsername(const QString &username)
 {
-    this->destinationFilename = destinationFilename;
+    this->username = username;
+}
+
+void HTTPPostUpload::setPassword(const QString &password)
+{
+    this->password = password;
+}
+
+void HTTPPostUpload::setPrivateKey(const QString &privateKey)
+{
+    this->privateKey = privateKey;
 }
 
 void HTTPPostUpload::sendFile()
 {
-    container = new QHttpMultiPart(QHttpMultiPart::FormDataType);
-
     /* We include all the file in part */
-    QHttpPart filePart;
     file = new QFile(pathToFile);
 
     if(!file->open(QIODevice::ReadOnly))
-        QMessageBox::critical(0,"!!","");
+        QMessageBox::critical(0,"Uplimg","Can't open file");
 
+    QHttpPart filePart;
+    filePart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"fileUplimg\"; filename=\"" + file->fileName() + "\""));
+    //filePart.setHeader(QNetworkRequest::ContentTypeHeader, QVariant(contentType));
     filePart.setBodyDevice(file);
-    filePart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"" + fileFieldName + "\"; filename=\"" + file->fileName() + "\""));
-    filePart.setHeader(QNetworkRequest::ContentTypeHeader, QVariant(contentType));
 
     /* We include informations about file in other parts */
     QHttpPart fileTypePart;
-    fileTypePart.setHeader(QNetworkRequest::ContentTypeHeader, QVariant("text/plain"));
     fileTypePart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"uplimgFileType\""));
-    fileTypePart.setBody(contentType.toUtf8());
+    fileTypePart.setBody(contentType.toStdString().c_str());
 
-    QHttpPart destinationFilenamePart;
-    destinationFilenamePart.setHeader(QNetworkRequest::ContentTypeHeader, QVariant("text/plain"));
-    destinationFilenamePart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"uplimgFilename\""));
-    destinationFilenamePart.setBody(destinationFilename.toUtf8());
+    /* Now we include user informations */
+    QHttpPart usernamePart;
+    usernamePart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"uplimgUsername\""));
+    usernamePart.setBody(username.toStdString().c_str());
 
+    QHttpPart privateKeyPart;
+    privateKeyPart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"uplimgKey\""));
+    privateKeyPart.setBody(privateKey.toStdString().c_str());
+
+    QHttpPart passwordPart;
+    passwordPart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"uplimgPassword\""));
+    passwordPart.setBody(password.toStdString().c_str());
+
+    container = new QHttpMultiPart(QHttpMultiPart::FormDataType);
     container->append(filePart);
     container->append(fileTypePart);
-    container->append(destinationFilenamePart);
+    container->append(usernamePart);
+    container->append(privateKeyPart);
+    container->append(passwordPart);
 
     QNetworkRequest request;
     request.setUrl(url);
@@ -72,6 +89,7 @@ void HTTPPostUpload::sendFile()
     reply = manager->post(request, container);
 
     reply->setParent(container);
+    file->setParent(container);
     manager->setParent(reply);
 
     QObject::connect(reply, SIGNAL(finished()), parent, SLOT(fileSendedTroughHTTP()));

@@ -24,9 +24,12 @@ public:
     ~HTTPPostUpload();
 
     void setHost(QString const &host, int port);
-    void setFile(QString const &pathToFile, const QString &fileFieldName);
+    void setFile(QString const &pathToFile);
     void setContentType(QString const &contentType = "image");
-    void setWantedFileName(QString const& destinationFilename);
+
+    void setUsername(QString const &username);
+    void setPassword(QString const &password);
+    void setPrivateKey(QString const &privateKey);
 
     void sendFile();
 
@@ -45,9 +48,10 @@ protected:
     QUrl url;
 
     QString pathToFile;
-    QString fileFieldName;
     QString contentType;
-    QString destinationFilename; //Needed file name for downloading
+    QString username;
+    QString password;
+    QString privateKey;
 
     FileManager * parent;
 };
