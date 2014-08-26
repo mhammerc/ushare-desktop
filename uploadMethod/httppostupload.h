@@ -26,7 +26,7 @@ public:
     void setHost(QString const &host, int port);
     void setFile(QString const &pathToFile, const QString &fileFieldName);
     void setContentType(QString const &contentType = "image");
-    void setDestinationFileName(QString const& destinationFilename);
+    void setWantedFileName(QString const& destinationFilename);
 
     void sendFile();
 

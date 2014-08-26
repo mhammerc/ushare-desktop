@@ -8,7 +8,7 @@ NotificationWindow::NotificationWindow(QString const &title, QString const &mess
     setAttribute(Qt::WA_TranslucentBackground, true);
     //setAttribute(Qt::WA_DeleteOnClose, true);
     setContentsMargins(-10,-10,-10,-10);
-    setGeometry(10,10,200,80);
+    resize(200,80);
 
     setUpUI();
 
@@ -21,6 +21,11 @@ NotificationWindow::NotificationWindow(QString const &title, QString const &mess
 
     timeToShowWindow->start();
     show();
+
+    /* To move the notification at bottom right corner */
+    QDesktopWidget desktop;
+    QRect geometryDesktop = desktop.screenGeometry();
+    move(geometryDesktop.bottomRight().x() - this->width() - 15, geometryDesktop.bottomRight().y() - this->height() - 75);
 }
 
 void NotificationWindow::setUpUI()

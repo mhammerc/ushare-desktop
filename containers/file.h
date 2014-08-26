@@ -6,12 +6,14 @@
 class File
 {
 public:
-    File()
+    File() : realName("undefined"), wantedName("undefined"), path("undefined"), type("undefined")
     {
         hasError = false;
+
     }
 
-    QString name;
+    QString realName; //Name of the file on the disc
+    QString wantedName; //Name wanted of the file to download
     QString path;
     QString type;
 

@@ -30,7 +30,7 @@ void HTTPPostUpload::setContentType(QString const &contentType)
     this->contentType = contentType;
 }
 
-void HTTPPostUpload::setDestinationFileName(QString const &destinationFilename)
+void HTTPPostUpload::setWantedFileName(QString const &destinationFilename)
 {
     this->destinationFilename = destinationFilename;
 }

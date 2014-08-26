@@ -82,8 +82,8 @@ void SystemTrayIcon::takeSelectedAreaScreenTriggered()
     if(!actionBeing)
         {
             newActionStarted();
-            fileInfo.name = Uplimg::Utils::getNewFileName(Uplimg::Utils::getImageFormat());
-            fileInfo.path = Uplimg::Utils::getFileTempPath(fileInfo.name);
+            fileInfo.realName = Uplimg::Utils::getNewFileName(Uplimg::Utils::getImageFormat());
+            fileInfo.path = Uplimg::Utils::getFileTempPath(fileInfo.realName);
             fileInfo.type = "image";
             screenManager->captureSelectedZone(fileInfo);
         }
@@ -105,8 +105,8 @@ void SystemTrayIcon::takeFullScrenTriggered()
         {
             newActionStarted();
             File file;
-            file.name = Uplimg::Utils::getNewFileName(Uplimg::Utils::getImageFormat());
-            file.path = Uplimg::Utils::getFileTempPath(file.name);
+            file.realName = Uplimg::Utils::getNewFileName(Uplimg::Utils::getImageFormat());
+            file.path = Uplimg::Utils::getFileTempPath(file.realName);
 
             screenManager->autoSendFile(screenManager->captureFullScreen(file));
         }
@@ -124,7 +124,7 @@ void SystemTrayIcon::uploadSelectedFileTriggered()
             if(!file.path.isNull())
                 {
                     QFileInfo fileInfo(file.path);
-                    file.name = fileInfo.fileName();
+                    file.realName = fileInfo.fileName();
                     fileSended(file);
                     screenManager->autoSendFile(file);
                 }
@@ -152,7 +152,7 @@ void SystemTrayIcon::fileSended(File const &file)
                 fileSendedSound.play();
 
             if((settings.value(Reg::linkFrom).toString() != "FROM_HTTP" || Uplimg::Utils::getUploadMethod() != Uplimg::UploadMethod::HTTP) && Uplimg::Utils::getUploadMethod() != Uplimg::UploadMethod::UPLIMG_WEB)
-                var::lastUrl.setUrl(Uplimg::Utils::getUploadedFileURL(file.name));
+                var::lastUrl.setUrl(Uplimg::Utils::getUploadedFileURL(file.realName));
 
             addUploadedFileInContextMenu();
 
@@ -230,14 +230,14 @@ void SystemTrayIcon::uploadClipboardTriggered()
             if(QFile::exists(file.path)) //Clipboard is pointing to file
                 {
                     QFileInfo fi(file.path);
-                    file.name = fi.fileName();
+                    file.realName = fi.fileName();
                     screenManager->autoSendFile(file);
                     return;
                 }
             /* WINDOWS ONLY END */
 
-            file.name = Uplimg::Utils::getNewFileName(".txt");
-            file.path = Uplimg::Utils::getFileTempPath(file.name);
+            file.realName = Uplimg::Utils::getNewFileName(".txt");
+            file.path = Uplimg::Utils::getFileTempPath(file.realName);
             std::ofstream physicFile(file.path.toStdString().c_str());
             if (physicFile)
                 {
@@ -298,7 +298,7 @@ void SystemTrayIcon::throwErrorAlert(Uplimg::FTPStatus const error)
 
 void SystemTrayIcon::firstStart()
 {
-    settings.setValue(Reg::runOnStartup, true);
+    settings.setValue(Reg::runOnStartup, false);
     settings.setValue(Reg::showNotifications, true);
     settings.setValue(Reg::playSound, true);
     settings.setValue(Reg::copyToClipboard, true);

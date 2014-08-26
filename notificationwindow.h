@@ -10,6 +10,8 @@
 #include <QPainter>
 #include <QWidget>
 #include <QTimer>
+#include <QDesktopWidget>
+#include <QRect>
 
 #include "shared.h"
 

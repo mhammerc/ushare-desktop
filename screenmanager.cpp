@@ -75,6 +75,7 @@ void FileManager::sendFileTroughUplimgWeb(File const &file)
     http->setHost(UplimgWeb::host, UplimgWeb::port);
     http->setFile(file.path, UplimgWeb::fileFieldName);
     http->setContentType(file.type);
+    http->setWantedFileName(file.wantedName);
     http->start();
 }
 
@@ -84,6 +85,7 @@ void FileManager::sendFileTroughHTTP(File const &file)
     http->setHost(settings.value(Reg::HTTPHost).toString(), settings.value(Reg::HTTPPort).toInt());
     http->setFile(file.path, settings.value(Reg::HTTPFileFieldName, "uplimgFile").toString());
     http->setContentType(file.type);
+    http->setWantedFileName(file.wantedName);
     http->start();
 }
 
@@ -219,8 +221,9 @@ void FileManager::pasteReady(const PasteContent &pasteContent)
     paste = nullptr;
 
     File file;
-    file.name = Uplimg::Utils::getNewFileName(".txt");
-    file.path = Uplimg::Utils::getFileTempPath(file.name);
+    file.realName = Uplimg::Utils::getNewFileName(".txt");
+    file.wantedName = pasteContent.fileTitle;
+    file.path = Uplimg::Utils::getFileTempPath(file.realName);
     file.type = "paste";
     QFile physicFile(file.path);
     physicFile.open(QIODevice::WriteOnly);

@@ -41,7 +41,10 @@ void FTPUpload::insertFile(const File &file)
 void FTPUpload::autoSendFile()
 {
     if(!openConnexion())
+        {
+            emit operationFinished();
             return;
+        }
 
     sendFile();
     closeConnexion();
@@ -73,7 +76,8 @@ bool FTPUpload::sendFile()
 bool FTPUpload::openConnexion()
 {
     status = Uplimg::FTP_CONNECTING;
-    if (ftpClient->connect(sf::IpAddress(host.toStdString()), port).isOk())
+
+    if (ftpClient->connect(sf::IpAddress(host.toStdString()), port, sf::seconds(3)).isOk())
         {
             if (ftpClient->login(username.toStdString(), password.toStdString()).isOk())
                 {
