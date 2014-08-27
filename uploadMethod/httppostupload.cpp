@@ -53,7 +53,7 @@ void HTTPPostUpload::sendFile()
         QMessageBox::critical(0,"Uplimg","Can't open file");
 
     QHttpPart filePart;
-    filePart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"fileUplimg\"; filename=\"" + file->fileName() + "\""));
+    filePart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"uplimgFile\"; filename=\"" + file->fileName() + "\""));
     //filePart.setHeader(QNetworkRequest::ContentTypeHeader, QVariant(contentType));
     filePart.setBodyDevice(file);
 
@@ -73,7 +73,11 @@ void HTTPPostUpload::sendFile()
 
     QHttpPart passwordPart;
     passwordPart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"uplimgPassword\""));
-    passwordPart.setBody(password.toStdString().c_str());
+    passwordPart.setBody(QCryptographicHash::hash(password.toStdString().c_str(), QCryptographicHash::Sha1).toHex());
+
+    QHttpPart uplimgVersionPart;
+    uplimgVersionPart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"uplimgVersion\""));
+    uplimgVersionPart.setBody(Uplimg::version.toStdString().c_str());
 
     container = new QHttpMultiPart(QHttpMultiPart::FormDataType);
     container->append(filePart);
@@ -81,6 +85,7 @@ void HTTPPostUpload::sendFile()
     container->append(usernamePart);
     container->append(privateKeyPart);
     container->append(passwordPart);
+    container->append(uplimgVersionPart);
 
     QNetworkRequest request;
     request.setUrl(url);

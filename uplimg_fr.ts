@@ -363,50 +363,55 @@
 <context>
     <name>HTTPConfiguration</name>
     <message>
-        <location filename="configuration/httpconfiguration.cpp" line="58"/>
-        <source>KEY_WARNING</source>
-        <translation type="unfinished">&lt;font size=&apos;2&apos;&gt;&lt;span style=&apos;color:blue;&apos;&gt;(!)&lt;/span&gt;Mélange de pseudo/password&lt;/font&gt;</translation>
+        <location filename="configuration/httpconfiguration.cpp" line="60"/>
+        <source>KEY_COPY</source>
+        <translation>Copier la clé</translation>
     </message>
     <message>
-        <location filename="configuration/httpconfiguration.cpp" line="60"/>
+        <location filename="configuration/httpconfiguration.cpp" line="61"/>
+        <source>KEY_WARNING</source>
+        <translation>&lt;font size=&apos;2&apos;&gt;&lt;span style=&apos;color:blue;&apos;&gt;(!)&lt;/span&gt;Mélange de pseudo/password&lt;/font&gt;</translation>
+    </message>
+    <message>
+        <location filename="configuration/httpconfiguration.cpp" line="64"/>
         <source>FROM_LINK_TO_DISTRIBUTE</source>
         <translation>Origine du lien</translation>
     </message>
     <message>
-        <location filename="configuration/httpconfiguration.cpp" line="62"/>
+        <location filename="configuration/httpconfiguration.cpp" line="66"/>
         <source>LINK_FROM_HTTP_RESPONSE</source>
         <translation>Obtenir le lien auprès de la réponse HTTP</translation>
     </message>
     <message>
-        <location filename="configuration/httpconfiguration.cpp" line="64"/>
+        <location filename="configuration/httpconfiguration.cpp" line="68"/>
         <source>LINK_FROM_FIXED_WEBPATH</source>
         <translation>Obtenir le lien avec un pattern fixe</translation>
     </message>
     <message>
-        <location filename="configuration/httpconfiguration.cpp" line="73"/>
+        <location filename="configuration/httpconfiguration.cpp" line="77"/>
         <source>YOUR_HOST</source>
         <oldsource>Your host :</oldsource>
         <translation>Hôte :</translation>
     </message>
     <message>
-        <location filename="configuration/httpconfiguration.cpp" line="74"/>
+        <location filename="configuration/httpconfiguration.cpp" line="78"/>
         <source>YOUR_PORT</source>
         <oldsource>Port of your server :</oldsource>
         <translation>Port :</translation>
     </message>
     <message>
-        <location filename="configuration/httpconfiguration.cpp" line="75"/>
+        <location filename="configuration/httpconfiguration.cpp" line="79"/>
         <source>YOUR_USERNAME</source>
         <oldsource>YOUR_FILE_FIED_NAME</oldsource>
         <translation>Nom d&apos;utilisateur (optionnel) :</translation>
     </message>
     <message>
-        <location filename="configuration/httpconfiguration.cpp" line="76"/>
+        <location filename="configuration/httpconfiguration.cpp" line="80"/>
         <source>YOUR_PASSWORD</source>
         <translation>Votre mot de passe (optionnel) :</translation>
     </message>
     <message>
-        <location filename="configuration/httpconfiguration.cpp" line="77"/>
+        <location filename="configuration/httpconfiguration.cpp" line="81"/>
         <source>YOUR_KEY</source>
         <translation>Votre clé (auto-générée) :</translation>
     </message>
@@ -415,13 +420,13 @@
         <translation type="vanished">Lien d&apos;accès sur Internet :</translation>
     </message>
     <message>
-        <location filename="configuration/httpconfiguration.cpp" line="84"/>
+        <location filename="configuration/httpconfiguration.cpp" line="88"/>
         <source>SET_HTTP_CREDENTIALS</source>
         <oldsource>Modify HTTP credentials</oldsource>
         <translation>Configurer les informations d&apos;Uplimg CMS</translation>
     </message>
     <message>
-        <location filename="configuration/httpconfiguration.cpp" line="88"/>
+        <location filename="configuration/httpconfiguration.cpp" line="92"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>

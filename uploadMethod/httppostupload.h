@@ -10,6 +10,7 @@
 #include <QString>
 #include <QThread>
 #include <QMessageBox>
+#include <QCryptographicHash>
 
 #include <fstream>
 

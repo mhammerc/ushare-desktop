@@ -28,7 +28,7 @@ void FileManager::autoSendFile(File const &file)
         return sendFileTroughUplimgWeb(file);
 
     else if (method == Uplimg::UploadMethod::LOCAL)
-        return;
+        parent->fileSended(lastFile);
 
     return;
 }

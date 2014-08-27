@@ -351,48 +351,53 @@
 <context>
     <name>HTTPConfiguration</name>
     <message>
-        <location filename="configuration/httpconfiguration.cpp" line="58"/>
-        <source>KEY_WARNING</source>
-        <translation type="unfinished">&lt;font size=&apos;2&apos;&gt;&lt;span style=&apos;color:blue;&apos;&gt;(!)&lt;/span&gt;Mix of username/password&lt;/font&gt;</translation>
+        <location filename="configuration/httpconfiguration.cpp" line="60"/>
+        <source>KEY_COPY</source>
+        <translation>Copy the key in clipboard</translation>
     </message>
     <message>
-        <location filename="configuration/httpconfiguration.cpp" line="60"/>
+        <location filename="configuration/httpconfiguration.cpp" line="61"/>
+        <source>KEY_WARNING</source>
+        <translation>&lt;font size=&apos;2&apos;&gt;&lt;span style=&apos;color:blue;&apos;&gt;(!)&lt;/span&gt;Mix of username/password&lt;/font&gt;</translation>
+    </message>
+    <message>
+        <location filename="configuration/httpconfiguration.cpp" line="64"/>
         <source>FROM_LINK_TO_DISTRIBUTE</source>
         <translation>Link&apos;s origin</translation>
     </message>
     <message>
-        <location filename="configuration/httpconfiguration.cpp" line="62"/>
+        <location filename="configuration/httpconfiguration.cpp" line="66"/>
         <source>LINK_FROM_HTTP_RESPONSE</source>
         <translation>Link get from the HTTP reponse</translation>
     </message>
     <message>
-        <location filename="configuration/httpconfiguration.cpp" line="64"/>
+        <location filename="configuration/httpconfiguration.cpp" line="68"/>
         <source>LINK_FROM_FIXED_WEBPATH</source>
         <translation>Get link from fixed pattern</translation>
     </message>
     <message>
-        <location filename="configuration/httpconfiguration.cpp" line="73"/>
+        <location filename="configuration/httpconfiguration.cpp" line="77"/>
         <source>YOUR_HOST</source>
         <translation>Host :</translation>
     </message>
     <message>
-        <location filename="configuration/httpconfiguration.cpp" line="74"/>
+        <location filename="configuration/httpconfiguration.cpp" line="78"/>
         <source>YOUR_PORT</source>
         <translation>Port :</translation>
     </message>
     <message>
-        <location filename="configuration/httpconfiguration.cpp" line="75"/>
+        <location filename="configuration/httpconfiguration.cpp" line="79"/>
         <source>YOUR_USERNAME</source>
         <oldsource>YOUR_FILE_FIED_NAME</oldsource>
         <translation>Username (optionnal) :</translation>
     </message>
     <message>
-        <location filename="configuration/httpconfiguration.cpp" line="76"/>
+        <location filename="configuration/httpconfiguration.cpp" line="80"/>
         <source>YOUR_PASSWORD</source>
         <translation>Your password (optionnal) :</translation>
     </message>
     <message>
-        <location filename="configuration/httpconfiguration.cpp" line="77"/>
+        <location filename="configuration/httpconfiguration.cpp" line="81"/>
         <source>YOUR_KEY</source>
         <translation>Your key (auto-generated) :</translation>
     </message>
@@ -401,12 +406,12 @@
         <translation type="vanished">Web access link :</translation>
     </message>
     <message>
-        <location filename="configuration/httpconfiguration.cpp" line="84"/>
+        <location filename="configuration/httpconfiguration.cpp" line="88"/>
         <source>SET_HTTP_CREDENTIALS</source>
         <translation>Set Uplimg CMS credentials</translation>
     </message>
     <message>
-        <location filename="configuration/httpconfiguration.cpp" line="88"/>
+        <location filename="configuration/httpconfiguration.cpp" line="92"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>

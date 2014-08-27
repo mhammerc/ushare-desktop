@@ -39,7 +39,7 @@ public:
         validateLayout = new QHBoxLayout;
         version = new LabelBlue(Uplimg::versionText);
         validateButton = new ButtonBlue("Ok");
-        validateLayout->addWidget(version);
+        //validateLayout->addWidget(version);
         validateLayout->addStretch();
         validateLayout->addWidget(validateButton);
         setLayout(validateLayout);

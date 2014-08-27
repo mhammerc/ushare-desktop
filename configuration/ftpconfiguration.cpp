@@ -41,7 +41,7 @@ void FTPConfiguration::setUpUI()
     port = new QSpinBox();
     username = new LineEditBlue();
     password = new LineEditBlue();
-    password->setEchoMode(QLineEdit::Password);
+    password->setEchoMode(QLineEdit::EchoMode::Password);
     basePath = new LineEditBlue();
     webPath = new LineEditBlue();
 

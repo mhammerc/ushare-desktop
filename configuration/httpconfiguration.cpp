@@ -15,6 +15,9 @@ HTTPConfiguration::HTTPConfiguration(QWidget * parent) :
 
     host->setText(settings.value(Reg::HTTPHost).toString());
     port->setValue(settings.value(Reg::HTTPPort, 80).toInt());
+    username->setText(settings.value(Reg::HTTPUsername).toString());
+    password->setText(settings.value(Reg::HTTPPassword).toString());
+    password->setEchoMode(QLineEdit::EchoMode::Password);
     webPath->setText(settings.value(Reg::HTTPWebPath).toString());
 
     if(settings.value(Reg::HTTPLinkFrom).toString() == "FROM_FIXED")
@@ -29,6 +32,7 @@ HTTPConfiguration::HTTPConfiguration(QWidget * parent) :
     QObject::connect(port, SIGNAL(valueChanged(int)), this, SLOT(portSettingModified(int)));
     QObject::connect(username, SIGNAL(textChanged(QString)), this, SLOT(usernameSettingModified(QString)));
     QObject::connect(password, SIGNAL(textChanged(QString)), this, SLOT(passwordSettingModified(QString)));
+    QObject::connect(privateKey, SIGNAL(clicked()), this, SLOT(privateKeyClicked()));
     QObject::connect(webPathFromHTTPResponse, SIGNAL(toggled(bool)), this, SLOT(webPathFromHTTPResponseSettingModified(bool)));
     QObject::connect(webPathFromFixed, SIGNAL(toggled(bool)), this, SLOT(webPathFromFixedSettingModified(bool)));
     QObject::connect(webPath, SIGNAL(textChanged(QString)), this, SLOT(webPathSettingModified(QString)));
@@ -56,8 +60,7 @@ void HTTPConfiguration::setUpUI()
     port->setMinimum(0);
     username = new LineEditBlue;
     password = new LineEditBlue;
-    privateKey = new LineEditBlue;
-    privateKey->setDisabled(true);
+    privateKey = new ButtonOrange(tr("KEY_COPY"));
     privateKeyWarning = new LabelRed(tr("KEY_WARNING"));
 
 
@@ -78,8 +81,8 @@ void HTTPConfiguration::setUpUI()
     mainFormLayout->addRow(tr("YOUR_PORT"), port);
     mainFormLayout->addRow(tr("YOUR_USERNAME"), username);
     mainFormLayout->addRow(tr("YOUR_PASSWORD"), password);
-    //mainFormLayout->addRow(tr("YOUR_KEY"), privateKey);
-    //mainFormLayout->addRow("", privateKeyWarning);
+    mainFormLayout->addRow(tr("YOUR_KEY"), privateKey);
+    mainFormLayout->addRow("", privateKeyWarning);
 
     secondLayout = new QVBoxLayout;
     secondLayout->addLayout(mainFormLayout);
@@ -127,12 +130,16 @@ void HTTPConfiguration::passwordSettingModified(QString content)
     refillPrivateKey();
 }
 
+void HTTPConfiguration::privateKeyClicked()
+{
+    QApplication::clipboard()->setText(settings.value(Reg::HTTPPrivateKey).toString());
+}
+
 void HTTPConfiguration::refillPrivateKey()
 {
     QString unhashedKey = username->text() + "|oOo|" + password->text();
-    QString hashedKey = QCryptographicHash::hash(unhashedKey.toUtf8(), QCryptographicHash::Md5);
+    QString hashedKey = QCryptographicHash::hash(unhashedKey.toUtf8(), QCryptographicHash::Sha1).toHex();
     settings.setValue(Reg::HTTPPrivateKey, hashedKey);
-    privateKey->setText(hashedKey);
 }
 
 void HTTPConfiguration::fileFieldNameSettingModified(QString content)

@@ -36,7 +36,7 @@ protected:
     QSpinBox * port;
     QLineEdit * username;
     QLineEdit * password;
-    QLineEdit * privateKey;
+    QPushButton * privateKey;
     QLabel * privateKeyWarning;
     QGroupBox * webPathBox;
     QVBoxLayout * webPathLayout;
@@ -55,6 +55,7 @@ public slots :
     void portSettingModified(int);
     void usernameSettingModified(QString);
     void passwordSettingModified(QString);
+    void privateKeyClicked();
     void refillPrivateKey();
     void fileFieldNameSettingModified(QString);
     void webPathSettingModified(QString);
