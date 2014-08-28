@@ -18,7 +18,4 @@
         <file alias="uploading.png">iconUploading.png</file>
         <file alias="waiting.png">iconWaiting.png</file>
     </qresource>
-    <qresource prefix="/css">
-        <file>styleSheet.css</file>
-    </qresource>
 </RCC>

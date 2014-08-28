@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
     QCoreApplication::setOrganizationName("Uplimg corporation");
     QCoreApplication::setApplicationName(Uplimg::applicationName);
 
-    QFile css("styleSheet.css");
+    QFile css(":/design/stylesheet.css");
     css.open(QIODevice::ReadOnly);
     QString sheet(css.readAll());
     app.setStyleSheet(sheet);

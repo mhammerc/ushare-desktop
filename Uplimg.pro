@@ -10,7 +10,8 @@ RC_ICONS = resources/uplimg.ico
 
 RESOURCES += \
     resources/resources.qrc \
-    langs.qrc
+    langs.qrc \
+    resources/design.qrc
 
 HEADERS += \
     configuration/configurationwindows.h \
@@ -55,10 +56,6 @@ SOURCES += \
     filesendedsound.cpp \
     paste/pastewindow.cpp \
     notificationwindow.cpp
-
-
-OTHER_FILES += \
-    resources/styleSheet.css
 
 #Windows specific
 win32 {
