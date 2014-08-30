@@ -24,12 +24,13 @@ In the time, only the Windows version is stable and available in downloads. If y
 [Let's go to the website](http://uplmg.com)
 
 ### Credits  /  Crédits
+License : [complete text](https://github.com/Imote/Uplimg/blob/master/LICENSE.md) or [human-readable summary of the license](http://creativecommons.org/licenses/by-nc-sa/4.0/)
 
 Uplimg is developped by :
 - Martin Hammerchmidt (Alias Imote) : [Website](http://www.imote.eu/)  |  [Twitter](https://twitter.com/_MartinH_)
 - si0ls : [Website](http://si0ls.fr/) | [Twitter](https://twitter.com/si0ls)
 
-Thanks to Krayon973, Yohann Hammad, Eldraeildor, Mrs025 and si0ls :D
+Thanks to Krayon973, Yohann Hammad, Eldraeildor, Mrs025 and Malobre :D
 
 
 ***
@@ -57,9 +58,10 @@ Pour cela, les dernières versions de Qt, de Qxt et de SFML sont nécessaires.
 [Aller sur le site web](http://uplmg.com)
 
 ### Credits  /  Crédits
+Licence : [texte complet](https://github.com/Imote/Uplimg/blob/master/LICENSE.md) ou [résumé de la licence](http://creativecommons.org/licenses/by-nc-sa/4.0/)
 
 Uplimg est développé par :
 - Martin Hammerchmidt (Alias Imote) : [Site web](http://www.imote.eu/)  |  [Twitter](https://twitter.com/_MartinH_)
 - si0ls : [Site web](http://si0ls.fr/) | [Twitter](https://twitter.com/si0ls)
 
-Merci à Krayon973, Yohann Hammad, Eldraeildor, Mrs025 et si0ls :D
+Merci à Krayon973, Yohann Hammad, Eldraeildor, Mrs025, Malobre :D
