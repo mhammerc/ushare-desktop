@@ -1,3 +1,15 @@
+/**
+This file (c) by : - Martin Hammerchmidt alias Imote
+
+This file is licensed under a
+Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+
+You should have received a copy of the license along with this
+work. If not, see <http://creativecommons.org/licenses/by-nc-sa/4.0/>.
+
+If you have contributed to this file, add your name to authors list.
+*/
+
 #include "screenmanager.h"
 #include "systemtrayicon.h"
 
@@ -11,14 +23,16 @@ FileManager::FileManager(SystemTrayIcon *parent) :
 
 void FileManager::autoSendFile(File const &file)
 {
-    parent->setIcon(QIcon(":/icon/uploading.png"));
     lastFile = file;
     Uplimg::UploadMethod method = Uplimg::Utils::getUploadMethod();
 
-    if (method == Uplimg::UploadMethod::U_ERROR)
+    if (file.hasError)
+        parent->throwErrorAlert(Uplimg::ErrorList::CANT_SAVE_IMAGE_TEMP);
+
+    else if (method == Uplimg::UploadMethod::U_ERROR)
         parent->throwErrorAlert(Uplimg::ErrorList::UPLOAD_METHOD_NOT_CHOOSED);
 
-    if (method == Uplimg::UploadMethod::FTP)
+    else if (method == Uplimg::UploadMethod::FTP)
         return sendFileTroughFTP(file);
 
     else if (method == Uplimg::UploadMethod::HTTP)
@@ -95,10 +109,10 @@ void FileManager::sendFileTroughHTTP(File const &file)
 
 File FileManager::captureSelectedZone(File const &file)
 {
-    screen = QGuiApplication::primaryScreen();
-
     this->lastFile = file;
 
+    screen = QGuiApplication::screens()[0];
+    screenNumber = 0;
     if (screen)
         {
             originalScreenshot = screen->grabWindow(0);
@@ -113,6 +127,11 @@ File FileManager::captureSelectedZone(File const &file)
 
     return file;
 }
+
+void FileManager::changeSelectingScreenRequested()
+{
+}
+
 
 void FileManager::areaPictureTaken(QRect area)
 {
@@ -159,7 +178,7 @@ QPixmap FileManager::darkenPicture(const QPixmap &picture)
 
 File FileManager::captureFullScreen(File &file)
 {
-    QScreen *screen = QGuiApplication::primaryScreen();
+    QScreen * screen = QGuiApplication::primaryScreen();
     QPixmap screenshot;
 
     if (screen)
@@ -183,8 +202,9 @@ File FileManager::captureFullScreen(File &file)
                         }
                 }
         }
+    else
+        file.error();
 
-    file.error();
     return file;
 
 }
@@ -202,6 +222,7 @@ void FileManager::fileSendedTroughHTTP()
     if(http->reply->error() == QNetworkReply::NetworkError::NoError)
         {
             http->terminate();
+            http->wait();
             var::lastUrl.setUrl(QString(http->reply->readAll()));
             http->deleteLater();
             http = nullptr;
@@ -211,6 +232,7 @@ void FileManager::fileSendedTroughHTTP()
     else if(http->reply->error() != QNetworkReply::NetworkError::NoError)
         {
             http->terminate();
+            http->wait();
             http->deleteLater();
             http = nullptr;
             parent->throwErrorAlert(Uplimg::UPLOAD_FAIL);
@@ -227,13 +249,13 @@ void FileManager::pasteReady(const PasteContent &pasteContent)
     File file;
     if(pasteContent.fileTitle == "undefined")
         {
-            file.wantedName = pasteContent.fileTitle;
-            file.path = Uplimg::Utils::getFileTempPath(file.wantedName);
+            file.realName = Uplimg::Utils::getNewFileName(".txt");
+            file.path = Uplimg::Utils::getFileTempPath(file.realName);
         }
     else
         {
-            file.realName = Uplimg::Utils::getNewFileName(".txt");
-            file.path = Uplimg::Utils::getFileTempPath(file.realName);
+            file.wantedName = pasteContent.fileTitle;
+            file.path = Uplimg::Utils::getFileTempPath(file.wantedName);
         }
 
     file.type = "paste";

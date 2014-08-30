@@ -54,7 +54,7 @@
         <location filename="configuration/configurationwindows.cpp" line="236"/>
         <source>CONFIGURE_HTTP</source>
         <oldsource>Configure HTTP POST...</oldsource>
-        <translation>Configurer les paramètres de Uplimg CMS</translation>
+        <translation>Configurer les paramètres du serveur HTTP</translation>
     </message>
     <message>
         <location filename="configuration/configurationwindows.cpp" line="248"/>
@@ -80,13 +80,13 @@
         <translation>Ce logiciel est Open-Source et entièrement gratuit.</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="375"/>
+        <location filename="configuration/configurationwindows.cpp" line="384"/>
         <source>MADE_WITH_QT</source>
         <comment>Made with the flexibility of Qt</comment>
         <translation>Avec la fléxibilité de Qt</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="374"/>
+        <location filename="configuration/configurationwindows.cpp" line="382"/>
         <source>MADE_WITH_SFML</source>
         <comment>Made with the lightness of SFML</comment>
         <translation>Avec la légèreté de SFML</translation>
@@ -111,7 +111,7 @@
         <translation type="vanished">Enfin, n&apos;oubliez jamais le but même de la vie. Soyez &quot;Happy 4 Ever&quot; !</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="413"/>
+        <location filename="configuration/configurationwindows.cpp" line="424"/>
         <source>Credits</source>
         <translation>Crédits</translation>
     </message>
@@ -179,7 +179,7 @@
     <message>
         <location filename="configuration/configurationwindows.cpp" line="235"/>
         <source>USE_UPLOADMETHOD_HTTP</source>
-        <translation>Envoyer dans Uplimg CMS</translation>
+        <translation>Envoyer vers un serveur HTTP</translation>
     </message>
     <message>
         <location filename="configuration/configurationwindows.cpp" line="277"/>
@@ -267,22 +267,33 @@
         <translation>Crédits</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="385"/>
+        <location filename="configuration/configurationwindows.cpp" line="377"/>
+        <source>UPLIMG_LICENSE_WINDOW</source>
+        <oldsource>Uplimg License</oldsource>
+        <translation>Licence d&apos;Uplimg</translation>
+    </message>
+    <message>
+        <location filename="configuration/configurationwindows.cpp" line="383"/>
+        <source>UPLIMG_LICENSE</source>
+        <translation>Licence d&apos;Uplimg</translation>
+    </message>
+    <message>
+        <location filename="configuration/configurationwindows.cpp" line="396"/>
         <source>MAIN_DEVELOPPER</source>
         <translation>Développeur principal et leader du projet : Martin Hammerchmidt alias Imote</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="386"/>
+        <location filename="configuration/configurationwindows.cpp" line="397"/>
         <source>SI0LS</source>
         <translation>Designer et contributeur principal : si0ls</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="399"/>
+        <location filename="configuration/configurationwindows.cpp" line="410"/>
         <source>HAPPY4EVER</source>
         <translation>Enfin, n&apos;oubliez jamais le but même de la vie. Soyez &quot;Happy 4 Ever&quot; !</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="552"/>
+        <location filename="configuration/configurationwindows.cpp" line="563"/>
         <source>CHOOSE_DIRECTORY</source>
         <translation>Choisissez un dossier</translation>
     </message>
@@ -363,55 +374,55 @@
 <context>
     <name>HTTPConfiguration</name>
     <message>
-        <location filename="configuration/httpconfiguration.cpp" line="60"/>
+        <location filename="configuration/httpconfiguration.cpp" line="63"/>
         <source>KEY_COPY</source>
         <translation>Copier la clé</translation>
     </message>
     <message>
-        <location filename="configuration/httpconfiguration.cpp" line="61"/>
+        <location filename="configuration/httpconfiguration.cpp" line="64"/>
         <source>KEY_WARNING</source>
         <translation>&lt;font size=&apos;2&apos;&gt;&lt;span style=&apos;color:blue;&apos;&gt;(!)&lt;/span&gt;Mélange de pseudo/password&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="configuration/httpconfiguration.cpp" line="64"/>
+        <location filename="configuration/httpconfiguration.cpp" line="67"/>
         <source>FROM_LINK_TO_DISTRIBUTE</source>
         <translation>Origine du lien</translation>
     </message>
     <message>
-        <location filename="configuration/httpconfiguration.cpp" line="66"/>
+        <location filename="configuration/httpconfiguration.cpp" line="69"/>
         <source>LINK_FROM_HTTP_RESPONSE</source>
         <translation>Obtenir le lien auprès de la réponse HTTP</translation>
     </message>
     <message>
-        <location filename="configuration/httpconfiguration.cpp" line="68"/>
+        <location filename="configuration/httpconfiguration.cpp" line="71"/>
         <source>LINK_FROM_FIXED_WEBPATH</source>
         <translation>Obtenir le lien avec un pattern fixe</translation>
     </message>
     <message>
-        <location filename="configuration/httpconfiguration.cpp" line="77"/>
+        <location filename="configuration/httpconfiguration.cpp" line="80"/>
         <source>YOUR_HOST</source>
         <oldsource>Your host :</oldsource>
         <translation>Hôte :</translation>
     </message>
     <message>
-        <location filename="configuration/httpconfiguration.cpp" line="78"/>
+        <location filename="configuration/httpconfiguration.cpp" line="81"/>
         <source>YOUR_PORT</source>
         <oldsource>Port of your server :</oldsource>
         <translation>Port :</translation>
     </message>
     <message>
-        <location filename="configuration/httpconfiguration.cpp" line="79"/>
+        <location filename="configuration/httpconfiguration.cpp" line="82"/>
         <source>YOUR_USERNAME</source>
         <oldsource>YOUR_FILE_FIED_NAME</oldsource>
         <translation>Nom d&apos;utilisateur (optionnel) :</translation>
     </message>
     <message>
-        <location filename="configuration/httpconfiguration.cpp" line="80"/>
+        <location filename="configuration/httpconfiguration.cpp" line="83"/>
         <source>YOUR_PASSWORD</source>
         <translation>Votre mot de passe (optionnel) :</translation>
     </message>
     <message>
-        <location filename="configuration/httpconfiguration.cpp" line="81"/>
+        <location filename="configuration/httpconfiguration.cpp" line="84"/>
         <source>YOUR_KEY</source>
         <translation>Votre clé (auto-générée) :</translation>
     </message>
@@ -420,13 +431,13 @@
         <translation type="vanished">Lien d&apos;accès sur Internet :</translation>
     </message>
     <message>
-        <location filename="configuration/httpconfiguration.cpp" line="88"/>
+        <location filename="configuration/httpconfiguration.cpp" line="91"/>
         <source>SET_HTTP_CREDENTIALS</source>
         <oldsource>Modify HTTP credentials</oldsource>
-        <translation>Configurer les informations d&apos;Uplimg CMS</translation>
+        <translation>Configurer les informations du serveur</translation>
     </message>
     <message>
-        <location filename="configuration/httpconfiguration.cpp" line="92"/>
+        <location filename="configuration/httpconfiguration.cpp" line="95"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
@@ -514,26 +525,31 @@
         <translation>Selectionnez un fichier</translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="166"/>
+        <location filename="systemtrayicon.cpp" line="169"/>
         <source>UPLOAD_SUCCESS_WITH_URL</source>
         <translation>Félicitations !
 L&apos;envoi est un succès. Le lien est :
 </translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="293"/>
+        <location filename="systemtrayicon.cpp" line="290"/>
+        <source>CANT_SAVE_IMAGE_TEMP</source>
+        <translation>Nous ne pouvons pas stocker localement votre image.</translation>
+    </message>
+    <message>
+        <location filename="systemtrayicon.cpp" line="302"/>
         <source>FTP_CANT_CONNECT</source>
         <translation>Nous ne pouvons pas nous connecter à votre serveur FTP.
 Vous devez vérifier votre adresse de connection et votre port.</translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="295"/>
+        <location filename="systemtrayicon.cpp" line="304"/>
         <source>FTP_CANT_LOGIN</source>
         <translation>Nous ne pouvons pas vous authentifier dans votre serveur FTP.
 Vous devez vérifier vos identifiants.</translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="297"/>
+        <location filename="systemtrayicon.cpp" line="306"/>
         <source>FTP_CANT_PUT_FILE</source>
         <translation>Nous avons eu une erreur lors de l&apos;envoi du fichier mais la connexion c&apos;est bien passé.
 Si le serveur vous appartient, vérifiez que vous avez bien les autorisations nécessaires afin de sauvegarder un fichier.
@@ -549,28 +565,28 @@ L&apos;envoi est un succès. Le lien est :
 </translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="174"/>
+        <location filename="systemtrayicon.cpp" line="177"/>
         <source>UPLOAD_SUCCESS_LOCAL</source>
         <translation>Votre image est désormais sauvegardé locallement.</translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="197"/>
+        <location filename="systemtrayicon.cpp" line="201"/>
         <source>OPEN_TO_BROWSER</source>
         <translation>Ouvrir dans le navigateur</translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="198"/>
+        <location filename="systemtrayicon.cpp" line="202"/>
         <source>COPY_TO_CLIPBOARD</source>
         <translation>Copier dans le presse papier</translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="276"/>
+        <location filename="systemtrayicon.cpp" line="280"/>
         <source>UPLOAD_FAILED</source>
         <translation>Echec de l&apos;envoi.
 Vous devez vérifier votre configuration d&apos;Uplimg ou votre configuration internet pour corriger le problème.</translation>
     </message>
     <message>
-        <location filename="systemtrayicon.cpp" line="281"/>
+        <location filename="systemtrayicon.cpp" line="285"/>
         <source>NO_METHOD_TO_UPLOAD_CHOOSED</source>
         <translation>Nous ne pouvons rien envoyer.
 Vous devez sélectionner une méthode d&apos;envoi avant.</translation>

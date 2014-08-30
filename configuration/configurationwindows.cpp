@@ -1,3 +1,15 @@
+/**
+This file (c) by : - Martin Hammerchmidt alias Imote
+
+This file is licensed under a
+Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+
+You should have received a copy of the license along with this
+work. If not, see <http://creativecommons.org/licenses/by-nc-sa/4.0/>.
+
+If you have contributed to this file, add your name to authors list.
+*/
+
 #include "configurationwindows.h"
 #include "systemtrayicon.h"
 
@@ -116,8 +128,8 @@ ConfigurationWindows::ConfigurationWindows(SystemTrayIcon * parent, QWidget *qwi
     QObject::connect(uploadFileShortcut, SIGNAL(textChanged(QString)), this, SLOT(uploadFileShortcutChanged(QString)));
     QObject::connect(uploadClipboardShortcut, SIGNAL(textChanged(QString)), this, SLOT(uploadClipboardShortcutChanged(QString)));
 
-    //QObject::connect(validate, SIGNAL(clicked()), this, SLOT(hide()));
-    QObject::connect(bottomBar, SIGNAL(validate()), this, SLOT(refreshCSS())); /* Used when making design. This button refresh all the design according to modified css file. */
+    QObject::connect(bottomBar, SIGNAL(validate()), this, SLOT(hide()));
+    //QObject::connect(bottomBar, SIGNAL(validate()), this, SLOT(refreshCSS())); /* Used when making design. This button refresh all the design according to modified css file. */
 
     FTPConf = new FTPConfiguration();
     HTTPConf = new HTTPConfiguration();
@@ -370,15 +382,26 @@ void ConfigurationWindows::setUpCreditsSectionUI()
     SFMLLicence->setReadOnly(true);
     SFMLLicence->setFixedSize(400,280);
 
+    uplimgLicense = new QTextEdit;
+    QFile uplimgLicenseFile(":/by-nc-sa.txt");
+    uplimgLicenseFile.open(QIODevice::ReadOnly);
+    uplimgLicense->setText(uplimgLicenseFile.readAll());
+    uplimgLicense->setWindowTitle(tr("UPLIMG_LICENSE_WINDOW"));
+    uplimgLicense->setReadOnly(true);
+    uplimgLicense->setFixedSize(400,280);
+
     madeWithLayout = new QHBoxLayout;
     madeWithSFML = new ButtonBlue(tr("MADE_WITH_SFML", "Made with the lightness of SFML"));
+    uplimgLicenseButton = new ButtonBlue(tr("UPLIMG_LICENSE"));
     madeWithQt = new ButtonBlue(tr("MADE_WITH_QT", "Made with the flexibility of Qt"));
     madeWithLayout->addStretch();
     madeWithLayout->addWidget(madeWithQt);
+    madeWithLayout->addWidget(uplimgLicenseButton);
     madeWithLayout->addWidget(madeWithSFML);
     madeWithLayout->addStretch();
 
     QObject::connect(madeWithSFML, SIGNAL(clicked()), SFMLLicence, SLOT(show()));
+    QObject::connect(uplimgLicenseButton, SIGNAL(clicked()), uplimgLicense, SLOT(show()));
     QObject::connect(madeWithQt, SIGNAL(clicked()), qApp, SLOT(aboutQt()));
 
     //Contributors

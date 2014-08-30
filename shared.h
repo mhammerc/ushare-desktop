@@ -1,3 +1,15 @@
+/**
+This file (c) by : - Martin Hammerchmidt alias Imote
+
+This file is licensed under a
+Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+
+You should have received a copy of the license along with this
+work. If not, see <http://creativecommons.org/licenses/by-nc-sa/4.0/>.
+
+If you have contributed to this file, add your name to authors list.
+*/
+
 #ifndef SHARED_H
 #define SHARED_H
 
@@ -83,15 +95,15 @@ QString const fileFieldName("uplimgFile");
 namespace Uplimg
 {
 QString const applicationName("Uplimg");
-QString const versionText("0.12 -> Alpha testing | leaks unautorized without express authorization");
-QString const version("0.12");
+QString const versionText("0.12a");
+QString const version("0.12a");
 QString const updateVersionLink("http://update.uplmg.com/latest.html");
 
 enum HTTP_ACCESS_FILE_LINK { FROM_RESPONSE /* From HTTP response */, FROM_FIXED_LINK /* Web path */}; //From what link return the user on successfull HTTP upload : from HTTP response or from fixed choosed link
 
 enum ImageFormat { JPEG, PNG, INVALID_FORMAT };
 
-enum ErrorList { UPLOAD_FAIL, UPLOAD_METHOD_NOT_CHOOSED };
+enum ErrorList { UPLOAD_FAIL, UPLOAD_METHOD_NOT_CHOOSED, CANT_SAVE_IMAGE_TEMP /*Can't save the image for upload */ };
 
 enum UploadMethod
 {

@@ -1,3 +1,15 @@
+/**
+This file (c) by : - Martin Hammerchmidt alias Imote
+
+This file is licensed under a
+Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+
+You should have received a copy of the license along with this
+work. If not, see <http://creativecommons.org/licenses/by-nc-sa/4.0/>.
+
+If you have contributed to this file, add your name to authors list.
+*/
+
 #include "systemtrayicon.h"
 
 SystemTrayIcon::SystemTrayIcon(QObject *qobject) :
@@ -129,7 +141,10 @@ void SystemTrayIcon::uploadSelectedFileTriggered()
                     screenManager->autoSendFile(file);
                 }
             else
+            {
                 lastActionFinished();
+                setIcon(QIcon(":/icon/waiting.png"));
+            }
         }
 }
 
@@ -183,6 +198,7 @@ void SystemTrayIcon::lastActionFinished()
 void SystemTrayIcon::newActionStarted()
 {
     actionBeing = true;
+    setIcon(QIcon(":/icon/uploading.png"));
 }
 
 void SystemTrayIcon::addUploadedFileInContextMenu()
@@ -273,12 +289,17 @@ void SystemTrayIcon::throwErrorAlert(const Uplimg::ErrorList error)
 
     if (error == Uplimg::ErrorList::UPLOAD_FAIL)
         {
-            const QString text(tr("UPLOAD_FAILED"));
+            QString const text(tr("UPLOAD_FAILED"));
             this->showNotification(Uplimg::applicationName, text);
         }
     else if(error == Uplimg::ErrorList::UPLOAD_METHOD_NOT_CHOOSED)
         {
-            const QString text(tr("NO_METHOD_TO_UPLOAD_CHOOSED"));
+            QString const text(tr("NO_METHOD_TO_UPLOAD_CHOOSED"));
+            this->showNotification(Uplimg::applicationName, text);
+        }
+    else if(error == Uplimg::ErrorList::CANT_SAVE_IMAGE_TEMP)
+        {
+            QString const text(tr("CANT_SAVE_IMAGE_TEMP"));
             this->showNotification(Uplimg::applicationName, text);
         }
 }

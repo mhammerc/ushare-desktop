@@ -1,3 +1,15 @@
+/**
+This file (c) by : - Martin Hammerchmidt alias Imote
+
+This file is licensed under a
+Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+
+You should have received a copy of the license along with this
+work. If not, see <http://creativecommons.org/licenses/by-nc-sa/4.0/>.
+
+If you have contributed to this file, add your name to authors list.
+*/
+
 #include "httppostupload.h"
 #include "screenmanager.h"
 #include <iostream>
@@ -91,11 +103,12 @@ void HTTPPostUpload::sendFile()
     request.setUrl(url);
 
     manager = new QNetworkAccessManager;
+
     reply = manager->post(request, container);
+
+    QObject::connect(reply, SIGNAL(finished()), parent, SLOT(fileSendedTroughHTTP()));
 
     reply->setParent(container);
     file->setParent(container);
     manager->setParent(reply);
-
-    QObject::connect(reply, SIGNAL(finished()), parent, SLOT(fileSendedTroughHTTP()));
 }
