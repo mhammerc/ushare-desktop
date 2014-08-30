@@ -95,8 +95,8 @@ QString const fileFieldName("uplimgFile");
 namespace Uplimg
 {
 QString const applicationName("Uplimg");
-QString const versionText("0.12a");
-QString const version("0.12a");
+QString const versionText("0.12b");
+QString const version("0.12b");
 QString const updateVersionLink("http://update.uplmg.com/latest.html");
 
 enum HTTP_ACCESS_FILE_LINK { FROM_RESPONSE /* From HTTP response */, FROM_FIXED_LINK /* Web path */}; //From what link return the user on successfull HTTP upload : from HTTP response or from fixed choosed link

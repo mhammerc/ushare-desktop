@@ -65,7 +65,8 @@ void PasteWindow::setUpConnections()
 void PasteWindow::sendTriggered()
 {
     PasteContent content;
-    content.fileTitle = fileNameLineEdit->text();
+    if(fileNameLineEdit->isModified())
+        content.fileTitle = fileNameLineEdit->text();
     content.fileContent = contentText->toPlainText();
     parent->pasteReady(content);
 }
