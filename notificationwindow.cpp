@@ -13,14 +13,14 @@ If you have contributed to this file, add your name to authors list.
 #include "notificationwindow.h"
 #include "systemtrayicon.h"
 
-NotificationWindow::NotificationWindow(QString const &title, QString const &message, SystemTrayIcon * systray, QWidget *parent, Qt::WindowFlags f) : QWidget(parent, Qt::WindowFlags(Qt::FramelessWindowHint | Qt::WindowMinMaxButtonsHint | Qt::WindowSystemMenuHint | Qt::WindowStaysOnTopHint)), parent(systray), message(message), title(title)
+NotificationWindow::NotificationWindow(QString const &title, QString const &message, SystemTrayIcon * systray, MESSAGE_TYPE state, QWidget *parent, Qt::WindowFlags f) : QWidget(parent, Qt::WindowFlags(Qt::FramelessWindowHint | Qt::WindowMinMaxButtonsHint | Qt::WindowSystemMenuHint | Qt::WindowStaysOnTopHint)), parent(systray), state(state), message(message), title(title)
 {
     Q_UNUSED(f);
 
     setAttribute(Qt::WA_TranslucentBackground, true);
     setAttribute(Qt::WA_DeleteOnClose, true);
     setContentsMargins(-10,-10,-10,-10);
-    resize(200,80);
+    resize(350,80);
 
     setUpUI();
 
@@ -44,7 +44,8 @@ void NotificationWindow::setUpUI()
 {
     widget = new QWidget;
     widget->setObjectName("NotificationContent");
-    mainLayout = new QVBoxLayout;
+    mainLayout = new QHBoxLayout;
+    textLayout = new QVBoxLayout;
     layout = new QVBoxLayout;
 
     titleLabel = new QLabel(title);
@@ -55,16 +56,22 @@ void NotificationWindow::setUpUI()
     topLayout->addWidget(titleLabel);
     topLayout->addStretch();
     topLayout->addWidget(closeButton);
-
     messageLabel = new QLabel(message);
     messageLabel->setObjectName("NotificationMessage");
 
     layout->addLayout(topLayout);
     layout->addWidget(messageLabel);
     layout->addStretch();
-    widget->setLayout(layout);
-    mainLayout->addWidget(widget);
-    setLayout(mainLayout);
+
+    icon = new QLabel;
+    icon->setObjectName("NotificationLeftIcon");
+
+    mainLayout->addWidget(icon);
+    mainLayout->addLayout(layout);
+
+    widget->setLayout(mainLayout);
+    textLayout->addWidget(widget);
+    setLayout(textLayout);
 }
 
 void NotificationWindow::mousePressEvent(QMouseEvent *event)

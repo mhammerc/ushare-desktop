@@ -425,5 +425,5 @@ SystemTrayIcon::~SystemTrayIcon()
 
 void SystemTrayIcon::showNotification(const QString &title, const QString &message)
 {
-    new NotificationWindow(title, message, this);
+    new NotificationWindow(title, message, this, MESSAGE_TYPE::SUCCESS);
 }

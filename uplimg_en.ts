@@ -12,13 +12,13 @@
     <message>
         <location filename="configuration/configurationwindows.cpp" line="369"/>
         <source>SFML Licence</source>
-        <translation>SFML Licence</translation>
+        <translation>SFML License</translation>
     </message>
     <message>
         <location filename="configuration/configurationwindows.cpp" line="362"/>
         <source>SOFTWARE_FREE_OPEN_SOURCE</source>
         <comment>This software is open source and entirely free to use.</comment>
-        <translation>This software is open source and entirely free to use.</translation>
+        <translation>This software is open source and absolutely free to use.</translation>
     </message>
     <message>
         <location filename="configuration/configurationwindows.cpp" line="384"/>
@@ -96,12 +96,12 @@
     <message>
         <location filename="configuration/configurationwindows.cpp" line="256"/>
         <source>IMAGE_TYPE</source>
-        <translation>Image format</translation>
+        <translation>Image file format</translation>
     </message>
     <message>
         <location filename="configuration/configurationwindows.cpp" line="265"/>
         <source>IMAGE_QUALITY</source>
-        <translation>Image quality</translation>
+        <translation>Image file quality</translation>
     </message>
     <message>
         <location filename="configuration/configurationwindows.cpp" line="275"/>
@@ -117,12 +117,12 @@
     <message>
         <location filename="configuration/configurationwindows.cpp" line="188"/>
         <source>CHOOSE_COLOR_FOR_SELECTING_AREA_SCREEN</source>
-        <translation>Couleur de la sélection de zone</translation>
+        <translation>Area selector&apos;s color</translation>
     </message>
     <message>
         <location filename="configuration/configurationwindows.cpp" line="194"/>
         <source>ON_SUCCESS</source>
-        <translation>On successfull upload</translation>
+        <translation>On successful upload</translation>
     </message>
     <message>
         <location filename="configuration/configurationwindows.cpp" line="207"/>
@@ -152,7 +152,7 @@
     <message>
         <location filename="configuration/configurationwindows.cpp" line="298"/>
         <source>WARNING_HOTKEYS_DISABLED</source>
-        <translation>Warning : global hotkeys disabled in this tab !</translation>
+        <translation>Warning : global hotkeys are disabled in this tab !</translation>
     </message>
     <message>
         <location filename="configuration/configurationwindows.cpp" line="306"/>
@@ -177,7 +177,7 @@
     <message>
         <location filename="configuration/configurationwindows.cpp" line="310"/>
         <source>UPLOAD_CLIPBOARD_SHORTCUT</source>
-        <translation>Upload clipboard content</translation>
+        <translation>Upload clipboard&apos;s content</translation>
     </message>
     <message>
         <location filename="configuration/configurationwindows.cpp" line="330"/>
@@ -228,7 +228,7 @@
     <message>
         <location filename="configuration/configurationwindows.cpp" line="396"/>
         <source>MAIN_DEVELOPPER</source>
-        <translation>Main developper and project manager : Martin Hammerchmidt alias Imote</translation>
+        <translation>Main developer and project manager : Martin Hammerchmidt alias Imote</translation>
     </message>
     <message>
         <location filename="configuration/configurationwindows.cpp" line="397"/>
@@ -369,7 +369,7 @@
     <message>
         <location filename="configuration/httpconfiguration.cpp" line="64"/>
         <source>KEY_WARNING</source>
-        <translation>&lt;font size=&apos;2&apos;&gt;&lt;span style=&apos;color:blue;&apos;&gt;(!)&lt;/span&gt;Mix of username/password&lt;/font&gt;</translation>
+        <translation>&lt;font size=&apos;2&apos;&gt;&lt;span style=&apos;color:blue;&apos;&gt;(!)&lt;/span&gt; Mix of username/password&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="configuration/httpconfiguration.cpp" line="67"/>
@@ -379,12 +379,12 @@
     <message>
         <location filename="configuration/httpconfiguration.cpp" line="69"/>
         <source>LINK_FROM_HTTP_RESPONSE</source>
-        <translation>Link get from the HTTP reponse</translation>
+        <translation>Get the link from HTTP response</translation>
     </message>
     <message>
         <location filename="configuration/httpconfiguration.cpp" line="71"/>
         <source>LINK_FROM_FIXED_WEBPATH</source>
-        <translation>Get link from fixed pattern</translation>
+        <translation>Get the link from fixed pattern</translation>
     </message>
     <message>
         <location filename="configuration/httpconfiguration.cpp" line="80"/>
@@ -405,7 +405,7 @@
     <message>
         <location filename="configuration/httpconfiguration.cpp" line="83"/>
         <source>YOUR_PASSWORD</source>
-        <translation>Your password (optionnal) :</translation>
+        <translation>Password (optionnal) :</translation>
     </message>
     <message>
         <location filename="configuration/httpconfiguration.cpp" line="84"/>
@@ -432,7 +432,7 @@
     <message>
         <location filename="paste/pastewindow.cpp" line="18"/>
         <source>PASTE_FILE_NAME</source>
-        <translation>File name (leave blank for random) :</translation>
+        <translation>File name (leave blank to random it) :</translation>
     </message>
     <message>
         <location filename="paste/pastewindow.cpp" line="30"/>
@@ -465,13 +465,13 @@
         <location filename="systemtrayicon.cpp" line="60"/>
         <source>TAKE_NEW_FULLSCREEN</source>
         <oldsource>Take new screen</oldsource>
-        <translation>Take new fullscreen</translation>
+        <translation>Capture new fullscreen</translation>
     </message>
     <message>
         <location filename="systemtrayicon.cpp" line="61"/>
         <source>TAKE_NEW_AREA_SELECTED_SCREEN</source>
         <oldsource>Take new selected screen</oldsource>
-        <translation>Take new selected screen</translation>
+        <translation>Shoot area...</translation>
     </message>
     <message>
         <location filename="systemtrayicon.cpp" line="62"/>
@@ -519,7 +519,7 @@ Upload success. URL is :
     <message>
         <location filename="systemtrayicon.cpp" line="290"/>
         <source>CANT_SAVE_IMAGE_TEMP</source>
-        <translation>Wa actually can&apos;t save you file on your computer</translation>
+        <translation>Wa actually can&apos;t save the file on your computer</translation>
     </message>
     <message>
         <location filename="systemtrayicon.cpp" line="302"/>
@@ -538,7 +538,7 @@ You must verify your FTP credentials.</translation>
         <source>FTP_CANT_PUT_FILE</source>
         <translation>We got error while uploading file but we can connect to you server.
 If you own the FTP server, verify if you&apos;ve right to save file.
-Otherwise, contact you sysadmin.</translation>
+Otherwise, contact your sysadmin.</translation>
     </message>
     <message>
         <source>UPLOAD_SUCCESS_WITH_URL</source>

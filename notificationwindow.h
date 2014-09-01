@@ -24,16 +24,19 @@ If you have contributed to this file, add your name to authors list.
 #include <QTimer>
 #include <QDesktopWidget>
 #include <QRect>
+#include <QPixmap>
 
 #include "shared.h"
 
 class SystemTrayIcon;
 
+enum class MESSAGE_TYPE { SUCCESS, ERROR, WARNING };
+
 class NotificationWindow : public QWidget
 {
     Q_OBJECT
 public:
-    NotificationWindow(QString const &title, QString const &message, SystemTrayIcon * systray, QWidget * parent = 0, Qt::WindowFlags f = 0);
+    NotificationWindow(QString const &title, QString const &message, SystemTrayIcon * systray, MESSAGE_TYPE state, QWidget * parent = 0, Qt::WindowFlags f = 0);
 
     void paintEvent(QPaintEvent *)
     {
@@ -47,15 +50,21 @@ protected:
     void setUpUI();
     virtual void mousePressEvent(QMouseEvent * event);
 
+    MESSAGE_TYPE state;
+
     SystemTrayIcon * parent;
     QString message;
     QString title;
     QTimer * timeToShowWindow;
 
     //Layout
-    QVBoxLayout * mainLayout;
+    QHBoxLayout * mainLayout;
+    QVBoxLayout * textLayout;
     QWidget * widget;
     QVBoxLayout * layout;
+
+    //icon on left
+    QLabel * icon;
 
     QHBoxLayout * topLayout;
     QLabel * titleLabel;

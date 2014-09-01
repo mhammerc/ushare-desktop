@@ -381,7 +381,7 @@
     <message>
         <location filename="configuration/httpconfiguration.cpp" line="64"/>
         <source>KEY_WARNING</source>
-        <translation>&lt;font size=&apos;2&apos;&gt;&lt;span style=&apos;color:blue;&apos;&gt;(!)&lt;/span&gt;Mélange de pseudo/password&lt;/font&gt;</translation>
+        <translation>&lt;font size=&apos;2&apos;&gt;&lt;span style=&apos;color:blue;&apos;&gt;(!)&lt;/span&gt; Mélange de pseudo/password&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="configuration/httpconfiguration.cpp" line="67"/>
