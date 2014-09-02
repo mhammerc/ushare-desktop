@@ -17,6 +17,7 @@ If you have contributed to this file, add your name to authors list.
 SelectAreaBand::SelectAreaBand(FileManager *manager, QWidget * parent) :
     QLabel(parent)
 {
+    this->grabKeyboard();
     QSettings settings;
     QColor color;
 
@@ -34,6 +35,7 @@ SelectAreaBand::SelectAreaBand(FileManager *manager, QWidget * parent) :
             color.setBlue(settings.value(Reg::blueArea).toInt());
         }
 
+
     setCursor(Qt::CrossCursor);
     rubberBand = new QRubberBand(QRubberBand::Rectangle, this);
     this->manager = manager;
@@ -43,7 +45,7 @@ SelectAreaBand::SelectAreaBand(FileManager *manager, QWidget * parent) :
 
     QPalette palette;
     palette.setColor(QPalette::Normal, QPalette::Highlight, color);
-    setPalette(palette);
+    //setPalette(palette);
     rubberBand->setPalette(palette);
 }
 
@@ -85,9 +87,7 @@ void SelectAreaBand::keyPressEvent(QKeyEvent * event)
             this->deleteLater();
             emit areaCanceled();
         }
-    else if(event->key() == Qt::Key_A)
-        manager->changeSelectingScreenRequested();
 
 }
 
-SelectAreaBand::~SelectAreaBand() {}
+SelectAreaBand::~SelectAreaBand() {releaseKeyboard();}

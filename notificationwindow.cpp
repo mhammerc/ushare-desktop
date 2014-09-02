@@ -13,10 +13,12 @@ If you have contributed to this file, add your name to authors list.
 #include "notificationwindow.h"
 #include "systemtrayicon.h"
 
-NotificationWindow::NotificationWindow(QString const &title, QString const &message, SystemTrayIcon * systray, MESSAGE_TYPE state, QWidget *parent, Qt::WindowFlags f) : QWidget(parent, Qt::WindowFlags(Qt::FramelessWindowHint | Qt::WindowMinMaxButtonsHint | Qt::WindowSystemMenuHint | Qt::WindowStaysOnTopHint)), parent(systray), state(state), message(message), title(title)
+NotificationWindow::NotificationWindow(QString const &title, QString const &message, SystemTrayIcon * systray, MESSAGE_TYPE state, QWidget *parent, Qt::WindowFlags f) : QWidget(parent, Qt::WindowFlags(Qt::Tool |Qt::FramelessWindowHint | Qt::WindowMinMaxButtonsHint | Qt::WindowSystemMenuHint | Qt::WindowStaysOnTopHint)), parent(systray), state(state), message(message), title(title)
 {
     Q_UNUSED(f);
-
+    setFocusPolicy(Qt::NoFocus);
+    //setWindowFlags(Qt::Tool);
+    setAttribute(Qt::WA_X11DoNotAcceptFocus, true);
     setAttribute(Qt::WA_TranslucentBackground, true);
     setAttribute(Qt::WA_DeleteOnClose, true);
     setContentsMargins(-10,-10,-10,-10);

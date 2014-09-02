@@ -102,7 +102,7 @@ QLabel#UplimgText{
 QPushButton#NotificationCloseButton{
 	width: 34px;
     height: 26px;
-    background: url(":/design/IconCloseNotification.png") no-repeat right top;
+    background: url(":/design/IconClose.png") no-repeat right top;
     border: 0;
     padding: 0 0 0 0;
     margin: 0 0 0 0;
@@ -112,30 +112,38 @@ QPushButton#NotificationCloseButton{
 QPushButton#NotificationCloseButton::hover{
 	width: 34px;
     height: 26px;
-    background: url(":/design/IconCloseHoverNotification.png") no-repeat right top;
+    background: url(":/design/IconCloseHover.png") no-repeat right top;
     border: 0;
     padding: 0 0 0 0;
     margin: 0 0 0 0;
     border-radius: 3px;
 }
 
+QLabel#NotificationLeftIcon{
+    min-width: 75px;
+    min-height: 50px;
+    background: url(":/icon/waiting.png") no-repeat;
+    border-right: 1px solid #444;
+}
+
 QWidget#NotificationContent{
-    background-color: #2D2D30;
-    margin: 0 ;
-	border-radius:20px;
+    background-color: white;
+    margin: 0;
+    border: 1px solid #BBB;
 }
 
 QLabel#NotificationTitle{
-	font-size:15px;
+	font-size:20px;
 	font-family: "Trebuchet MS";
-	color: white;
+	color: #666;
 	font-weight: bold;
 	margin-left: 7px;
 	text-align:center;
 }
 
 QLabel#NotificationMessage{
-	color:white;
+	color: #333;
+    font-size:11px;
 	margin-left:5px;
 	font-family: sans-serif;
 } 

@@ -92,8 +92,6 @@ public slots:
     void fileSendedTroughHTTP();
     void fileSendedTroughFTP();
 
-    void changeSelectingScreenRequested(); //This slot is used when user is selecting area and pressed arrow key.
-
     void pasteReady(PasteContent const &paste);
 
 

@@ -115,23 +115,19 @@ File FileManager::captureSelectedZone(File const &file)
     screenNumber = 0;
     if (screen)
         {
-            originalScreenshot = screen->grabWindow(0);
+            originalScreenshot = screen->grabWindow(0, screen->virtualGeometry().x(), screen->virtualGeometry().y(), screen->virtualGeometry().width(), screen->virtualGeometry().height());
 
             if (!originalScreenshot.isNull())
                 {
                     fullScreenPicture = new SelectAreaBand(this);
                     fullScreenPicture->setPixmap(originalScreenshot);
                     fullScreenPicture->selectArea();
+                    fullScreenPicture->setGeometry(screen->virtualGeometry().x(),screen->virtualGeometry().y(),screen->virtualSize().width(), screen->virtualSize().height());
                 }
         }
 
     return file;
 }
-
-void FileManager::changeSelectingScreenRequested()
-{
-}
-
 
 void FileManager::areaPictureTaken(QRect area)
 {
@@ -149,8 +145,8 @@ void FileManager::areaPictureTaken(QRect area)
 void FileManager::areaPictureCanceled()
 {
     parent->lastActionFinished();
+    parent->setIcon(QIcon(":/icon/waiting.png"));
     fullScreenPicture->deleteLater();
-    parent->lastActionFinished();
 }
 
 QPixmap FileManager::darkenPicture(const QPixmap &picture)
