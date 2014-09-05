@@ -17,7 +17,6 @@ NotificationWindow::NotificationWindow(QString const &title, QString const &mess
 {
     Q_UNUSED(f);
     setFocusPolicy(Qt::NoFocus);
-    //setWindowFlags(Qt::Tool);
     setAttribute(Qt::WA_X11DoNotAcceptFocus, true);
     setAttribute(Qt::WA_TranslucentBackground, true);
     setAttribute(Qt::WA_DeleteOnClose, true);
