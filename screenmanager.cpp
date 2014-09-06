@@ -107,6 +107,7 @@ void FileManager::sendFileTroughHTTP(File const &file)
     http->start();
 }
 
+
 /** Windows and linux not work same for capturing area */
 
 #ifdef _WIN32
