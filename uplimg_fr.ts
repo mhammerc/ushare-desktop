@@ -83,7 +83,7 @@
         <location filename="configuration/configurationwindows.cpp" line="384"/>
         <source>MADE_WITH_QT</source>
         <comment>Made with the flexibility of Qt</comment>
-        <translation>Avec la fléxibilité de Qt</translation>
+        <translation>Avec la flexibilité de Qt</translation>
     </message>
     <message>
         <location filename="configuration/configurationwindows.cpp" line="382"/>
@@ -204,7 +204,7 @@
     <message>
         <location filename="configuration/configurationwindows.cpp" line="298"/>
         <source>WARNING_HOTKEYS_DISABLED</source>
-        <translation>Attention : les raccourcis clavier sont désactivé dans cette section !</translation>
+        <translation>Attention : les raccourcis clavier sont désactivés dans cette section !</translation>
     </message>
     <message>
         <location filename="configuration/configurationwindows.cpp" line="306"/>
@@ -259,7 +259,7 @@
     <message>
         <location filename="configuration/configurationwindows.cpp" line="350"/>
         <source>UPDATE_SECTION</source>
-        <translation>Mise à jours</translation>
+        <translation>Mise à jour</translation>
     </message>
     <message>
         <location filename="configuration/configurationwindows.cpp" line="359"/>
@@ -567,7 +567,7 @@ L&apos;envoi est un succès. Le lien est :
     <message>
         <location filename="systemtrayicon.cpp" line="177"/>
         <source>UPLOAD_SUCCESS_LOCAL</source>
-        <translation>Votre image est désormais sauvegardé locallement.</translation>
+        <translation>Votre image est désormais sauvegardé localement.</translation>
     </message>
     <message>
         <location filename="systemtrayicon.cpp" line="201"/>
