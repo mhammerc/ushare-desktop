@@ -18,7 +18,7 @@ If you have contributed to this file, add your name to authors list.
 class File
 {
 public:
-    File() : realName("undefined"), wantedName("undefined"), path("undefined"), type("undefined")
+    File() : realName("undefined"), wantedName("undefined"), path("undefined"), type("undefined"), language("notUsing")
     {
         hasError = false;
 
@@ -28,6 +28,10 @@ public:
     QString wantedName; //Name wanted of the file to download
     QString path;
     QString type;
+
+    /** Other specific informations */
+    QByteArray language; //Needed for paste. Ex : csharp
+    QString languageHR; //Human readable. Ex : C#
 
     bool hasError;
 

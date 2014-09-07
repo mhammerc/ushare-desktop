@@ -23,6 +23,8 @@ public:
     PasteContent():fileTitle("undefined"){}
 
     QString fileTitle;
+    QByteArray fileContentLanguage;
+    QString fileContentLanguageHR; //Human readable
     QString fileContent;
 };
 

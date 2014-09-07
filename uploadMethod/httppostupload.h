@@ -39,6 +39,7 @@ public:
     void setHost(QString const &host, int port);
     void setFile(QString const &pathToFile);
     void setContentType(QString const &contentType = "image");
+    void setLanguage(QByteArray const &lang, QString const &langHR) { this->lang = lang; this->langHR = langHR; }
 
     void setUsername(QString const &username);
     void setPassword(QString const &password);
@@ -65,6 +66,10 @@ protected:
     QString username;
     QString password;
     QString privateKey;
+
+    /** Paste specific */
+    QByteArray lang;
+    QString langHR;
 
     FileManager * parent;
 };

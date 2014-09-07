@@ -17,7 +17,7 @@ If you have contributed to this file, add your name to authors list.
 
 #include "systemtrayicon.h"
 
-QUrl var::lastUrl;
+QString var::lastUrl;
 
 int main(int argc, char *argv[])
 {

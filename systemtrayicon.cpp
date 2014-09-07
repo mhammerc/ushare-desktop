@@ -156,8 +156,8 @@ void SystemTrayIcon::fileSended(File const &file)
 
     if(Uplimg::Utils::getUploadMethod() == Uplimg::UploadMethod::UPLIMG_WEB || Uplimg::Utils::getUploadMethod() == Uplimg::UploadMethod::HTTP)
         {
-            if(!Uplimg::Utils::isValidURL(var::lastUrl.toString().toStdString()))
-                return throwErrorAlert(var::lastUrl.toString());
+            if(!Uplimg::Utils::isValidURL(var::lastUrl.toStdString()))
+                return throwErrorAlert(var::lastUrl);
 
         }
 
@@ -167,7 +167,7 @@ void SystemTrayIcon::fileSended(File const &file)
                 fileSendedSound.play();
 
             if((settings.value(Reg::linkFrom).toString() != "FROM_HTTP" || Uplimg::Utils::getUploadMethod() != Uplimg::UploadMethod::HTTP) && Uplimg::Utils::getUploadMethod() != Uplimg::UploadMethod::UPLIMG_WEB)
-                var::lastUrl.setUrl(Uplimg::Utils::getUploadedFileURL(file.realName));
+                var::lastUrl = Uplimg::Utils::getUploadedFileURL(file.realName);
 
             addUploadedFileInContextMenu();
 
@@ -178,7 +178,7 @@ void SystemTrayIcon::fileSended(File const &file)
                 Uplimg::Utils::copyLastUrlToClipboard();
 
             if(settings.value(Reg::showNotifications).toBool())
-                this->showNotification(Uplimg::applicationName, tr("UPLOAD_SUCCESS_WITH_URL") + var::lastUrl.toDisplayString());
+                this->showNotification(Uplimg::applicationName, tr("UPLOAD_SUCCESS_WITH_URL") + var::lastUrl);
         }
     else if(Uplimg::Utils::getUploadMethod()  == Uplimg::UploadMethod::LOCAL)
         {
@@ -209,7 +209,7 @@ void SystemTrayIcon::addUploadedFileInContextMenu()
             lastUploadedFileSeparatorInserted = true;
         }
 
-    QMenu * pictureMenu = new QMenu(var::lastUrl.fileName());
+    QMenu * pictureMenu = new QMenu(var::lastUrl);
     QAction * openToBrowser = pictureMenu->addAction(tr("OPEN_TO_BROWSER"));
     QAction * copyToClipboard = pictureMenu->addAction(tr("COPY_TO_CLIPBOARD"));
     systemTrayMenu->insertMenu(lastUploadedFileSeparator, pictureMenu);
@@ -338,6 +338,7 @@ void SystemTrayIcon::firstStart()
     settings.setValue(Reg::greenArea, 210);
     settings.setValue(Reg::blueArea, 10);
     settings.setValue(Reg::HTTPLinkFrom, "FROM_HTTP");
+    settings.setValue(Reg::pasteLastLanguageSelected, "0");
     QDir pictureDir(QStandardPaths::standardLocations(QStandardPaths::PicturesLocation).at(0));
     pictureDir.mkdir("Uplimg");
     pictureDir.cd("Uplimg");

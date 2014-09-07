@@ -22,8 +22,12 @@ If you have contributed to this file, add your name to authors list.
 #include <QLabel>
 #include <QLineEdit>
 #include <QShortcut>
+#include <QComboBox>
+#include <QSettings>
 #include "shared.h"
 #include "containers/pastecontent.h"
+
+#include <iostream>
 
 class FileManager;
 
@@ -34,6 +38,7 @@ public:
     explicit PasteWindow(FileManager*, QWidget * qwidgetParent = 0);
 
 protected:
+    QSettings settings;
     void setUpWidgets();
     void setUpConnections();
 
@@ -42,6 +47,7 @@ protected:
     QHBoxLayout * fileNameLayout;
     QLabel * fileNameLabel;
     QLineEdit * fileNameLineEdit;
+    QComboBox * languageSelector;
 
     QTextEdit * contentText;
 
@@ -55,6 +61,7 @@ protected:
 
 public slots:
     void sendTriggered();
+    void languageIndexChanged(int index);
 
 signals:
 };

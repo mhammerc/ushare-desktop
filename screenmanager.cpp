@@ -89,6 +89,7 @@ void FileManager::sendFileTroughUplimgWeb(File const &file)
     http->setHost(UplimgWeb::host, UplimgWeb::port);
     http->setFile(file.path);
     http->setContentType(file.type);
+    http->setLanguage(file.language, file.languageHR);
     http->setUsername(settings.value(Reg::HTTPUsername).toString());
     http->setPassword(settings.value(Reg::HTTPPassword).toString());
     http->setPrivateKey(settings.value(Reg::HTTPPrivateKey).toString());
@@ -101,6 +102,7 @@ void FileManager::sendFileTroughHTTP(File const &file)
     http->setHost(settings.value(Reg::HTTPHost).toString(), settings.value(Reg::HTTPPort).toInt());
     http->setFile(file.path);
     http->setContentType(file.type);
+    http->setLanguage(file.language, file.languageHR);
     http->setUsername(settings.value(Reg::HTTPUsername).toString());
     http->setPassword(settings.value(Reg::HTTPPassword).toString());
     http->setPrivateKey(settings.value(Reg::HTTPPrivateKey).toString());
@@ -247,7 +249,7 @@ void FileManager::fileSendedTroughHTTP()
         {
             http->terminate();
             http->wait();
-            var::lastUrl.setUrl(QString(http->reply->readAll()));
+            var::lastUrl = QString(http->reply->readAll());
             http->deleteLater();
             http = nullptr;
             parent->fileSended(lastFile);
@@ -283,6 +285,8 @@ void FileManager::pasteReady(const PasteContent &pasteContent)
         }
 
     file.type = "paste";
+    file.language = pasteContent.fileContentLanguage;
+    file.languageHR = pasteContent.fileContentLanguageHR;
     QFile physicFile(file.path);
     physicFile.open(QIODevice::WriteOnly);
     physicFile.write(pasteContent.fileContent.toLatin1());

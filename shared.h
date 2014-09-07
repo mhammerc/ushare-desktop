@@ -77,12 +77,13 @@ QString const takeSelectedAreaScreenShortcut("configuration/shortcut/takeSelecte
 QString const sendPasteShortcut("configuration/shortcut/sendPaste");
 QString const uploadClipboardShortcut("configuration/shortcut/uploadClipboard");
 QString const uploadFileShortcut("configuration/shortcut/uploadFile");
+QString const pasteLastLanguageSelected("configuration/paste/lastLanguageSelected");
 }
 
 class var
 {
 public:
-    static QUrl lastUrl;
+    static QString lastUrl;
 };
 
 namespace UplimgWeb
@@ -237,13 +238,13 @@ public slots:
 
     static void openLastUrl()
     {
-        if(!var::lastUrl.toString().isNull())
-            QDesktopServices::openUrl(var::lastUrl);
+        if(!var::lastUrl.isNull())
+            QDesktopServices::openUrl(QUrl(var::lastUrl));
     }
 
     static void copyLastUrlToClipboard()
     {
-        QApplication::clipboard()->setText(var::lastUrl.toString());
+        QApplication::clipboard()->setText(var::lastUrl);
     }
 };
 }

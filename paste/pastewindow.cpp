@@ -29,12 +29,43 @@ void PasteWindow::setUpWidgets()
     fileNameLayout = new QHBoxLayout;
     fileNameLabel = new QLabel(tr("PASTE_FILE_NAME"));
     fileNameLineEdit = new QLineEdit;
+
+    languageSelector = new ComboBoxBlue;
+    languageSelector->addItem("Classic text", "text");
+    languageSelector->addItem("ActionScript3", "as3");
+    languageSelector->addItem("Bash/shell (linux/unix)", "bash");
+    languageSelector->addItem("ColdFusion", "coldfusion");
+    languageSelector->addItem("C#", "csharp");
+    languageSelector->addItem("C", "c");
+    languageSelector->addItem("C++", "cpp");
+    languageSelector->addItem("CSS", "css");
+    languageSelector->addItem("Delphi", "delphi");
+    languageSelector->addItem("Diff", "diff");
+    languageSelector->addItem("Erlang", "erlang");
+    languageSelector->addItem("Groovy", "groovy");
+    languageSelector->addItem("HTML", "xml");
+    languageSelector->addItem("JavaScript", "javascript");
+    languageSelector->addItem("Java", "java");
+    languageSelector->addItem("JavaFX", "javafx");
+    languageSelector->addItem("Perl", "perl");
+    languageSelector->addItem("PHP", "php");
+    languageSelector->addItem("PowerShell", "powershell");
+    languageSelector->addItem("Python", "python");
+    languageSelector->addItem("Ruby", "ruby");
+    languageSelector->addItem("Scala", "scala");
+    languageSelector->addItem("SQL", "sql");
+    languageSelector->addItem("Visual Basic", "vbnet");
+    languageSelector->addItem("XML", "xml");
+    languageSelector->setCurrentIndex(settings.value(Reg::pasteLastLanguageSelected).toInt());
+    QObject::connect(languageSelector, SIGNAL(currentIndexChanged(int)), this, SLOT(languageIndexChanged(int)));
     //--
     fileNameLayout->addWidget(fileNameLabel);
     fileNameLayout->addWidget(fileNameLineEdit);
+    fileNameLayout->addWidget(languageSelector);
 
     /* content text */
     contentText = new QTextEdit;
+    contentText->setTabStopWidth(15);
 
     /* bottom button */
     bottomButtonLayout = new QHBoxLayout;
@@ -67,6 +98,13 @@ void PasteWindow::sendTriggered()
     PasteContent content;
     if(fileNameLineEdit->isModified())
         content.fileTitle = fileNameLineEdit->text();
+    content.fileContentLanguage = languageSelector->currentData().toByteArray();
+    content.fileContentLanguageHR = languageSelector->currentText();
     content.fileContent = contentText->toPlainText();
     parent->pasteReady(content);
+}
+
+void PasteWindow::languageIndexChanged(int index)
+{
+    settings.setValue(Reg::pasteLastLanguageSelected, index);
 }

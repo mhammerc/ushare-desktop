@@ -14,7 +14,7 @@ If you have contributed to this file, add your name to authors list.
 #include "screenmanager.h"
 #include <iostream>
 
-HTTPPostUpload::HTTPPostUpload(FileManager *parent) : contentType("undefined"), parent(parent)
+HTTPPostUpload::HTTPPostUpload(FileManager *parent) : contentType("undefined"), parent(parent), lang("undefined")
 {
     reply = nullptr;
 }
@@ -74,6 +74,14 @@ void HTTPPostUpload::sendFile()
     fileTypePart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"uplimgFileType\""));
     fileTypePart.setBody(contentType.toStdString().c_str());
 
+    QHttpPart fileLanguagePart;
+    fileLanguagePart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"uplimgFileLanguage\""));
+    fileLanguagePart.setBody(lang);
+
+    QHttpPart fileLanguageHRPart;
+    fileLanguageHRPart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"uplimgFileLanguageHR\""));
+    fileLanguageHRPart.setBody(langHR.toStdString().c_str());
+
     /* Now we include user informations */
     QHttpPart usernamePart;
     usernamePart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"uplimgUsername\""));
@@ -94,6 +102,8 @@ void HTTPPostUpload::sendFile()
     container = new QHttpMultiPart(QHttpMultiPart::FormDataType);
     container->append(filePart);
     container->append(fileTypePart);
+    container->append(fileLanguagePart);
+    container->append(fileLanguageHRPart);
     container->append(usernamePart);
     container->append(privateKeyPart);
     container->append(passwordPart);
