@@ -91,22 +91,22 @@
         <location filename="configuration/configurationwindows.cpp" line="176"/>
         <source>APPLICATION_LANG</source>
         <comment>Application&apos;s lang :</comment>
-        <translation>Uplimg&apos;s lang</translation>
+        <translation>Language</translation>
     </message>
     <message>
         <location filename="configuration/configurationwindows.cpp" line="256"/>
         <source>IMAGE_TYPE</source>
-        <translation>Image file format</translation>
+        <translation>Picture file format</translation>
     </message>
     <message>
         <location filename="configuration/configurationwindows.cpp" line="265"/>
         <source>IMAGE_QUALITY</source>
-        <translation>Image file quality</translation>
+        <translation>Picture quality</translation>
     </message>
     <message>
         <location filename="configuration/configurationwindows.cpp" line="275"/>
         <source>LOCAL_SAVE</source>
-        <translation>Local save of the picture</translation>
+        <translation>Save picture on hard drive</translation>
     </message>
     <message>
         <location filename="configuration/configurationwindows.cpp" line="184"/>
@@ -207,7 +207,7 @@
     <message>
         <location filename="configuration/configurationwindows.cpp" line="350"/>
         <source>UPDATE_SECTION</source>
-        <translation>Updates</translation>
+        <translation>Update</translation>
     </message>
     <message>
         <location filename="configuration/configurationwindows.cpp" line="359"/>
@@ -495,7 +495,7 @@
         <source>CONFIGURATION</source>
         <oldsource>Configuration...</oldsource>
         <comment>In system tray icon</comment>
-        <translation>Options</translation>
+        <translation>Settings</translation>
     </message>
     <message>
         <location filename="systemtrayicon.cpp" line="67"/>
