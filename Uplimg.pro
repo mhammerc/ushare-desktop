@@ -82,9 +82,9 @@ unix {
 HEADERS += shortcut/shortcutmanager_linux.h
 SOURCES += shortcut/shortcutmanager_linux.cpp
 
-INCLUDEPATH += "/home/imote/Documents/Uplimg/SFML-master/include/"
-DEPENDPATH += "/home/imote/Documents/Uplimg/SFML-master/include/"
-LIBS += -L"/home/imote/Documents/Uplimg/SFML/lib/"
+INCLUDEPATH += "/home/imote/dev/SFML/include/"
+DEPENDPATH += "/home/imote/dev/SFML/include/"
+LIBS += -L"/home/imote/dev/SFML-build/lib/"
 
 CONFIG(release, debug|release): LIBS += -lsfml-audio -lsfml-graphics -lsfml-network -lsfml-window -lsfml-system
 CONFIG(debug, debug|release): LIBS += -lsfml-audio-d -lsfml-graphics-d -lsfml-network-d -lsfml-window-d -lsfml-system-d

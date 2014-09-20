@@ -93,7 +93,8 @@ void HTTPPostUpload::sendFile()
 
     QHttpPart passwordPart;
     passwordPart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"uplimgPassword\""));
-    passwordPart.setBody(QCryptographicHash::hash(password.toStdString().c_str(), QCryptographicHash::Sha1).toHex());
+    if(password != "") passwordPart.setBody(QCryptographicHash::hash(password.toStdString().c_str(), QCryptographicHash::Sha1).toHex());
+    else passwordPart.setBody("");
 
     QHttpPart uplimgVersionPart;
     uplimgVersionPart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"uplimgVersion\""));
