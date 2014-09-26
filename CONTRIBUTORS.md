@@ -1,6 +1,6 @@
 Contributors
 ---------
-Uplimg is developped by a fixed team but there are many contributors. Whithout these people, you probably never discover Uplimg.
+Uplimg is developped by a fixed team but there are many contributors. Whithout these people, you probably would never have discovered Uplimg.
 
 Here is the list :
 
@@ -12,3 +12,4 @@ Here is the list :
  * Jalal Abouelhadi
  * Alexandre Wurtz "Krayon973"
  * Yohann Hammad
+ * Fanor
