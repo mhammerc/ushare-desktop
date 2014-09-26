@@ -10,3 +10,5 @@ Here is the list :
  * Simon ([Indie-Gift](http://indie-gift.fr "Indie-Gift"))
  * Aymeric B. "Shindaube"
  * Jalal Abouelhadi
+ * Alexandre Wurtz "Krayon973"
+ * Yohann Hammad
