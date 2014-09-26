@@ -6,3 +6,7 @@ Here is the list :
 
  * Dedishops, our sponsor ! 
  * Si0ls
+ * Benjamin_ (benjam62217)
+ * Simon ((Indie-Gift)[http://indie-gift.fr])
+ * Aymeric B. "Shindaube"
+ * Jalal Abouelhadi
