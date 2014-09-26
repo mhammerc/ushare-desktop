@@ -13,3 +13,4 @@ Here is the list :
  * Alexandre Wurtz "Krayon973"
  * Yohann Hammad
  * Fanor
+ * Cam "@TocheCamille"
