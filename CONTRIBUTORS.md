@@ -8,8 +8,9 @@ Here is the list :
  * Si0ls
  * Benjamin_ (benjam62217)
  * Simon ([Indie-Gift](http://indie-gift.fr "Indie-Gift"))
- * Aymeric B. "Shindaube"
+ * Aymeric B. "Shindaube" ([Twitter](https://twitter.com/Mimim_Dragneel))
  * Jalal Abouelhadi
  * Alexandre Wurtz "Krayon973"
  * Yohann Hammad
  * Fanor
+ * BleuDiamant ([Twitter](https://twitter.com/BleuDiamantFR))
