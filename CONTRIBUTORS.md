@@ -8,10 +8,11 @@ Here is the list :
  * si0ls ([si0ls.fr](http://www.si0ls.fr/ "www.si0ls.fr") - [@si0ls](https://twitter.com/si0ls "@si0ls"))
  * Benjamin_ (benjam62217)
  * Simon ([Indie-Gift](http://indie-gift.fr "Indie-Gift"))
- * Aymeric B. "Shindaube" ([Twitter](https://twitter.com/Mimim_Dragneel))
+ * Aymeric B. "Shindaube" ([@Mimim_Dragneel](https://twitter.com/Mimim_Dragneel))
  * Jalal Abouelhadi
  * Alexandre Wurtz "Krayon973"
  * Yohann Hammad
  * Fanor
- * BleuDiamant ([Twitter](https://twitter.com/BleuDiamantFR))
+ * BleuDiamant ([@BleuDiamantFR](https://twitter.com/BleuDiamantFR))
  * Mrs025
+ * Cam ([@TocheCamille](https://twitter.com/TocheCamille))
