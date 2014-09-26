@@ -4,8 +4,8 @@ Uplimg is developped by a fixed team but there are many contributors. Whithout t
 
 Here is the list :
 
- * Dedishops, our sponsor ! 
- * si0ls ([si0ls.fr](http://www.si0ls.fr/, "www.si0ls.fr"))
+ * Dedishops, our sponsor ! ([Dedishops.com](https://www.dedishops.com/ "Dedishops.com"))
+ * si0ls ([si0ls.fr](http://www.si0ls.fr/ "www.si0ls.fr") - [@si0ls](https://twitter.com/si0ls "@si0ls"))
  * Benjamin_ (benjam62217)
  * Simon ([Indie-Gift](http://indie-gift.fr "Indie-Gift"))
  * Aymeric B. "Shindaube" ([Twitter](https://twitter.com/Mimim_Dragneel))
@@ -14,3 +14,4 @@ Here is the list :
  * Yohann Hammad
  * Fanor
  * BleuDiamant ([Twitter](https://twitter.com/BleuDiamantFR))
+ * Mrs025
