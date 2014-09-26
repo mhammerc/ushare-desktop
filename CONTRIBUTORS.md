@@ -16,4 +16,4 @@ Here is the list :
  * BleuDiamant ([@BleuDiamantFR](https://twitter.com/BleuDiamantFR))
  * Mrs025
  * Cam ([@TocheCamille](https://twitter.com/TocheCamille))
- * Toinane (Antoine) : J'aime Uplimg et je le recommande ! ([toinane.crea-th.at](toinane.crea-th.at) - [@toinane](https://twitter.com/toinane))
+ * Toinane (Antoine) : J'aime Uplimg et je le recommande ! ([toinane.crea-th.at](https://toinane.crea-th.at) - [@toinane](https://twitter.com/toinane))
