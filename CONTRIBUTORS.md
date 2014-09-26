@@ -9,7 +9,7 @@ Here is the list :
  * Benjamin_ (benjam62217)
  * Simon ([Indie-Gift](http://indie-gift.fr "Indie-Gift"))
  * Aymeric B. "Shindaube" ([@Mimim_Dragneel](https://twitter.com/Mimim_Dragneel))
- * Jalal Abouelhadi
+ * Jalal Abouelhadi ([@xXGaminGXx33](https://twitter.com/xXGaminGXx33))
  * Alexandre Wurtz "Krayon973"
  * Yohann Hammad
  * Fanor
