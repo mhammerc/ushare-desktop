@@ -4,4 +4,5 @@ Uplimg is developped by a fixed team but there are many contributors. Whithout t
 
 Here is the list :
 
-  * Si0ls
+ * Dedishops, our sponsor ! 
+ * Si0ls
