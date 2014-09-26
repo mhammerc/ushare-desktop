@@ -13,4 +13,8 @@ Here is the list :
  * Alexandre Wurtz "Krayon973"
  * Yohann Hammad
  * Fanor
+<<<<<<< HEAD
  * BleuDiamant ([Twitter](https://twitter.com/BleuDiamantFR))
+=======
+ * Cam "@TocheCamille"
+>>>>>>> c29830b51d7b975bfe24d22b03957a2e9408e676
