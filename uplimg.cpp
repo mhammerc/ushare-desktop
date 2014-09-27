@@ -14,6 +14,8 @@ If you have contributed to this file, add your name to authors list.
 #include <QTranslator>
 #include <QFile>
 #include <QUrl>
+#include <cstdlib>
+
 
 #include "systemtrayicon.h"
 

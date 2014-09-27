@@ -43,7 +43,7 @@ void PasteWindow::setUpWidgets()
     languageSelector->addItem("Diff", "diff");
     languageSelector->addItem("Erlang", "erlang");
     languageSelector->addItem("Groovy", "groovy");
-    languageSelector->addItem("HTML", "xml");
+    languageSelector->addItem("HTML", "html");
     languageSelector->addItem("JavaScript", "javascript");
     languageSelector->addItem("Java", "java");
     languageSelector->addItem("JavaFX", "javafx");

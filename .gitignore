@@ -34,12 +34,51 @@ qtc*
 # OSX
 # =========================
 
+=======
+.travis.yml
+
+# C++ objects and libs
+
+*.slo
+*.lo
+*.o
+*.a
+*.la
+*.lai
+*.so
+*.dll
+*.dylib
+
+# Qt-es
+*.config
+*.pro.user
+*.pro.user.*
+moc_*.cpp
+qrc_*.cpp
+ui_*.h
+Makefile*
+*-build-*
+*.qm
+qtc*
+
+# QtCreator
+
+*.autosave
+
+# =========================
+# Operating System Files
+# =========================
+
+# OSX
+# =========================
+
 .DS_Store
 .AppleDouble
 .LSOverride
 
 # Icon must ends with two \r.
-Icon
+Icon
+
 
 # Thumbnails
 ._*
@@ -66,3 +105,4 @@ $RECYCLE.BIN/
 *.msi
 *.msm
 *.msp
+Uplimg.pro.user

@@ -289,7 +289,7 @@ void FileManager::pasteReady(const PasteContent &pasteContent)
     file.languageHR = pasteContent.fileContentLanguageHR;
     QFile physicFile(file.path);
     physicFile.open(QIODevice::WriteOnly);
-    physicFile.write(pasteContent.fileContent.toLatin1());
+    physicFile.write(pasteContent.fileContent.toUtf8());
     physicFile.close();
     parent->newActionStarted();
     autoSendFile(file);
