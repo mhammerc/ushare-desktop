@@ -46,6 +46,8 @@ If you have contributed to this file, add your name to authors list.
 
 #include "ftpconfiguration.h"
 #include "httpconfiguration.h"
+#include "aboutuplimgwebwindow.h"
+#include "uplimgwebconfiguration.h"
 #include "widgets/shortcutgetter.h"
 #include "widgets/bottombar.h"
 #include "shared.h"
@@ -108,6 +110,8 @@ protected:
     QRadioButton * uplimgWeb;
     ButtonBlue * configureUplimgWeb;
     ButtonBlue * aboutUplimgWeb;
+    AboutUplimgWebWindow * aboutUplimgWebWindow;
+    UplimgWebConfiguration * configureUplimgWebWindow;
 
     QRadioButton * localMethod;
 
@@ -235,7 +239,8 @@ public slots :
     void verifyUpdateFinished(QNetworkReply*);
     void downloadUpdate();
 
-
+    void showAboutUplimgWeb();
+    void showConfigureUplimgWeb();
     void configureFTP();
     void configureHTTP();
 

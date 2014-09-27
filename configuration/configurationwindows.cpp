@@ -119,6 +119,8 @@ ConfigurationWindows::ConfigurationWindows(SystemTrayIcon * parent, QWidget *qwi
     QObject::connect(FTPMethod, SIGNAL(toggled(bool)), this, SLOT(FTPMethodSettingModified(bool)));
     QObject::connect(HTTPMethod, SIGNAL(toggled(bool)), this, SLOT(HTTPMethodSettingModified(bool)));
 
+    QObject::connect(aboutUplimgWeb, SIGNAL(clicked()), this, SLOT(showAboutUplimgWeb()));
+    QObject::connect(configureUplimgWeb, SIGNAL(clicked()), this, SLOT(showConfigureUplimgWeb()));
     QObject::connect(configureFTPButton, SIGNAL(clicked()), this, SLOT(configureFTP()));
     QObject::connect(configureHTTPButton, SIGNAL(clicked()), this, SLOT(configureHTTP()));
 
@@ -133,6 +135,8 @@ ConfigurationWindows::ConfigurationWindows(SystemTrayIcon * parent, QWidget *qwi
 
     FTPConf = new FTPConfiguration();
     HTTPConf = new HTTPConfiguration();
+    aboutUplimgWebWindow = new AboutUplimgWebWindow();
+    configureUplimgWebWindow = new UplimgWebConfiguration;
 
     this->setLayout(mainLayout);
 
@@ -679,6 +683,16 @@ void ConfigurationWindows::verifyUpdateFinished(QNetworkReply * reply)
 void ConfigurationWindows::downloadUpdate()
 {
     QDesktopServices::openUrl(updateLink);
+}
+
+void ConfigurationWindows::showAboutUplimgWeb()
+{
+    aboutUplimgWebWindow->show();
+}
+
+void ConfigurationWindows::showConfigureUplimgWeb()
+{
+    configureUplimgWebWindow->show();
 }
 
 void ConfigurationWindows::currentTabChanged(int index)

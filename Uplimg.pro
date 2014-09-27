@@ -48,7 +48,9 @@ HEADERS += \
     widgets/groupbox.h \
     widgets/tabwidget.h \
     notificationwindow.h \
-    widgets/lineedit.h
+    widgets/lineedit.h \
+    configuration/aboutuplimgwebwindow.h \
+    configuration/uplimgwebconfiguration.h
 
 SOURCES += \
     configuration/configurationwindows.cpp \
@@ -63,7 +65,9 @@ SOURCES += \
     widgets/shortcutgetter.cpp \
     filesendedsound.cpp \
     paste/pastewindow.cpp \
-    notificationwindow.cpp
+    notificationwindow.cpp \
+    configuration/aboutuplimgwebwindow.cpp \
+    configuration/uplimgwebconfiguration.cpp
 
 #Windows specific
 win32 {
@@ -89,3 +93,6 @@ LIBS += -L"/home/imote/dev/SFML-master-build/lib/"
 CONFIG(release, debug|release): LIBS += -lsfml-audio -lsfml-graphics -lsfml-network -lsfml-window -lsfml-system
 CONFIG(debug, debug|release): LIBS += -lsfml-audio-d -lsfml-graphics-d -lsfml-network-d -lsfml-window-d -lsfml-system-d
 }
+
+FORMS += \
+    configuration/aboutuplimgwebwindow.ui
