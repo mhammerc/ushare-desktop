@@ -233,7 +233,14 @@ void ConfigurationWindows::setUpUploadSectionUI()
     uploadLayout = new QVBoxLayout;
     onlineServicesLayout = new QVBoxLayout;
 
+    uplimgWebLayout = new QHBoxLayout;
     uplimgWeb = new RadioButtonGreen(tr("USE_UPLOADMETHOD_UPLIMGWEB"));
+    aboutUplimgWeb = new ButtonBlue(tr("ABOUT_UPLIMGWEB_BUTTON"));
+    configureUplimgWeb = new ButtonBlue(tr("CONFIGURE_UPLIMGWEB_BUTTON"));
+    uplimgWebLayout->addWidget(uplimgWeb);
+    uplimgWebLayout->addWidget(configureUplimgWeb);
+    uplimgWebLayout->addWidget(aboutUplimgWeb);
+
     localMethod = new RadioButtonGreen(tr("USE_UPLOADMETHOD_LOCAL"));
 
     FTPLayout = new QHBoxLayout;
@@ -252,7 +259,7 @@ void ConfigurationWindows::setUpUploadSectionUI()
     HTTPLayout->addLayout(HTTPLayoutForRadioAndPushButton);
     HTTPLayout->addWidget(HTTPWarning);
 
-    onlineServicesLayout->addWidget(uplimgWeb);
+    onlineServicesLayout->addLayout(uplimgWebLayout);
     onlineServicesLayout->addLayout(FTPLayout);
     onlineServicesLayout->addLayout(HTTPLayout);
     onlineServicesLayout->addWidget(localMethod);

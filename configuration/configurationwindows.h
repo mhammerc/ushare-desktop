@@ -104,7 +104,10 @@ protected:
     QGroupBox * onlineServices;
     QVBoxLayout * onlineServicesLayout;
 
+    QHBoxLayout * uplimgWebLayout;
     QRadioButton * uplimgWeb;
+    ButtonBlue * configureUplimgWeb;
+    ButtonBlue * aboutUplimgWeb;
 
     QRadioButton * localMethod;
 
