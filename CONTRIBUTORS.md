@@ -6,6 +6,7 @@ Here is the list :
 
  * Dedishops, our sponsor ! 
  * si0ls ([si0ls.fr](http://www.si0ls.fr/, "www.si0ls.fr"))
+ * Alex ([@alexb_rh](https://twitter.com/alexb_rh))
  * Benjamin_ (benjam62217)
  * Simon ([Indie-Gift](http://indie-gift.fr "Indie-Gift"))
  * Aymeric B. "Shindaube" ([@Mimim_Dragneel](https://twitter.com/Mimim_Dragneel))
