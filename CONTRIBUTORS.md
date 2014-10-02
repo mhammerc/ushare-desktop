@@ -19,3 +19,4 @@ Here is the list :
  * Mrs025
  * Cam ([@TocheCamille](https://twitter.com/TocheCamille))
  * Toinane (Antoine) : J'aime Uplimg et je le recommande ! ([toinane.crea-th.at](https://toinane.crea-th.at) - [@toinane](https://twitter.com/toinane))
+ * [Malobre](http://malob.re) ([@malob_re](https://twitter.com/malob_re))
