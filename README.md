@@ -16,7 +16,7 @@ Uplimg is currently in development, so it is still evolving. Functionalities and
 
 ### Downloads
 
-Currently, only the Windows version is stable and available to downloads. If you want to use Uplimg on MAC or Linux, you can try to build it. You'll need the latest version of Qt  SFML. All commits pushed to master branch are stable and working so no error can be happening.
+Currently, only the Windows version is stable and available to downloads. If you want to use Uplimg on MAC or Linux, you can try to build it. You'll need the latest version of Qt and SFML. All commits pushed to master branch are stable and working so no error can occur.
 
 [Access to the website](http://uplmg.com)
 
@@ -47,7 +47,7 @@ Vous avez la possibilité de contribuer au projet en ajoutant une/des issue(s) e
 ### Téléchargements
 
 Pour le moment, seul la version Windows de Uplimg est stable et disponible au téléchargement.
-Si vous souhaitez utiliser Umpling sous MAC ou Linux, vous pouvez tenter de compiler Uplimg, il n'est pas exclu que vous rencontriez cependant quelques problèmes. La branche master de Uplimg étant totalement stable, vous pouvez l'utiliser sans soucis avec en plus les dernières fonctionnalités !
+Si vous souhaitez utiliser Uplimg sous MAC ou Linux, vous pouvez tenter de le compiler, il n'est pas exclu que vous rencontriez cependant quelques problèmes. La branche master de Uplimg étant totalement stable, vous pouvez l'utiliser sans soucis avec en plus les dernières fonctionnalités !
 Pour cela, les dernières versions de Qt et de SFML sont nécessaires.
 
 [Accédez au site internet](http://uplmg.com)
