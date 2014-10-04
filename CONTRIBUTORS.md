@@ -14,7 +14,6 @@ Here is the list :
  * Alexandre Wurtz "Krayon973"
  * Yohann Hammad
  * Fanor
- * Cam "@TocheCamille"
  * BleuDiamant ([@BleuDiamantFR](https://twitter.com/BleuDiamantFR))
  * Mrs025
  * Cam ([@TocheCamille](https://twitter.com/TocheCamille))
