@@ -61,6 +61,9 @@ QString const HTTPWebPath("configuration/http/webPath");
 QString const HTTPUsername("configuration/http/username");
 QString const HTTPPassword("configuration/http/password");
 QString const HTTPPrivateKey("configuration/http/privateKey");
+QString const UplimgWebUsername("configuration/uplimgweb/username");
+QString const UplimgWebPassword("configuration/uplimgweb/password");
+QString const hasUplimgWebLogin("configuration/uplimgweb/user_login");
 QString const imageFormat("configuration/imageType");
 QString const imageQuality("configuration/imageQuality");
 QString const lang("configuration/lang");
@@ -88,16 +91,16 @@ public:
 
 namespace UplimgWeb
 {
-int const port(9375);
-QString const host("http://insert.uplmg.com/upload.php");
+int const port(80);
+QString const host("http://home.uplmg.com/app_dev.php/insert/upload");
 QString const fileFieldName("uplimgFile");
 }
 
 namespace Uplimg
 {
 QString const applicationName("Uplimg");
-QString const versionText("0.12d");
-QString const version("0.12d");
+QString const versionText("0.13");
+QString const version("0.13");
 QString const updateVersionLink("http://update.uplmg.com/latest.html");
 
 enum HTTP_ACCESS_FILE_LINK { FROM_RESPONSE /* From HTTP response */, FROM_FIXED_LINK /* Web path */}; //From what link return the user on successfull HTTP upload : from HTTP response or from fixed choosed link

@@ -189,7 +189,8 @@ protected:
     QHBoxLayout * allContributorsLayout;
     QListWidget * allContributorsOne;
     QListWidget * allContributorsTwo;
-    LabelBlue * happy4Ever;
+    QLabel * fullContributorsList;
+    QLabel * happy4Ever;
 
     BottomBarConfigurationWindow * bottomBar;
 

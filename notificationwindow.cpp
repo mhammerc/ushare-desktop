@@ -13,7 +13,7 @@ If you have contributed to this file, add your name to authors list.
 #include "notificationwindow.h"
 #include "systemtrayicon.h"
 
-NotificationWindow::NotificationWindow(QString const &title, QString const &message, SystemTrayIcon * systray, MESSAGE_TYPE state, QWidget *parent, Qt::WindowFlags f) : QWidget(parent, Qt::WindowFlags(Qt::Tool |Qt::FramelessWindowHint | Qt::WindowMinMaxButtonsHint | Qt::WindowSystemMenuHint | Qt::WindowStaysOnTopHint)), parent(systray), state(state), message(message), title(title)
+NotificationWindow::NotificationWindow(QString const &title, QString const &message, SystemTrayIcon * systray, MESSAGE_TYPE state, QWidget *parent, Qt::WindowFlags f) : QWidget(parent, Qt::WindowFlags(Qt::Tool |Qt::FramelessWindowHint | Qt::WindowMinMaxButtonsHint | Qt::WindowSystemMenuHint | Qt::WindowStaysOnTopHint)), parent(systray), state(state), message(message), title(title), showTwitterButton(true)
 {
     Q_UNUSED(f);
     setFocusPolicy(Qt::NoFocus);
@@ -31,6 +31,7 @@ NotificationWindow::NotificationWindow(QString const &title, QString const &mess
 
     QObject::connect(closeButton, SIGNAL(clicked()), this, SLOT(close()));
     QObject::connect(timeToShowWindow, SIGNAL(timeout()), this, SLOT(close()));
+    QObject::connect(twitterButton, SIGNAL(clicked()), this, SLOT(twitter()));
 
     timeToShowWindow->start();
     show();
@@ -59,15 +60,21 @@ void NotificationWindow::setUpUI()
     topLayout->addWidget(closeButton);
     messageLabel = new QLabel(message);
     messageLabel->setObjectName("NotificationMessage");
+    if(showTwitterButton) { twitterButton = new ButtonTwitter("Twitter"); twitterButton->setIcon(QIcon(":/design/twitter.png")); twitterButton->setIconSize(QSize(15,15));}
 
     layout->addLayout(topLayout);
     layout->addWidget(messageLabel);
-    layout->addStretch();
+    if(showTwitterButton) layout->addWidget(twitterButton);
+    //layout->addStretch();
 
     icon = new QLabel;
     icon->setObjectName("NotificationLeftIcon");
+    iconLayout = new QVBoxLayout;
+    iconLayout->addStretch();
+    iconLayout->addWidget(icon);
+    iconLayout->addStretch();
 
-    mainLayout->addWidget(icon);
+    mainLayout->addLayout(iconLayout);
     mainLayout->addLayout(layout);
 
     widget->setLayout(mainLayout);
@@ -82,4 +89,10 @@ void NotificationWindow::mousePressEvent(QMouseEvent *event)
 
     parent->openLastUrl();
     this->close();
+}
+
+void NotificationWindow::twitter()
+{
+    QUrl url("https://twitter.com/intent/tweet?text="+var::lastUrl);
+    QDesktopServices::openUrl(url);
 }

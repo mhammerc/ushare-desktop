@@ -41,14 +41,12 @@ protected:
     //Main layout and main form
     QVBoxLayout * layout;
     QGroupBox * mainGroupLayout;
-    QLabel * whatIAm;
     QFormLayout * mainFormLayout;
     QVBoxLayout * secondLayout;
 
     QLineEdit * username;
     QLineEdit * password;
 
-    QGroupBox * authMethodBox;
     QVBoxLayout * authMethodLayout;
     QRadioButton * anonymousAuthMethod;
     QRadioButton * loginAuthMethod;
@@ -57,11 +55,16 @@ protected:
     ButtonBlue * validate;
 
     void setUpUI();
+    void fillRow();
 
 signals:
 
 public slots:
+    void makeAnonymous();
+    void makeWithLogin();
 
+    void usernameChanged(QString);
+    void passwordChanged(QString);
 };
 
 #endif // UPLIMGWEBCONFIGURATION_H

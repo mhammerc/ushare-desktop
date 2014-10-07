@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>792</width>
+    <width>854</width>
     <height>182</height>
    </rect>
   </property>
@@ -16,11 +16,14 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>440</x>
-     <y>80</y>
+     <x>490</x>
+     <y>50</y>
      <width>340</width>
      <height>80</height>
     </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
    </property>
    <property name="styleSheet">
     <string notr="true">background-image:url(:/dedizones.png);
@@ -31,6 +34,9 @@ max-height:80px;</string>
    </property>
    <property name="text">
     <string/>
+   </property>
+   <property name="openExternalLinks">
+    <bool>true</bool>
    </property>
   </widget>
   <widget class="QLabel" name="label_2">
@@ -51,7 +57,7 @@ max-height:80px;</string>
     <rect>
      <x>0</x>
      <y>40</y>
-     <width>401</width>
+     <width>471</width>
      <height>81</height>
     </rect>
    </property>
@@ -62,8 +68,8 @@ max-height:80px;</string>
   <widget class="QLabel" name="label_4">
    <property name="geometry">
     <rect>
-     <x>440</x>
-     <y>30</y>
+     <x>490</x>
+     <y>10</y>
      <width>151</width>
      <height>21</height>
     </rect>
@@ -75,7 +81,7 @@ max-height:80px;</string>
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>320</x>
+     <x>390</x>
      <y>140</y>
      <width>75</width>
      <height>23</height>
@@ -83,6 +89,22 @@ max-height:80px;</string>
    </property>
    <property name="text">
     <string>Close</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_5">
+   <property name="geometry">
+    <rect>
+     <x>490</x>
+     <y>150</y>
+     <width>171</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;https://client.dedizones.com/link.php?id=46&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;https://www.dedishops.com&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="openExternalLinks">
+    <bool>true</bool>
    </property>
   </widget>
  </widget>

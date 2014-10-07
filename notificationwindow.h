@@ -25,6 +25,7 @@ If you have contributed to this file, add your name to authors list.
 #include <QDesktopWidget>
 #include <QRect>
 #include <QPixmap>
+#include <QDesktopServices>
 
 #include "shared.h"
 
@@ -46,7 +47,12 @@ public:
         style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
     }
 
+    bool hasTwitterButton(){ return showTwitterButton; }
+    void setTwitterButton(bool t){ showTwitterButton = t; }
+
 protected:
+    bool showTwitterButton;
+
     void setUpUI();
     virtual void mousePressEvent(QMouseEvent * event);
 
@@ -64,6 +70,7 @@ protected:
     QVBoxLayout * layout;
 
     //icon on left
+    QVBoxLayout * iconLayout;
     QLabel * icon;
 
     QHBoxLayout * topLayout;
@@ -71,5 +78,9 @@ protected:
     QPushButton * closeButton;
 
     QLabel * messageLabel;
+    QPushButton * twitterButton;
+
+public slots:
+    void twitter();
 };
 #endif // NOTIFICATIONWINDOW_H

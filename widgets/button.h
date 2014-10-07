@@ -83,4 +83,21 @@ public:
     }
 };
 
+class ButtonTwitter : public QPushButton
+{
+public:
+    ButtonTwitter(QWidget * parent = 0) : QPushButton(parent)
+    {
+        setObjectName("twitter");
+    }
+    ButtonTwitter(const QString & text, QWidget * parent = 0): QPushButton(text, parent)
+    {
+        setObjectName("twitter");
+    }
+    ButtonTwitter(const QIcon & icon, const QString & text, QWidget * parent = 0) : QPushButton(icon, text, parent)
+    {
+        setObjectName("twitter");
+    }
+};
+
 #endif // BUTTON_H

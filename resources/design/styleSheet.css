@@ -121,7 +121,10 @@ QPushButton#NotificationCloseButton::hover{
 
 QLabel#NotificationLeftIcon{
     min-width: 75px;
-    min-height: 50px;
+    min-height: 65px;
+    max-width: 75px;
+    max-height: 65px;
+    margin-bottom:10px;
     background: url(":/icon/waiting.png") no-repeat;
     border-right: 1px solid #444;
 }
@@ -146,6 +149,20 @@ QLabel#NotificationMessage{
     font-size:11px;
 	margin-left:5px;
 	font-family: sans-serif;
+}
+
+/* Twitter PushButton */
+QPushButton#twitter::!hover{
+    background-color: #FFFFFF;
+    color: #3498DB;
+    border: 1px solid #3498DB;
+    border-radius: 4px;
+}
+QPushButton#twitter::hover{
+    background-color: #3498DB;
+    color: #FFFFFF;
+    border: 1px solid #3498DB;
+    border-radius: 4px;
 } 
 
 /* Minimize PushButton */

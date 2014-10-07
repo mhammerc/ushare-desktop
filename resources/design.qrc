@@ -13,5 +13,6 @@
         <file alias="RadioButton.png">design/RadioButton.png</file>
         <file alias="stylesheet.css">design/styleSheet.css</file>
         <file alias="uplimg.png">design/uplimg.png</file>
+        <file alias="twitter.png">design/Twitter_logo_blue.png</file>
     </qresource>
 </RCC>

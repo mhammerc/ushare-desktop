@@ -90,9 +90,8 @@ void FileManager::sendFileTroughUplimgWeb(File const &file)
     http->setFile(file.path);
     http->setContentType(file.type);
     http->setLanguage(file.language, file.languageHR);
-    http->setUsername(settings.value(Reg::HTTPUsername).toString());
-    http->setPassword(settings.value(Reg::HTTPPassword).toString());
-    http->setPrivateKey(settings.value(Reg::HTTPPrivateKey).toString());
+    http->setUsername(settings.value(Reg::UplimgWebUsername).toString());
+    http->setPassword(settings.value(Reg::UplimgWebPassword).toString());
     http->start();
 }
 

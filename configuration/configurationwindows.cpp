@@ -425,11 +425,22 @@ void ConfigurationWindows::setUpCreditsSectionUI()
     allContributorsLayout->addWidget(allContributorsTwo);
     new QListWidgetItem("You <3", allContributorsOne);
     new QListWidgetItem("si0ls", allContributorsTwo);
-    new QListWidgetItem("Yohann Hammad", allContributorsOne);
+    new QListWidgetItem("Alex", allContributorsOne);
+    new QListWidgetItem("Benjamin_ (benjam62217)", allContributorsTwo);
+    new QListWidgetItem("Simon (Indie-Gift, MRP)", allContributorsOne);
+    new QListWidgetItem("Aymeric B. \"Shindaube\"", allContributorsTwo);
+    new QListWidgetItem("xXGaminGXx33", allContributorsOne);
     new QListWidgetItem("Krayon973", allContributorsTwo);
+    //TODO : mettre un lien vers le fichiers des contribs + un lien dans la section credit vers le github
+    new QListWidgetItem("Yohann Hammad", allContributorsOne);
+    new QListWidgetItem("Fanor", allContributorsTwo);
+    new QListWidgetItem("TocheCamille", allContributorsOne);
+    new QListWidgetItem("BleuDiamant",allContributorsTwo);
     new QListWidgetItem("Eldraeildor", allContributorsOne);
     new QListWidgetItem("Mrs025", allContributorsTwo);
-    new QListWidgetItem("Malobre", allContributorsOne);
+    new QListWidgetItem("Toinane (Antoine)", allContributorsOne);
+    new QListWidgetItem("Malobre", allContributorsTwo);
+    fullContributorsList = new LabelBlue(tr("SEE_FULL_LIST"));
     happy4Ever = new LabelBlue(tr("HAPPY4EVER"));
 
     creditLayout->addWidget(openSourceText);
@@ -437,6 +448,7 @@ void ConfigurationWindows::setUpCreditsSectionUI()
     creditLayout->addWidget(leadDevelopper);
     creditLayout->addWidget(si0ls);
     creditLayout->addLayout(allContributorsLayout);
+    creditLayout->addWidget(fullContributorsList);
     creditLayout->addWidget(happy4Ever);
     creditLayout->addStretch();
 

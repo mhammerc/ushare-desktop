@@ -343,6 +343,7 @@ void SystemTrayIcon::firstStart()
     pictureDir.mkdir("Uplimg");
     pictureDir.cd("Uplimg");
     settings.setValue(Reg::localSavePath, pictureDir.absolutePath());
+    settings.setValue(Reg::hasUplimgWebLogin, false);
 }
 
 void SystemTrayIcon::disableHotkeys()

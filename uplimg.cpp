@@ -16,7 +16,6 @@ If you have contributed to this file, add your name to authors list.
 #include <QUrl>
 #include <cstdlib>
 
-
 #include "systemtrayicon.h"
 
 QString var::lastUrl;
