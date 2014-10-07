@@ -13,7 +13,7 @@
 # Qt-es
 *.config
 *.pro.user
-Uplimg.pro.user
+*.user
 *.pro.user.*
 moc_*.cpp
 qrc_*.cpp
