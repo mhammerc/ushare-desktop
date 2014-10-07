@@ -55,9 +55,9 @@ max-height:80px;</string>
   <widget class="QLabel" name="label_3">
    <property name="geometry">
     <rect>
-     <x>0</x>
+     <x>20</x>
      <y>40</y>
-     <width>471</width>
+     <width>391</width>
      <height>81</height>
     </rect>
    </property>
@@ -81,8 +81,8 @@ max-height:80px;</string>
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>390</x>
-     <y>140</y>
+     <x>10</x>
+     <y>150</y>
      <width>75</width>
      <height>23</height>
     </rect>
@@ -105,6 +105,19 @@ max-height:80px;</string>
    </property>
    <property name="openExternalLinks">
     <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_6">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>120</y>
+     <width>111</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;http://www.uplmg.com&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;http://www.uplmg.com&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
  </widget>

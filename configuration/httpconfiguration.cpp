@@ -40,6 +40,9 @@ HTTPConfiguration::HTTPConfiguration(QWidget * parent) :
             webPathFromHTTPResponse->setChecked(true);
         }
 
+    if(password->text() == "" && username->text() == "")
+        privateKey->setDisabled(true);
+
     QObject::connect(host, SIGNAL(textChanged(QString)), this, SLOT(hostSettingModified(QString)));
     QObject::connect(port, SIGNAL(valueChanged(int)), this, SLOT(portSettingModified(int)));
     QObject::connect(username, SIGNAL(textChanged(QString)), this, SLOT(usernameSettingModified(QString)));
@@ -53,7 +56,6 @@ HTTPConfiguration::HTTPConfiguration(QWidget * parent) :
     QObject::connect(webPath, SIGNAL(returnPressed()), this, SLOT(close()));
 
     QObject::connect(validate, SIGNAL(clicked()), this, SLOT(close()));
-
 }
 
 
@@ -134,12 +136,22 @@ void HTTPConfiguration::usernameSettingModified(QString content)
 {
     settings.setValue(Reg::HTTPUsername, content);
     refillPrivateKey();
+
+    if(password->text() == "" && content == "")
+        privateKey->setDisabled(true);
+    else
+        privateKey->setEnabled(true);
 }
 
 void HTTPConfiguration::passwordSettingModified(QString content)
 {
     settings.setValue(Reg::HTTPPassword, content);
     refillPrivateKey();
+
+    if(username->text() == "" && content == "")
+        privateKey->setDisabled(true);
+    else
+        privateKey->setEnabled(true);
 }
 
 void HTTPConfiguration::privateKeyClicked()

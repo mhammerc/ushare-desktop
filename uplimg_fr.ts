@@ -9,24 +9,29 @@
         <translation>Et Uplimg web ?</translation>
     </message>
     <message>
-        <location filename="configuration/aboutuplimgwebwindow.ui" line="46"/>
+        <location filename="configuration/aboutuplimgwebwindow.ui" line="52"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Uplimg web&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Uplimg web&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="configuration/aboutuplimgwebwindow.ui" line="59"/>
+        <location filename="configuration/aboutuplimgwebwindow.ui" line="65"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Uplimg provide out of the box functionnal servers to store and share your files.&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;It&apos;s entirely free to use and totally secure.&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;On Uplimg web you can protect your file by password, delete them and more !&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Uplimg propose une infrastructure prêt à l&apos;emploie pour enregistrer vos fichiers.&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Celle-ci est totalement gratuite à l&apos;utilisation et sécurisée.&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Sur Uplimg web vous pouvez aisément protéger vos fichiers par mot de passe, les supprimer et bien plus !&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="configuration/aboutuplimgwebwindow.ui" line="72"/>
+        <location filename="configuration/aboutuplimgwebwindow.ui" line="78"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; font-weight:600;&quot;&gt;Powered by&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; font-weight:600;&quot;&gt;Propulsé par&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="configuration/aboutuplimgwebwindow.ui" line="85"/>
+        <location filename="configuration/aboutuplimgwebwindow.ui" line="91"/>
         <source>Close</source>
         <translation>Fermer</translation>
+    </message>
+    <message>
+        <location filename="configuration/aboutuplimgwebwindow.ui" line="104"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;https://client.dedizones.com/link.php?id=46&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;https://www.dedishops.com&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;https://client.dedizones.com/link.php?id=46&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;https://www.dedishops.com&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -139,7 +144,7 @@
         <translation type="vanished">Enfin, n&apos;oubliez jamais le but même de la vie. Soyez &quot;Happy 4 Ever&quot; !</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="447"/>
+        <location filename="configuration/configurationwindows.cpp" line="459"/>
         <source>Credits</source>
         <translation>Crédits</translation>
     </message>
@@ -326,12 +331,17 @@
         <translation>Designer et contributeur principal : si0ls</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="433"/>
+        <location filename="configuration/configurationwindows.cpp" line="443"/>
+        <source>SEE_FULL_LIST</source>
+        <translation>&lt;a href=&quot;https://github.com/Uplimg/Uplimg/blob/master/CONTRIBUTORS.md&quot;&gt;Regarder la liste complète ici&lt;/a&gt;</translation>
+    </message>
+    <message>
+        <location filename="configuration/configurationwindows.cpp" line="444"/>
         <source>HAPPY4EVER</source>
         <translation>Enfin, n&apos;oubliez jamais le but même de la vie. Soyez &quot;Happy 4 Ever&quot; !</translation>
     </message>
     <message>
-        <location filename="configuration/configurationwindows.cpp" line="586"/>
+        <location filename="configuration/configurationwindows.cpp" line="598"/>
         <source>CHOOSE_DIRECTORY</source>
         <translation>Choisissez un dossier</translation>
     </message>
@@ -647,37 +657,36 @@ Vous devez sélectionner une méthode d&apos;envoi avant.</translation>
 <context>
     <name>UplimgWebConfiguration</name>
     <message>
-        <location filename="configuration/uplimgwebconfiguration.cpp" line="13"/>
+        <location filename="configuration/uplimgwebconfiguration.cpp" line="20"/>
         <source>CONFIGURE_UPLIMG_WEB</source>
         <translation>Configurer Uplimg web</translation>
     </message>
     <message>
-        <location filename="configuration/uplimgwebconfiguration.cpp" line="15"/>
         <source>PRESENT_UPLIMG_WEB</source>
-        <translation>Uplimg web peux enregistrer vos fichiers. Vous pouvez vous connecter mais&lt;br /&gt;vous pouvez aussi utiliser Uplimg web en tant qu&apos;anonyme. Pour plus d&apos;informations allez sur http://uplmg.com.</translation>
+        <translation type="vanished">Uplimg web peux enregistrer vos fichiers. Vous pouvez vous connecter mais&lt;br /&gt;vous pouvez aussi utiliser Uplimg web en tant qu&apos;anonyme. Pour plus d&apos;informations allez sur http://uplmg.com.</translation>
     </message>
     <message>
-        <location filename="configuration/uplimgwebconfiguration.cpp" line="21"/>
+        <location filename="configuration/uplimgwebconfiguration.cpp" line="27"/>
         <source>ANONYMOUS</source>
         <translation>Rester anonyme</translation>
     </message>
     <message>
-        <location filename="configuration/uplimgwebconfiguration.cpp" line="22"/>
+        <location filename="configuration/uplimgwebconfiguration.cpp" line="28"/>
         <source>LOGIN</source>
         <translation>Se connecter</translation>
     </message>
     <message>
-        <location filename="configuration/uplimgwebconfiguration.cpp" line="23"/>
+        <location filename="configuration/uplimgwebconfiguration.cpp" line="29"/>
         <source>USERNAME</source>
         <translation>Nom d&apos;utilisateur</translation>
     </message>
     <message>
-        <location filename="configuration/uplimgwebconfiguration.cpp" line="24"/>
+        <location filename="configuration/uplimgwebconfiguration.cpp" line="30"/>
         <source>PASSWORD</source>
         <translation>Mot de passe</translation>
     </message>
     <message>
-        <location filename="configuration/uplimgwebconfiguration.cpp" line="33"/>
+        <location filename="configuration/uplimgwebconfiguration.cpp" line="38"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
