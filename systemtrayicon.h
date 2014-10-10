@@ -58,7 +58,7 @@ public:
     explicit SystemTrayIcon(QObject *qobject = 0);
     ~SystemTrayIcon();
 
-    void showNotification(QString const& title, QString const& message);
+    void showNotification(QString const& title, QString const& message, bool twitter = true);
 
     QUrl lastUrl;
     QString receivedMessage;

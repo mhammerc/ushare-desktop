@@ -92,7 +92,7 @@ public:
 namespace UplimgWeb
 {
 int const port(80);
-QString const host("http://home.uplmg.com/app_dev.php/insert/upload");
+QString const host("http://home.uplmg.com/insert/upload");
 QString const fileFieldName("uplimgFile");
 }
 

@@ -37,7 +37,7 @@ class NotificationWindow : public QWidget
 {
     Q_OBJECT
 public:
-    NotificationWindow(QString const &title, QString const &message, SystemTrayIcon * systray, MESSAGE_TYPE state, QWidget * parent = 0, Qt::WindowFlags f = 0);
+    NotificationWindow(QString const &title, QString const &message, SystemTrayIcon * systray, MESSAGE_TYPE state, bool twitter, QWidget * parent = 0, Qt::WindowFlags f = 0);
 
     void paintEvent(QPaintEvent *)
     {

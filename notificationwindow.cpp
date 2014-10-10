@@ -13,7 +13,7 @@ If you have contributed to this file, add your name to authors list.
 #include "notificationwindow.h"
 #include "systemtrayicon.h"
 
-NotificationWindow::NotificationWindow(QString const &title, QString const &message, SystemTrayIcon * systray, MESSAGE_TYPE state, QWidget *parent, Qt::WindowFlags f) : QWidget(parent, Qt::WindowFlags(Qt::Tool |Qt::FramelessWindowHint | Qt::WindowMinMaxButtonsHint | Qt::WindowSystemMenuHint | Qt::WindowStaysOnTopHint)), parent(systray), state(state), message(message), title(title), showTwitterButton(true)
+NotificationWindow::NotificationWindow(QString const &title, QString const &message, SystemTrayIcon * systray, MESSAGE_TYPE state, bool twitter, QWidget *parent, Qt::WindowFlags f) : QWidget(parent, Qt::WindowFlags(Qt::Tool |Qt::FramelessWindowHint | Qt::WindowMinMaxButtonsHint | Qt::WindowSystemMenuHint | Qt::WindowStaysOnTopHint)), parent(systray), state(state), message(message), title(title), showTwitterButton(true)
 {
     Q_UNUSED(f);
     setFocusPolicy(Qt::NoFocus);
@@ -23,6 +23,8 @@ NotificationWindow::NotificationWindow(QString const &title, QString const &mess
     setContentsMargins(-10,-10,-10,-10);
     resize(350,80);
 
+    this->setTwitterButton(twitter);
+
     setUpUI();
 
     timeToShowWindow = new QTimer(this);
@@ -31,7 +33,7 @@ NotificationWindow::NotificationWindow(QString const &title, QString const &mess
 
     QObject::connect(closeButton, SIGNAL(clicked()), this, SLOT(close()));
     QObject::connect(timeToShowWindow, SIGNAL(timeout()), this, SLOT(close()));
-    QObject::connect(twitterButton, SIGNAL(clicked()), this, SLOT(twitter()));
+    if(twitter) QObject::connect(twitterButton, SIGNAL(clicked()), this, SLOT(twitter()));
 
     timeToShowWindow->start();
     show();
