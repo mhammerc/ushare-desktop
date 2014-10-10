@@ -180,13 +180,13 @@ void SystemTrayIcon::fileSended(File const &file)
             if(settings.value(Reg::showNotifications).toBool())
                 this->showNotification(Uplimg::applicationName, tr("UPLOAD_SUCCESS_WITH_URL") + var::lastUrl);
         }
-    else if(Uplimg::Utils::getUploadMethod()  == Uplimg::UploadMethod::LOCAL)
+    else if(Uplimg::Utils::getUploadMethod() == Uplimg::UploadMethod::LOCAL)
         {
             if(settings.value(Reg::playSound).toBool())
                 fileSendedSound.play();
 
             if(settings.value(Reg::showNotifications).toBool())
-                this->showNotification(Uplimg::applicationName, tr("UPLOAD_SUCCESS_LOCAL"));
+                this->showNotification(Uplimg::applicationName, tr("UPLOAD_SUCCESS_LOCAL"), false);
         }
 }
 
@@ -425,7 +425,7 @@ SystemTrayIcon::~SystemTrayIcon()
     configurationWindow->deleteLater();
 }
 
-void SystemTrayIcon::showNotification(const QString &title, const QString &message)
+void SystemTrayIcon::showNotification(const QString &title, const QString &message, bool twitter)
 {
-    new NotificationWindow(title, message, this, MESSAGE_TYPE::SUCCESS);
+    new NotificationWindow(title, message, this, MESSAGE_TYPE::SUCCESS, twitter);
 }
