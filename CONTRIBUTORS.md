@@ -4,18 +4,18 @@ Uplimg is developped by a fixed team but there are many contributors. Whithout t
 
 Here is the list :
 
- * Dedishops, our sponsor ! 
- * si0ls ([si0ls.fr](http://www.si0ls.fr/, "www.si0ls.fr"))
+ * **Dedishops, our sponsor !** 
  * Alex ([@alexb_rh](https://twitter.com/alexb_rh))
- * Benjamin_ (benjam62217)
- * Simon ([Indie-Gift](http://indie-gift.fr "Indie-Gift"))
- * Aymeric B. "Shindaube" ([@Mimim_Dragneel](https://twitter.com/Mimim_Dragneel))
- * Jalal Abouelhadi ([@xXGaminGXx33](https://twitter.com/xXGaminGXx33))
  * Alexandre Wurtz "Krayon973"
- * Yohann Hammad
- * Fanor
+ * Aymeric B. "Shindaube" ([@Mimim_Dragneel](https://twitter.com/Mimim_Dragneel))
+ * Benjamin_ (benjam62217)
  * BleuDiamant ([@BleuDiamantFR](https://twitter.com/BleuDiamantFR))
- * Mrs025
  * Cam ([@TocheCamille](https://twitter.com/TocheCamille))
- * Toinane (Antoine) : J'aime Uplimg et je le recommande ! ([toinane.crea-th.at](https://toinane.crea-th.at) - [@toinane](https://twitter.com/toinane))
+ * Fanor
+ * Jalal Abouelhadi ([@xXGaminGXx33](https://twitter.com/xXGaminGXx33))
  * [Malobre](http://malob.re) ([@malob_re](https://twitter.com/malob_re))
+ * Mrs025
+ * si0ls ([si0ls.fr](http://www.si0ls.fr/, "www.si0ls.fr"))
+ * Simon ([Indie-Gift](http://indie-gift.fr "Indie-Gift"))
+ * Toinane (Antoine) : J'aime Uplimg et je le recommande ! ([toinane.crea-th.at](https://toinane.crea-th.at) - [@toinane](https://twitter.com/toinane))
+ * Yohann Hammad
