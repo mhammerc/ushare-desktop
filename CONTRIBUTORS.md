@@ -10,7 +10,7 @@ Here is the list :
  * Aymeric B. "Shindaube" ([@Mimim_Dragneel](https://twitter.com/Mimim_Dragneel))
  * Benjamin_ (benjam62217)
  * BleuDiamant ([@BleuDiamantFR](https://twitter.com/BleuDiamantFR))
- * Cam ([@TocheCamille](https://twitter.com/TocheCamille))
+ * Cam ([@ToshCamille](https://twitter.com/ToshCamille))
  * Fanor
  * Jalal Abouelhadi ([@xXGaminGXx33](https://twitter.com/xXGaminGXx33))
  * [Malobre](http://malob.re) ([@malob_re](https://twitter.com/malob_re))
