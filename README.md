@@ -25,7 +25,6 @@ License : [complete text](https://github.com/Imote/Uplimg/blob/master/LICENSE.md
 
 Uplimg is developped by :
 - Martin Hammerchmidt (Alias Imote) : [Website](http://www.imote.eu/)  |  [Twitter](https://twitter.com/_MartinH_)
-- si0ls : [Website](http://si0ls.fr/) | [Twitter](https://twitter.com/si0ls)
 
 Special thanks to Krayon973, Yohann Hammad, Eldraeildor, Mrs025, Malobre. See [CONTRIBUTORS.md](https://github.com/Uplimg/Uplimg/blob/master/CONTRIBUTORS.md) for more details.
 
@@ -57,6 +56,5 @@ Licence : [texte complet](https://github.com/Imote/Uplimg/blob/master/LICENSE.md
 
 Uplimg est développé par :
 - Martin Hammerchmidt (Alias Imote) : [Site web](http://www.imote.eu/)  |  [Twitter](https://twitter.com/_MartinH_)
-- si0ls : [Site web](http://si0ls.fr/) | [Twitter](https://twitter.com/si0ls)
 
 Remerciement spéciaux à Krayon973, Yohann Hammad, Eldraeildor, Mrs025, Malobre. Regardez [CONTRIBUTORS.md](https://github.com/Uplimg/Uplimg/blob/master/CONTRIBUTORS.md) pour plus de détails.
