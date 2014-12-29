@@ -1,5 +1,7 @@
 # UPLIMG
 
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Uplimg/Uplimg?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 - [English version](#english-version)
 - [Version française](#version-fran%C3%A7aise)
 
