@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/images">
+        <file alias="uplimg_icon.png">resources/uplimg_icon.png</file>
+    </qresource>
+    <qresource prefix="/images/context_menu">
+        <file alias="clipboard.png">resources/context_menu/clipboard.png</file>
+        <file alias="file.png">resources/context_menu/file.png</file>
+        <file alias="fullscreen.png">resources/context_menu/fullscreen.png</file>
+        <file alias="selected_screen.png">resources/context_menu/selected_screen.png</file>
+    </qresource>
+</RCC>
