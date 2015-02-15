@@ -7,6 +7,8 @@
 
 #include "core/systemtrayicon.h"
 #include "core/screentaker.h"
+#include "file/filemanager.h"
+#include "network/filesender.h"
 #include "windows/mainwindow.h"
 
 #include <iostream>
@@ -29,6 +31,8 @@ private:
 
     SystemTrayIcon * systemTray;
     ScreenTaker * screenTaker;
+    FileManager * fileManager;
+    FileSender * fileSender;
     MainWindow * mainWindow;
 
 
@@ -38,7 +42,6 @@ public slots:
     void startCaptureFullScreenProccess();
 
     void startCaptureSelectedScreenProccess();
-    void captureSelectedScreenProccessFinished(QPixmap);
     void captureSelectedScreenProccessCanceled();
 };
 

@@ -8,7 +8,9 @@ SOURCES += main.cpp \
     windows/mainwindow.cpp \
     core/screentaker.cpp \
     core/areauserdefiner.cpp \
-    network/httpsender.cpp
+    network/httpsender.cpp \
+    file/filemanager.cpp \
+    network/filesender.cpp
 
 RESOURCES += qml.qrc \
     images.qrc
@@ -34,7 +36,11 @@ HEADERS += \
     windows/mainwindow.h \
     core/screentaker.h \
     core/areauserdefiner.h \
-    network/httpsender.h
+    network/httpsender.h \
+    file/filemanager.h \
+    file/file.h \
+    core/utils.h \
+    network/filesender.h
 
 # Global shortcuts from the Qxt Team !
 HEADERS += \

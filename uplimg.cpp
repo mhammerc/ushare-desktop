@@ -31,6 +31,10 @@ void Uplimg::initModules()
     systemTray = new SystemTrayIcon(this);
 
     screenTaker = new ScreenTaker(this);
+
+    fileManager = new FileManager(this);
+
+    fileSender = new FileSender(this);
 }
 
 void Uplimg::linkConnections()
@@ -41,8 +45,11 @@ void Uplimg::linkConnections()
     QObject::connect(systemTray, &SystemTrayIcon::openUplimgAsked, mainWindow, &MainWindow::show);
 
     /* Connections from the screen taker */
-    QObject::connect(screenTaker, &ScreenTaker::captureSelectedZoneFinished, this, &Uplimg::captureSelectedScreenProccessFinished);
+    QObject::connect(screenTaker, &ScreenTaker::captureSelectedZoneFinished, fileManager, &FileManager::screenTook); /* Send the screen took to the file manager */
     QObject::connect(screenTaker, &ScreenTaker::captureSelectedZoneCanceled, this, &Uplimg::captureSelectedScreenProccessCanceled);
+
+    /* Connections from the file manager */
+    QObject::connect(fileManager, &FileManager::fileReadyToBeSent, fileSender, &FileSender::autoSendFile);
 }
 
 void Uplimg::startCaptureFullScreenProccess()
@@ -53,12 +60,6 @@ void Uplimg::startCaptureFullScreenProccess()
 void Uplimg::startCaptureSelectedScreenProccess()
 {
     screenTaker->captureSelectedZone(QColor(255,0,0));
-}
-
-void Uplimg::captureSelectedScreenProccessFinished(QPixmap picture)
-{
-    /* transmit the file to the sender */
-    std::cout << "finished" << std::endl;
 }
 
 void Uplimg::captureSelectedScreenProccessCanceled()
