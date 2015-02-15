@@ -3,7 +3,7 @@ import Material 0.1
 import Material.ListItems 0.1 as ListItem
 
 ApplicationWindow {
-    id: uplimg
+    id: usquare
 
     theme {
         accentColor: "#009688"
@@ -11,71 +11,51 @@ ApplicationWindow {
 
     initialPage: page
 
-    property var components: ["My files", "My account", "Settings"]
-
-    property string selectedComponent: components[0]
-
     Page {
         id: page
+        title: "U²"
 
-        title: "Uplimg"
-
-        ListItem.Standard {}
-
-        /*actions: [
-            Action {
-                iconName: "content/add"
+        tabs: [
+            // Each tab can have text and an icon
+            {
+                text: "Overview",
+                icon: "action/home"
             },
+            "My account",
+            "Settings"
+        ]
 
-            Action {
-                iconName: "action/search"
-                name: "Search"
-            },
-
-            Action {
-                iconName: "action/language"
-                name: "Language"
-            },
-
-            Action {
-                iconName: "action/account_circle"
-                name: "Account"
-            },
-
-            Action {
-                iconName: "action/settings"
-                name: "Settings"
-            }
-        ]*/
-
-        Sidebar {
-            id: sidebar
-
-            Column {
-                width: parent.width
-
-                Repeater {
-                    model: uplimg.components
-                    delegate: ListItem.Standard {
-                        text: modelData
-                        selected: modelData == selectedComponent
-                        onTriggered: selectedComponent = modelData
-                    }
-                }
-            }
+        // TabView is simply a customized ListView
+        // You can use any model/delegate for the tab contents,
+        // but a VisualItemModel works well
+        TabView {
+            id: tabView
+            anchors.fill: parent
+            currentIndex: page.selectedTab
+            model: tabs
         }
 
-        Loader {
-            anchors {
-                left: sidebar.right
-                right: parent.right
-                top: parent.top
-                bottom: parent.bottom
+        VisualItemModel {
+            id: tabs
+
+            // Tab 1 "Overview"
+            Overview {
+                width: tabView.width
+                height: tabView.height
             }
 
-            // selectedComponent will always be valid, as it defaults to the first component
-            source: Qt.resolvedUrl("%.qml").arg(selectedComponent.replace(" ", ""))
-            asynchronous: true
+            // Tab 2 "My account"
+            MyAccount {
+                width: tabView.width
+                height: tabView.height
+            }
+
+            // Tab 3 "Settings"
+            Settings {
+                width: tabView.width
+                height: tabView.height
+            }
         }
     }
+
 }

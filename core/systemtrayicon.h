@@ -20,10 +20,26 @@ public:
 
 signals:
     void openUplimgAsked();
+    void captureFullScreenAsked();
+    void captureSelectedScreenAsked();
 
 private:
     void init();
     void makeContextMenu();
+    void makeGlobalShortcuts();
+    void makeConnections();
+
+    /* Constants */
+    const QString fullScreenIcon = ":/images/context_menu/fullscreen.png";
+    const QString selectedScreenIcon = ":/images/context_menu/selected_screen.png";
+    const QString fileIcon = ":/images/context_menu/file.png";
+    const QString clipboardIcon = ":/images/context_menu/clipboard.png";
+
+    const QKeySequence captureFullScreen_k = QKeySequence("alt+1");
+    const QKeySequence captureSelectedScreen_k = QKeySequence("alt+1");
+    const QKeySequence makePaste_k = QKeySequence("alt+3");
+    const QKeySequence sendFile_k = QKeySequence("alt+4");
+    const QKeySequence sendClipboard_k = QKeySequence("alt+5");
 
     /* The menu */
     QMenu * menu;

@@ -5,7 +5,10 @@ QT += qml quick widgets core gui
 SOURCES += main.cpp \
     core/systemtrayicon.cpp \
     uplimg.cpp \
-    windows/mainwindow.cpp
+    windows/mainwindow.cpp \
+    core/screentaker.cpp \
+    core/areauserdefiner.cpp \
+    network/httpsender.cpp
 
 RESOURCES += qml.qrc \
     images.qrc
@@ -21,12 +24,17 @@ include(deployment.pri)
 
 DISTFILES += \
     qml/mainWindow.qml \
-    qml/Myaccount.qml
+    qml/Settings.qml \
+    qml/MyAccount.qml \
+    qml/Overview.qml
 
 HEADERS += \
     core/systemtrayicon.h \
     uplimg.h \
-    windows/mainwindow.h
+    windows/mainwindow.h \
+    core/screentaker.h \
+    core/areauserdefiner.h \
+    network/httpsender.h
 
 # Global shortcuts from the Qxt Team !
 HEADERS += \

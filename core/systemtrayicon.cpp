@@ -22,21 +22,12 @@ void SystemTrayIcon::init()
     setIcon(QIcon(":/images/uplimg_icon.png"));
     setToolTip("Uplimg");
     makeContextMenu();
+    makeGlobalShortcuts();
+    makeConnections();
 }
 
 void SystemTrayIcon::makeContextMenu()
 {
-    const QString fullScreenIcon(":/images/context_menu/fullscreen.png");
-    const QString selectedScreenIcon(":/images/context_menu/selected_screen.png");
-    const QString fileIcon(":/images/context_menu/file.png");
-    const QString clipboardIcon(":/images/context_menu/clipboard.png");
-
-    const QKeySequence captureFullScreen_k("alt+1");
-    const QKeySequence captureSelectedScreen_k("alt+1");
-    const QKeySequence makePaste_k("alt+3");
-    const QKeySequence sendFile_k("alt+4");
-    const QKeySequence sendClipboard_k("alt+5");
-
     /* Make the menu by it self */
     menu = new QMenu();
     menu->setTearOffEnabled(true);
@@ -65,11 +56,11 @@ void SystemTrayIcon::makeContextMenu()
 
     exitUplimg = menu->addAction("Exit Uplimg");
 
-    /* Now, we need to connect this menu */
+    setContextMenu(menu);
+}
 
-    QObject::connect(openUplimg, &QAction::triggered, this, &SystemTrayIcon::openUplimgAsked);
-    QObject::connect(exitUplimg, &QAction::triggered, qApp, &QApplication::quit);
-
+void SystemTrayIcon::makeGlobalShortcuts()
+{
     /* Then we set up global shortcuts */
 
     captureFullScreen_s = new QxtGlobalShortcut(captureFullScreen_k);
@@ -83,7 +74,14 @@ void SystemTrayIcon::makeContextMenu()
     QObject::connect(makePaste_s, &QxtGlobalShortcut::activated, makePaste, &QAction::trigger);
     QObject::connect(sendFile_s, &QxtGlobalShortcut::activated, sendFile, &QAction::trigger);
     QObject::connect(sendClipboard_s, &QxtGlobalShortcut::activated, sendClipboard, &QAction::trigger);
+}
 
+void SystemTrayIcon::makeConnections()
+{
+    /* Now, we need to connect this menu */
 
-    setContextMenu(menu);
+    QObject::connect(captureFullScreen, &QAction::triggered, this, &SystemTrayIcon::captureFullScreenAsked);
+    QObject::connect(captureSelectedScreen, &QAction::triggered, this, &SystemTrayIcon::captureSelectedScreenAsked);
+    QObject::connect(openUplimg, &QAction::triggered, this, &SystemTrayIcon::openUplimgAsked);
+    QObject::connect(exitUplimg, &QAction::triggered, qApp, &QApplication::quit);
 }
