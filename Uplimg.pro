@@ -10,7 +10,8 @@ SOURCES += main.cpp \
     core/areauserdefiner.cpp \
     network/httpsender.cpp \
     file/filemanager.cpp \
-    network/filesender.cpp
+    network/filesender.cpp \
+    windows/uploadingwindow.cpp
 
 RESOURCES += qml.qrc \
     images.qrc
@@ -28,7 +29,8 @@ DISTFILES += \
     qml/mainWindow.qml \
     qml/Settings.qml \
     qml/MyAccount.qml \
-    qml/Overview.qml
+    qml/Overview.qml \
+    qml/upload_window/UploadWindow.qml
 
 HEADERS += \
     core/systemtrayicon.h \
@@ -40,7 +42,8 @@ HEADERS += \
     file/filemanager.h \
     file/file.h \
     core/utils.h \
-    network/filesender.h
+    network/filesender.h \
+    windows/uploadingwindow.h
 
 # Global shortcuts from the Qxt Team !
 HEADERS += \

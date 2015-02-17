@@ -43,6 +43,8 @@ public slots:
 
     void startCaptureSelectedScreenProccess();
     void captureSelectedScreenProccessCanceled();
+
+    void autoSendFile(File);
 };
 
 #endif // UPLIMG_H

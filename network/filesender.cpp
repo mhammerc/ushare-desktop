@@ -12,15 +12,14 @@ FileSender::~FileSender()
 
 void FileSender::autoSendFile(File file)
 {
-    HttpSender http;
     http.setHost("http://uplmg.com/insert/upload", 80);
     http.setFile(file.path);
     http.setUplimgVersion("2.0");
 
-    QObject::connect(&http, &HttpSender::finished, [&http]()
+   /* QObject::connect(&http, &HttpSender::finished, [&http]()
     {
         std::cout << http.getResponse().toStdString() << std::endl; //Will show the access link
-    });
+    });*/
 
     QObject::connect(&http, &HttpSender::uploadProgress, [](qint64 bytesSent, qint64 bytesTotal)
     {
@@ -41,7 +40,45 @@ void FileSender::autoSendFile(File file)
         std::cout << "Error occured. Code : " << e << std::endl;
     });
 
+    uploadingWindow = new UploadingWindow();
+
+    QObject::connect(uploadingWindow, &UploadingWindow::cancellationAsked, this, &FileSender::cancelUpload);
+
+    QObject::connect(&http, &HttpSender::uploadProgress, [this](qint64 bytesSent, qint64 bytesTotal)
+    {
+        if(bytesTotal == 0) return;
+        uploadingWindow->setProgress((float)bytesSent/(float)bytesTotal);
+    });
+
+    uploadFinishedConnection = QObject::connect(&http, &HttpSender::finished, [this]()
+    {
+        uploadingWindow->terminateUpload(http.getResponse());
+        //http.exit();
+        //http.deleteLater();
+    });
+
+    QFileInfo fileInfo(file.path);
+
+    uploadingWindow->show();
+    uploadingWindow->setBytesTotal(fileInfo.size());
+
+
     //Call run function to send the file
-    http.run();
+    http.start();
+}
+
+void FileSender::cancelUpload()
+{
+    QObject::disconnect(uploadFinishedConnection);
+    QObject::connect(&http, &HttpSender::finished, this, &FileSender::cancelFinished);
+
+    http.abort();
+}
+
+void FileSender::cancelFinished()
+{
+    http.quit();
+
+    uploadingWindow->deleteLater();
 }
 

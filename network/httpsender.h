@@ -1,7 +1,6 @@
 #ifndef HTTPSENDER_H
 #define HTTPSENDER_H
 
-
 #include <QObject>
 #include <QHttpMultiPart>
 #include <QHttpPart>
@@ -25,6 +24,11 @@ public:
 
     HttpSender();
 
+    ~HttpSender()
+    {
+        reply->deleteLater();
+    }
+
     void run() Q_DECL_OVERRIDE
     {
         Status status = this->sendFile();
@@ -32,6 +36,11 @@ public:
             this->exec();
 
         emit statusChanged(status);
+    }
+
+    QString getResponse()
+    {
+        return QString(reply->readAll());
     }
 
 public slots:
@@ -68,9 +77,15 @@ public slots:
         this->uplimgVersion = uplimgVersion;
     }
 
-    QString getResponse()
+
+    /* abort current upload if asked */
+    void abort()
     {
-        return QString(reply->readAll());
+        if(reply == nullptr)
+            return;
+
+        reply->abort();
+        reply->close();
     }
 
 signals:

@@ -34,13 +34,13 @@ void Uplimg::initModules()
 
     fileManager = new FileManager(this);
 
-    fileSender = new FileSender(this);
+    //fileSender = new FileSender(this);
 }
 
 void Uplimg::linkConnections()
 {
     /* Connection to the system tray */
-    QObject::connect(systemTray, &SystemTrayIcon::captureFullScreenAsked, this, &Uplimg::startCaptureFullScreenProccess);
+    QObject::connect(systemTray, &SystemTrayIcon::captureFullScreenAsked, [this](){fileManager->screenTook(screenTaker->captureFullScreen());});
     QObject::connect(systemTray, &SystemTrayIcon::captureSelectedScreenAsked, this, &Uplimg::startCaptureSelectedScreenProccess);
     QObject::connect(systemTray, &SystemTrayIcon::openUplimgAsked, mainWindow, &MainWindow::show);
 
@@ -49,7 +49,7 @@ void Uplimg::linkConnections()
     QObject::connect(screenTaker, &ScreenTaker::captureSelectedZoneCanceled, this, &Uplimg::captureSelectedScreenProccessCanceled);
 
     /* Connections from the file manager */
-    QObject::connect(fileManager, &FileManager::fileReadyToBeSent, fileSender, &FileSender::autoSendFile);
+    QObject::connect(fileManager, &FileManager::fileReadyToBeSent, this, &Uplimg::autoSendFile);
 }
 
 void Uplimg::startCaptureFullScreenProccess()
@@ -66,4 +66,10 @@ void Uplimg::captureSelectedScreenProccessCanceled()
 {
     /* return in idle state */
     std::cout << "canceled" << std::endl;
+}
+
+void Uplimg::autoSendFile(File file)
+{
+    FileSender * fileSender = new FileSender(this);
+    fileSender->autoSendFile(file);
 }
