@@ -33,8 +33,6 @@ void Uplimg::initModules()
     screenTaker = new ScreenTaker(this);
 
     fileManager = new FileManager(this);
-
-    //fileSender = new FileSender(this);
 }
 
 void Uplimg::linkConnections()
