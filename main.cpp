@@ -26,6 +26,8 @@ int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
+    app.setQuitOnLastWindowClosed(false);
+
     QCoreApplication::setOrganizationName("USquare");
     QCoreApplication::setOrganizationDomain("usquare.io");
     QCoreApplication::setApplicationName("U²");

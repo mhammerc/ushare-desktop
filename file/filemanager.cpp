@@ -30,3 +30,19 @@ void FileManager::screenTook(QPixmap picture)
     emit fileReadyToBeSent(file);
 }
 
+void FileManager::chooseFile()
+{
+    /* assume that we want to send it */
+    QString fileName = QFileDialog::getOpenFileName();
+
+    QFileInfo fileInfo(fileName);
+
+    File file;
+    file.filename = fileInfo.fileName();
+    file.path = fileInfo.filePath();
+    file.type = "file";
+
+    emit fileReadyToBeSent(file);
+
+}
+

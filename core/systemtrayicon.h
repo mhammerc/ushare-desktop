@@ -22,6 +22,7 @@ signals:
     void openUplimgAsked();
     void captureFullScreenAsked();
     void captureSelectedScreenAsked();
+    void sendFileAsked();
 
 private:
     void init();

@@ -41,8 +41,6 @@ private:
 signals:
 
 public slots:
-    void startCaptureFullScreenProccess();
-
     void startCaptureSelectedScreenProccess();
     void captureSelectedScreenProccessCanceled();
 

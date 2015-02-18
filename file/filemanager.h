@@ -3,6 +3,8 @@
 
 #include <QObject>
 #include <QPixmap>
+#include <QFileDialog>
+#include <QFileInfo>
 
 #include "file.h"
 
@@ -22,6 +24,8 @@ signals:
 
 public slots:
     void screenTook(QPixmap);
+
+    void chooseFile();
 };
 
 #endif // FILEMANAGER_H

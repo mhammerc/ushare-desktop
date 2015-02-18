@@ -40,6 +40,7 @@ void Uplimg::linkConnections()
     /* Connection to the system tray */
     QObject::connect(systemTray, &SystemTrayIcon::captureFullScreenAsked, [this](){fileManager->screenTook(screenTaker->captureFullScreen());});
     QObject::connect(systemTray, &SystemTrayIcon::captureSelectedScreenAsked, this, &Uplimg::startCaptureSelectedScreenProccess);
+    QObject::connect(systemTray, &SystemTrayIcon::sendFileAsked, fileManager, &FileManager::chooseFile);
     QObject::connect(systemTray, &SystemTrayIcon::openUplimgAsked, mainWindow, &MainWindow::show);
 
     /* Connections from the screen taker */
@@ -50,11 +51,6 @@ void Uplimg::linkConnections()
     QObject::connect(fileManager, &FileManager::fileReadyToBeSent, this, &Uplimg::autoSendFile);
 }
 
-void Uplimg::startCaptureFullScreenProccess()
-{
-    std::cout << "ok" << std::endl;
-}
-
 void Uplimg::startCaptureSelectedScreenProccess()
 {
     screenTaker->captureSelectedZone(QColor(255,0,0));
@@ -63,7 +59,6 @@ void Uplimg::startCaptureSelectedScreenProccess()
 void Uplimg::captureSelectedScreenProccessCanceled()
 {
     /* return in idle state */
-    std::cout << "canceled" << std::endl;
 }
 
 void Uplimg::autoSendFile(File file)
