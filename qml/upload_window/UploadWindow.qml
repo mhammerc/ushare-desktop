@@ -2,7 +2,6 @@ import QtQuick 2.2
 import Material 0.1
 import Material.ListItems 0.1 as ListItem
 
-
 Window {
     id: usquare
     width: 405
@@ -24,6 +23,7 @@ Window {
     property int bytesTotal: 0
 
     signal cancellationAsked
+
 
     Item {
         id: uploading
@@ -67,7 +67,6 @@ Window {
                 name: "awesome/remove"
                 color: "#c0392b"
                 size: 1
-                verticalAlignment: Icon.AlignVCenter
 
                 MouseArea {
                     id: cancel
@@ -78,9 +77,9 @@ Window {
                 Component.onCompleted: {
                     cancel.clicked.connect(usquare.cancellationAsked)
                 }
-            } // Icon
-        } // Row
-    } // Item
+            } /* Icon */
+        } /* Row */
+    } /* Item */
 
     Item {
         anchors.centerIn: parent
@@ -101,8 +100,8 @@ Window {
             text: "Your file is uploaded ! The link is <a href=\"" + link + "\">" + link +"</a>"
             verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignHCenter
-        } // Label
-    } // Item
+        } /* Label */
+    } /* Item */
 
     function humanFileSize(bytes, si) {
         var thresh = si ? 1000 : 1024;
@@ -114,5 +113,5 @@ Window {
             ++u;
         } while(bytes >= thresh);
         return bytes.toFixed(1)+' '+units[u];
-    } // humanFileSize(bytes, si)
-} //Window
+    } /* humanFileSize(bytes, si) */
+} /* Window */

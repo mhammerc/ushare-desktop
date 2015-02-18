@@ -4,6 +4,9 @@
 #include <QObject>
 #include <QQmlEngine>
 #include <QQmlComponent>
+#include <QQmlContext>
+
+#include "qml/cpp_wrapper/qmlsettings.h"
 
 class MainWindow : public QObject
 {
@@ -15,6 +18,7 @@ public:
 private:
     QQmlEngine engine;
     QQmlComponent  * component;
+    QQmlContext * context;
     QObject * window;
 
 signals:

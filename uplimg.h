@@ -11,6 +11,8 @@
 #include "network/filesender.h"
 #include "windows/mainwindow.h"
 
+#include "core/settings.h"
+
 #include <iostream>
 
 /* This link all modules between them */

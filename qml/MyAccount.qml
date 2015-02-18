@@ -7,7 +7,7 @@ Item {
         spacing: units.dp(25)
 
         Label {
-            text: "You need to connect to Uplimg web before use this"
+            text: "You need to connect to Uplimg web before use this (" + Settings.value("username", "haha") + ")"
         }
     }
 }

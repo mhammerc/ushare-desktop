@@ -2,6 +2,7 @@ import QtQuick 2.2
 import Material 0.1
 import Material.ListItems 0.1 as ListItem
 
+
 ApplicationWindow {
     id: usquare
 
@@ -51,7 +52,7 @@ ApplicationWindow {
             }
 
             // Tab 3 "Settings"
-            Settings {
+            SettingsPage {
                 width: tabView.width
                 height: tabView.height
             }

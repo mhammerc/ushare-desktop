@@ -2,7 +2,7 @@
 
 Uplimg::Uplimg(QObject *parent) : QObject(parent)
 {
-
+    Settings::init(this);
 }
 
 Uplimg::~Uplimg()

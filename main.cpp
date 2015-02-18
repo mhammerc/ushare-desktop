@@ -1,3 +1,8 @@
+/* Welcome in USquare !! I'm really happy to see you here :-)
+ * Don't be scary about comment or edit the code :-P
+ * I hope you a good journey in this code :-) *
+*/
+
 /**
  * This file (c) by : - Martin Hammerchmidt alias Imote
  *
@@ -12,14 +17,23 @@
 */
 
 #include <QApplication>
+#include <QtQml>
 #include "uplimg.h"
+
+//#include "core/settings.h"
 
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
+    QCoreApplication::setOrganizationName("USquare");
+    QCoreApplication::setOrganizationDomain("usquare.io");
+    QCoreApplication::setApplicationName("U²");
+
     Uplimg uplimg;
     uplimg.start();
+
+
 
     return app.exec();
 }
