@@ -38,7 +38,7 @@ void SystemTrayIcon::makeContextMenu()
     captureSelectedScreen = menu->addAction(QIcon(selectedScreenIcon), tr("Capture selected area"));
     captureSelectedScreen->setShortcut(captureSelectedScreen_k);
 
-    makePaste = menu->addAction(tr("Cook new paste"));
+    makePaste = menu->addAction(QIcon(pasteIcon), tr("Cook new paste"));
     makePaste->setShortcut(makePaste_k);
 
     sendFile = menu->addAction(QIcon(fileIcon), tr("Send new file"));

@@ -7,5 +7,6 @@
         <file alias="file.png">resources/context_menu/file.png</file>
         <file alias="fullscreen.png">resources/context_menu/fullscreen.png</file>
         <file alias="selected_screen.png">resources/context_menu/selected_screen.png</file>
+        <file alias="paste.png">resources/context_menu/paste.png</file>
     </qresource>
 </RCC>

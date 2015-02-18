@@ -33,6 +33,7 @@ private:
     /* Constants */
     const QString fullScreenIcon = ":/images/context_menu/fullscreen.png";
     const QString selectedScreenIcon = ":/images/context_menu/selected_screen.png";
+    const QString pasteIcon = ":/images/context_menu/paste.png";
     const QString fileIcon = ":/images/context_menu/file.png";
     const QString clipboardIcon = ":/images/context_menu/clipboard.png";
 
