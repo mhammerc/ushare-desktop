@@ -2,7 +2,7 @@
 
 MainWindow::MainWindow(QObject *parent) : QObject(parent)
 {
-    component = new QQmlComponent(&engine, QUrl::fromLocalFile("/home/imote/Development/Uplimg/qml/mainWindow.qml"), this);
+    component = new QQmlComponent(&engine, QUrl::fromLocalFile("/home/imote/Development/Uplimg/qml/main_window/main.qml"), this);
 
     /* create the context to set Settings before the creation */
     context = new QQmlContext(&engine);
@@ -11,6 +11,9 @@ MainWindow::MainWindow(QObject *parent) : QObject(parent)
     context->setContextProperty("Settings", settings);
 
     window = component->create(context);
+    qDebug() << component->errorString ();
+
+    window->setProperty("visible", true);
 
 }
 

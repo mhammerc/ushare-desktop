@@ -5,6 +5,7 @@
 #include <QQmlEngine>
 #include <QQmlComponent>
 #include <QQmlContext>
+#include <QDebug>
 
 #include "qml/cpp_wrapper/qmlsettings.h"
 

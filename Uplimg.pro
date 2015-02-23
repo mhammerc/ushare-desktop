@@ -28,11 +28,17 @@ QML_IMPORT_PATH =
 include(deployment.pri)
 
 DISTFILES += \
-    qml/mainWindow.qml \
-    qml/MyAccount.qml \
-    qml/Overview.qml \
+    qml/main_window/MyAccount.qml \
+    qml/main_window/Overview.qml \
     qml/upload_window/UploadWindow.qml \
-    qml/SettingsPage.qml
+    qml/main_window/SettingsPage.qml \
+    qml/main_window/settings/General.qml \
+    qml/main_window/main.qml \
+    qml/components/Label.qml \
+    qml/components/Checkbox.qml \
+    qml/main_window/settings/Saving.qml \
+    qml/components/Slider.qml \
+    qml/components/functions.js
 
 HEADERS += \
     core/systemtrayicon.h \

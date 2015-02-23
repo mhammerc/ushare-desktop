@@ -56,6 +56,9 @@ void SystemTrayIcon::makeContextMenu()
 
     exitUplimg = menu->addAction("Exit Uplimg");
 
+    QAction * build = menu->addAction("Technology preview build 1000 - Private");
+    build->setDisabled(true);
+
     setContextMenu(menu);
 }
 
