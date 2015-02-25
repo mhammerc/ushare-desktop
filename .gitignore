@@ -1,3 +1,7 @@
+debug/*
+release/*
+object_script.*
+
 # C++ objects and libs
 
 *.slo

@@ -6,7 +6,7 @@ Window {
     id: usquare
     width: 405
     height: 30
-    flags: Qt.WindowStaysOnTopHint | Qt.WindowCloseButtonHint
+    //flags: Qt.WindowStaysOnTopHint | Qt.WindowCloseButtonHint
 
     maximumWidth: width
     minimumWidth: width

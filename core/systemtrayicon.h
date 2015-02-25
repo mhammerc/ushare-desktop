@@ -38,7 +38,7 @@ private:
     const QString clipboardIcon = ":/images/context_menu/clipboard.png";
 
     const QKeySequence captureFullScreen_k = QKeySequence("alt+1");
-    const QKeySequence captureSelectedScreen_k = QKeySequence("alt+1");
+    const QKeySequence captureSelectedScreen_k = QKeySequence("alt+2");
     const QKeySequence makePaste_k = QKeySequence("alt+3");
     const QKeySequence sendFile_k = QKeySequence("alt+4");
     const QKeySequence sendClipboard_k = QKeySequence("alt+5");

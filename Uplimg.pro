@@ -1,6 +1,6 @@
 TEMPLATE = app
 
-QT += qml quick widgets core gui multimedia
+QT += qml quick core gui multimedia
 
 SOURCES += main.cpp \
     core/systemtrayicon.cpp \

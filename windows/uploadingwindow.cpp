@@ -2,7 +2,7 @@
 
 UploadingWindow::UploadingWindow(QObject *parent) : QObject(parent)
 {
-    component = new QQmlComponent(&engine, QUrl::fromLocalFile("/home/imote/Development/Uplimg/qml/upload_window/UploadWindow.qml"), this);
+    component = new QQmlComponent(&engine, QUrl::fromLocalFile("qml/upload_window/UploadWindow.qml"), this);
     std::cout << component->errorString().toStdString()<< std::endl;
     window = component->create();
 
