@@ -14,9 +14,11 @@ void FileManager::screenTook(QPixmap picture)
 {
     /* Assuming that we send the picture to uplimg web */
     QString filename = Utils::getNewFileName();
-    QString filePath = Utils::getFileTempPath(filename);
+    QString filePath = Utils::getFolderPath(filename);
 
-    if(!picture.save(filePath))
+    int quality = Settings::entry(SettingsKeys::IMAGE_QUALITY, 100).toInt();
+
+    if(!picture.save(filePath, 0, quality))
     {
         /* get back to idle state */
         return;

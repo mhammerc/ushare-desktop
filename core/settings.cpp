@@ -26,7 +26,11 @@ Settings::Settings(QObject *parent) : QSettings(parent)
          << "password"
          << "copy_link_to_clipboard"
          << "open_file_in_browser"
-         << "play_sound";
+         << "play_sound"
+         << "picture/format"
+         << "picture/quality"
+         << "picture/save_on_computer"
+         << "picture/save_path";
 
 }
 

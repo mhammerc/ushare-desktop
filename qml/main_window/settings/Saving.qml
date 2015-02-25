@@ -89,7 +89,7 @@ Item {
                 }
 
                 U.Slider {
-                    value: Settings.value("pictures/quality", 100)
+                    value: Settings.value("picture/quality", 100)
                     numericValueLabel: true
                     minimumValue: 0
                     maximumValue: 100
@@ -98,7 +98,7 @@ Item {
                     width: 250
                     onValueChanged: {
                         value = F.round(value)
-                        Settings.setValue("pictures/quality", value)
+                        Settings.setValue("picture/quality", value)
                     }
                 }
             } /* Row */
@@ -154,7 +154,7 @@ Item {
         id: fileDialog
         title: "Please choose a folder"
         selectFolder: true
-        onAccepted: pathField.text = folder.toString().replace("file:///", "")
+        onAccepted: pathField.text = folder.toString().replace("file://", "")
     } /* FileDialog */
 
 } /* Item */

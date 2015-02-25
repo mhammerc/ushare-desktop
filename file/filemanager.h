@@ -6,6 +6,7 @@
 #include <QFileDialog>
 #include <QFileInfo>
 
+#include "core/settings.h"
 #include "file.h"
 
 #include <iostream>
