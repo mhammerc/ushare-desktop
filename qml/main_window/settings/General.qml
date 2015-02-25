@@ -16,7 +16,7 @@ Item {
         Column {
             anchors.fill: parent
             anchors.topMargin: units.dp(10)
-            spacing: units.dp(7);
+            spacing: units.dp(5);
 
             U.Label {
                 id: titleLabel
@@ -34,13 +34,16 @@ Item {
 
             U.Checkbox {
                 text: 'Run on startup'
-                checked: false
+                checked: F.stringToBoolean(Settings.value('run_on_startup', false))
                 darkBackground: false
+                onCheckedChanged: Settings.setValue('run_on_startup', checked)
             }
 
             ListItem.SimpleMenu {
                 text: "Language"
                 model: ["English", "French"]
+                selectedIndex: Settings.value("language", 0)
+                onSelectedIndexChanged: Settings.setValue("language", selectedIndex)
             }
 
             U.Label {
@@ -58,12 +61,9 @@ Item {
             U.Checkbox {
                 id: sound
                 text: 'Play a sound'
-                checked: F.stringToBoolean(Settings.value('playSound', false))
+                checked: F.stringToBoolean(Settings.value('play_sound', false))
                 darkBackground: false
-                onCheckedChanged: {
-                    Settings.setValue('playSound', checked)
-                    Settings.value('playSound', checked)
-                }
+                onCheckedChanged: Settings.setValue('play_sound', checked)
             }
 
             U.Checkbox {
@@ -71,31 +71,24 @@ Item {
                 text: 'Show upload progress'
                 checked: F.stringToBoolean(Settings.value('ShowProgressWindow', false))
                 darkBackground: false
-                onCheckedChanged: {
-                    Settings.setValue('ShowProgressWindow', checked)
-                }
+                onCheckedChanged: Settings.setValue('ShowProgressWindow', checked)
             }
 
             U.Checkbox {
                 id: clipboard
                 text: 'Copy web link to clipboard'
-                checked: F.stringToBoolean(Settings.value('copyLinkToClipboard', false))
+                checked: F.stringToBoolean(Settings.value('copy_link_to_clipboard', false))
                 darkBackground: false
-                onCheckedChanged: {
-                    Settings.setValue('copyLinkToClipboard', checked)
-                    //console.log(checked);
-                }
+                onCheckedChanged: Settings.setValue('copy_link_to_clipboard', checked)
             }
 
             U.Checkbox {
                 id: browser
                 text: 'Open file in browser'
-                checked: F.stringToBoolean(Settings.value('openFileInBrowser', false))
+                checked: F.stringToBoolean(Settings.value('open_file_in_browser', false))
                 darkBackground: false
-                onCheckedChanged: {
-                    Settings.setValue('openFileInBrowser', checked)
-                }
-            }
+                onCheckedChanged: Settings.setValue('open_file_in_browser', checked)
+            } /* U.Checkbox */
         } /* Column */
     } /* View */
 } /* Item */

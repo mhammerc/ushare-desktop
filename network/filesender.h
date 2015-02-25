@@ -2,6 +2,7 @@
 #define FILESENDER_H
 
 #include <QObject>
+#include <QString>
 #include <QFileInfo>
 
 #include "file/file.h"
@@ -26,6 +27,7 @@ private:
     QMetaObject::Connection uploadFinishedConnection;
 
 signals:
+    void uploadFinished(QString);
 
 public slots:
     void autoSendFile(File);

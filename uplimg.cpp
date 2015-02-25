@@ -64,5 +64,21 @@ void Uplimg::captureSelectedScreenProccessCanceled()
 void Uplimg::autoSendFile(File file)
 {
     FileSender * fileSender = new FileSender(this);
+
+    QObject::connect(fileSender, &FileSender::uploadFinished, [this](QString response){
+
+        if(Settings::entry(SettingsKeys::COPY_LINK_TO_CLIPBOARD).toBool())
+            // If the user want to copy the response inside his clipboard
+            QApplication::clipboard()->setText(response);
+
+        if(Settings::entry(SettingsKeys::OPEN_FILE_IN_BROWSER).toBool())
+            // If the user want to automatically open the file in browser
+            QDesktopServices::openUrl(QUrl(response));
+
+        if(Settings::entry(SettingsKeys::PLAY_SOUND_ON_SUCCESS_UPLOAD).toBool())
+            // If the user want to play a sound on upload success
+            fileSendedSound.play();
+    });
+
     fileSender->autoSendFile(file);
 }

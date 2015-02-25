@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/sounds">
+        <file alias="easter_egg.wav">resources/sounds/easter_egg.wav</file>
+        <file alias="file_sended.wav">resources/sounds/file_sended.wav</file>
+    </qresource>
+</RCC>

@@ -7,8 +7,8 @@ ApplicationWindow {
     id: usquare
 
     theme {
-        accentColor: Settings.value('color/accentColor','#ff4081')
-        primaryColor: Settings.value('color/primaryColor', '#00bad2')
+        primaryColor: Settings.value('color/primaryColor', '#4CAF50')
+        accentColor: Settings.value('color/accentColor','#2196F3')
         backgroundColor: Settings.value('color/backgroundColor', '#fafafa')
     }
 
@@ -23,6 +23,7 @@ ApplicationWindow {
                 text: "Overview",
                 icon: "action/home"
             },
+            "Uploads",
             "My account",
             "Settings"
         ]
@@ -51,13 +52,18 @@ ApplicationWindow {
                 height: tabView.height
             }
 
-            // Tab 2 "My account"
+            Uploads {
+                width: tabView.width
+                height: tabView.height
+            }
+
+            // Tab 3 "My account"
             MyAccount {
                 width: tabView.width
                 height: tabView.height
             }
 
-            // Tab 3 "Settings"
+            // Tab 4 "Settings"
             SettingsPage {
                 width: tabView.width
                 height: tabView.height
@@ -105,11 +111,11 @@ ApplicationWindow {
                         theme.backgroundColor = "#fafafa"
                         Settings.setValue('color/backgroundColor', "#fafafa")
 
-                        theme.primaryColor = "#00bad2"
-                        Settings.setValue('color/primaryColor', "#00bad2")
+                        theme.primaryColor = "#4CAF50"
+                        Settings.setValue('color/primaryColor', "#4CAF50")
 
-                        theme.accentColor = "#ff4081"
-                        Settings.setValue('color/accentColor', "#ff4081")
+                        theme.accentColor = "#2196F3"
+                        Settings.setValue('color/accentColor', "#2196F3")
 
                         Settings.setValue('color/theme', 'light')
                     }
@@ -136,13 +142,6 @@ ApplicationWindow {
                     }
                 } /* onItemSelected */
             } /* MenuField */
-
-            MenuField {
-                visible: colorPicker.isCustom
-                id: selection
-                model: ["Primary color", "Accent color", "Background color"]
-                width: units.dp(160)
-            }
 
             Grid {
                 visible: colorPicker.isCustom
@@ -189,6 +188,13 @@ ApplicationWindow {
                     } /* Rectangle */
                 } /* Repeater */
             } /* Grid color */
+
+            MenuField {
+                visible: colorPicker.isCustom
+                id: selection
+                model: ["Primary color", "Accent color", "Background color"]
+                width: units.dp(160)
+            }
         } /* Column */
     } /* Dialog color chooser */
 } /* ApplicationWindow */

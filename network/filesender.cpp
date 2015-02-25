@@ -28,7 +28,9 @@ void FileSender::autoSendFile(File file)
 
     uploadFinishedConnection = QObject::connect(&http, &HttpSender::finished, [this]()
     {
-        uploadingWindow->terminateUpload(http.getResponse());
+        QString response = http.getResponse();
+        uploadingWindow->terminateUpload(response);
+        emit uploadFinished(response);
     });
 
     QFileInfo fileInfo(file.path);

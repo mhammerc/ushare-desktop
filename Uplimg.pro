@@ -1,6 +1,6 @@
 TEMPLATE = app
 
-QT += qml quick widgets core gui
+QT += qml quick widgets core gui multimedia
 
 SOURCES += main.cpp \
     core/systemtrayicon.cpp \
@@ -13,10 +13,12 @@ SOURCES += main.cpp \
     network/filesender.cpp \
     windows/uploadingwindow.cpp \
     core/settings.cpp \
-    qml/cpp_wrapper/qmlsettings.cpp
+    qml/cpp_wrapper/qmlsettings.cpp \
+    sounds/filesendedsound.cpp
 
 RESOURCES += qml.qrc \
-    images.qrc
+    images.qrc \
+    sounds.qrc
 
 QMAKE_CXXFLAGS += -std=c++11 # C++11 for sure !
 QMAKE_CXXFLAGS += -lX11
@@ -38,7 +40,8 @@ DISTFILES += \
     qml/components/Checkbox.qml \
     qml/main_window/settings/Saving.qml \
     qml/components/Slider.qml \
-    qml/components/functions.js
+    qml/components/functions.js \
+    qml/main_window/Uploads.qml
 
 HEADERS += \
     core/systemtrayicon.h \
@@ -54,7 +57,8 @@ HEADERS += \
     windows/uploadingwindow.h \
     core/settings.h \
     core/keys_data.h \
-    qml/cpp_wrapper/qmlsettings.h
+    qml/cpp_wrapper/qmlsettings.h \
+    sounds/filesendedsound.h
 
 # Global shortcuts from the Qxt Team !
 HEADERS += \

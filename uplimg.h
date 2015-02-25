@@ -2,11 +2,15 @@
 #define UPLIMG_H
 
 #include <QObject>
+#include <QClipboard>
+#include <QDesktopServices>
+#include <QUrl>
 #include <QPixmap>
 #include <QColor>
 
 #include "core/systemtrayicon.h"
 #include "core/screentaker.h"
+#include "sounds/filesendedsound.h"
 #include "file/filemanager.h"
 #include "network/filesender.h"
 #include "windows/mainwindow.h"
@@ -36,6 +40,7 @@ private:
     FileManager * fileManager;
     FileSender * fileSender;
     MainWindow * mainWindow;
+    FileSendedSound fileSendedSound;
 
 
 signals:

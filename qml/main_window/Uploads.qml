@@ -11,15 +11,5 @@ Item {
             text: "You need to connect to U² online before use this feature"
         }
     }
-
-    ActionButton {
-        anchors {
-            right: parent.right
-            bottom: parent.bottom
-            margins: units.dp(32)
-        }
-
-        iconName: "content/add"
-    }
 }
 

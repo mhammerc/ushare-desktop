@@ -23,7 +23,10 @@ const QString Settings::getStringKey(const SettingsKeys key)
 Settings::Settings(QObject *parent) : QSettings(parent)
 {
     keys << "username"
-         << "password";
+         << "password"
+         << "copy_link_to_clipboard"
+         << "open_file_in_browser"
+         << "play_sound";
 
 }
 
