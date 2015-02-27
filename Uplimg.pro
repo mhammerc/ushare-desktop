@@ -1,6 +1,6 @@
 TEMPLATE = app
 
-QT += qml quick core gui multimedia
+QT += widgets qml quick core gui multimedia
 
 SOURCES += main.cpp \
     core/systemtrayicon.cpp \
@@ -14,7 +14,8 @@ SOURCES += main.cpp \
     windows/uploadingwindow.cpp \
     core/settings.cpp \
     qml/cpp_wrapper/qmlsettings.cpp \
-    sounds/filesendedsound.cpp
+    sounds/filesendedsound.cpp \
+    windows/notificationwindow.cpp
 
 RESOURCES += qml.qrc \
     images.qrc \
@@ -41,7 +42,9 @@ DISTFILES += \
     qml/main_window/settings/Saving.qml \
     qml/components/Slider.qml \
     qml/components/functions.js \
-    qml/main_window/Uploads.qml
+    qml/main_window/Uploads.qml \
+    qml/main_window/settings/Credits.qml \
+    qml/notification_window/NotificationWindow.qml
 
 HEADERS += \
     core/systemtrayicon.h \
@@ -58,7 +61,10 @@ HEADERS += \
     core/settings.h \
     core/keys_data.h \
     qml/cpp_wrapper/qmlsettings.h \
-    sounds/filesendedsound.h
+    sounds/filesendedsound.h \
+    qml/cpp_wrapper/platformdetails.h \
+    windows/notificationwindow.h \
+    qml/cpp_wrapper/desktop.h
 
 # Global shortcuts from the Qxt Team !
 HEADERS += \

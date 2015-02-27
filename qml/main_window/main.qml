@@ -6,6 +6,9 @@ import Material.ListItems 0.1 as ListItem
 ApplicationWindow {
     id: usquare
 
+    width: 700
+    height: 600
+
     theme {
         primaryColor: Settings.value('color/primaryColor', '#4CAF50')
         accentColor: Settings.value('color/accentColor','#2196F3')

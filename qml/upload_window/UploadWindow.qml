@@ -16,10 +16,6 @@ Window {
 
     property real progress : 0
 
-    property bool isUploading : true
-
-    property string link: ""
-
     property int bytesTotal: 0
 
     signal cancellationAsked
@@ -29,8 +25,6 @@ Window {
         id: uploading
         anchors.fill: parent
         anchors.leftMargin: 5
-
-        visible: isUploading
 
         Row {
             id: row1
@@ -79,28 +73,6 @@ Window {
                 }
             } /* Icon */
         } /* Row */
-    } /* Item */
-
-    Item {
-        anchors.centerIn: parent
-        anchors.fill: parent
-        id: uploaded
-
-        visible: !isUploading
-
-        MouseArea {
-            anchors.fill: parent
-            onClicked: Qt.openUrlExternally(link)
-            cursorShape: Qt.PointingHandCursor
-        }
-
-        Label {
-            textFormat: Text.RichText
-            anchors.fill: parent
-            text: "Your file is uploaded ! The link is <a href=\"" + link + "\">" + link +"</a>"
-            verticalAlignment: Text.AlignVCenter
-            horizontalAlignment: Text.AlignHCenter
-        } /* Label */
     } /* Item */
 
     function humanFileSize(bytes, si) {

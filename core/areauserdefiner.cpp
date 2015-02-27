@@ -49,7 +49,7 @@ void AreaUserDefiner::start()
 {
     this->grabKeyboard();
     QScreen * screen = QApplication::primaryScreen();
-    showFullScreen();
+    show();
     setGeometry(screen->virtualGeometry().x(), screen->virtualGeometry().y(), screen->virtualGeometry().width(), screen->virtualGeometry().height());
 }
 

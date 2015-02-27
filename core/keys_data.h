@@ -10,7 +10,9 @@ enum class SettingsKeys : int {
     IMAGE_FORMAT, // 0 -> JPEG or 1 -> PNG
     IMAGE_QUALITY, // From 0 to 100
     SAVE_IMAGE_ON_COMPUTER, // Boolean
-    PATH_TO_SAVE_IMAGE_ON_COMPUTER // String path
+    PATH_TO_SAVE_IMAGE_ON_COMPUTER, // String path
+    SHOW_NOTIFICATION_WINDOW,
+    SHOW_PROGRESS_WINDOW
 };
 
 #endif // KEYS_DATA_H

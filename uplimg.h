@@ -13,7 +13,9 @@
 #include "sounds/filesendedsound.h"
 #include "file/filemanager.h"
 #include "network/filesender.h"
+
 #include "windows/mainwindow.h"
+#include "windows/notificationwindow.h"
 
 #include "core/settings.h"
 

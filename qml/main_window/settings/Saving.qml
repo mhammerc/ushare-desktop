@@ -89,16 +89,20 @@ Item {
                 }
 
                 U.Slider {
-                    value: Settings.value("picture/quality", 100)
                     numericValueLabel: true
                     minimumValue: 0
                     maximumValue: 100
                     darkBackground: false
+
                     height: 15
                     width: 250
+
+                    value: Settings.value("picture/quality", 100)
                     onValueChanged: {
                         value = F.round(value)
-                        Settings.setValue("picture/quality", value)
+                    }
+                    onPressedChanged: {
+                        Settings.setValue("picture/quality", value);
                     }
                 }
             } /* Row */
@@ -154,7 +158,18 @@ Item {
         id: fileDialog
         title: "Please choose a folder"
         selectFolder: true
-        onAccepted: pathField.text = folder.toString().replace("file://", "")
+        onAccepted: {
+            var text;
+            if(PlatformDetails.isLinux)
+                text = folder.toString().replace("file://", "")
+            else if(PlatformDetails.isWindows)
+                text = folder.toString().replace("file:///", "");
+            else /* Mac ?? */
+                text = "Mac not implemented yet"
+
+            pathField.text = text
+
+        }
     } /* FileDialog */
 
 } /* Item */

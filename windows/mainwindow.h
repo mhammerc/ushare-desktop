@@ -8,6 +8,7 @@
 #include <QDebug>
 
 #include "qml/cpp_wrapper/qmlsettings.h"
+#include "qml/cpp_wrapper/platformdetails.h"
 
 class MainWindow : public QObject
 {

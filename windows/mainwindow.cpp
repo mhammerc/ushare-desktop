@@ -7,11 +7,14 @@ MainWindow::MainWindow(QObject *parent) : QObject(parent)
     /* create the context to set Settings before the creation */
     context = new QQmlContext(&engine);
 
-    QmlSettings * settings = new QmlSettings();
+    QmlSettings * settings = new QmlSettings(this);
     context->setContextProperty("Settings", settings);
 
+    PlatformDetails * pd = new PlatformDetails(this);
+    context->setContextProperty("PlatformDetails", pd);
+
     window = component->create(context);
-    qDebug() << component->errorString ();
+    qDebug() << component->errorString();
 
     window->setProperty("visible", true);
 

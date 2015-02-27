@@ -9,8 +9,7 @@
 #include "httpsender.h"
 #include "windows/uploadingwindow.h"
 
-
-#include <iostream>
+#include "core/settings.h"
 
 class FileSender : public QObject
 {

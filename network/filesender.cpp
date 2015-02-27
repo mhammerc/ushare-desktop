@@ -16,27 +16,40 @@ void FileSender::autoSendFile(File file)
     http.setFile(file.path);
     http.setUplimgVersion("2.0");
 
-    uploadingWindow = new UploadingWindow();
-
-    QObject::connect(uploadingWindow, &UploadingWindow::cancellationAsked, this, &FileSender::cancelUpload);
-
-    QObject::connect(&http, &HttpSender::uploadProgress, [this](qint64 bytesSent, qint64 bytesTotal)
+    if(Settings::entry(SettingsKeys::SHOW_PROGRESS_WINDOW).toBool())
     {
-        if(bytesTotal == 0) return;
-        uploadingWindow->setProgress((float)bytesSent/(float)bytesTotal);
-    });
+        // If the user want the progress window
+        uploadingWindow = new UploadingWindow();
 
-    uploadFinishedConnection = QObject::connect(&http, &HttpSender::finished, [this]()
+        QObject::connect(uploadingWindow, &UploadingWindow::cancellationAsked, this, &FileSender::cancelUpload);
+
+        QObject::connect(&http, &HttpSender::uploadProgress, [this](qint64 bytesSent, qint64 bytesTotal)
+        {
+            if(bytesTotal == 0) return;
+            uploadingWindow->setProgress((float)bytesSent/(float)bytesTotal);
+        });
+
+        uploadFinishedConnection = QObject::connect(&http, &HttpSender::finished, [this]()
+        {
+            uploadingWindow->deleteLater();
+
+            QString response = http.getResponse();
+            emit uploadFinished(response);
+        });
+
+        QFileInfo fileInfo(file.path);
+
+        uploadingWindow->setBytesTotal(fileInfo.size());
+        uploadingWindow->show();
+    }
+    else
     {
-        QString response = http.getResponse();
-        uploadingWindow->terminateUpload(response);
-        emit uploadFinished(response);
-    });
-
-    QFileInfo fileInfo(file.path);
-
-    uploadingWindow->show();
-    uploadingWindow->setBytesTotal(fileInfo.size());
+        uploadFinishedConnection = QObject::connect(&http, &HttpSender::finished, [this]()
+        {
+            QString response = http.getResponse();
+            emit uploadFinished(response);
+        });
+    }
 
     // Call run function to send the file
     http.start();

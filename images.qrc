@@ -9,4 +9,8 @@
         <file alias="selected_screen.png">resources/context_menu/selected_screen.png</file>
         <file alias="paste.png">resources/context_menu/paste.png</file>
     </qresource>
+    <qresource prefix="/design">
+        <file alias="icon_close_hover.png">resources/design/icon_close_hover.png</file>
+        <file alias="icon_close_unhover.png">resources/design/icon_close_unhover.png</file>
+    </qresource>
 </RCC>

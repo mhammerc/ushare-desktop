@@ -7,8 +7,6 @@
 #include <QQuickItem>
 #include <QQuickWindow>
 
-#include <iostream>
-
 class UploadingWindow : public QObject
 {
     Q_OBJECT
@@ -29,7 +27,6 @@ public slots:
     void hide();
     void setProgress(float);
     void setBytesTotal(qint64);
-    void terminateUpload(QString link);
 };
 
 #endif // UPLOADINGWINDOW_H

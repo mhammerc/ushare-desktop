@@ -67,11 +67,19 @@ Item {
             }
 
             U.Checkbox {
+                id: notificationWindow
+                text: 'Notify me on successful upload'
+                checked: F.stringToBoolean(Settings.value('show_notification_window', false))
+                darkBackground: false
+                onCheckedChanged: Settings.setValue('show_notification_window', checked)
+            }
+
+            U.Checkbox {
                 id: progressWindow
                 text: 'Show upload progress'
-                checked: F.stringToBoolean(Settings.value('ShowProgressWindow', false))
+                checked: F.stringToBoolean(Settings.value('show_progress_window', false))
                 darkBackground: false
-                onCheckedChanged: Settings.setValue('ShowProgressWindow', checked)
+                onCheckedChanged: Settings.setValue('show_progress_window', checked)
             }
 
             U.Checkbox {

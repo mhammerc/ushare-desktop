@@ -38,7 +38,10 @@ void Uplimg::initModules()
 void Uplimg::linkConnections()
 {
     /* Connection to the system tray */
-    QObject::connect(systemTray, &SystemTrayIcon::captureFullScreenAsked, [this](){fileManager->screenTook(screenTaker->captureFullScreen());});
+    QObject::connect(systemTray, &SystemTrayIcon::captureFullScreenAsked, [this]()
+    {
+        fileManager->screenTook(screenTaker->captureFullScreen());
+    });
     QObject::connect(systemTray, &SystemTrayIcon::captureSelectedScreenAsked, this, &Uplimg::startCaptureSelectedScreenProccess);
     QObject::connect(systemTray, &SystemTrayIcon::sendFileAsked, fileManager, &FileManager::chooseFile);
     QObject::connect(systemTray, &SystemTrayIcon::openUplimgAsked, mainWindow, &MainWindow::show);
@@ -65,8 +68,8 @@ void Uplimg::autoSendFile(File file)
 {
     FileSender * fileSender = new FileSender(this);
 
-    QObject::connect(fileSender, &FileSender::uploadFinished, [this](QString response){
-
+    QObject::connect(fileSender, &FileSender::uploadFinished, [this](QString response)
+    {
         if(Settings::entry(SettingsKeys::COPY_LINK_TO_CLIPBOARD).toBool())
             // If the user want to copy the response inside his clipboard
             QApplication::clipboard()->setText(response);
@@ -78,6 +81,12 @@ void Uplimg::autoSendFile(File file)
         if(Settings::entry(SettingsKeys::PLAY_SOUND_ON_SUCCESS_UPLOAD).toBool())
             // If the user want to play a sound on upload success
             fileSendedSound.play();
+
+        if(Settings::entry(SettingsKeys::SHOW_NOTIFICATION_WINDOW).toBool())
+        { // If the user want a notification window
+            NotificationWindow * notif = new NotificationWindow("Congratulation!", "Your file is uploaded!\nThe link is\n" + response, response);
+            notif->show();
+        }
     });
 
     fileSender->autoSendFile(file);
