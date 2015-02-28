@@ -78,7 +78,7 @@ win32 {
     SOURCES += shortcuts/win/qxtglobalshortcut_win.cpp
 }
 
-unix {
+linux {
     SOURCES += shortcuts/x11/qxtglobalshortcut_x11.cpp
     LIBS += -lX11
 }

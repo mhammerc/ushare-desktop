@@ -17,8 +17,9 @@ void FileManager::screenTook(QPixmap picture)
     QString filePath = Utils::getFolderPath(filename);
 
     int quality = Settings::entry(SettingsKeys::IMAGE_QUALITY, 100).toInt();
+    int format = Settings::entry(SettingsKeys::IMAGE_FORMAT, false).toBool(); // 0 -> JPEG | 1 -> PNG
 
-    if(!picture.save(filePath, 0, quality))
+    if(!picture.save(filePath, 0, format ? 0 : quality))
     {
         /* get back to idle state */
         return;
