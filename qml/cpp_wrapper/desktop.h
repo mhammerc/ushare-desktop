@@ -18,7 +18,14 @@ public:
     QSize size()
     {
         QScreen * screen = QGuiApplication::primaryScreen();
+
+#ifdef Q_OS_LINUX
         return screen->availableVirtualSize();
+#endif
+
+#ifdef Q_OS_WIN
+        return screen->availableSize();
+#endif
     }
 };
 

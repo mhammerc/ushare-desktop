@@ -7,7 +7,7 @@ Window {
     width: 280
     height: 84
 
-    flags: Qt.WindowStaysOnTopHint | Qt.CustomizeWindowHint
+    flags: Qt.WindowStaysOnTopHint | Qt.CustomizeWindowHint | Qt.FramelessWindowHint
 
     maximumWidth: width
     minimumWidth: width
@@ -22,6 +22,7 @@ Window {
 
     x: Desktop.size.width - width - 10
     y: Desktop.size.height - ((height+7)*windowCount) - 10
+
 
     signal closeAsked;
     signal clickedInWindow;
