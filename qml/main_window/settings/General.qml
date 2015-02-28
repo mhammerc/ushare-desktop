@@ -54,7 +54,7 @@ Item {
                 }
 
                 style: "title"
-                text: "On successful upload"
+                text: "On upload"
                 color: Theme.light.textColor
             }
 

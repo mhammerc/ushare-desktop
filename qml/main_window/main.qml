@@ -10,8 +10,8 @@ ApplicationWindow {
     height: 600
 
     theme {
-        primaryColor: Settings.value('color/primaryColor', '#4CAF50')
-        accentColor: Settings.value('color/accentColor','#2196F3')
+        primaryColor: Settings.value('color/primaryColor', '#2196F3')
+        accentColor: Settings.value('color/accentColor','#4CAF50')
         backgroundColor: Settings.value('color/backgroundColor', '#fafafa')
     }
 
@@ -114,11 +114,11 @@ ApplicationWindow {
                         theme.backgroundColor = "#fafafa"
                         Settings.setValue('color/backgroundColor', "#fafafa")
 
-                        theme.primaryColor = "#4CAF50"
-                        Settings.setValue('color/primaryColor', "#4CAF50")
+                        theme.primaryColor = "#2196F3"
+                        Settings.setValue('color/primaryColor', "#2196F3")
 
-                        theme.accentColor = "#2196F3"
-                        Settings.setValue('color/accentColor', "#2196F3")
+                        theme.accentColor = "#4CAF50"
+                        Settings.setValue('color/accentColor', "#4CAF50")
 
                         Settings.setValue('color/theme', 'light')
                     }

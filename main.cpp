@@ -35,7 +35,5 @@ int main(int argc, char *argv[])
     Uplimg uplimg;
     uplimg.start();
 
-
-
     return app.exec();
 }
