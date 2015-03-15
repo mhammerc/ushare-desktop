@@ -17,7 +17,7 @@ public:
 
     bool isWindows()
     {
-#ifdef Q_OS_MSDOS
+#ifdef Q_OS_WIN
         return true;
 #else
         return false;
