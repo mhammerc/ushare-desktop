@@ -14,7 +14,7 @@ NotificationWindow::NotificationWindow(QString title, QString text, QString link
     QmlSettings * settings = new QmlSettings(this);
     context->setContextProperty("Settings", settings);
 
-    Desktop * desktop = new Desktop(this);
+    QmlDesktop * desktop = new QmlDesktop(this);
     context->setContextProperty("Desktop", desktop);
 
 

@@ -15,7 +15,8 @@ SOURCES += main.cpp \
     core/settings.cpp \
     qml/cpp_wrapper/qmlsettings.cpp \
     sounds/filesendedsound.cpp \
-    windows/notificationwindow.cpp
+    windows/notificationwindow.cpp \
+    core/shared.cpp
 
 RESOURCES += qml.qrc \
     images.qrc \
@@ -44,7 +45,18 @@ DISTFILES += \
     qml/components/functions.js \
     qml/main_window/Uploads.qml \
     qml/main_window/settings/Credits.qml \
-    qml/notification_window/NotificationWindow.qml
+    qml/notification_window/NotificationWindow.qml \
+    qml/components/network.js \
+    qml/components/md5.js \
+    qml/components/Badge.qml \
+    qml/components/usquare_online.js \
+    qml/components/ColorPicker.qml \
+    qml/components/Login.qml \
+    qml/components/Dialog.qml \
+    qml/components/FileCard.qml \
+    qml/components/Offline.qml \
+    qml/components/Loading.qml \
+    qml/main_window/global/Global.qml
 
 HEADERS += \
     core/systemtrayicon.h \
@@ -64,7 +76,9 @@ HEADERS += \
     sounds/filesendedsound.h \
     qml/cpp_wrapper/platformdetails.h \
     windows/notificationwindow.h \
-    qml/cpp_wrapper/desktop.h
+    qml/cpp_wrapper/desktop.h \
+    core/shared.h \
+    qml/cpp_wrapper/clipboard.h
 
 # Global shortcuts from the Qxt Team !
 HEADERS += \

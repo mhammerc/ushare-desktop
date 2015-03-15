@@ -13,6 +13,12 @@ MainWindow::MainWindow(QObject *parent) : QObject(parent)
     PlatformDetails * pd = new PlatformDetails(this);
     context->setContextProperty("PlatformDetails", pd);
 
+    Clipboard * cb = new Clipboard(this);
+    context->setContextProperty("Clipboard", cb);
+
+    QmlDesktop * dk = new QmlDesktop(this);
+    context->setContextProperty("Desktop", dk);
+
     window = component->create(context);
     qDebug() << component->errorString();
 
@@ -22,7 +28,6 @@ MainWindow::MainWindow(QObject *parent) : QObject(parent)
 
 MainWindow::~MainWindow()
 {
-
 }
 
 void MainWindow::show()

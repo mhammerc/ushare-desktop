@@ -26,6 +26,7 @@ SystemTrayIcon * Uplimg::getSystemTray()
 
 void Uplimg::initModules()
 {
+    qDebug() << Shared::url;
     mainWindow = new MainWindow(this);
 
     systemTray = new SystemTrayIcon(this);

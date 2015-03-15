@@ -40,11 +40,11 @@ Window {
             ProgressBar {
                 id: progressBar1
                 anchors.verticalCenter: parent.verticalCenter
-                progress: usquare.progress
+                value: usquare.progress
                 width: 165
                 height: 5
 
-                Behavior on progress { NumberAnimation { duration: 450 } }
+                Behavior on value { NumberAnimation { duration: 450 } }
             }
 
             Label {

@@ -12,5 +12,6 @@
     <qresource prefix="/design">
         <file alias="icon_close_hover.png">resources/design/icon_close_hover.png</file>
         <file alias="icon_close_unhover.png">resources/design/icon_close_unhover.png</file>
+        <file alias="inconnu.jpg">resources/design/inconnu.jpg</file>
     </qresource>
 </RCC>

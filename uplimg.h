@@ -8,6 +8,8 @@
 #include <QPixmap>
 #include <QColor>
 
+#include "core/shared.h"
+
 #include "core/systemtrayicon.h"
 #include "core/screentaker.h"
 #include "sounds/filesendedsound.h"
