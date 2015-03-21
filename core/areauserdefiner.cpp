@@ -19,7 +19,8 @@ AreaUserDefiner::~AreaUserDefiner()
 
 void AreaUserDefiner::mousePressEvent(QMouseEvent *e)
 {
-    if(e->button() != Qt::LeftButton) return;
+    if(e->button() != Qt::LeftButton)
+        return;
 
     origin = e->pos();
     rubberBand->setGeometry(QRect(origin, QSize(0,0)));
@@ -33,7 +34,13 @@ void AreaUserDefiner::mouseMoveEvent(QMouseEvent *e)
 
 void AreaUserDefiner::mouseReleaseEvent(QMouseEvent *e)
 {
-    if(e->button() != Qt::LeftButton) return;
+    if(e->button() != Qt::LeftButton)
+        return;
+
+    QRect zone = QRect(origin, e->pos()).normalized();
+
+    if(zone.height() <= 1)
+        return;
 
     hide();
     emit areaTaken(QRect(origin, e->pos()).normalized());

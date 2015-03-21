@@ -1,11 +1,12 @@
 #ifndef SCREENTAKER_H
 #define SCREENTAKER_H
 
-
+#include <QApplication>
 #include <QObject>
 #include <QGuiApplication>
 #include <QPixmap>
 #include <QScreen>
+#include <QDebug>
 
 #include "core/areauserdefiner.h"
 

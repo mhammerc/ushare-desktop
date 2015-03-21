@@ -36,9 +36,6 @@ View {
     }
 
     onSourceChanged: {
-        console.log(miniature.source);
-        if('http://localhost:3000/silent/' + source == miniature.source)
-            return;
         miniature.source = 'http://localhost:3000/silent/' + source;
     }
 

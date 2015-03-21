@@ -1,6 +1,6 @@
 #include "screentaker.h"
 
-ScreenTaker::ScreenTaker(QObject *parent) : QObject(parent){}
+ScreenTaker::ScreenTaker(QObject *parent) : QObject(parent) {}
 
 QPixmap ScreenTaker::captureFullScreen()
 {
@@ -26,11 +26,11 @@ bool ScreenTaker::captureSelectedZone(QColor areaColor)
     area->setGeometry(vg);
 
     QObject::connect(area, &AreaUserDefiner::areaTaken, [capture, area, this](QRect areaSelected)
-        {
-            QPixmap finalCapture = capture.copy(areaSelected);
-            emit captureSelectedZoneFinished(finalCapture);
-            area->deleteLater();
-        });
+    {
+        QPixmap finalCapture = capture.copy(areaSelected);
+        emit captureSelectedZoneFinished(finalCapture);
+        area->deleteLater();
+    });
 
     QObject::connect(area, &AreaUserDefiner::areaCanceled, this, &ScreenTaker::captureSelectedZoneCanceled);
     QObject::connect(area, &AreaUserDefiner::areaCanceled, area, &AreaUserDefiner::deleteLater);
@@ -54,11 +54,11 @@ bool ScreenTaker::captureSelectedZone(QColor areaColor)
     area->setPixmap(capture);
 
     QObject::connect(area, &AreaUserDefiner::areaTaken, [capture, area, this](QRect areaSelected)
-        {
-            QPixmap finalCapture = capture.copy(areaSelected);
-            emit captureSelectedZoneFinished(finalCapture);
-            area->deleteLater();
-        });
+    {
+        QPixmap finalCapture = capture.copy(areaSelected);
+        emit captureSelectedZoneFinished(finalCapture);
+        area->deleteLater();
+    });
 
     QObject::connect(area, &AreaUserDefiner::areaCanceled, this, &ScreenTaker::captureSelectedZoneCanceled);
     QObject::connect(area, &AreaUserDefiner::areaCanceled, area, &AreaUserDefiner::deleteLater);
