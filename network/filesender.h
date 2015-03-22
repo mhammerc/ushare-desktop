@@ -10,6 +10,7 @@
 #include "windows/uploadingwindow.h"
 
 #include "core/settings.h"
+#include "core/shared.h"
 
 class FileSender : public QObject
 {

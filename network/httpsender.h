@@ -12,6 +12,8 @@
 #include <QString>
 #include <QThread>
 
+#include "core/settings.h"
+
 class HttpSender : public QThread
 {
     Q_OBJECT

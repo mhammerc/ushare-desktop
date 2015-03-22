@@ -32,7 +32,9 @@ Settings::Settings(QObject *parent) : QSettings(parent)
          << "picture/save_on_computer"
          << "picture/save_path"
          << "show_notification_window"
-         << "show_progress_window";
+         << "show_progress_window"
+         << "account_key"
+         << "private_key";
 
 }
 

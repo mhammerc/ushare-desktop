@@ -5,6 +5,9 @@
 class Shared
 {
 public:
+    const static QString appVersion;
+    const static QString uploadUrl;
+    const static int uploadPort;
     const static QString url;
 };
 

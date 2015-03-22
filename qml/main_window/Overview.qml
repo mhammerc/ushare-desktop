@@ -343,6 +343,7 @@ Item {
         UOnline.onWsConnected(wsConnected);
         UOnline.onWsDisconnected(disconnect);
         UOnline.onWsError(wsError);
-        UOnline.connect(Settings.value('username', false), Settings.value('password', false), root, function(err, result){});
+        UOnline.connect(Settings.value('username', false), Settings.value('password', false), root, function(err, result){            Settings.setValue("account_key", result.accountKey);
+            Settings.setValue("private_key", result.privateKey);});
     }
 }

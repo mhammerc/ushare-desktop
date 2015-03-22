@@ -12,7 +12,9 @@ enum class SettingsKeys : int {
     SAVE_IMAGE_ON_COMPUTER, // Boolean
     PATH_TO_SAVE_IMAGE_ON_COMPUTER, // String path
     SHOW_NOTIFICATION_WINDOW,
-    SHOW_PROGRESS_WINDOW
+    SHOW_PROGRESS_WINDOW,
+    ACCOUNT_KEY,
+    PRIVATE_KEY
 };
 
 #endif // KEYS_DATA_H

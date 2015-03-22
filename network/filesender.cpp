@@ -12,9 +12,9 @@ FileSender::~FileSender()
 
 void FileSender::autoSendFile(File file)
 {
-    http.setHost("http://uplmg.com/insert/upload", 80);
+    http.setHost(Shared::uploadUrl, Shared::uploadPort);
     http.setFile(file.path);
-    http.setUplimgVersion("2.0");
+    http.setUplimgVersion(Shared::appVersion);
 
     if(Settings::entry(SettingsKeys::SHOW_PROGRESS_WINDOW).toBool())
     {
@@ -35,6 +35,8 @@ void FileSender::autoSendFile(File file)
 
             QString response = http.getResponse();
             emit uploadFinished(response);
+
+            qDebug() << response;
         });
 
         QFileInfo fileInfo(file.path);

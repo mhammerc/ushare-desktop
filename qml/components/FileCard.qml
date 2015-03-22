@@ -36,7 +36,7 @@ View {
     }
 
     onSourceChanged: {
-        miniature.source = 'http://localhost:3000/silent/' + source;
+        miniature.source = 'http://46.101.47.41/silent/' + source;
     }
 
     width: 310

@@ -82,7 +82,7 @@ function connect(username, password, object, callback)
         }
     }
 
-    Network.post("http://127.0.0.1:3000/user/auth",
+    Network.post("http://46.101.47.41/user/auth",
                  {username:_username, password:_password},
                  {},
                  onEnd);
@@ -111,7 +111,7 @@ function initWebSocket(object)
     websocket.statusChanged.connect(wsStatusChanged);
     websocket.textMessageReceived.connect(wsMessageReceived);
 
-    websocket.url = 'ws://localhost:3000/';
+    websocket.url = 'ws://46.101.47.41/';
 }
 
 function wsMessageReceived(message)
