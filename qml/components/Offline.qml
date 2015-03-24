@@ -21,6 +21,9 @@ Item {
                 text: 'Register'
                 elevation: 1
                 backgroundColor: Theme.accentColor
+                onClicked: {
+                    register.show();
+                }
             }
 
             Button {

@@ -13,6 +13,7 @@ var _uploads;
 
 var _username;
 var _password;
+var _email;
 
 var _accountKey;
 var _privateKey;
@@ -65,6 +66,8 @@ function connect(username, password, object, callback)
 
     var onEnd = function(err, result)
     {
+        result = JSON.parse(result);
+
         if(err !== null)
         {
             callback(err, result);
@@ -80,18 +83,50 @@ function connect(username, password, object, callback)
         } else {
             callback(err, result);
         }
-    }
+    };
 
-    Network.post("http://46.101.47.41/user/auth",
+    Network.post("http://localhost:3000/user/auth",
                  {username:_username, password:_password},
                  {},
                  onEnd);
+}
+
+function register(username, password, email, object, callback)
+{
+    _username = username;
+    _password = password;
+    _email = email;
+
+    var onEndRegister = function(err, result)
+    {
+        result = JSON.parse(result);
+
+        if(err !== null)
+        {
+            callback(err, result);
+            return;
+        }
+
+        if(result.success)
+        {
+            connect(_username, _password, object, callback);
+        } else
+        {
+            callback(err, result);
+        }
+    };
+
+    Network.post('http://localhost:3000/user/register',
+                {username: _username, password: _password, email: _email}, {}, onEndRegister);
 }
 
 /** WEBSOCKET **/
 
 function wsSendTextMessage(message, callback, parametersToCallback)
 {
+    if(!_connected)
+        return;
+
     if(websocket.status !== 1)
         return;
 
@@ -111,7 +146,7 @@ function initWebSocket(object)
     websocket.statusChanged.connect(wsStatusChanged);
     websocket.textMessageReceived.connect(wsMessageReceived);
 
-    websocket.url = 'ws://46.101.47.41/';
+    websocket.url = 'ws://localhost:3000/';
 }
 
 function wsMessageReceived(message)

@@ -218,20 +218,6 @@ Item {
         iconName: "content/add"
     }
 
-    Snackbar {
-        id: snackbar
-    }
-
-    U.Login {
-        id: login
-
-        onSuccessLogin: {
-            snackbar.open('Great, you\'re connected!');
-            Global.connected = true
-            updateDatas();
-        }
-    }
-
     Timer {
         id: refreshTimer
         interval: 1000
@@ -253,6 +239,20 @@ Item {
             {
                 refreshTimer.running = false;
             }
+        }
+    }
+
+    Connections {
+        target: login
+        onSuccessLogin: {
+            updateDatas();
+        }
+    }
+
+    Connections {
+        target: register
+        onSuccessRegister: {
+            updateDatas();
         }
     }
 

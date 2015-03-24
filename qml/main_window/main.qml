@@ -1,4 +1,5 @@
 import QtQuick 2.2
+import U.Global 1.0
 import "."
 import Material 0.1
 import Material.ListItems 0.1 as ListItem
@@ -76,5 +77,27 @@ ApplicationWindow {
 
     U.ColorPicker {
         id: colorPicker
+    }
+
+    U.Login {
+        id: login
+
+        onSuccessLogin: {
+            snackbar.open('Great, you\'re connected!');
+            Global.connected = true
+        }
+    }
+
+    U.Register{
+        id: register
+
+        onSuccessRegister: {
+            snackbar.open('Great, you\'re connected!');
+            Global.connected = true
+        }
+    }
+
+    Snackbar {
+        id: snackbar
     }
 } /* ApplicationWindow */

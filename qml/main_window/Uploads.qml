@@ -50,7 +50,12 @@ Item {
                     spacing: units.dp(8)
 
                     Repeater {
-                        model: root.uploads.files
+                        model: {
+                            if(!!root.uploads)
+                                return root.uploads.files
+                            else
+                                return null;
+                        }
 
                         U.FileCard {
                             shortName: modelData.shortName
@@ -78,21 +83,21 @@ Item {
 
     /* On loading */
     U.Loading {
-        visible: Global.isLoading || root.uploads === null
+        visible: Global.isLoading
     }
 
-    U.Login {
-        id: login
-
+    Connections {
+        target: login
         onSuccessLogin: {
-            snackbar.open('Great, you\'re connected!');
-            Global.connected = true
             updateDatas();
         }
     }
 
-    Snackbar {
-        id: snackbar
+    Connections {
+        target: register
+        onSuccessRegister: {
+            updateDatas();
+        }
     }
 
     Timer {

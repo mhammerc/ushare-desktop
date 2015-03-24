@@ -23,9 +23,9 @@ function get(url, headers, callback)
             //console.log('Response : ', req.responseText);
 
             if(req.status == 200) {
-                callback(null, JSON.parse(req.responseText));
+                callback(null, req.responseText);
             } else {
-                callback(req.status, JSON.parse(req.responseText));
+                callback(req.status, req.responseText);
             }
         }
     }
@@ -67,7 +67,7 @@ function post(url, form, headers, callback)
             console.log('Response : ', req.responseText);
 
             if(status == 200) {
-                callback(null, JSON.parse(req.responseText));
+                callback(null, req.responseText);
             } else {
                 callback(status, req.responseText);
             }

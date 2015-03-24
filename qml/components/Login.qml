@@ -131,10 +131,12 @@ U.Dialog {
 
         var callback = function(err, result)
         {
-            console.log(err);
             if(err !== null)
             {
-                errorLabel.text = 'Can\'t connect to U² Online'
+                if(err === 401)
+                    errorLabel.text = 'Bad username or password';
+                else
+                    errorLabel.text = 'Can\'t connect to U² Online';
                 errorLabel.visible = true
                 return;
             }

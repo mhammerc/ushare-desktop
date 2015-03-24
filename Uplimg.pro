@@ -56,7 +56,8 @@ DISTFILES += \
     qml/components/FileCard.qml \
     qml/components/Offline.qml \
     qml/components/Loading.qml \
-    qml/main_window/global/Global.qml
+    qml/main_window/global/Global.qml \
+    qml/components/Register.qml
 
 HEADERS += \
     core/systemtrayicon.h \
