@@ -6,7 +6,7 @@ HttpSender::Status HttpSender::sendFile()
 {
 
     /* We include all the file in part of the request */
-    file = new QFile(pathToFile, this);
+    file = new QFile(pathToFile);
 
     if(!file->open(QIODevice::ReadOnly)) return HttpSender::FILE_ERROR;
 
@@ -38,7 +38,7 @@ HttpSender::Status HttpSender::sendFile()
 
     qDebug() << Settings::entry(SettingsKeys::PRIVATE_KEY).toString();
 
-    container = new QHttpMultiPart(QHttpMultiPart::FormDataType, this);
+    container = new QHttpMultiPart(QHttpMultiPart::FormDataType);
     container->append(filePart);
     container->append(accountKeyPart);
     container->append(privateKeyPart);
@@ -52,7 +52,7 @@ HttpSender::Status HttpSender::sendFile()
     QNetworkRequest request;
     request.setUrl(url);
 
-    manager = new QNetworkAccessManager(this);
+    manager = new QNetworkAccessManager();
     reply = manager->post(request, container);
 
     QObject::connect(reply, &QNetworkReply::finished, this, &HttpSender::finished);
