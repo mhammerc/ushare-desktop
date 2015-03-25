@@ -92,6 +92,8 @@ function gravatar(email, md5, callback)
             return;
         }
 
+        response = JSON.parse(response);
+
         var url = response.entry[0].thumbnailUrl;
 
         callback(url);

@@ -85,7 +85,7 @@ function connect(username, password, object, callback)
         }
     };
 
-    Network.post("http://localhost:3000/user/auth",
+    Network.post("https://usqua.re/user/auth",
                  {username:_username, password:_password},
                  {},
                  onEnd);
@@ -116,7 +116,7 @@ function register(username, password, email, object, callback)
         }
     };
 
-    Network.post('http://localhost:3000/user/register',
+    Network.post('https://usqua.re/user/register',
                 {username: _username, password: _password, email: _email}, {}, onEndRegister);
 }
 
@@ -146,7 +146,7 @@ function initWebSocket(object)
     websocket.statusChanged.connect(wsStatusChanged);
     websocket.textMessageReceived.connect(wsMessageReceived);
 
-    websocket.url = 'ws://localhost:3000/';
+    websocket.url = 'ws://92.222.195.209/';
 }
 
 function wsMessageReceived(message)

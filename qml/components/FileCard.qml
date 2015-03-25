@@ -36,7 +36,7 @@ View {
     }
 
     onSourceChanged: {
-        miniature.source = 'http://46.101.47.41/silent/' + source;
+        miniature.source = 'https://usqua.re/silent/' + source;
     }
 
     width: 310
