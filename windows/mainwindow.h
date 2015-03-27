@@ -7,6 +7,8 @@
 #include <QQmlContext>
 #include <QDebug>
 
+#include "core/shared.h"
+
 #include "qml/cpp_wrapper/qmlsettings.h"
 #include "qml/cpp_wrapper/platformdetails.h"
 #include "qml/cpp_wrapper/clipboard.h"

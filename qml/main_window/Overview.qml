@@ -21,7 +21,6 @@ Item {
     }
 
     Component.onCompleted: {
-        isLoading = true;
         onStart();
     }
 
@@ -333,6 +332,8 @@ Item {
 
     function onStart()
     {
+        UOnline.setSettings(Settings);
+
         if(!Settings.value('username', false) || !Settings.value('password', false))
         {
             return;

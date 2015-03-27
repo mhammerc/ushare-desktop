@@ -9,10 +9,6 @@ import "../components" as U
 ApplicationWindow {
     id: megaRoot
 
-    property bool hasLogin: false
-    property bool connected: false
-    property bool isLoading: false
-
     width: 670
     height: 600
 

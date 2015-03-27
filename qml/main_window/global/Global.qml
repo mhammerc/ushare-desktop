@@ -5,5 +5,7 @@ QtObject {
     property bool hasLogin: false
     property bool connected: false
     property bool isLoading: false
+
+    property string authUrl: 'Settings.authUrl'
 }
 

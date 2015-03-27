@@ -22,7 +22,7 @@ View {
     }
 
     onShortNameChanged: {
-        link1.text = 'usqua.re/' + shortName;
+        link1.text = Settings.domainName + '/' + shortName;
     }
 
     onSizeChanged: {
@@ -36,7 +36,7 @@ View {
     }
 
     onSourceChanged: {
-        miniature.source = 'https://usqua.re/silent/' + source;
+        miniature.source = Settings.silentViewUrl + source;
     }
 
     width: 310

@@ -1,5 +1,6 @@
 .pragma library
 .import "network.js" as Network
+.import U.Global 1.0 as Global
 
 var websocket; /* WebSocket QML element */
 var wsRequestIsPending = false;
@@ -18,6 +19,12 @@ var _email;
 var _accountKey;
 var _privateKey;
 
+var Settings;
+
+function setSettings(s)
+{
+    Settings = s;
+}
 
 /* If callback is false, then return already known data without refresh */
 function getUserInfos(callback)
@@ -85,7 +92,7 @@ function connect(username, password, object, callback)
         }
     };
 
-    Network.post("https://usqua.re/user/auth",
+    Network.post(Settings.authUrl,
                  {username:_username, password:_password},
                  {},
                  onEnd);
@@ -116,7 +123,7 @@ function register(username, password, email, object, callback)
         }
     };
 
-    Network.post('https://usqua.re/user/register',
+    Network.post(Settings.registerUrl,
                 {username: _username, password: _password, email: _email}, {}, onEndRegister);
 }
 
@@ -140,13 +147,13 @@ function wsSendTextMessage(message, callback, parametersToCallback)
 
 function initWebSocket(object)
 {
-    var qmlString = 'import Qt.WebSockets 1.0; WebSocket {}'
+    var qmlString = 'import Qt.WebSockets 1.0; WebSocket {}';
     websocket = Qt.createQmlObject(qmlString, object);
 
     websocket.statusChanged.connect(wsStatusChanged);
     websocket.textMessageReceived.connect(wsMessageReceived);
 
-    websocket.url = 'ws://92.222.195.209/';
+    websocket.url = Settings.wsUrl;
 }
 
 function wsMessageReceived(message)

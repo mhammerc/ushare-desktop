@@ -59,7 +59,12 @@ Item {
 
                         U.FileCard {
                             shortName: modelData.shortName
-                            source: modelData.shortName
+                            source: {
+                                if(modelData.extension === 'jpg' || modelData.extension === 'png')
+                                    return modelData.shortName;
+                                return;
+                            }
+
                             nOfViews: modelData.views
                             size: modelData.size
                             password: {
