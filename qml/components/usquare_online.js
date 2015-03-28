@@ -73,7 +73,13 @@ function connect(username, password, object, callback)
 
     var onEnd = function(err, result)
     {
-        result = JSON.parse(result);
+        try
+        {
+            result = JSON.parse(result);
+        } catch(e) {
+            callback(true, null);
+            return;
+        }
 
         if(err !== null)
         {

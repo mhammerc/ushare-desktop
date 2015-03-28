@@ -4,7 +4,7 @@ import Material.ListItems 0.1 as ListItem
 
 Window {
     id: usquare
-    width: 405
+    width: 375
     height: 30
     //flags: Qt.WindowStaysOnTopHint | Qt.WindowCloseButtonHint
 

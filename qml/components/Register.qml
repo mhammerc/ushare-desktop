@@ -158,14 +158,23 @@ U.Dialog {
                 }
 
                 Label {
+                    id: statusLabel
+
                     anchors {
                         left: parent.left
                         right: parent.right
                         margins: units.dp(5)
                     }
 
-                    id: errorLabel
-                    color: '#c0392b'
+                    property bool error: false
+
+                    color: {
+                        if(error)
+                            return '#c0392b';
+                        else
+                            return '#27ae60'
+                    }
+
                     visible: false
                 }
             }
@@ -176,33 +185,34 @@ U.Dialog {
         if(usernameField.text === '' || passwordField.text === ''
                 || passwordField2.text === '' || emailField.text === '')
         {
-            errorLabel.text = 'You must fill all fields.';
-            errorLabel.visible = true;
+            statusLabel.error = true;
+            statusLabel.text = 'You must fill all fields.';
+            statusLabel.visible = true;
             return;
         }
-
-        if(!acceptConditionsCheckbox.checked)
+        else if(!acceptConditionsCheckbox.checked)
         {
-            errorLabel.text = 'You must agree the conditions.';
-            errorLabel.visible = true;
+            statusLabel.error = true;
+            statusLabel.text = 'You must agree the conditions.';
+            statusLabel.visible = true;
             return;
         }
-
-        if(!validateEmail(emailField.text))
+        else if(!validateEmail(emailField.text))
         {
-            errorLabel.text = 'Your email must be valid.';
-            errorLabel.visible = true;
+            statusLabel.error = true;
+            statusLabel.text = 'Your email must be valid.';
+            statusLabel.visible = true;
             return;
         }
-
-        if(passwordField.text !== passwordField2.text)
+        else if(passwordField.text !== passwordField2.text)
         {
-            errorLabel.text = 'Your password must be the same in two rows.';
-            errorLabel.visible = true;
+            statusLabel.error = true;
+            statusLabel.text = 'Your passwords must match.';
+            statusLabel.visible = true;
             return;
         }
 
-        errorLabel.visible = false;
+        statusLabel.visible = false;
         tryToRegister();
     }
 
@@ -218,7 +228,7 @@ U.Dialog {
         passwordField2.text = '';
         emailField.text = '';
         acceptConditionsCheckbox.checked = false;
-        errorLabel.visible = false;
+        statusLabel.visible = false;
     }
 
     function tryToRegister()
@@ -231,8 +241,9 @@ U.Dialog {
         {
             if(err !== null)
             {
-                errorLabel.text = 'Can\'t register your account (' + result.errorMessage + ')';
-                errorLabel.visible = true
+                statusLabel.error = true;
+                statusLabel.text = 'Can\'t register your account (' + result.errorMessage + ')';
+                statusLabel.visible = true
                 return;
             }
 
@@ -249,6 +260,10 @@ U.Dialog {
                 close();
             }
         }
+
+        statusLabel.error = false;
+        statusLabel.text = 'Loading...';
+        statusLabel.visible = true;
 
         UOnline.register(username, password, email, dialog, callback);
     }

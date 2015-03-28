@@ -94,14 +94,23 @@ U.Dialog {
                 }
 
                 Label {
+                    id: statusLabel
+
                     anchors {
                         left: parent.left
                         right: parent.right
                         margins: units.dp(5)
                     }
 
-                    id: errorLabel
-                    color: '#c0392b'
+                    property bool error: false
+
+                    color: {
+                        if(error)
+                            return '#c0392b';
+                        else
+                            return '#27ae60';
+                    }
+
                     visible: false
                 }
             }
@@ -121,7 +130,7 @@ U.Dialog {
     {
         usernameField.text = '';
         passwordField.text = '';
-        errorLabel.visible = false;
+        statusLabel.visible = false;
     }
 
     function tryToConnect()
@@ -134,17 +143,24 @@ U.Dialog {
             if(err !== null)
             {
                 if(err === 401)
-                    errorLabel.text = 'Bad username or password';
+                {
+                    statusLabel.text = 'Bad username or password';
+                }
                 else
-                    errorLabel.text = 'Can\'t connect to U² Online';
-                errorLabel.visible = true
+                {
+                    statusLabel.text = 'Can\'t connect to U² Online';
+                }
+
+                statusLabel.error = true;
+                statusLabel.visible = true
                 return;
             }
 
             if(!result.success)
             {
-                errorLabel.text = 'Bad credentials';
-                errorLabel.visible = true;
+                statusLabel.error = true;
+                statusLabel.text = 'Bad credentials';
+                statusLabel.visible = true;
             }
             else
             {
@@ -160,6 +176,9 @@ U.Dialog {
             }
         }
 
+        statusLabel.text = 'Connecting...'
+        statusLabel.error = false;
+        statusLabel.visible = true;
         UOnline.connect(username, password, dialog, callback);
     }
 }

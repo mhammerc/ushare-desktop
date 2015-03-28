@@ -12,7 +12,7 @@ FileSender::~FileSender()
 
 void FileSender::autoSendFile(File file)
 {
-    http.setHost(Shared::uploadUrl, Shared::uploadPort);
+    http.setHost(Shared::uploadUrl, Shared::globalPort);
     http.setFile(file.path);
     http.setUplimgVersion(Shared::appVersion);
 

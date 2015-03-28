@@ -88,7 +88,7 @@ Item {
 
     /* On loading */
     U.Loading {
-        visible: Global.isLoading
+        visible: Global.isLoading || (uploads === null && Global.connected === true)
     }
 
     Connections {

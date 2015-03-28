@@ -150,9 +150,10 @@ Item {
                     spacing: units.dp(5);
 
                     Label {
+                        id: nOfFilesSavedToday
                         anchors.horizontalCenter: parent.horizontalCenter
 
-                        text: "5"
+                        text: ""
                         style: "display2"
                         color: "#c0392b"
                     }
@@ -258,6 +259,7 @@ Item {
     function disconnect()
     {
         Global.connected = false
+        Global.isLoading = false
         UOnline.disconnect();
         Settings.setValue('username', false);
         Settings.setValue('password', false);
@@ -280,6 +282,9 @@ Item {
 
             if(nOfFilesSaved.text !== result.nOfFilesSaved)
                 nOfFilesSaved.text = result.nOfFilesSaved;
+
+            if(nOfFilesSavedToday.text !== result.nOfFilesSavedToday)
+                nOfFilesSavedToday.text = result.nOfFilesSavedToday
 
             if(result.accountType === "vip")
             {
@@ -339,12 +344,24 @@ Item {
             return;
         }
 
-        Global.hasLogin = true
+        Global.hasLogin = true;
+        Global.isLoading = true;
 
         UOnline.onWsConnected(wsConnected);
         UOnline.onWsDisconnected(disconnect);
         UOnline.onWsError(wsError);
-        UOnline.connect(Settings.value('username', false), Settings.value('password', false), root, function(err, result){            Settings.setValue("account_key", result.accountKey);
-            Settings.setValue("private_key", result.privateKey);});
+        UOnline.connect(Settings.value('username', false), Settings.value('password', false), root, function(err, result)
+        {
+            if(err !== null)
+            {
+                Global.hasLogin = false;
+                Global.isLoading = false;
+                Global.connected = false;
+                return;
+            }
+
+            Settings.setValue("account_key", result.accountKey);
+            Settings.setValue("private_key", result.privateKey);
+        });
     }
 }

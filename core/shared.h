@@ -10,7 +10,6 @@ class Shared : public QObject
 public:
     const static QString appVersion;
     const static int uploadPort;
-    const static QString url;
 
     const static int globalPort;
 
