@@ -2,6 +2,7 @@ import QtQuick 2.0
 import Material 0.1
 import "../components" as U
 import "../components/functions.js" as F
+import "../components/usquare_online.js" as UOnline
 
 View {
 
@@ -130,12 +131,16 @@ View {
         }
 
         Button {
-            text: 'Share'
+            text: 'Delete'
             elevation: 1
             backgroundColor: Theme.accentColor
 
             width: 82
             height: 28
+
+            onClicked: {
+                UOnline.deleteFile(shortName, function(err, result){snackbar.open('File deleted!')});
+            }
         }
     }
 } /* View */

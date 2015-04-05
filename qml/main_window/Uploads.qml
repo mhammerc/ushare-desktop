@@ -62,7 +62,7 @@ Item {
                             source: {
                                 if(modelData.extension === 'jpg' || modelData.extension === 'png')
                                     return modelData.shortName;
-                                return;
+                                return '';
                             }
 
                             nOfViews: modelData.views

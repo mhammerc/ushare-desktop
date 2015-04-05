@@ -66,6 +66,16 @@ function getUploads(limit, callback)
     wsSendTextMessage(JSON.stringify(request), onEnd, callback);
 }
 
+function deleteFile(shortName, callback)
+{
+    var onEnd = function(err, result)
+    {
+        callback(err, result);
+    }
+
+    Network.post(Settings.deleteUrl, {accountKey:_accountKey, privateKey:_privateKey, shortName: shortName}, {}, onEnd);
+}
+
 function connect(username, password, object, callback)
 {
     _username = username;

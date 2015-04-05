@@ -10,6 +10,7 @@ const int Shared::globalPort = 80;
 
 const QString Shared::authUrl = "https://usqua.re/user/auth";
 const QString Shared::registerUrl = "https://usqua.re/user/register";
+const QString Shared::deleteUrl = "https://usqua.re/file/delete";
 const QString Shared::wsUrl = "ws://92.222.195.209/";
 const QString Shared::silentViewUrl = "https://usqua.re/silent/";
 const QString Shared::domainName = "usqua.re";

@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
     const QString location = "file:///home/imote/Development/uShare/qml/main_window/global/Global.qml";
     qmlRegisterSingletonType(QUrl(location), "U.Global", 1, 0, "Global");
 
-    QCoreApplication::setOrganizationName("USquare");
+    QCoreApplication::setOrganizationName("uSquare");
     QCoreApplication::setOrganizationDomain("usquare.io");
     QCoreApplication::setApplicationName("U²");
 

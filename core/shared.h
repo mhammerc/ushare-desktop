@@ -14,6 +14,7 @@ public:
     const static int globalPort;
 
     const static QString uploadUrl;
+    const static QString deleteUrl;
     const static QString authUrl;
     const static QString registerUrl;
     const static QString wsUrl;
