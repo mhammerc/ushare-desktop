@@ -339,6 +339,10 @@ Item
     {
         UOnline.setSettings(Settings);
 
+        UOnline.onWsConnected(wsConnected);
+        UOnline.onWsDisconnected(disconnect);
+        UOnline.onWsError(wsError);
+
         if(Settings.value('username', false) === 'false' || Settings.value('password', false) === 'false')
         {
             return;
@@ -347,9 +351,6 @@ Item
         Global.hasLogin = true;
         Global.isLoading = true;
 
-        UOnline.onWsConnected(wsConnected);
-        UOnline.onWsDisconnected(disconnect);
-        UOnline.onWsError(wsError);
 
         UOnline.connect(Settings.value('username', false), Settings.value('password', false), function(err, result)
         {
