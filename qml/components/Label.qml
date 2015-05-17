@@ -1,12 +1,18 @@
 import QtQuick 2.0
 import Material 0.1
 
-Label {
-    color: {
+Label
+{
+    color:
+    {
         if(Theme.isDarkColor(theme.backgroundColor))
-            return Theme.dark.textColor
+        {
+            return Theme.dark.textColor;
+        }
         else
-            return Theme.light.textColor
+        {
+            return Theme.light.textColor;
+        }
     }
 }
 

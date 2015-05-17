@@ -7,12 +7,14 @@ import "../components/usquare_online.js" as UOnline
 import "../components/network.js" as Network
 import "../components/md5.js" as Crypto
 
-Item {
-    id: root
+Item
+{
+    id: root;
 
-    property var uploads : null
+    property var uploads;
 
-    onFocusChanged: {
+    onFocusChanged:
+    {
         if(!focus)
         {
             refreshTimer.running = false;
@@ -22,98 +24,119 @@ Item {
         refreshTimer.running = true;
     }
 
-    Item {
-        anchors.fill: parent
-        visible: Global.connected && !Global.isLoading && root.uploads !== null
+    /** All files card **/
+    Item
+    {
+        visible: Global.connected && !Global.isLoading && root.uploads && root.uploads.files.length !== 0;
+        anchors.fill: parent;
 
-        Flickable {
-            id: flickable
+        Flickable
+        {
+            anchors.fill: parent;
 
-            anchors.fill: parent
-            contentHeight: content.height
-            contentWidth: width
+            contentHeight: content.height;
+            contentWidth: width;
 
-            Item {
-                id: content
-                width: flickable.width
-                height: grid.implicitHeight + grid.anchors.margins * 2
+            Item
+            {
+                id: content;
 
-                Grid {
-                    id: grid
+                width: parent.width;
+                height: grid.implicitHeight + grid.anchors.margins * 2;
 
-                    anchors {
-                        fill: parent
-                        margins: units.dp(20)
+                Grid
+                {
+                    id: grid;
+
+                    anchors
+                    {
+                        fill: parent;
+                        margins: Units.dp(20);
                     }
 
-                    columns: Math.floor(width/units.dp(365))
-                    spacing: units.dp(8)
+                    columns: Math.floor(width/Units.dp(365));
+                    spacing: Units.dp(8);
 
-                    Repeater {
-                        model: {
-                            if(!!root.uploads)
-                                return root.uploads.files
+                    Repeater
+                    {
+                        model:
+                        {
+                            if(root.uploads)
+                                return root.uploads.files;
                             else
                                 return null;
                         }
 
-                        U.FileCard {
-                            shortName: modelData.shortName
-                            source: {
-                                if(modelData.extension === 'jpg' || modelData.extension === 'png')
-                                    return modelData.shortName;
-                                return '';
-                            }
+                        U.FileCard
+                        {
+                            fileInformations: modelData;
+                        } /* U.FileCard */
+                    } /* Repeater */
+                } /* Grid */
+            } /* Item */
+        } /* Flickable */
+    } /* Item */
 
-                            nOfViews: modelData.views
-                            size: modelData.size
-                            password: {
-                                if(modelData.password === null)
-                                    return false;
-                                return modelData.password
-                            }
+    /** If there is no files yet **/
+    Item
+    {
+        visible: Global.connected && !Global.isLoading && root.uploads && root.uploads.files.length === 0;
+        anchors.fill: parent;
 
-                            onLinkCopied: snackbar.open('Link copied!');
-                        }
-                    }
-                }
-            }
+        U.Label
+        {
+            anchors.centerIn: parent;
+            horizontalAlignment: Text.AlignHCenter;
+            style: 'display1';
+            text: 'There is no files yet\n:(';
         }
     }
 
     /* On offline */
-    U.Offline {
-        visible: !Global.connected && !Global.isLoading
+    U.Offline
+    {
+        visible: !Global.connected && !Global.isLoading;
     }
 
     /* On loading */
-    U.Loading {
-        visible: Global.isLoading || (uploads === null && Global.connected === true)
+    U.Loading
+    {
+        visible: Global.isLoading || (typeof uploads === 'undefined' && Global.connected === true);
     }
 
-    Connections {
+    Connections
+    {
         target: login
-        onSuccessLogin: {
+        onSuccessLogin:
+        {
             updateDatas();
         }
     }
 
-    Connections {
+    Connections
+    {
         target: register
-        onSuccessRegister: {
+        onSuccessRegister:
+        {
             updateDatas();
         }
     }
 
-    Timer {
+    Timer
+    {
         id: refreshTimer
+
         interval: 1000
         running: false
         repeat: true
-        triggeredOnStart: true
-        onTriggered: {
+        triggeredOnStart: false
+
+        onTriggered:
+        {
             if(!Global.connected || Global.isLoading)
+            {
                 return;
+            }
 
             updateDatas();
         }

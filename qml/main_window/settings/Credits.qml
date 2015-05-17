@@ -5,7 +5,7 @@ import "../../components" as U
 Item {
     Column {
         anchors.centerIn: parent
-        spacing: units.dp(25)
+        spacing: Units.dp(25)
 
         U.Label {
             text: "You need to connect to U² online before use this feature"

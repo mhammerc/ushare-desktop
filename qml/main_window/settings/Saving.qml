@@ -9,16 +9,16 @@ import "../../components/functions.js" as F
 Item {
     View {
         anchors.fill: parent
-        anchors.margins: units.dp(16)
+        anchors.margins: Units.dp(16)
 
         elevation: 1
-        radius: units.dp(2)
+        radius: Units.dp(2)
 
         Column {
             id: column
             anchors.fill: parent
-            anchors.topMargin: units.dp(10)
-            spacing: units.dp(5);
+            anchors.topMargin: Units.dp(10)
+            spacing: Units.dp(5);
 
             U.Label {
                 id: titleLabel
@@ -26,7 +26,7 @@ Item {
                 anchors {
                     left: parent.left
                     right: parent.right
-                    margins: units.dp(16)
+                    margins: Units.dp(16)
                 }
 
                 style: "title"
@@ -38,7 +38,7 @@ Item {
                 anchors {
                     left: parent.left
                     right: parent.right
-                    margins: units.dp(8)
+                    margins: Units.dp(8)
                 }
 
                 text: 'Later...'
@@ -50,7 +50,7 @@ Item {
                 anchors {
                     left: parent.left
                     right: parent.right
-                    margins: units.dp(16)
+                    margins: Units.dp(16)
                 }
 
                 style: "title"
@@ -74,12 +74,12 @@ Item {
 
             Row {
                 id: imageQuality
-                spacing: units.dp(16)
+                spacing: Units.dp(16)
 
                 anchors {
                     left: parent.left
                     right: parent.right
-                    margins: units.dp(16)
+                    margins: Units.dp(16)
                 }
 
                 U.Label{
@@ -119,12 +119,12 @@ Item {
             }
 
             Row {
-                spacing: units.dp(16)
+                spacing: Units.dp(16)
 
                 anchors {
                     left: parent.left
                     right: parent.right
-                    margins: units.dp(18)
+                    margins: Units.dp(18)
                 }
 
                 TextField {

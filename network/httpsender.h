@@ -11,8 +11,11 @@
 #include <QNetworkReply>
 #include <QString>
 #include <QThread>
+#include <QMimeType>
+#include <QMimeDatabase>
 
 #include "core/settings.h"
+#include "core/shared.h"
 
 class HttpSender : public QThread
 {
@@ -29,6 +32,7 @@ public:
     ~HttpSender()
     {
         reply->deleteLater();
+        file->deleteLater();
     }
 
     void run() Q_DECL_OVERRIDE
@@ -74,12 +78,6 @@ public slots:
         this->privateKey = privateKey;
     }
 
-    void setUplimgVersion(QString const &uplimgVersion)
-    {
-        this->uplimgVersion = uplimgVersion;
-    }
-
-
     /* abort current upload if asked */
     void abort()
     {
@@ -104,7 +102,6 @@ protected:
     QString pathToFile;
     QString username;
     QString privateKey;
-    QString uplimgVersion;
     QFile * file;
     /* Paste specific */
     QByteArray lang;

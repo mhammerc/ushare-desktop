@@ -6,122 +6,154 @@ import Material.Extras 0.1
 import "." as U
 import "./usquare_online.js" as UOnline
 
-U.Dialog {
-    id: dialog
-    title: "Login"
-    height: units.dp(350)
+U.Dialog
+{
+    id: dialog;
 
-    signal successLogin()
+    title: "Login";
+
+    height: Units.dp(350);
+
+    signal successLogin();
 
     /* Login form */
-    Column {
-        id: login
-        spacing: units.dp(10)
+    Column
+    {
+        id: login;
+        spacing: Units.dp(10);
 
-        Label {
-            style: 'subheading'
+        Label
+        {
+            style: 'subheading';
             text: 'You are not connected. Try to login to continue.';
         }
 
-        View {
-            elevation: 2
-            width: units.dp(300)
-            height: units.dp(250)
+        View
+        {
+            elevation: 2;
+            width: Units.dp(300);
+            height: Units.dp(250);
 
-         Column {
-                id: fieldColumn
+            Column
+            {
+                id: fieldColumn;
 
-                anchors {
-                    fill: parent
-                    topMargin: units.dp(16)
-                    bottomMargin: units.dp(16)
+                anchors
+                {
+                    fill: parent;
+                    topMargin: Units.dp(16);
+                    bottomMargin: Units.dp(16);
                 }
 
-                Label {
-                    anchors {
-                        left: parent.left
-                        right: parent.right
-                        margins: units.dp(16)
+                Label
+                {
+                    text: "Please enter your credentials";
+
+                    anchors
+                    {
+                        left: parent.left;
+                        right: parent.right;
+                        margins: Units.dp(16);
                     }
 
-                    style: "title"
-                    text: "Please enter your credentials"
+                    style: "title";
                 }
 
-                Item {
-                    Layout.fillWidth: false
-                    Layout.preferredHeight: units.dp(0)
+                Item
+                {
+                    Layout.fillWidth: false;
+                    Layout.preferredHeight: Units.dp(0);
                 }
 
-                ListItem.Standard {
-                    action: Icon {
-                        anchors.centerIn: parent
-                        name: "action/account_child"
+                ListItem.Standard
+                {
+                    action: Icon
+                    {
+                        anchors.centerIn: parent;
+                        name: "action/account_child";
                     }
 
-                    content: TextField {
-                        id: usernameField
-                        placeholderText: "Username"
+                    content: TextField
+                    {
+                        id: usernameField;
+                        placeholderText: "Username";
 
-                        width: parent.width
-                        anchors.centerIn: parent
-                    }
-                }
+                        anchors.centerIn: parent;
+                        width: parent.width;
 
-                ListItem.Standard {
-                    action: Icon {
-                        anchors.centerIn: parent
-                        name: "action/https"
-                    }
-
-                    content: TextField {
-                        id: passwordField
-                     placeholderText: "Password"
-
-                     input.echoMode: TextInput.Password
-
-                     width: parent.width
-                     anchors.centerIn: parent
+                        floatingLabel: true;
                     }
                 }
 
-                ListItem.Standard {
-                    content: Checkbox {
-                        id: rememberCheckbox
-                        text: 'Remember'
-                        checked: true
+                ListItem.Standard
+                {
+                    action: Icon
+                    {
+                        anchors.centerIn: parent;
+                        name: "action/https";
+                    }
+
+                    content: TextField
+                    {
+                        id: passwordField;
+                        placeholderText: "Password";
+
+                        anchors.centerIn: parent;
+                        width: parent.width;
+
+                        echoMode: TextInput.Password;
+                        floatingLabel: true;
                     }
                 }
 
-                Label {
-                    id: statusLabel
+                ListItem.Standard
+                {
+                    content: Checkbox
+                    {
+                        id: rememberCheckbox;
+                        text: 'Remember';
+                        checked: true;
+                    }
+                }
 
-                    anchors {
-                        left: parent.left
-                        right: parent.right
-                        margins: units.dp(5)
+                Label
+                {
+                    id: statusLabel;
+
+                    anchors
+                    {
+                        left: parent.left;
+                        right: parent.right;
+                        margins: Units.dp(5);
                     }
 
-                    property bool error: false
+                    property bool error: false;
 
-                    color: {
+                    color:
+                    {
                         if(error)
+                        {
                             return '#c0392b';
+                        }
                         else
+                        {
                             return '#27ae60';
+                        }
                     }
 
-                    visible: false
+                    visible: false;
                 }
             }
         }
     }
 
-    onAccepted: {
+    onAccepted:
+    {
         tryToConnect();
     }
 
-    onRejected: {
+    onRejected:
+    {
         resetFields();
         close();
     }

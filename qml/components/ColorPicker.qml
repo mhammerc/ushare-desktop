@@ -2,129 +2,176 @@ import QtQuick 2.2
 import Material 0.1
 import Material.ListItems 0.1 as ListItem
 
-Dialog {
-    id: colorPicker
-    title: "Pick color"
+Dialog
+{
+    id: colorPicker;
 
-    positiveButtonText: "Done"
+    title: "Pick color";
 
-    property bool isCustom : false
+    positiveButtonText: "Done";
 
-    Column {
-        spacing: units.dp(8)
+    property bool isCustom : false;
 
-        MenuField {
-            id: selectionMainTheme
-            model: ["Light", "Dark", "Custom"]
-            width: units.dp(160)
-            selectedIndex: {
-                var currentTheme = Settings.value('color/theme', 'light')
+    Column
+    {
+        spacing: Units.dp(8);
 
-                if(currentTheme === 'light'){
-                    colorPicker.isCustom = false
-                    return 0
+        MenuField
+        {
+            model: ["Light", "Dark", "Custom"];
+            width: Units.dp(160);
+
+            selectedIndex:
+            {
+                var currentTheme = Settings.value('color/theme', 'light');
+
+                if(currentTheme === 'light')
+                {
+                    colorPicker.isCustom = false;
+                    return 0;
                 }
-                else if(currentTheme === 'dark') {
-                    colorPicker.isCustom = false
-                    return 1
+                else if(currentTheme === 'dark')
+                {
+                    colorPicker.isCustom = false;
+                    return 1;
                 }
-                else {
-                    colorPicker.isCustom = true
-                    return 2
+                else
+                {
+                    colorPicker.isCustom = true;
+                    return 2;
                 }
             }
 
-            onItemSelected: {
+            onItemSelected:
+            {
                 if(index == 0) /* Light selected */
                 {
-                    colorPicker.isCustom = false
+                    colorPicker.isCustom = false;
 
-                    theme.backgroundColor = "#fafafa"
-                    Settings.setValue('color/backgroundColor', "#fafafa")
+                    theme.backgroundColor = "#fafafa";
+                    Settings.setValue('color/backgroundColor', "#fafafa");
 
-                    theme.primaryColor = "#2196F3"
-                    Settings.setValue('color/primaryColor', "#2196F3")
+                    theme.primaryColor = "#2196F3";
+                    Settings.setValue('color/primaryColor', "#2196F3");
 
-                    theme.accentColor = "#4CAF50"
-                    Settings.setValue('color/accentColor', "#4CAF50")
+                    theme.accentColor = "#4CAF50";
+                    Settings.setValue('color/accentColor', "#4CAF50");
 
-                    Settings.setValue('color/theme', 'light')
+                    Settings.setValue('color/theme', 'light');
                 }
                 else if(index == 1) /* Dark selected */
                 {
-                    colorPicker.isCustom = false
+                    colorPicker.isCustom = false;
 
-                    theme.backgroundColor = "#37474f"
-                    Settings.setValue('color/backgroundColor', "#37474f")
+                    theme.backgroundColor = "#37474f";
+                    Settings.setValue('color/backgroundColor', "#37474f");
 
-                    theme.primaryColor = "#263238"
-                    Settings.setValue('color/primaryColor', "#263238")
+                    theme.primaryColor = "#263238";
+                    Settings.setValue('color/primaryColor', "#263238");
 
-                    theme.accentColor = "#607D8B"
-                    Settings.setValue('color/accentColor', "#607D8B")
+                    theme.accentColor = "#607D8B";
+                    Settings.setValue('color/accentColor', "#607D8B");
 
-                    Settings.setValue('color/theme', 'dark')
-
+                    Settings.setValue('color/theme', 'dark');
                 }
                 if(index == 2) /* Custom selected */
                 {
-                    colorPicker.isCustom = true
-                    Settings.setValue('color/theme', 'custom')
+                    colorPicker.isCustom = true;
+                    Settings.setValue('color/theme', 'custom');
                 }
             } /* onItemSelected */
         } /* MenuField */
 
-        Grid {
-            visible: colorPicker.isCustom
-            columns: 7
-            spacing: units.dp(8)
+        View
+        {
+            anchors
+            {
+                margins: Units.dp(8);
+            }
 
-            Repeater {
-                model: [
-                    "red", "pink", "purple", "deepPurple", "indigo",
-                    "blue", "lightBlue", "cyan", "teal", "green",
-                    "lightGreen", "lime", "yellow", "amber", "orange",
-                    "deepOrange", "grey", "blueGrey", "brown", "black",
-                    "white"
-                ]
+            width: grid.implicitWidth + Units.dp(16);
+            height: grid.implicitHeight + selection.implicitHeight + Units.dp(16);
 
-                Rectangle {
-                    width: units.dp(30)
-                    height: units.dp(30)
-                    radius: units.dp(2)
-                    color: Palette.colors[modelData]["500"]
-                    border.width: modelData === "white" ? units.dp(2) : 0
-                    border.color: Theme.alpha("#000", 0.26)
+            visible: colorPicker.isCustom;
 
-                    Ink {
-                        anchors.fill: parent
+            elevation: 1;
 
-                        onPressed: {
-                            switch(selection.selectedIndex) {
-                                case 0:
-                                    theme.primaryColor = parent.color
-                                    Settings.setValue('color/primaryColor', parent.color)
-                                    break;
-                                case 1:
-                                    theme.accentColor = parent.color
-                                    Settings.setValue('color/accentColor', parent.color)
-                                    break;
-                                case 2:
-                                    theme.backgroundColor = parent.color
-                                    Settings.setValue('color/backgroundColor', parent.color)
-                                    break;
-                            } /* Switch */
-                        } /* on Pressed */
-                    } /* Ink */
-                } /* Rectangle */
-            } /* Repeater */
-        } /* Grid color */
+            Column
+            {
+                spacing: Units.dp(8);
 
-        MenuField {
-            visible: colorPicker.isCustom
-            id: selection
-            model: ["Primary color", "Accent color", "Background color"]
-            width: units.dp(160)
+                anchors
+                {
+                    fill: parent;
+                    topMargin: Units.dp(8);
+                    leftMargin: Units.dp(8);
+                    rightMargin: Units.dp(8);
+                }
+
+                Grid
+                {
+                    id: grid
+
+                    columns: 7;
+                    spacing: Units.dp(8);
+
+                    anchors.horizontalCenter: parent.horizontalCenter;
+
+                    Repeater
+                    {
+                        model: [
+                            "red", "pink", "purple", "deepPurple", "indigo",
+                            "blue", "lightBlue", "cyan", "teal", "green",
+                            "lightGreen", "lime", "yellow", "amber", "orange",
+                            "deepOrange", "grey", "blueGrey", "brown", "black",
+                            "white"
+                        ];
+
+                        Rectangle
+                        {
+                            width: Units.dp(30);
+                            height: Units.dp(30);
+                            radius: Units.dp(2);
+                            color: Palette.colors[modelData]["500"];
+                            border.width: modelData === "white" ? Units.dp(2) : 0;
+                            border.color: Theme.alpha("#000", 0.26);
+
+                            Ink
+                            {
+                                anchors.fill: parent;
+
+                                onPressed:
+                                {
+                                    switch(selection.selectedIndex)
+                                    {
+                                        case 0:
+                                            theme.primaryColor = parent.color;
+                                            Settings.setValue('color/primaryColor', parent.color);
+                                            break;
+                                        case 1:
+                                            theme.accentColor = parent.color;
+                                            Settings.setValue('color/accentColor', parent.color);
+                                            break;
+                                        case 2:
+                                            theme.backgroundColor = parent.color;
+                                            Settings.setValue('color/backgroundColor', parent.color);
+                                            break;
+                                    } /* Switch */
+                                } /* on Pressed */
+                            } /* Ink */
+                        } /* Rectangle */
+                    } /* Repeater */
+                } /* Grid color */
+
+                MenuField
+                {
+                    id: selection;
+                    visible: colorPicker.isCustom;
+
+                    model: ["Primary color", "Accent color", "Background color"];
+                    width: Units.dp(160);
+                }
+            }
         }
     } /* Column */
 } /* Dialog color chooser */

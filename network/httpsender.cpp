@@ -4,50 +4,37 @@ HttpSender::HttpSender(){}
 
 HttpSender::Status HttpSender::sendFile()
 {
+    QMimeDatabase mimeDatabase;
 
     /* We include all the file in part of the request */
     file = new QFile(pathToFile);
+    QMimeType fileMimeType = mimeDatabase.mimeTypeForFile(pathToFile);
 
     if(!file->open(QIODevice::ReadOnly)) return HttpSender::FILE_ERROR;
 
     QHttpPart filePart;
     filePart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"file\"; filename=\"" + file->fileName() + "\""));
+    filePart.setHeader(QNetworkRequest::ContentTypeHeader, fileMimeType.name());
     filePart.setBodyDevice(file);
-
-    /* We include informations about file in other parts */
-    /*QHttpPart fileLanguagePart;
-    fileLanguagePart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"uplimgFileLanguage\""));
-    fileLanguagePart.setBody(lang);
-
-    QHttpPart fileLanguageHRPart;
-    fileLanguageHRPart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"uplimgFileLanguageHR\""));
-    fileLanguageHRPart.setBody(langHR.toStdString().c_str());*/
 
     /* Now we include user informations */
     QHttpPart accountKeyPart;
-    accountKeyPart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"accountKey\""));
+    accountKeyPart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"accountkey\""));
     accountKeyPart.setBody(Settings::entry(SettingsKeys::ACCOUNT_KEY).toString().toStdString().c_str());
 
     QHttpPart privateKeyPart;
-    privateKeyPart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"privateKey\""));
+    privateKeyPart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"privatekey\""));
     privateKeyPart.setBody(Settings::entry(SettingsKeys::PRIVATE_KEY).toString().toStdString().c_str());
 
     QHttpPart version;
-    version.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"version\""));
-    version.setBody(uplimgVersion.toStdString().c_str());
-
-    qDebug() << Settings::entry(SettingsKeys::PRIVATE_KEY).toString();
+    version.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"source\""));
+    version.setBody(Shared::appVersion.toStdString().c_str());
 
     container = new QHttpMultiPart(QHttpMultiPart::FormDataType);
     container->append(filePart);
     container->append(accountKeyPart);
     container->append(privateKeyPart);
     container->append(version);
-    //container->append(privateKeyPart);
-    //container->append(usernamePart);
-    //container->append(fileLanguagePart);
-    //container->append(fileLanguageHRPart);
-    //container->append(uplimgVersionPart);
 
     QNetworkRequest request;
     request.setUrl(url);

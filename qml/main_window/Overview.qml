@@ -7,10 +7,15 @@ import "../components/usquare_online.js" as UOnline
 import "../components/network.js" as Network
 import "../components/md5.js" as Crypto
 
-Item {
-    id: root
+Item
+{
+    id: root;
 
-    onFocusChanged: {
+    /* Hold user's datas. See the API to know what is the object */
+    property var datas;
+
+    onFocusChanged:
+    {
         if(!focus)
         {
             refreshTimer.running = false;
@@ -20,221 +25,288 @@ Item {
         refreshTimer.running = true;
     }
 
-    Component.onCompleted: {
+    Component.onCompleted:
+    {
         onStart();
     }
 
     /* When user is connected */
-    Item {
-        anchors.fill: parent
-        visible: Global.connected && !Global.isLoading
-        Row {
-        anchors.fill: parent
-        anchors.margins: units.dp(32);
-        spacing: units.dp(16);
+    Item
+    {
+        anchors.fill: parent;
+        visible: Global.connected && !Global.isLoading;
 
-        View {
-            width: 300
-            height: 285
+        Row
+        {
+            anchors
+            {
+                fill: parent;
+                margins: Units.dp(32);
+            }
 
-            elevation: 2
+            spacing: Units.dp(16);
 
-            Column {
-                anchors.fill: parent
-                anchors.margins: units.dp(8)
-                spacing: units.dp(8);
+            View
+            {
+                width: 300;
+                height: 285;
 
-                CircleImage {
-                    id: gravatar
-                    anchors.horizontalCenter: parent.horizontalCenter
+                elevation: 2;
 
-                    width: 85
-                    height: 85
-
-                    source: "qrc:/design/inconnu.jpg"
-                }
-
-                Label {
-                    anchors {
-                        horizontalCenter: parent.horizontalCenter
-                        margins: units.dp(16)
+                Column
+                {
+                    anchors
+                    {
+                        fill: parent;
+                        margins: Units.dp(8);
                     }
 
-                    id: username
-                    text: ""
-                    style:"display2"
-                    color:Theme.light.textColor
-                }
+                    spacing: Units.dp(8);
 
-                U.Badge {
-                    anchors.horizontalCenter: parent.horizontalCenter
+                    CircleImage
+                    {
+                        id: gravatar;
+                        anchors.horizontalCenter: parent.horizontalCenter;
 
-                    id: accountType
-                    text: "VIP"
-                    color: "#c0392b"
-                }
+                        width: 85;
+                        height: 85;
 
-                Button {
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    elevation: 1
-                    backgroundColor: Theme.accentColor
-                    text: "U² Online"
-                    onClicked: snackbar.open("Opening U² online")
-                }
-
-                Row {
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    spacing: units.dp(5);
-
-                    Button {
-                        backgroundColor: Theme.accentColor
-                        text: "Edit account"
-                        elevation: 1
-                        onClicked: snackbar.open("Opening U² online")
+                        source: "qrc:/design/inconnu.jpg";
                     }
 
-                    Button {
-                        backgroundColor: Theme.accentColor
-                        text: "Disconnect"
-                        elevation: 1
-                        onClicked: {
-                            disconnect();
-                            snackbar.open("Successful logout")
+                    Label
+                    {
+                        text: datas.username;
+
+                        anchors
+                        {
+                            horizontalCenter: parent.horizontalCenter;
+                            margins: Units.dp(16);
+                        }
+
+                        style: "display2";
+                        color: Theme.light.textColor;
+                    }
+
+                    U.Badge
+                    {
+                        text: datas.accountType
+
+                        anchors.horizontalCenter: parent.horizontalCenter;
+                        color: "#c0392b"
+                    }
+
+                    Button
+                    {
+                        text: "uShare Online";
+
+                        anchors.horizontalCenter: parent.horizontalCenter;
+                        elevation: 1;
+                        backgroundColor: Theme.accentColor;
+
+                        onClicked: snackbar.open("Opening uShare online");
+                    }
+
+                    Row
+                    {
+                        anchors.horizontalCenter: parent.horizontalCenter;
+                        spacing: Units.dp(5);
+
+                        Button
+                        {
+                            text: "Edit account";
+
+                            backgroundColor: Theme.accentColor;
+                            elevation: 1;
+
+                            onClicked: snackbar.open("Opening uShare online");
+                        }
+
+                        Button
+                        {
+                            text: "Disconnect";
+
+                            backgroundColor: Theme.accentColor;
+                            elevation: 1;
+
+                            onClicked:
+                            {
+                                disconnect();
+                                snackbar.open("Successful logout");
+                            }
+                        }
+                    } /* Row */
+                } /* Column */
+            } /* View */
+
+            View
+            {
+                width: 300;
+                height: 285;
+
+                anchors.leftMargin: Units.dp(2);
+
+                elevation: 2;
+
+                Column
+                {
+                    anchors
+                    {
+                        fill: parent;
+                        margins: Units.dp(8);
+                    }
+
+                    spacing: Units.dp(30);
+
+                    Column
+                    {
+                        anchors
+                        {
+                            left: parent.left;
+                            right: parent.right;
+                            margins: Units.dp(8);
+                        }
+
+                        spacing: Units.dp(5);
+
+                        Label // Number of views
+                        {
+                            text: datas.numberOfViews;
+
+                            anchors.horizontalCenter: parent.horizontalCenter;
+
+                            style: "display2";
+                            color: "#c0392b";
+                        }
+
+                        Label
+                        {
+                            text: "vues sur vos fichiers";
+
+                            anchors.horizontalCenter: parent.horizontalCenter;
+                            style: "title";
                         }
                     }
-                }
-            } /* Column */
-        } /* View */
 
-        View {
-            width: 300
-            height: 285
-            anchors.leftMargin: units.dp(2)
+                    Column
+                    {
+                        anchors
+                        {
+                            left: parent.left;
+                            right: parent.right;
+                            margins: Units.dp(8);
+                        }
 
-            elevation: 2
+                        spacing: Units.dp(5);
 
-            Column {
-                anchors.fill: parent
-                anchors.margins: units.dp(8)
-                spacing: units.dp(30);
+                        Label // Number of files saved today
+                        {
+                            text: datas.numberOfFilesSavedToday;
 
-                Column {
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    anchors.margins: units.dp(8)
-                    spacing: units.dp(5);
+                            anchors.horizontalCenter: parent.horizontalCenter;
+                            style: "display2";
+                            color: "#c0392b";
+                        }
 
-                    Label {
-                        id: nOfViews;
-                        //anchors.verticalCenter: parent.verticalCenter
-                        anchors.horizontalCenter: parent.horizontalCenter
+                        Label
+                        {
+                            text: "fichiers envoyé aujourd'hui";
 
-                        text: ""
-                        style: "display2"
-                        color: "#c0392b"
+                            anchors.horizontalCenter: parent.horizontalCenter;
+                            style: "title";
+                        }
                     }
 
-                    Label {
-                        //anchors.verticalCenter: parent.verticalCenter
-                        anchors.horizontalCenter: parent.horizontalCenter
+                    Column
+                    {
+                        anchors
+                        {
+                            left: parent.left;
+                            right: parent.right;
+                            margins: Units.dp(8);
+                        }
 
-                        text: "vues sur vos fichiers"
-                        style: "title"
-                    }
-                }
-
-                Column {
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    anchors.margins: units.dp(8)
-                    spacing: units.dp(5);
-
-                    Label {
-                        id: nOfFilesSavedToday
-                        anchors.horizontalCenter: parent.horizontalCenter
-
-                        text: ""
-                        style: "display2"
-                        color: "#c0392b"
-                    }
-
-                    Label {
-                        anchors.horizontalCenter: parent.horizontalCenter
-
-                        text: "fichiers envoyé aujourd'hui"
-                        style: "title"
-                    }
-                }
-
-                Column {
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    anchors.margins: units.dp(8)
-                    spacing: units.dp(5);
+                        spacing: Units.dp(5);
 
 
-                    Label {
-                        id: nOfFilesSaved;
-                        anchors.horizontalCenter: parent.horizontalCenter
+                        Label // Number of files saved
+                        {
+                            text: datas.numberOfFilesSaved;
 
-                        text: ""
-                        style: "display2"
-                        color: "#c0392b"
-                    }
+                            anchors.horizontalCenter: parent.horizontalCenter;
+                            style: "display2";
+                            color: "#c0392b";
+                        }
 
-                    Label {
-                        anchors.horizontalCenter: parent.horizontalCenter
+                        Label
+                        {
+                            text: "fichiers envoyés au total";
 
-                        text: "fichiers envoyés au total"
-                        style: "title"
-                    }
-                }
-            }
-        }
-        }
-    }
+                            anchors.horizontalCenter: parent.horizontalCenter;
+                            style: "title";
+                        } /* Label */
+                    } /* Column */
+                } /* Column */
+            } /* View */
+        } /* Row */
+    } /* Main Item when user is connected */
 
     /* When user is disconnected */
-    U.Offline {
-        visible: !Global.connected && !Global.isLoading
+    U.Offline
+    {
+        visible: !Global.connected && !Global.isLoading;
     }
 
     /* On loading */
-    U.Loading {
-        visible: Global.isLoading
+    U.Loading
+    {
+        visible: Global.isLoading;
     }
 
-    ActionButton {
-        anchors {
-            right: parent.right
-            bottom: parent.bottom
-            margins: units.dp(32)
+    // DEBUG ONLY
+    ActionButton
+    {
+        anchors
+        {
+            right: parent.right;
+            bottom: parent.bottom;
+            margins: Units.dp(32);
         }
 
-        onClicked: {
-            updateDatas();
+        onClicked:
+        {
+            updateDatas(false);
         }
 
-        iconName: "content/add"
+        iconName: "content/add";
     }
 
-    Timer {
-        id: refreshTimer
-        interval: 1000
-        running: false
-        repeat: true
-        triggeredOnStart: true
-        onTriggered: {
+    Timer
+    {
+        id: refreshTimer;
+
+        interval: 1000;
+        running: false;
+        repeat: true;
+        triggeredOnStart: false;
+
+        onTriggered:
+        {
             if(!Global.connected || Global.isLoading)
+            {
                 return;
+            }
 
             updateDatas(true);
         }
     }
 
-    Connections {
-        target: Global
-        onConnectedChanged: {
+    Connections
+    {
+        target: Global;
+
+        onConnectedChanged:
+        {
             if(!Global.connected)
             {
                 refreshTimer.running = false;
@@ -242,99 +314,27 @@ Item {
         }
     }
 
-    Connections {
-        target: login
-        onSuccessLogin: {
-            updateDatas();
-        }
-    }
-
-    Connections {
-        target: register
-        onSuccessRegister: {
-            updateDatas();
-        }
-    }
-
-    function disconnect()
+    Connections
     {
-        Global.connected = false
-        Global.isLoading = false
-        UOnline.disconnect();
-        Settings.setValue('username', false);
-        Settings.setValue('password', false);
-    }
+        target: login;
 
-    function updateDatas(lite)
-    {
-        Global.isLoading = lite ? false : true
-
-        var onGetUserInfos = function(result)
+        onSuccessLogin:
         {
-            if(!lite)
-            {
-                if(username.text !== result.username)
-                    username.text = result.username;
-            }
-
-            if(nOfViews.text !== result.nOfViews)
-                nOfViews.text = result.nOfViews;
-
-            if(nOfFilesSaved.text !== result.nOfFilesSaved)
-                nOfFilesSaved.text = result.nOfFilesSaved;
-
-            if(nOfFilesSavedToday.text !== result.nOfFilesSavedToday)
-                nOfFilesSavedToday.text = result.nOfFilesSavedToday
-
-            if(result.accountType === "vip")
-            {
-                if(accountType.text != "VIP :-D")
-                    accountType.text = "VIP :-D";
-            }
-            else if(result.accountType === "premium")
-            {
-                if(accountType.text != "Premium")
-                    accountType.text = "Premium";
-            }
-            else if(result.accountType === "regular")
-            {
-                if(accountType.text != "Regular")
-                    accountType.text = "Regular"
-            }
-
-
-            if(!lite)
-            {
-                Network.gravatar(result.email, Crypto.md5, function(url)
-                {
-                    if(url !== null)
-                    {
-                        gravatar.source = url;
-                    }
-                });
-            }
-
-            Global.isLoading = false;
+            updateDatas(false);
         }
-
-        UOnline.getUserInfos(onGetUserInfos);
     }
 
-    function wsConnected()
+    Connections
     {
-        Global.connected = true;
-        Global.isLoading = true;
-        updateDatas(false);
-        refreshTimer.start();
-        console.log('connected');
+        target: register;
+
+        onSuccessRegister:
+        {
+            updateDatas(false);
+        }
     }
 
-    function wsError()
-    {
-        snackbar.open("Connection lost, error occurred");
-        disconnect();
-    }
-
+    /* When the application is started and loaded */
     function onStart()
     {
         UOnline.setSettings(Settings);
@@ -350,9 +350,10 @@ Item {
         UOnline.onWsConnected(wsConnected);
         UOnline.onWsDisconnected(disconnect);
         UOnline.onWsError(wsError);
+
         UOnline.connect(Settings.value('username', false), Settings.value('password', false), root, function(err, result)
         {
-            if(err !== null)
+            if(err || !result.success)
             {
                 Global.hasLogin = false;
                 Global.isLoading = false;
@@ -360,8 +361,91 @@ Item {
                 return;
             }
 
-            Settings.setValue("account_key", result.accountKey);
-            Settings.setValue("private_key", result.privateKey);
+            Settings.setValue("account_key", result.accountkey);
+            Settings.setValue("private_key", result.privatekey);
         });
     }
+
+    /* Update datas on overview screen. If it is not lite, also update gravatar. */
+    function updateDatas(lite)
+    {
+        Global.isLoading = lite ? false : true;
+
+        var onGetUserInfos = function(result)
+        {
+
+            if(!result.success)
+            {
+                snackbar.open('An error occurred');
+                return;
+            }
+
+            datas = result;
+
+            if(!lite)
+            {
+                updateAvatar();
+                Global.isLoading = false;
+            }
+        }
+
+        UOnline.getUserInfos(onGetUserInfos);
+    }
+
+    function updateAvatar()
+    {
+        Network.gravatar(datas.email, Crypto.md5, function(url)
+        {
+            if(url !== null)
+            {
+                gravatar.source = url;
+            }
+        });
+    }
+
+    function disconnect()
+    {
+        Global.hasLogin = false;
+        Global.connected = false;
+        Global.isLoading = false;
+
+        UOnline.disconnect();
+
+        Settings.setValue('username', false);
+        Settings.setValue('password', false);
+        Settings.setValue('account_key', false);
+        Settings.setValue('private_key', false);
+
+        datas = null;
+    }
+
+    function wsConnected()
+    {
+        Global.connected = true;
+        Global.isLoading = true;
+
+        UOnline.wsAuth(function(result)
+        {
+            if(result.success === true)
+            {
+                updateDatas(false);
+                refreshTimer.start();
+            }
+            else
+            {
+                snackbar.open('Cant login, check your credentials');
+
+                Global.connected = false;
+                Global.isLoading = false;
+                Global.hasLogin = false;
+            }
+        });
+    }
+
+    function wsError()
+    {
+        snackbar.open('Connection lost, error occurred');
+        disconnect();
+    }
+
 }

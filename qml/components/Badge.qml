@@ -1,19 +1,25 @@
 import QtQuick 2.0
 
-Rectangle {
-    width: label.implicitWidth + 10
-    height: label.implicitHeight + 10
+Rectangle
+{
+    width: label.implicitWidth + 10;
+    height: label.implicitHeight + 7;
 
-    radius: 5
+    radius: 8;
 
-    property alias text: label.text
+    property alias text: label.text;
 
-    Label {
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.verticalCenter: parent.verticalCenter
+    Label
+    {
+        id: label;
 
-        id: label
-        color: "white"
+        anchors
+        {
+            horizontalCenter: parent.horizontalCenter;
+            verticalCenter: parent.verticalCenter;
+        }
+
+        color: "white";
     }
 }
 

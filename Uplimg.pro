@@ -32,7 +32,6 @@ QML_IMPORT_PATH =
 include(deployment.pri)
 
 DISTFILES += \
-    qml/main_window/MyAccount.qml \
     qml/main_window/Overview.qml \
     qml/upload_window/UploadWindow.qml \
     qml/main_window/SettingsPage.qml \

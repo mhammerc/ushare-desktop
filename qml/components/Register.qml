@@ -6,97 +6,122 @@ import Material.Extras 0.1
 import "." as U
 import "./usquare_online.js" as UOnline
 
-U.Dialog {
-    id: dialog
-    title: "Register"
-    height: units.dp(445)
+U.Dialog
+{
+    id: dialog;
+    title: "Register";
+    height: Units.dp(445);
 
-    property bool hasError: false
+    property bool hasError: false;
 
-    signal successRegister()
+    signal successRegister();
 
     /* Register form */
-    Column {
-        id: register
-        spacing: units.dp(10)
+    Column
+    {
+        id: register;
+        spacing: Units.dp(10);
 
-        Label {
-            style: 'subheading'
+        Label
+        {
+            style: 'subheading';
             text: 'Fill fields below to get registered';
         }
 
-        View {
-            elevation: 2
-            width: units.dp(400)
-            height: units.dp(350)
+        View
+        {
+            elevation: 2;
+            width: Units.dp(400);
+            height: Units.dp(350);
 
-         Column {
-                id: fieldColumn
+            Column
+            {
+                id: fieldColumn;
 
-                anchors {
-                    fill: parent
-                    topMargin: units.dp(16)
-                    bottomMargin: units.dp(16)
+                anchors
+                {
+                    fill: parent;
+                    topMargin: Units.dp(16);
+                    bottomMargin: Units.dp(16);
                 }
 
-                Label {
-                    anchors {
-                        left: parent.left
-                        right: parent.right
-                        margins: units.dp(16)
+                Label
+                {
+                    anchors
+                    {
+                        left: parent.left;
+                        right: parent.right;
+                        margins: Units.dp(16);
                     }
 
-                    style: "title"
-                    text: "Please fill fields"
+                    style: "title";
+                    text: "Please fill fields";
                 }
 
-                Item {
-                    Layout.fillWidth: false
-                    Layout.preferredHeight: units.dp(0)
+                Item
+                {
+                    Layout.fillWidth: false;
+                    Layout.preferredHeight: Units.dp(0);
                 }
 
-                ListItem.Standard {
-                    action: Icon {
-                        anchors.centerIn: parent
-                        name: "action/account_child"
+                ListItem.Standard
+                {
+                    action: Icon
+                    {
+                        anchors.centerIn: parent;
+                        name: "action/account_child";
                     }
 
-                    content: TextField {
-                        id: usernameField
-                        placeholderText: "Username"
+                    content: TextField
+                    {
+                        id: usernameField;
+                        placeholderText: "Username";
 
-                        width: parent.width
-                        anchors.centerIn: parent
+                        width: parent.width;
+                        anchors.centerIn: parent;
+
+                        floatingLabel: true;
                     }
                 }
 
-                ListItem.Standard {
-                    action: Icon {
-                        anchors.centerIn: parent
-                        name: "action/https"
+                ListItem.Standard
+                {
+                    action: Icon
+                    {
+                        anchors.centerIn: parent;
+                        name: "action/https";
                     }
 
-                    content: RowLayout {
-                        anchors.centerIn: parent
-                        width: parent.width
+                    content: RowLayout
+                    {
+                        anchors.centerIn: parent;
+                        width: parent.width;
 
-                            TextField {
-                             id: passwordField
-                             placeholderText: "Password"
+                        TextField
+                        {
+                            id: passwordField;
+                            placeholderText: "Password";
 
-                             input.echoMode: TextInput.Password
+                            Layout.alignment: Qt.AlignVCenter
+                            Layout.preferredWidth: 0.45 * parent.width
 
-                             Layout.alignment: Qt.AlignVCenter
-                             Layout.preferredWidth: 0.45 * parent.width
-                            }
+                            echoMode: TextInput.Password
+                            floatingLabel: true;
+                        }
 
-                            TextField {
-                             id: passwordField2
-                             placeholderText: "Repeat password"
+                        TextField
+                        {
+                            id: passwordField2;
+                            placeholderText: "Repeat password";
 
-                             input.echoMode: TextInput.Password
+                            Layout.alignment: Qt.AlignVCenter;
+                            Layout.preferredWidth: 0.45 * parent.width;
 
-                             hasError: {
+                            echoMode: TextInput.Password;
+                            floatingLabel: true;
+
+                            hasError:
+                            {
                                  if(passwordField.text !== passwordField2.text)
                                  {
                                      dialog.hasError = true;
@@ -107,28 +132,31 @@ U.Dialog {
                                      dialog.hasError = false;
                                      return false;
                                  }
-                             }
-
-                             Layout.alignment: Qt.AlignVCenter
-                             Layout.preferredWidth: 0.45 * parent.width
                             }
+                        }
                     }
                 }
 
-                ListItem.Standard {
-                    action: Icon {
-                        anchors.centerIn: parent
-                        name: "communication/email"
+                ListItem.Standard
+                {
+                    action: Icon
+                    {
+                        anchors.centerIn: parent;
+                        name: "communication/email";
                     }
 
-                    content: TextField {
-                        id: emailField
-                        anchors.centerIn: parent
-                        width: parent.width
+                    content: TextField
+                    {
+                        id: emailField;
+                        placeholderText: "Email";
 
-                        placeholderText: "Email"
+                        anchors.centerIn: parent;
+                        width: parent.width;
 
-                        hasError: {
+                        floatingLabel: true;
+
+                        hasError:
+                        {
                             if(text !== "")
                             {
                                 dialog.hasError = true;
@@ -141,47 +169,59 @@ U.Dialog {
                     }
                 }
 
-                ListItem.Standard {
-                    content: Checkbox {
-                        id: rememberCheckbox
-                        text: 'Remember for further login attempt'
-                        checked: true
+                ListItem.Standard
+                {
+                    content: Checkbox
+                    {
+                        id: rememberCheckbox;
+                        text: 'Remember for further login attempt';
+                        checked: true;
                     }
                 }
 
-                ListItem.Standard {
-                    content: Checkbox {
-                        id: acceptConditionsCheckbox
-                        text: 'I accept conditions'
-                        checked: false
+                ListItem.Standard
+                {
+                    content: Checkbox
+                    {
+                        id: acceptConditionsCheckbox;
+                        text: 'I accept conditions';
+                        checked: false;
                     }
                 }
 
-                Label {
-                    id: statusLabel
+                Label
+                {
+                    id: statusLabel;
 
-                    anchors {
-                        left: parent.left
-                        right: parent.right
-                        margins: units.dp(5)
+                    anchors
+                    {
+                        left: parent.left;
+                        right: parent.right;
+                        margins: Units.dp(5);
                     }
 
-                    property bool error: false
+                    property bool error: false;
 
-                    color: {
+                    color:
+                    {
                         if(error)
+                        {
                             return '#c0392b';
+                        }
                         else
-                            return '#27ae60'
+                        {
+                            return '#27ae60';
+                        }
                     }
 
-                    visible: false
+                    visible: false;
                 }
             }
         }
     }
 
-    onAccepted: {
+    onAccepted:
+    {
         if(usernameField.text === '' || passwordField.text === ''
                 || passwordField2.text === '' || emailField.text === '')
         {
@@ -216,7 +256,8 @@ U.Dialog {
         tryToRegister();
     }
 
-    onRejected: {
+    onRejected:
+    {
         resetFields();
         close();
     }
@@ -242,23 +283,20 @@ U.Dialog {
             if(err !== null)
             {
                 statusLabel.error = true;
-                statusLabel.text = 'Can\'t register your account (' + result.errorMessage + ')';
+                statusLabel.text = result.message;
                 statusLabel.visible = true
                 return;
             }
 
-            else
+            if(rememberCheckbox.checked)
             {
-                if(rememberCheckbox.checked)
-                {
-                    Settings.setValue('username', username);
-                    Settings.setValue('password', password);
-                }
-
-                successRegister();
-                resetFields();
-                close();
+                Settings.setValue('username', username);
+                Settings.setValue('password', password);
             }
+
+            successRegister();
+            resetFields();
+            close();
         }
 
         statusLabel.error = false;
@@ -268,7 +306,8 @@ U.Dialog {
         UOnline.register(username, password, email, dialog, callback);
     }
 
-    function validateEmail(email) {
+    function validateEmail(email)
+    {
         var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return re.test(email);
     }

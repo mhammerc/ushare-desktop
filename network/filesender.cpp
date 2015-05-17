@@ -14,7 +14,6 @@ void FileSender::autoSendFile(File file)
 {
     http.setHost(Shared::uploadUrl, Shared::globalPort);
     http.setFile(file.path);
-    http.setUplimgVersion(Shared::appVersion);
 
     if(Settings::entry(SettingsKeys::SHOW_PROGRESS_WINDOW).toBool())
     {
@@ -35,8 +34,6 @@ void FileSender::autoSendFile(File file)
 
             QString response = http.getResponse();
             emit uploadFinished(response);
-
-            qDebug() << response;
         });
 
         QFileInfo fileInfo(file.path);

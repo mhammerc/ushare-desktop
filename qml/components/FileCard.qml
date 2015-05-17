@@ -6,104 +6,81 @@ import "../components/usquare_online.js" as UOnline
 
 View {
 
-    property string nOfViews: ''
-    property real size: 0
-    property string password: ''
-    property string shortName: ''
-    property string source: ''
-
-    signal linkCopied
-
-    Component.onCompleted: {
-        copyLink1.clicked.connect(linkCopied);
-    }
-
-    onNOfViewsChanged: {
-        nOfViews1.text = nOfViews + ' views'
-    }
-
-    onShortNameChanged: {
-        link1.text = Settings.domainName + '/' + shortName;
-    }
-
-    onSizeChanged: {
-        size1.text = F.humanFileSize(size, true);
-    }
-
-    onPasswordChanged: {
-        if(password === 'false')
-            return;
-        password1.text = password;
-    }
-
-    onSourceChanged: {
-        miniature.source = Settings.silentViewUrl + source;
-    }
+    property var fileInformations // Handle a file object. See the API for more informations
 
     width: 310
     height: 90
     elevation: 1
 
-    Image {
-        id: miniature
-
-        x: 0
-        y: 0
-        width: 90
-        height: 90
-
-        fillMode: Image.PreserveAspectFit
-    }
-
-    Rectangle {
+    /** Two dividers**/
+    Rectangle
+    {
         width: 1
         height: 90
         x: 91
         color: Qt.rgba(0,0,0,0.1)
     }
 
-    Rectangle {
+    Rectangle
+    {
         width: 1
         height: 90
         x: 210
         color: Qt.rgba(0,0,0,0.1)
     }
 
-    Column {
+    /** First column, miniature of the file **/
+    Image
+    {
+        x: 0
+        y: 0
+        width: 90
+        height: 90
+
+        source: fileInformations.mimetype.slice(0, 6) === "image/" ? fileInformations.silentLink : ''
+
+        fillMode: Image.PreserveAspectFit
+    }
+
+    /** Second column, informations about the file **/
+    Column
+    {
         y: 5
         x: 100
         spacing: 7
 
-        Label {
-            id: nOfViews1
-            text: '14 Views'
+        Label
+        {
+            text: fileInformations.views + ' views'
         }
 
-        Label {
-            id: size1
-            text: '9 MB'
+        Label
+        {
+            text: F.humanFileSize(fileInformations.size, true);
         }
 
-        Label {
-            id: password1
-            text: 'No password'
+        Label
+        {
+            text: fileInformations.password ? fileInformations.password : 'No password'
             color: '#27ae60'
         }
 
-        Label {
-            id: link1
-            text: 'http://usqua.re/xyz'
+        Label
+        {
+            text: fileInformations.link
             color: '#2980b9'
         }
     }
 
-    Column {
+    /** Third column, actions on the file **/
+    Column
+    {
         y: 2
         x: 219
         spacing: 1
 
-        Button {
-            id: open
+        Button
+        {
             text: 'Open'
             elevation: 1
             backgroundColor: Theme.accentColor
@@ -111,13 +88,14 @@ View {
             width: 82
             height: 28
 
-            onClicked: {
-                Desktop.openUrl('http://' + link1.text);
+            onClicked:
+            {
+                Desktop.openUrl(fileInformations.link);
             }
         }
 
-        Button {
-            id: copyLink1
+        Button
+        {
             text: 'Copy link'
             elevation: 1
             backgroundColor: Theme.accentColor
@@ -125,12 +103,15 @@ View {
             width: 82
             height: 28
 
-            onClicked: {
-                Clipboard.setText('http://' + link1.text);
+            onClicked:
+            {
+                Clipboard.setText(fileInformations.link);
+                snackbar.open('Link copied!');
             }
         }
 
-        Button {
+        Button
+        {
             text: 'Delete'
             elevation: 1
             backgroundColor: Theme.accentColor
@@ -139,7 +120,16 @@ View {
             height: 28
 
             onClicked: {
-                UOnline.deleteFile(shortName, function(err, result){snackbar.open('File deleted!')});
+                UOnline.deleteFile(fileInformations.shortname, function(err, result)
+                {
+                    if(err || !result.success)
+                    {
+                        snackbar.open(result.message ? result.message : 'An error occurred.');
+                        return;
+                    }
+
+                    snackbar.open('File deleted!');
+                });
             }
         }
     }

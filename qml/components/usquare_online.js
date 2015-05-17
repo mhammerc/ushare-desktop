@@ -7,6 +7,8 @@ var wsRequestIsPending = false;
 var wsRequestCallback = {};
 var wsCallback = {}; //connected, closed, error
 
+var sourceName = 'uShare-dev'
+
 var _connected = false;
 
 var _userInfo;
@@ -49,31 +51,29 @@ function getUserInfos(callback)
 
 function getUploads(limit, callback)
 {
-    if(!callback)
-    {
-        return _uploads;
-    }
-
-    var onEnd = function (message, callback)
+    var onEnd = function(message)
     {
         _uploads = JSON.parse(message);
         callback(_uploads);
     }
 
-    var request = { path: '/user/uploads', limit: limit,
-        accountKey: accountKey(), privateKey: privateKey() };
+    var request = { path: '/user/uploads', limit: limit, };
 
-    wsSendTextMessage(JSON.stringify(request), onEnd, callback);
+    wsSendTextMessage(JSON.stringify(request), onEnd);
 }
 
 function deleteFile(shortName, callback)
 {
     var onEnd = function(err, result)
     {
-        callback(err, result);
+        callback(err, JSON.parse(result));
     }
 
-    Network.post(Settings.deleteUrl, {accountKey:_accountKey, privateKey:_privateKey, shortName: shortName}, {}, onEnd);
+    Network.post(Settings.deleteUrl, {
+                     accountkey: _accountKey,
+                     privatekey: _privateKey,
+                     shortname: shortName,
+                     source: sourceName }, {}, onEnd);
 }
 
 function connect(username, password, object, callback)
@@ -99,17 +99,21 @@ function connect(username, password, object, callback)
 
         if(result.success)
         {
-            _accountKey = result.accountKey;
-            _privateKey = result.privateKey;
+            _accountKey = result.accountkey;
+            _privateKey = result.privatekey;
+
             initWebSocket(object);
+
             callback(err, result);
-        } else {
+        }
+        else
+        {
             callback(err, result);
         }
     };
 
     Network.post(Settings.authUrl,
-                 {username:_username, password:_password},
+                 { username: _username, password: _password, source: sourceName },
                  {},
                  onEnd);
 }
@@ -133,14 +137,15 @@ function register(username, password, email, object, callback)
         if(result.success)
         {
             connect(_username, _password, object, callback);
-        } else
+        }
+        else
         {
             callback(err, result);
         }
     };
 
     Network.post(Settings.registerUrl,
-                {username: _username, password: _password, email: _email}, {}, onEndRegister);
+                { username: _username, password: _password, email: _email, source: sourceName }, {}, onEndRegister);
 }
 
 /** WEBSOCKET **/
@@ -170,6 +175,17 @@ function initWebSocket(object)
     websocket.textMessageReceived.connect(wsMessageReceived);
 
     websocket.url = Settings.wsUrl;
+}
+
+function wsAuth(callback)
+{
+    var object = {};
+    object.path = "/user/auth";
+    object.username = _username;
+    object.password = _password;
+    object.source = sourceName;
+
+    wsSendTextMessage(JSON.stringify(object), function(result) { callback(JSON.parse(result)); });
 }
 
 function wsMessageReceived(message)
