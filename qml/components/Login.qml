@@ -3,6 +3,7 @@ import QtQuick.Layouts 1.1
 import Material 0.1
 import Material.ListItems 0.1 as ListItem
 import Material.Extras 0.1
+import U.Global 1.0
 import "." as U
 import "./usquare_online.js" as UOnline
 
@@ -172,45 +173,35 @@ U.Dialog
 
         var callback = function(err, result)
         {
-            if(err !== null)
+            if(err !== null || !result.success)
             {
-                if(err === 401)
-                {
-                    statusLabel.text = 'Bad username or password';
-                }
-                else
-                {
-                    statusLabel.text = 'Can\'t connect to U² Online';
-                }
-
+                statusLabel.text = result && result.message ? result.message : 'Wrong credentials';
                 statusLabel.error = true;
-                statusLabel.visible = true
+                statusLabel.visible = true;
                 return;
             }
 
-            if(!result.success)
+            if(rememberCheckbox.checked)
             {
-                statusLabel.error = true;
-                statusLabel.text = 'Bad credentials';
-                statusLabel.visible = true;
+                Settings.setValue('username', username);
+                Settings.setValue('password', password);
             }
-            else
-            {
-                if(rememberCheckbox.checked)
-                {
-                    Settings.setValue('username', username);
-                    Settings.setValue('password', password);
-                }
 
-                successLogin();
-                resetFields();
-                close();
-            }
+            Settings.setValue("account_key", result.accountkey);
+            Settings.setValue("private_key", result.privatekey);
+
+            Global.hasLogin = true;
+            Global.isLoading = true;
+            Global.connected = true;
+
+            successLogin();
+            resetFields();
+            close();
         }
 
-        statusLabel.text = 'Connecting...'
+        statusLabel.text = 'Connecting...';
         statusLabel.error = false;
         statusLabel.visible = true;
-        UOnline.connect(username, password, dialog, callback);
+        UOnline.connect(username, password, callback);
     }
 }

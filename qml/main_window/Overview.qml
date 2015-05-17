@@ -12,7 +12,7 @@ Item
     id: root;
 
     /* Hold user's datas. See the API to know what is the object */
-    property var datas;
+    property var datas: ({});
 
     onFocusChanged:
     {
@@ -76,7 +76,7 @@ Item
 
                     Label
                     {
-                        text: datas.username;
+                        text: datas.username ? datas.username : '0';
 
                         anchors
                         {
@@ -90,7 +90,7 @@ Item
 
                     U.Badge
                     {
-                        text: datas.accountType
+                        text: datas.accountType ? datas.accountType : '0';
 
                         anchors.horizontalCenter: parent.horizontalCenter;
                         color: "#c0392b"
@@ -171,7 +171,7 @@ Item
 
                         Label // Number of views
                         {
-                            text: datas.numberOfViews;
+                            text: datas.numberOfViews ? datas.numberOfViews : '0';
 
                             anchors.horizontalCenter: parent.horizontalCenter;
 
@@ -201,7 +201,7 @@ Item
 
                         Label // Number of files saved today
                         {
-                            text: datas.numberOfFilesSavedToday;
+                            text: datas.numberOfFilesSavedToday ? datas.numberOfFilesSavedToday : '0';
 
                             anchors.horizontalCenter: parent.horizontalCenter;
                             style: "display2";
@@ -231,7 +231,7 @@ Item
 
                         Label // Number of files saved
                         {
-                            text: datas.numberOfFilesSaved;
+                            text: datas.numberOfFilesSaved ? datas.numberOfFilesSaved : '0';
 
                             anchors.horizontalCenter: parent.horizontalCenter;
                             style: "display2";
@@ -320,7 +320,7 @@ Item
 
         onSuccessLogin:
         {
-            updateDatas(false);
+            UOnline.initWebSocket(root);
         }
     }
 
@@ -330,7 +330,7 @@ Item
 
         onSuccessRegister:
         {
-            updateDatas(false);
+            UOnline.initWebSocket(root);
         }
     }
 
@@ -339,7 +339,7 @@ Item
     {
         UOnline.setSettings(Settings);
 
-        if(!Settings.value('username', false) || !Settings.value('password', false))
+        if(Settings.value('username', false) === 'false' || Settings.value('password', false) === 'false')
         {
             return;
         }
@@ -351,7 +351,7 @@ Item
         UOnline.onWsDisconnected(disconnect);
         UOnline.onWsError(wsError);
 
-        UOnline.connect(Settings.value('username', false), Settings.value('password', false), root, function(err, result)
+        UOnline.connect(Settings.value('username', false), Settings.value('password', false), function(err, result)
         {
             if(err || !result.success)
             {
@@ -363,6 +363,8 @@ Item
 
             Settings.setValue("account_key", result.accountkey);
             Settings.setValue("private_key", result.privatekey);
+
+            UOnline.initWebSocket(root);
         });
     }
 
@@ -377,6 +379,7 @@ Item
             if(!result.success)
             {
                 snackbar.open('An error occurred');
+                console.log(JSON.stringify(result));
                 return;
             }
 
@@ -399,7 +402,10 @@ Item
             if(url !== null)
             {
                 gravatar.source = url;
+                return;
             }
+
+            gravatar.source = "qrc:/design/inconnu.jpg";
         });
     }
 

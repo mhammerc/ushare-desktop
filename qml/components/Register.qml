@@ -3,6 +3,7 @@ import QtQuick.Layouts 1.1
 import Material 0.1
 import Material.ListItems 0.1 as ListItem
 import Material.Extras 0.1
+import U.Global 1.0
 import "." as U
 import "./usquare_online.js" as UOnline
 
@@ -280,7 +281,7 @@ U.Dialog
 
         var callback = function(err, result)
         {
-            if(err !== null)
+            if(err !== null || !result.success)
             {
                 statusLabel.error = true;
                 statusLabel.text = result.message;
@@ -294,6 +295,13 @@ U.Dialog
                 Settings.setValue('password', password);
             }
 
+            Settings.setValue("account_key", result.accountkey);
+            Settings.setValue("private_key", result.privatekey);
+
+            Global.hasLogin = true;
+            Global.isLoading = true;
+            Global.connected = true;
+
             successRegister();
             resetFields();
             close();
@@ -303,7 +311,7 @@ U.Dialog
         statusLabel.text = 'Loading...';
         statusLabel.visible = true;
 
-        UOnline.register(username, password, email, dialog, callback);
+        UOnline.register(username, password, email, callback);
     }
 
     function validateEmail(email)

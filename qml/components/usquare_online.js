@@ -76,7 +76,7 @@ function deleteFile(shortName, callback)
                      source: sourceName }, {}, onEnd);
 }
 
-function connect(username, password, object, callback)
+function connect(username, password, callback)
 {
     _username = username;
     _password = password;
@@ -102,8 +102,6 @@ function connect(username, password, object, callback)
             _accountKey = result.accountkey;
             _privateKey = result.privatekey;
 
-            initWebSocket(object);
-
             callback(err, result);
         }
         else
@@ -118,7 +116,7 @@ function connect(username, password, object, callback)
                  onEnd);
 }
 
-function register(username, password, email, object, callback)
+function register(username, password, email, callback)
 {
     _username = username;
     _password = password;
@@ -136,7 +134,7 @@ function register(username, password, email, object, callback)
 
         if(result.success)
         {
-            connect(_username, _password, object, callback);
+            connect(_username, _password, callback);
         }
         else
         {
