@@ -62,6 +62,24 @@ function getUploads(limit, callback)
     wsSendTextMessage(JSON.stringify(request), onEnd);
 }
 
+function editFilePassword(newPassword, shortName, callback)
+{
+    var onEnd = function(err, result)
+    {
+        console.log(Settings.editPasswordUrl);
+        callback(err, JSON.parse(result));
+    }
+
+    console.log(_accountKey + '+' + _privateKey);
+
+    Network.post(Settings.editPasswordUrl, {
+                     accountkey: _accountKey,
+                     privatekey: _privateKey,
+                     password: newPassword,
+                     shortname: shortName,
+                     source: sourceName, }, {}, onEnd);
+}
+
 function deleteFile(shortName, callback)
 {
     var onEnd = function(err, result)

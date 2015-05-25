@@ -25,6 +25,8 @@ public:
 
     Q_PROPERTY(QString deleteUrl READ deleteUrl CONSTANT FINAL)
 
+    Q_PROPERTY(QString editPasswordUrl READ editPasswordUrl CONSTANT FINAL)
+
     Q_PROPERTY(int uploadPort READ uploadPort CONSTANT FINAL)
 
     Q_PROPERTY(QString appVersion READ appVersion CONSTANT FINAL)
@@ -49,6 +51,11 @@ public:
     const QString deleteUrl()
     {
         return Shared::deleteUrl;
+    }
+
+    const QString editPasswordUrl()
+    {
+        return Shared::editPasswordUrl;
     }
 
     int uploadPort()

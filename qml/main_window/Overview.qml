@@ -181,7 +181,7 @@ Item
 
                         Label
                         {
-                            text: "vues sur vos fichiers";
+                            text: "views on your files";
 
                             anchors.horizontalCenter: parent.horizontalCenter;
                             style: "title";
@@ -210,7 +210,7 @@ Item
 
                         Label
                         {
-                            text: "fichiers envoyé aujourd'hui";
+                            text: "numbers of files saved today";
 
                             anchors.horizontalCenter: parent.horizontalCenter;
                             style: "title";
@@ -240,7 +240,7 @@ Item
 
                         Label
                         {
-                            text: "fichiers envoyés au total";
+                            text: "number of files saved";
 
                             anchors.horizontalCenter: parent.horizontalCenter;
                             style: "title";

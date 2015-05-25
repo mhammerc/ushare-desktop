@@ -38,6 +38,8 @@ void FileManager::chooseFile()
     /* assume that we want to send it */
     QString fileName = QFileDialog::getOpenFileName();
 
+    if(fileName == "") return;
+
     QFileInfo fileInfo(fileName);
 
     File file;
