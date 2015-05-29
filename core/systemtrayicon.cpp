@@ -86,6 +86,7 @@ void SystemTrayIcon::makeConnections()
     QObject::connect(captureFullScreen, &QAction::triggered, this, &SystemTrayIcon::captureFullScreenAsked);
     QObject::connect(captureSelectedScreen, &QAction::triggered, this, &SystemTrayIcon::captureSelectedScreenAsked);
     QObject::connect(sendFile, &QAction::triggered, this, &SystemTrayIcon::sendFileAsked);
+    QObject::connect(sendClipboard, &QAction::triggered, this, &SystemTrayIcon::sendClipboardAsked);
     QObject::connect(openUplimg, &QAction::triggered, this, &SystemTrayIcon::openUplimgAsked);
     QObject::connect(exitUplimg, &QAction::triggered, qApp, &QApplication::quit);
 }

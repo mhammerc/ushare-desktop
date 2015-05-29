@@ -44,6 +44,7 @@ void Uplimg::linkConnections()
     });
     QObject::connect(systemTray, &SystemTrayIcon::captureSelectedScreenAsked, this, &Uplimg::startCaptureSelectedScreenProccess);
     QObject::connect(systemTray, &SystemTrayIcon::sendFileAsked, fileManager, &FileManager::chooseFile);
+    QObject::connect(systemTray, &SystemTrayIcon::sendClipboardAsked, fileManager, &FileManager::sendClipboard);
     QObject::connect(systemTray, &SystemTrayIcon::openUplimgAsked, mainWindow, &MainWindow::show);
 
     /* Connections from the screen taker */

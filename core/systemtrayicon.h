@@ -23,6 +23,7 @@ signals:
     void captureFullScreenAsked();
     void captureSelectedScreenAsked();
     void sendFileAsked();
+    void sendClipboardAsked();
 
 private:
     void init();

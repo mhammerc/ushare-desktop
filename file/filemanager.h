@@ -5,6 +5,8 @@
 #include <QPixmap>
 #include <QFileDialog>
 #include <QFileInfo>
+#include <QClipboard>
+#include <QApplication>
 
 #include "core/settings.h"
 #include "file.h"
@@ -27,6 +29,8 @@ public slots:
     void screenTook(QPixmap);
 
     void chooseFile();
+
+    void sendClipboard();
 };
 
 #endif // FILEMANAGER_H

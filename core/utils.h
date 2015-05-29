@@ -25,7 +25,7 @@ public:
         return extension;
     }
 
-    static QString getNewFileName()
+    static QString getNewFileName(QString extension = "image")
     {
         QTime time = QTime::currentTime();
         QDate date = QDate::currentDate();
@@ -35,7 +35,7 @@ public:
                            + QString::number(time.minute())
                            + QString::number(time.second());
 
-        return fileName + getImageExtension();
+        return extension == "image" ? fileName + getImageExtension() : fileName + extension;
     }
 
     static QString getFolderPath(const QString &screenName)
