@@ -14,7 +14,6 @@ public:
     QString filename; // Name of the file on the hard drive
     QString wantedFilename; // Name of the file wanted on the web
     QString path; // Path of the file on the hard drive
-    QString type;
 
     /* Paste specific */
     QByteArray language;

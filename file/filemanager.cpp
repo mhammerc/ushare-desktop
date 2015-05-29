@@ -53,51 +53,42 @@ void FileManager::chooseFile()
 
 void FileManager::sendClipboard()
 {
-    QClipboard *clipboard = QApplication::clipboard();
+    QClipboard * clipboard = QApplication::clipboard();
 
-    QString clipboardFilename = "";
+    QString filePath = "";
 
 #ifdef __linux__ /* When copying a file in clipboard, linux store the path of the file inside the clipboard.*/
 
-    clipboardFilename = clipboard->text();
+    filePath = clipboard->text();
 
 #elif _WIN32 /* When copying a file in clipboard, Windows store the path of the file with 'file:///' at the beginning of the path. */
 
-    clipboardFileName = clipboard->text();
-    clipboardFileName = clipboardFileName.right(clipboardFileName.size() - 8);
+    filePath = clipboard->text();
+    filePath = clipboardFileName.right(clipboardFileName.size() - 8);
 
 #endif /* TODO: Support MAC */
 
-    if(QFile::exists(clipboardFilename))
+    if(!QFile::exists(filePath))
     {
-        QFileInfo qFileInfo(clipboardFilename);
-        File fileInfo;
-        fileInfo.filename = qFileInfo.fileName();
-        fileInfo.path = qFileInfo.filePath();
+        QString filename = Utils::getNewFileName(".txt");
+        filePath = Utils::getFolderPath(filename);
 
-        emit fileReadyToBeSent(fileInfo);
+        QFile file(filePath);
 
-        return;
+        if(file.open(QIODevice::ReadWrite))
+        {
+            QTextStream stream(&file);
+            stream << clipboard->text();
+        }
+
+        file.close();
     }
 
-    QString filename = Utils::getNewFileName(".txt");
-    QString filePath = Utils::getFolderPath(filename);
+    QFileInfo fileInfo(filePath);
+    File file;
+    file.filename = fileInfo.fileName();
+    file.path = fileInfo.filePath();
 
-    QFile file(filePath);
-
-    if(file.open(QIODevice::ReadWrite))
-    {
-        QTextStream stream(&file);
-        stream << clipboard->text();
-    }
-
-    file.close();
-
-    QFileInfo qFileInfo(filePath);
-    File fileInfo;
-    fileInfo.filename = qFileInfo.fileName();
-    fileInfo.path = qFileInfo.filePath();
-
-    emit fileReadyToBeSent(fileInfo);
+    emit fileReadyToBeSent(file);
 }
 
