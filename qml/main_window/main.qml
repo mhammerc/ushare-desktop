@@ -11,6 +11,8 @@ ApplicationWindow
     width: 670;
     height: 600;
 
+    title: 'uShare';
+
     theme
     {
         primaryColor: Settings.value('color/primaryColor', '#2196F3');
