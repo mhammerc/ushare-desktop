@@ -31,6 +31,10 @@ public slots:
     void chooseFile();
 
     void sendClipboard();
+
+    void sendDatas(QString filename, QString content);
+
+    void sendFile(QString &filename);
 };
 
 #endif // FILEMANAGER_H

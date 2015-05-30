@@ -18,6 +18,7 @@
 
 #include "windows/mainwindow.h"
 #include "windows/notificationwindow.h"
+#include "windows/pastewindow.h"
 
 #include "core/settings.h"
 
@@ -43,8 +44,10 @@ private:
     ScreenTaker * screenTaker;
     FileManager * fileManager;
     FileSender * fileSender;
-    MainWindow * mainWindow;
     FileSendedSound fileSendedSound;
+
+    MainWindow * mainWindow;
+    PasteWindow pasteWindow;
 
 
 signals:
@@ -52,6 +55,8 @@ signals:
 public slots:
     void startCaptureSelectedScreenProccess();
     void captureSelectedScreenProccessCanceled();
+
+    void makePaste();
 
     void autoSendFile(File);
 };

@@ -16,7 +16,8 @@ SOURCES += main.cpp \
     qml/cpp_wrapper/qmlsettings.cpp \
     sounds/filesendedsound.cpp \
     windows/notificationwindow.cpp \
-    core/shared.cpp
+    core/shared.cpp \
+    windows/pastewindow.cpp
 
 RESOURCES += qml.qrc \
     images.qrc \
@@ -56,7 +57,8 @@ DISTFILES += \
     qml/components/Offline.qml \
     qml/components/Loading.qml \
     qml/main_window/global/Global.qml \
-    qml/components/Register.qml
+    qml/components/Register.qml \
+    qml/pastes/PasteWindow.qml
 
 HEADERS += \
     core/systemtrayicon.h \
@@ -78,7 +80,8 @@ HEADERS += \
     windows/notificationwindow.h \
     qml/cpp_wrapper/desktop.h \
     core/shared.h \
-    qml/cpp_wrapper/clipboard.h
+    qml/cpp_wrapper/clipboard.h \
+    windows/pastewindow.h
 
 # Global shortcuts from the Qxt Team !
 HEADERS += \

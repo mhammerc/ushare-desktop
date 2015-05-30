@@ -1,6 +1,8 @@
 #include "uplimg.h"
 
-Uplimg::Uplimg(QObject *parent) : QObject(parent)
+Uplimg::Uplimg(QObject *parent) :
+    QObject(parent),
+    pasteWindow(this)
 {
     Settings::init(this);
 }
@@ -42,9 +44,11 @@ void Uplimg::linkConnections()
     {
         fileManager->screenTook(screenTaker->captureFullScreen());
     });
+
     QObject::connect(systemTray, &SystemTrayIcon::captureSelectedScreenAsked, this, &Uplimg::startCaptureSelectedScreenProccess);
     QObject::connect(systemTray, &SystemTrayIcon::sendFileAsked, fileManager, &FileManager::chooseFile);
     QObject::connect(systemTray, &SystemTrayIcon::sendClipboardAsked, fileManager, &FileManager::sendClipboard);
+    QObject::connect(systemTray, &SystemTrayIcon::makePasteAsked, this, &Uplimg::makePaste);
     QObject::connect(systemTray, &SystemTrayIcon::openUplimgAsked, mainWindow, &MainWindow::show);
 
     /* Connections from the screen taker */
@@ -53,6 +57,9 @@ void Uplimg::linkConnections()
 
     /* Connections from the file manager */
     QObject::connect(fileManager, &FileManager::fileReadyToBeSent, this, &Uplimg::autoSendFile);
+
+    /* Connections from paste manager */
+    QObject::connect(&pasteWindow, &PasteWindow::pasteReady, fileManager, &FileManager::sendDatas);
 }
 
 void Uplimg::startCaptureSelectedScreenProccess()
@@ -63,6 +70,11 @@ void Uplimg::startCaptureSelectedScreenProccess()
 void Uplimg::captureSelectedScreenProccessCanceled()
 {
     /* return in idle state */
+}
+
+void Uplimg::makePaste()
+{
+    pasteWindow.newPaste();
 }
 
 void Uplimg::autoSendFile(File file)

@@ -188,7 +188,6 @@ View
                     topMargin: Units.dp(8);
                 }
 
-                height: contentHeight;
                 interactive: false;
                 model: root.moreMenuModel;
 

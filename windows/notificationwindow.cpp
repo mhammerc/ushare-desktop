@@ -17,7 +17,6 @@ NotificationWindow::NotificationWindow(QString title, QString text, QString link
     QmlDesktop * desktop = new QmlDesktop(this);
     context->setContextProperty("Desktop", desktop);
 
-
     window = component->create(context);
     qDebug() << component->errorString();
 

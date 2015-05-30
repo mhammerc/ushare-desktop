@@ -24,6 +24,7 @@ signals:
     void captureSelectedScreenAsked();
     void sendFileAsked();
     void sendClipboardAsked();
+    void makePasteAsked();
 
 private:
     void init();

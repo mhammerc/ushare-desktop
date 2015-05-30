@@ -34,13 +34,14 @@ Item
     Item
     {
         anchors.fill: parent;
+
         visible: Global.connected && !Global.isLoading;
 
         Row
         {
             anchors
             {
-                fill: parent;
+                centerIn: parent;
                 margins: Units.dp(32);
             }
 

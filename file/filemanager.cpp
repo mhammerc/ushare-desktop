@@ -28,7 +28,6 @@ void FileManager::screenTook(QPixmap picture)
     File file;
     file.filename = filename;
     file.path = filePath;
-    file.type = "screen";
 
     emit fileReadyToBeSent(file);
 }
@@ -45,7 +44,6 @@ void FileManager::chooseFile()
     File file;
     file.filename = fileInfo.fileName();
     file.path = fileInfo.filePath();
-    file.type = "file";
 
     emit fileReadyToBeSent(file);
 
@@ -79,12 +77,37 @@ void FileManager::sendClipboard()
         {
             QTextStream stream(&file);
             stream << clipboard->text();
-        }
+            stream.flush();
+            file.close();
+        } else return;
 
-        file.close();
     }
 
-    QFileInfo fileInfo(filePath);
+    sendFile(filePath);
+}
+
+void FileManager::sendDatas(QString filename, QString content)
+{
+    if(!filename.contains("."))
+        filename.append(".txt");
+
+    QString filePath = Utils::getFolderPath(filename);
+    QFile file(filePath);
+
+    if(file.open(QIODevice::ReadWrite))
+    {
+        QTextStream stream(&file);
+        stream << content;
+        stream.flush();
+        file.close();
+    } else return;
+
+    sendFile(filePath);
+}
+
+void FileManager::sendFile(QString &filename)
+{
+    QFileInfo fileInfo(filename);
     File file;
     file.filename = fileInfo.fileName();
     file.path = fileInfo.filePath();

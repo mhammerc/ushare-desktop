@@ -27,7 +27,7 @@ Item
     /** All files card **/
     Item
     {
-        visible: Global.connected && !Global.isLoading && root.uploads && root.uploads.files.length !== 0;
+        visible: (Global.connected && !Global.isLoading && root.uploads && root.uploads.files && root.uploads.files.length !== 0);
         anchors.fill: parent;
 
         Flickable
@@ -80,7 +80,7 @@ Item
     /** If there is no files yet **/
     Item
     {
-        visible: Global.connected && !Global.isLoading && root.uploads && root.uploads.files.length === 0;
+        visible: (Global.connected && !Global.isLoading && root.uploads && root.uploads.files && root.uploads.files.length === 0);
         anchors.fill: parent;
 
         U.Label
