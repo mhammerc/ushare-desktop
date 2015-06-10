@@ -5,15 +5,18 @@ import Material.ListItems 0.1 as ListItem
 Window
 {
     id: root;
-    width: 375;
+    width: 380;
     height: 30;
-    flags: Qt.WindowStaysOnTopHint | Qt.WindowCloseButtonHint
+    //flags: Qt.WindowStaysOnTopHint | Qt.WindowCloseButtonHint
 
     maximumWidth: width;
     minimumWidth: width;
 
     maximumHeight: height;
     minimumHeight: height;
+
+    x: Desktop.size.width - width - 10;
+    y: Desktop.size.height - height - 15;
 
     property real progress: 0;
 

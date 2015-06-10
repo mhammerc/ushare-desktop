@@ -70,7 +70,7 @@ U.Dialog
                     action: Icon
                     {
                         anchors.centerIn: parent;
-                        name: "action/account_child";
+                        name: "action/account_circle";
                     }
 
                     content: TextField

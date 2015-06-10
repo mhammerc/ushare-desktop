@@ -23,15 +23,6 @@ RESOURCES += qml.qrc \
     images.qrc \
     sounds.qrc
 
-QMAKE_CXXFLAGS += -std=c++11 # C++11 for sure !
-QMAKE_CXXFLAGS += -lX11
-
-# Additional import path used to resolve QML modules in Qt Creator's code model
-QML_IMPORT_PATH =
-
-# Default rules for deployment.
-include(deployment.pri)
-
 DISTFILES += \
     qml/main_window/Overview.qml \
     qml/upload_window/UploadWindow.qml \
@@ -93,11 +84,15 @@ SOURCES += \
 
 win32 {
     SOURCES += shortcuts/win/qxtglobalshortcut_win.cpp
+    LIBS += -luser32
 }
 
 linux {
     SOURCES += shortcuts/x11/qxtglobalshortcut_x11.cpp
     LIBS += -lX11
+
+    QMAKE_CXXFLAGS += -std=c++11 # C++11 for sure !
+    QMAKE_CXXFLAGS += -lX11
 }
 
 mac {
