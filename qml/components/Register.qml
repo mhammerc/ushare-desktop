@@ -276,8 +276,10 @@ U.Dialog
     function tryToRegister()
     {
         var username = usernameField.text;
-        var password = passwordField.text;
+        var password = Desktop.sha256(passwordField.text);
+        console.log(password);
         var email = emailField.text;
+
 
         var callback = function(err, result)
         {

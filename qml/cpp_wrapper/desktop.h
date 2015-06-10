@@ -8,6 +8,7 @@
 #include <QScreen>
 #include <QDesktopServices>
 #include <QGuiApplication>
+#include <QCryptographicHash>
 
 class QmlDesktop : public QObject
 {
@@ -17,6 +18,13 @@ class QmlDesktop : public QObject
 
 public:
     QmlDesktop(QObject * parent = 0) : QObject(parent) {}
+
+    Q_INVOKABLE QString sha256(QString textToHash)
+    {
+        QByteArray byteArray;
+        byteArray.append(textToHash);
+        return QString(QCryptographicHash::hash(byteArray, QCryptographicHash::Sha256).toHex());
+    }
 
     QSize size()
     {

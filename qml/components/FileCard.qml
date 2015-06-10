@@ -242,7 +242,7 @@ View
     {
         var maxWidth = 0;
 
-        for (var i = 0; i < moreMenuModel.length; i++)
+        for (var i = 0; i < moreMenuModel.length; ++i)
         {
             hiddenLabel.text = moreMenuModel[i];
 
