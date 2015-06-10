@@ -3,8 +3,14 @@
 UploadingWindow::UploadingWindow(QObject *parent) : QObject(parent)
 {
     component = new QQmlComponent(&engine, QUrl::fromLocalFile("qml/upload_window/UploadWindow.qml"), this);
+
+    context = new QQmlContext(&engine);
+
+    QmlDesktop * desktop = new QmlDesktop(this);
+    context->setContextProperty("Desktop", desktop);
+
+    window = component->create(context);
     qDebug() << component->errorString();
-    window = component->create();
 
     QObject::connect(window, SIGNAL(cancellationAsked()), this, SIGNAL(cancellationAsked()));
 }

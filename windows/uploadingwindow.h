@@ -6,6 +6,9 @@
 #include <QQmlComponent>
 #include <QQuickItem>
 #include <QQuickWindow>
+#include <QQmlContext>
+
+#include "qml/cpp_wrapper/desktop.h"
 
 class UploadingWindow : public QObject
 {
@@ -17,6 +20,7 @@ public:
 private:
     QQmlEngine engine;
     QQmlComponent  * component;
+    QQmlContext * context;
     QObject * window;
 
 signals:

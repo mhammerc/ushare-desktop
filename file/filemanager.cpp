@@ -62,7 +62,7 @@ void FileManager::sendClipboard()
 #elif _WIN32 /* When copying a file in clipboard, Windows store the path of the file with 'file:///' at the beginning of the path. */
 
     filePath = clipboard->text();
-    filePath = clipboardFileName.right(clipboardFileName.size() - 8);
+    filePath = filePath.right(filePath.size() - 8);
 
 #endif /* TODO: Support MAC */
 

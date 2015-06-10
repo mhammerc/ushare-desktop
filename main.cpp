@@ -19,6 +19,7 @@
 #include <QApplication>
 #include <QString>
 #include <QUrl>
+#include <QFileInfo>
 #include <QtQml>
 #include "uplimg.h"
 
@@ -30,12 +31,13 @@ int main(int argc, char *argv[])
 
     app.setQuitOnLastWindowClosed(false);
 
-    const QString location = "file:///home/imote/Development/uShare/qml/main_window/global/Global.qml";
-    qmlRegisterSingletonType(QUrl(location), "U.Global", 1, 0, "Global");
+    const QString location = "qml/main_window/global/Global.qml";
+    QUrl singleton = QUrl::fromLocalFile(QFileInfo(location).absoluteFilePath());
+    qmlRegisterSingletonType(singleton, "U.Global", 1, 0, "Global");
 
     QCoreApplication::setOrganizationName("uSquare");
     QCoreApplication::setOrganizationDomain("usquare.io");
-    QCoreApplication::setApplicationName("U²");
+    QCoreApplication::setApplicationName("uShare");
 
     Uplimg uplimg;
     uplimg.start();
