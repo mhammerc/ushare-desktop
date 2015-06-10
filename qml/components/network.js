@@ -19,9 +19,6 @@ function get(url, headers, callback)
     {
         if(req.readyState === XMLHttpRequest.DONE)
         {
-            //console.log('Status : ', req.status);
-            //console.log('Response : ', req.responseText);
-
             if(req.status == 200) {
                 callback(null, req.responseText);
             } else {

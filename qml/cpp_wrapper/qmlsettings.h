@@ -41,7 +41,13 @@ public:
 
     Q_PROPERTY(QString silentViewUrl READ silentViewUrl CONSTANT FINAL)
 
+    Q_PROPERTY(QString updateInfoUrl READ updateInfoUrl CONSTANT FINAL)
+
     Q_PROPERTY(QString domainName READ domainName CONSTANT FINAL)
+
+    Q_PROPERTY(QString os READ os CONSTANT FINAL)
+
+    Q_PROPERTY(QString arch READ arch CONSTANT FINAL)
 
     const QString uploadUrl()
     {
@@ -93,9 +99,40 @@ public:
         return Shared::silentViewUrl;
     }
 
+    const QString updateInfoUrl()
+    {
+        return Shared::updateInfoUrl;
+    }
+
     const QString domainName()
     {
         return Shared::domainName;
+    }
+
+    const QString os()
+    {
+#ifdef __linux__
+        return "linux";
+#elif _WIN32
+        return "windows";
+#elif __APPLE__
+        return "macosx";
+#endif
+    }
+
+    const QString arch()
+    {
+#ifdef __amd64__
+        return "x64";
+#elif _M_X64
+        return "x64";
+#elif __i386
+        return "x32";
+#elif _M_IX86
+        return "x32";
+#elif _X86_
+        return "x32";
+#endif
     }
 };
 

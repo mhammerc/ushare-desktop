@@ -49,7 +49,8 @@ DISTFILES += \
     qml/components/Loading.qml \
     qml/main_window/global/Global.qml \
     qml/components/Register.qml \
-    qml/pastes/PasteWindow.qml
+    qml/pastes/PasteWindow.qml \
+    qml/main_window/settings/Updates.qml
 
 HEADERS += \
     core/systemtrayicon.h \

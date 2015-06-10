@@ -20,6 +20,7 @@ public:
     const static QString registerUrl;
     const static QString wsUrl;
     const static QString silentViewUrl;
+    const static QString updateInfoUrl;
     const static QString domainName;
 
 };
