@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import Material 0.1
 import "../../components/network.js" as Network
+import "../../components" as U
 
 Item
 {
@@ -115,6 +116,12 @@ Item
                     }
                 }
             }
+        }
+
+        /* On loading */
+        U.Loading
+        {
+            visible: informations === null;
         }
     }
 

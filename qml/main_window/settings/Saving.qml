@@ -3,174 +3,185 @@ import QtQuick.Dialogs 1.0
 import QtQuick.Layouts 1.1
 import Material 0.1
 import Material.ListItems 0.1 as ListItem
-import "../../components" as U
-import "../../components/functions.js" as F
+import '../../components' as U
+import '../../components/functions.js' as F
 
-Item {
-    View {
-        anchors.fill: parent
-        anchors.margins: Units.dp(16)
+Item
+{
+    View
+    {
+        anchors
+        {
+            fill: parent;
+            margins: Units.dp(16);
+        }
 
-        elevation: 1
-        radius: Units.dp(2)
+        elevation: 1;
+        radius: Units.dp(2);
 
-        Column {
-            id: column
-            anchors.fill: parent
-            anchors.topMargin: Units.dp(10)
+        Column
+        {
+            anchors
+            {
+                fill: parent;
+                topMargin: Units.dp(10);
+            }
+
             spacing: Units.dp(5);
 
-            U.Label {
-                id: titleLabel
-
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                    margins: Units.dp(16)
+            Label
+            {
+                anchors
+                {
+                    left: parent.left;
+                    right: parent.right;
+                    margins: Units.dp(16);
                 }
 
-                style: "title"
-                text: "Online services"
-                color: Theme.light.textColor
+                style: 'title';
+                text: 'Picture settings';
             }
 
-            U.Label {
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                    margins: Units.dp(8)
-                }
+            ListItem.SimpleMenu
+            {
+                text: 'Image format';
+                model: ['JPEG', 'PNG'];
+                selectedIndex: Settings.value('picture/format', 0);
 
-                text: 'Later...'
-                color: Theme.light.textColor
-                style: 'subheading'
-            }
-
-            U.Label {
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                    margins: Units.dp(16)
-                }
-
-                style: "title"
-                text: "Picture settings"
-                color: Theme.light.textColor
-            }
-
-            ListItem.SimpleMenu {
-                text: "Image format"
-                model: ["JPEG", "PNG"]
-                selectedIndex: Settings.value("picture/format", 0)
-                onSelectedIndexChanged: {
+                onSelectedIndexChanged:
+                {
                     if(selectedIndex === 0)
-                        imageQuality.enabled = true
+                    {
+                        imageQuality.enabled = true;
+                    }
                     else
-                        imageQuality.enabled = false
+                    {
+                        imageQuality.enabled = false;
+                    }
 
-                    Settings.setValue("picture/format", selectedIndex)
+                    Settings.setValue("picture/format", selectedIndex);
                 }
             }
 
-            Row {
-                id: imageQuality
-                spacing: Units.dp(16)
-
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                    margins: Units.dp(16)
+            Row
+            {
+                id: imageQuality;
+                anchors
+                {
+                    left: parent.left;
+                    right: parent.right;
+                    margins: Units.dp(16);
                 }
 
-                U.Label{
-                    color: Theme.light.textColor
-                    text: 'Image quality'
-                    style: 'subheading'
+                spacing: Units.dp(16);
+
+                Label
+                {
+                    text: 'Image quality';
+                    style: 'subheading';
                 }
 
-                U.Slider {
-                    numericValueLabel: true
-                    minimumValue: 0
-                    maximumValue: 100
-                    darkBackground: false
+                Slider
+                {
+                    numericValueLabel: true;
+                    minimumValue: 0;
+                    maximumValue: 100;
 
-                    height: 15
-                    width: 250
+                    height: 15;
+                    width: 250;
 
-                    value: Settings.value("picture/quality", 100)
-                    onValueChanged: {
-                        value = F.round(value)
+                    value: Settings.value('picture/quality', 100);
+
+                    onValueChanged:
+                    {
+                        value = F.round(value);
                     }
-                    onPressedChanged: {
-                        Settings.setValue("picture/quality", value);
+
+                    onPressedChanged:
+                    {
+                        Settings.setValue('picture/quality', value);;
                     }
                 }
             } /* Row */
 
-            U.Checkbox {
-                id: saveOnCheckbox
-                checked: F.stringToBoolean(Settings.value("picture/save_on_computer", false))
-                text: "Save pictures on computer"
-                darkBackground: false
+            CheckBox
+            {
+                id: saveOnCheckbox;
+                checked: F.stringToBoolean(Settings.value('picture/save_on_computer', false));
+                text: 'Save pictures on computer';
 
-                onCheckedChanged: {
-                    Settings.setValue("picture/save_on_computer", checked)
+                onCheckedChanged:
+                {
+                    Settings.setValue('picture/save_on_computer', checked);
                 }
             }
 
-            Row {
-                spacing: Units.dp(16)
-
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                    margins: Units.dp(18)
+            Row
+            {
+                anchors
+                {
+                    left: parent.left;
+                    right: parent.right;
+                    margins: Units.dp(18);
                 }
 
-                TextField {
-                    id: pathField
-                    Layout.alignment: Qt.AlignVCenter
-                    Layout.preferredWidth: 0.4 * parent.width
-                    enabled: saveOnCheckbox.checked
-                    text: Settings.value("picture/save_path", "unknown")
+                spacing: Units.dp(16);
 
-                    Component.onCompleted: {
-                        input.readOnly = true
+                TextField
+                {
+                    id: pathField;
+                    Layout.alignment: Qt.AlignVCenter;
+                    Layout.preferredWidth: 0.4 * parent.width;
+                    enabled: saveOnCheckbox.checked;
+                    text: Settings.value('picture/save_path', 'unknown');
+
+                    Component.onCompleted:
+                    {
+                        readOnly = true;
                     }
 
-                    onTextChanged: {
-                        Settings.setValue("picture/save_path", text)
+                    onTextChanged:
+                    {
+                        Settings.setValue('picture/save_path', text);
                     }
-
                 } /* TextField */
 
-                Button {
-                    text: ".."
-                    elevation: 1
-                    enabled: saveOnCheckbox.checked
-                    onClicked: fileDialog.open()
+                Button
+                {
+                    text: '..';
+                    elevation: 1;
+                    backgroundColor: Theme.accentColor;
+                    enabled: saveOnCheckbox.checked;
+                    onClicked: fileDialog.open();
                 } /* Button */
             } /* Row */
         } /* Column */
     } /* View */
 
-    FileDialog {
-        id: fileDialog
-        title: "Please choose a folder"
-        selectFolder: true
-        onAccepted: {
+    FileDialog
+    {
+        id: fileDialog;
+        title: 'Please choose a folder';
+        selectFolder: true;
+        onAccepted:
+        {
             var text;
+
             if(PlatformDetails.isLinux)
-                text = folder.toString().replace("file://", "")
+            {
+                text = folder.toString().replace('file://', '');
+            }
             else if(PlatformDetails.isWindows)
-                text = folder.toString().replace("file:///", "");
+            {
+                text = folder.toString().replace('file:///', '');
+            }
             else /* Mac ?? */
+            {
                 text = "Mac not implemented yet"
+            }
 
-            pathField.text = text
-
+            pathField.text = text;
         }
     } /* FileDialog */
-
 } /* Item */
 
