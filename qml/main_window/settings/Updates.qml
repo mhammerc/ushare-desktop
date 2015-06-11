@@ -21,11 +21,11 @@ Item
         elevation: 1;
         radius: Units.dp(2);
 
-
+        /* Main View */
         Item
         {
             anchors.fill: parent;
-            visible: root.informations !== null;
+            visible: root.informations !== null && informations.version !== Settings.appVersion;
 
             Column
             {
@@ -115,6 +115,24 @@ Item
                         Desktop.openUrl(informations.link);
                     }
                 }
+            }
+        }
+
+        /* No update available */
+        Item
+        {
+            anchors.fill: parent;
+            visible: root.informations !== null && informations.version === Settings.appVersion;
+
+            Label
+            {
+                anchors
+                {
+                    centerIn: parent;
+                }
+
+                text: qsTr('No update available :-)');
+                style: 'headline';
             }
         }
 

@@ -19,9 +19,10 @@ SOURCES += main.cpp \
     core/shared.cpp \
     windows/pastewindow.cpp
 
-RESOURCES += qml.qrc \
+RESOURCES += \
     images.qrc \
-    sounds.qrc
+    sounds.qrc \
+    translations.qrc
 
 DISTFILES += \
     qml/main_window/Overview.qml \

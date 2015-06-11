@@ -511,6 +511,11 @@
         <source>Update now!</source>
         <translation>Mises à jours !</translation>
     </message>
+    <message>
+        <location filename="qml/main_window/settings/Updates.qml" line="134"/>
+        <source>No update available :-)</source>
+        <translation>Aucune mise à jours disponible :-)</translation>
+    </message>
 </context>
 <context>
     <name>Uplimg</name>
