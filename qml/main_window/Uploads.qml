@@ -88,7 +88,7 @@ Item
             anchors.centerIn: parent;
             horizontalAlignment: Text.AlignHCenter;
             style: 'display1';
-            text: 'There is no files yet\n:(';
+            text: 'There are no files yet\n:(';
         }
     }
 

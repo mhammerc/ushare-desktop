@@ -21,6 +21,7 @@
 #include <QUrl>
 #include <QFileInfo>
 #include <QtQml>
+#include <QIcon>
 #include "uplimg.h"
 
 //#include "core/settings.h"
@@ -30,10 +31,9 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
 
     app.setQuitOnLastWindowClosed(false);
+    app.setWindowIcon(QIcon(":/images/ushare_icon.png"));
 
-    const QString location = "qml/main_window/global/Global.qml";
-    QUrl singleton = QUrl::fromLocalFile(QFileInfo(location).absoluteFilePath());
-    qmlRegisterSingletonType(singleton, "U.Global", 1, 0, "Global");
+    qmlRegisterSingletonType(QUrl("qrc:/qml/main_window/global/Global.qml"), "U.Global", 1, 0, "Global");
 
     QCoreApplication::setOrganizationName("uSquare");
     QCoreApplication::setOrganizationDomain("usquare.io");

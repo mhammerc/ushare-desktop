@@ -2,7 +2,7 @@
 
 MainWindow::MainWindow(QObject *parent) : QObject(parent)
 {
-    component = new QQmlComponent(&engine, QUrl::fromLocalFile("qml/main_window/main.qml"), this);
+    component = new QQmlComponent(&engine, QUrl("qrc:/qml/main_window/main.qml"), this);
 
     /* create the context to set Settings before the creation */
     context = new QQmlContext(&engine);

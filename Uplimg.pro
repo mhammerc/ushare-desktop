@@ -1,5 +1,8 @@
 TEMPLATE = app
 
+CONFIG += console
+CONFIG += qtquickcompiler
+
 QT += widgets qml quick core gui multimedia
 
 SOURCES += main.cpp \
@@ -22,7 +25,8 @@ SOURCES += main.cpp \
 RESOURCES += \
     images.qrc \
     sounds.qrc \
-    translations.qrc
+    translations.qrc \
+    qml.qrc
 
 DISTFILES += \
     qml/main_window/Overview.qml \

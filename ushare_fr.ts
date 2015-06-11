@@ -405,7 +405,7 @@
     <message>
         <location filename="qml/main_window/settings/Saving.qml" line="80"/>
         <source>Image quality</source>
-        <translation>Qualitée de l&apos;image</translation>
+        <translation>Qualité de l&apos;image</translation>
     </message>
     <message>
         <location filename="qml/main_window/settings/Saving.qml" line="111"/>
@@ -438,7 +438,7 @@
     <message>
         <location filename="qml/main_window/SettingsPage.qml" line="7"/>
         <source>Updates</source>
-        <translation>Mises à jours</translation>
+        <translation>Mises à jour</translation>
     </message>
     <message>
         <location filename="qml/main_window/SettingsPage.qml" line="7"/>
@@ -489,7 +489,7 @@
     <message>
         <location filename="qml/main_window/settings/Updates.qml" line="46"/>
         <source>Updates</source>
-        <translation>Mises à jours</translation>
+        <translation>Mises à jour</translation>
     </message>
     <message>
         <location filename="qml/main_window/settings/Updates.qml" line="60"/>
@@ -509,12 +509,12 @@
     <message>
         <location filename="qml/main_window/settings/Updates.qml" line="108"/>
         <source>Update now!</source>
-        <translation>Mises à jours !</translation>
+        <translation>Mettre à jour !</translation>
     </message>
     <message>
         <location filename="qml/main_window/settings/Updates.qml" line="134"/>
         <source>No update available :-)</source>
-        <translation>Aucune mise à jours disponible :-)</translation>
+        <translation>Aucune mise à jour disponible :-)</translation>
     </message>
 </context>
 <context>

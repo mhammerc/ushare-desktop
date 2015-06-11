@@ -1,6 +1,6 @@
 <RCC>
     <qresource prefix="/images">
-        <file alias="uplimg_icon.png">resources/uplimg_icon.png</file>
+        <file alias="ushare_icon.png">resources/ushare_icon.png</file>
     </qresource>
     <qresource prefix="/images/context_menu">
         <file alias="clipboard.png">resources/context_menu/clipboard.png</file>

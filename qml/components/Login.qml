@@ -169,7 +169,7 @@ U.Dialog
     function tryToConnect()
     {
         var username = usernameField.text;
-        var password = passwordField.text;
+        var password = Desktop.sha256(passwordField.text)
 
         var callback = function(err, result)
         {

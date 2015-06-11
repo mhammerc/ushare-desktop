@@ -277,7 +277,6 @@ U.Dialog
     {
         var username = usernameField.text;
         var password = Desktop.sha256(passwordField.text);
-        console.log(password);
         var email = emailField.text;
 
 

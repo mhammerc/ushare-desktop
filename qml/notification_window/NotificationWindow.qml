@@ -48,7 +48,7 @@ Window
             x: 10;
             y: 10;
 
-            source: "qrc:/images/uplimg_icon.png";
+            source: "qrc:/images/ushare_icon.png";
         }
 
         Column

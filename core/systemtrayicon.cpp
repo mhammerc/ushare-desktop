@@ -19,7 +19,7 @@ SystemTrayIcon::~SystemTrayIcon()
 
 void SystemTrayIcon::init()
 {
-    setIcon(QIcon(":/images/uplimg_icon.png"));
+    setIcon(QIcon(":/images/ushare_icon.png"));
     setToolTip("Uplimg");
     makeContextMenu();
     makeGlobalShortcuts();
