@@ -39,7 +39,7 @@ Window
 
             Label
             {
-                text: qsTr('Uploading... (%1/%2)').arg(humanFileSize(bytesTotal * progress, true)).arg(humanFileSize(bytesTotal, true));
+                text: qsTr('uSharing... (%1/%2)').arg(humanFileSize(bytesTotal * progress, true)).arg(humanFileSize(bytesTotal, true));
                 verticalAlignment: Text.AlignVCenter;
             }
 

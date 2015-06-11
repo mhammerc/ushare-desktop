@@ -539,7 +539,7 @@ Le lien est
     <message>
         <location filename="qml/upload_window/UploadWindow.qml" line="42"/>
         <source>Uploading... (%1/%2)</source>
-        <translation>Envoie... (%1/%2)</translation>
+        <translation>uSharing... (%1/%2)</translation>
     </message>
 </context>
 <context>
