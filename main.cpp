@@ -39,6 +39,27 @@ int main(int argc, char *argv[])
     QCoreApplication::setOrganizationDomain("usquare.io");
     QCoreApplication::setApplicationName("uShare");
 
+    /* TRANSLATIONS */
+
+    Settings::init(&app);
+
+    QVariant language = Settings::entry(SettingsKeys::LANGUAGE);
+    qDebug() << QString("ushare_") + language.toString();
+
+    if(language.isNull())
+    {
+        QString locale = QLocale::system().name().section('_', 0, 0);
+        Settings::setEntry(SettingsKeys::LANGUAGE, locale);
+        language = QVariant(locale);
+    }
+
+
+    QTranslator translator;
+    qDebug() << translator.load(QString("ushare_") + language.toString());
+    qDebug() << qApp->installTranslator(&translator);
+
+    /* TRANSLATIONS END */
+
     Uplimg uplimg;
     uplimg.start();
 

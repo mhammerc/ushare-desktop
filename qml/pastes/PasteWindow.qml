@@ -7,7 +7,7 @@ import Material.ListItems 0.1
 ApplicationWindow
 {
     id: root;
-    title: 'Cook a new paste';
+    title: qsTr('Cook a new paste');
 
     initialPage: page;
 
@@ -18,7 +18,7 @@ ApplicationWindow
     {
         id: page;
 
-        title: 'Cook a new paste';
+        title: qsTr('Cook a new paste');
 
         View
         {
@@ -56,8 +56,8 @@ ApplicationWindow
                     TextField
                     {
                        id: pasteName;
-                       placeholderText: 'Paste name';
-                       onTextChanged: text ? page.title = text : page.title = 'Cook a new paste';
+                       placeholderText: qsTr('Paste name');
+                       onTextChanged: text ? page.title = text : page.title = qsTr('Cook a new paste');
                     }
 
 
@@ -69,7 +69,7 @@ ApplicationWindow
                         Button
                         {
                             id: buttonSend;
-                            text: 'Send!';
+                            text: qsTr('Send!');
                             elevation: 1;
 
                             onClicked: root.send(pasteName.text, content.text);
@@ -78,7 +78,7 @@ ApplicationWindow
                         Button
                         {
                             id: buttonCancel;
-                            text: 'Cancel';
+                            text: qsTr('Cancel');
                             elevation: 1;
 
                             onClicked: root.cancel();

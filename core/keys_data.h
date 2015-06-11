@@ -14,7 +14,8 @@ enum class SettingsKeys : int {
     SHOW_NOTIFICATION_WINDOW,
     SHOW_PROGRESS_WINDOW,
     ACCOUNT_KEY,
-    PRIVATE_KEY
+    PRIVATE_KEY,
+    LANGUAGE
 };
 
 #endif // KEYS_DATA_H

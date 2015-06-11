@@ -43,7 +43,7 @@ Item
                     }
 
                     style: 'title';
-                    text: 'Updates';
+                    text: qsTr('Updates');
                 }
 
                 Label
@@ -57,7 +57,7 @@ Item
                     }
 
                     style: 'subheading';
-                    text: 'Actual version: ' + Settings.appVersion;
+                    text: qsTr('Actual version: %1').arg(Settings.appVersion);
                 }
 
                 Label
@@ -71,7 +71,7 @@ Item
                     }
 
                     style: 'subheading';
-                    text: 'Latest version: ' + informations.version;
+                    text: qsTr('Latest version: %1').arg(informations.version);
                 }
 
                 Row
@@ -86,7 +86,7 @@ Item
                     Label
                     {
                         style: 'subheading';
-                        text: 'Description: ';
+                        text: qsTr('Description: ');
                     }
 
                     Label
@@ -105,7 +105,7 @@ Item
                         margins: Units.dp(16);
                     }
 
-                    text: 'Update now!';
+                    text: qsTr('Update now!');
                     enabled: actualVersion !== latestVersion;
                     elevation: 1;
                     backgroundColor: Theme.accentColor;

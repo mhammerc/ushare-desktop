@@ -64,7 +64,7 @@ View
 
         Label
         {
-            text: fileInformations.views + ' views';
+            text: qsTr('%1 views').arg(fileInformations.views);
         }
 
         Label
@@ -74,7 +74,7 @@ View
 
         Label
         {
-            text: fileInformations.password ? 'Click to see password' : 'No password';
+            text: fileInformations.password ? qsTr('Click to see password') : qsTr('No password');
             color: '#27ae60';
 
             MouseArea
@@ -84,8 +84,8 @@ View
                 onClicked:
                 {
                     parent.text = fileInformations.password ?
-                                (fileInformations.password === parent.text ? 'Click to see password' : fileInformations.password)
-                                : 'No password';
+                                (fileInformations.password === parent.text ? qsTr('Click to see password') : fileInformations.password)
+                                : qsTr('No password');
                 }
             }
         }
@@ -116,7 +116,7 @@ View
 
         Button
         {
-            text: 'Open';
+            text: qsTr('Open');
             elevation: 1;
             backgroundColor: Theme.accentColor;
 
@@ -131,7 +131,7 @@ View
 
         Button
         {
-            text: 'Copy link';
+            text: qsTr('Copy link');
             elevation: 1;
             backgroundColor: Theme.accentColor;
 
@@ -141,14 +141,14 @@ View
             onClicked:
             {
                 Clipboard.setText(fileInformations.link);
-                snackbar.open('Link copied!');
+                snackbar.open(qsTr('Link copied!'));
             }
         }
 
         Button
         {
             id: buttonMore;
-            text: 'More';
+            text: qsTr('More');
             elevation: 1;
             backgroundColor: Theme.accentColor;
 
@@ -209,11 +209,11 @@ View
                             {
                                 if(err || !result.success)
                                 {
-                                    snackbar.open(result.message ? result.message : 'An error occurred.');
+                                    snackbar.open(result.message ? result.message : qsTr('An error occurred.'));
                                     return;
                                 }
 
-                                snackbar.open('File deleted!');
+                                snackbar.open(qsTr('File deleted!'));
                             });
                         }
 
@@ -227,7 +227,7 @@ View
         }
     }
 
-    property var moreMenuModel: ['Edit password', 'Delete'];
+    property var moreMenuModel: [qsTr('Edit password'), qsTr('Delete')];
 
     Label
     {
@@ -256,13 +256,13 @@ View
     {
         id: passwordDialog;
 
-        title: "Edit password";
+        title: qsTr("Edit password");
         hasActions: true;
 
         Label
         {
             style: "subheading";
-            text: "Change the password in order to protect the file.";
+            text: qsTr("Change the password in order to protect the file.");
         }
 
         TextField
@@ -272,12 +272,12 @@ View
             echoMode: TextInput.Password;
             width: parent.width;
 
-            placeholderText: "New password";
+            placeholderText: qsTr("New password");
         }
 
         CheckBox
         {
-            text: "Show password";
+            text: qsTr("Show password");
 
             width: parent.width;
             checked: false;
@@ -295,11 +295,11 @@ View
             {
                 if(err || !result.success)
                 {
-                    snackbar.open(result.message ? result.message : 'An error occurred.');
+                    snackbar.open(result.message ? result.message : qsTr('An error occurred.'));
                     return;
                 }
 
-                snackbar.open('Password edited.');
+                snackbar.open(qsTr('Password edited.'));
             });
         }
     }

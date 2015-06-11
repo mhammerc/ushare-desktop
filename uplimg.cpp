@@ -4,12 +4,6 @@ Uplimg::Uplimg(QObject *parent) :
     QObject(parent),
     pasteWindow(this)
 {
-    Settings::init(this);
-}
-
-Uplimg::~Uplimg()
-{
-
 }
 
 void Uplimg::start()
@@ -97,7 +91,7 @@ void Uplimg::autoSendFile(File file)
 
         if(Settings::entry(SettingsKeys::SHOW_NOTIFICATION_WINDOW).toBool())
         { // If the user want a notification window
-            NotificationWindow * notif = new NotificationWindow("Congratulation!", "Your file is uploaded!\nThe link is\n" + response, response);
+            NotificationWindow * notif = new NotificationWindow(tr("Congratulation!"), tr("Your file is uploaded!\nThe link is\n") + response, response);
             notif->show();
         }
     });

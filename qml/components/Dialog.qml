@@ -50,8 +50,8 @@ PopupBase {
     property alias title: titleLabel.text
     property alias text: textLabel.text
 
-    property string negativeButtonText: "Cancel"
-    property string positiveButtonText: "Ok"
+    property string negativeButtonText: qsTr("Cancel")
+    property string positiveButtonText: qsTr("Ok")
 
     property bool hasActions: true
 

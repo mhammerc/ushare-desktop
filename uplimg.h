@@ -7,6 +7,7 @@
 #include <QUrl>
 #include <QPixmap>
 #include <QColor>
+#include <QTranslator>
 
 #include "core/shared.h"
 
@@ -31,7 +32,6 @@ class Uplimg : public QObject
     Q_OBJECT
 public:
     explicit Uplimg(QObject *parent = 0);
-    ~Uplimg();
     void start();
 
     SystemTrayIcon *getSystemTray();

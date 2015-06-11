@@ -11,7 +11,7 @@ U.Dialog
 {
     id: dialog;
 
-    title: "Login";
+    title: qsTr("Login");
 
     height: Units.dp(350);
 
@@ -26,7 +26,7 @@ U.Dialog
         Label
         {
             style: 'subheading';
-            text: 'You are not connected. Try to login to continue.';
+            text: qsTr('You are not connected. Try to login to continue.');
         }
 
         View
@@ -48,7 +48,7 @@ U.Dialog
 
                 Label
                 {
-                    text: "Please enter your credentials";
+                    text: qsTr("Please enter your credentials");
 
                     anchors
                     {
@@ -77,7 +77,7 @@ U.Dialog
                     content: TextField
                     {
                         id: usernameField;
-                        placeholderText: "Username";
+                        placeholderText: qsTr("Username");
 
                         anchors.centerIn: parent;
                         width: parent.width;
@@ -97,7 +97,7 @@ U.Dialog
                     content: TextField
                     {
                         id: passwordField;
-                        placeholderText: "Password";
+                        placeholderText: qsTr("Password");
 
                         anchors.centerIn: parent;
                         width: parent.width;
@@ -112,7 +112,7 @@ U.Dialog
                     content: Checkbox
                     {
                         id: rememberCheckbox;
-                        text: 'Remember';
+                        text: qsTr('Remember');
                         checked: true;
                     }
                 }
@@ -199,7 +199,7 @@ U.Dialog
             close();
         }
 
-        statusLabel.text = 'Connecting...';
+        statusLabel.text = qsTr('Connecting...');
         statusLabel.error = false;
         statusLabel.visible = true;
         UOnline.connect(username, password, callback);

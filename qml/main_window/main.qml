@@ -30,11 +30,11 @@ ApplicationWindow
         tabs:
         [
             {
-                text: "Overview",
+                text: qsTr("Overview"),
                 icon: "action/home",
             },
-            "Uploads",
-            "Settings",
+            qsTr("Uploads"),
+            qsTr("Settings"),
         ];
 
         actions:
@@ -42,7 +42,7 @@ ApplicationWindow
             Action
             {
                 iconName: "image/color_lens";
-                name: "Colors";
+                name: qsTr("Colors");
                 onTriggered: colorPicker.show();
             }
         ]
@@ -94,7 +94,7 @@ ApplicationWindow
 
         onSuccessLogin:
         {
-            snackbar.open('Great, you\'re connected!');
+            snackbar.open(qsTr('Great, you\'re connected!'));
             Global.connected = true;
         }
     }
@@ -105,7 +105,7 @@ ApplicationWindow
 
         onSuccessRegister:
         {
-            snackbar.open('Great, you\'re connected!');
+            snackbar.open(qsTr('Great, you\'re connected!'));
             Global.connected = true;
         }
     }

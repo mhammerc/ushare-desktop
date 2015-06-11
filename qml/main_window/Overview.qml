@@ -105,7 +105,7 @@ Item
                         elevation: 1;
                         backgroundColor: Theme.accentColor;
 
-                        onClicked: snackbar.open("Opening uShare online");
+                        onClicked: snackbar.open(qsTr("Opening uShare online"));
                     }
 
                     Row
@@ -115,17 +115,17 @@ Item
 
                         Button
                         {
-                            text: "Edit account";
+                            text: qsTr("Edit account");
 
                             backgroundColor: Theme.accentColor;
                             elevation: 1;
 
-                            onClicked: snackbar.open("Opening uShare online");
+                            onClicked: snackbar.open(qsTr("Opening uShare online"));
                         }
 
                         Button
                         {
-                            text: "Disconnect";
+                            text: qsTr("Disconnect");
 
                             backgroundColor: Theme.accentColor;
                             elevation: 1;
@@ -133,7 +133,7 @@ Item
                             onClicked:
                             {
                                 disconnect();
-                                snackbar.open("Successful logout");
+                                snackbar.open(qsTr("Successful logout"));
                             }
                         }
                     } /* Row */
@@ -182,7 +182,7 @@ Item
 
                         Label
                         {
-                            text: "views on your files";
+                            text: qsTr("views on your files");
 
                             anchors.horizontalCenter: parent.horizontalCenter;
                             style: "title";
@@ -211,7 +211,7 @@ Item
 
                         Label
                         {
-                            text: "numbers of files saved today";
+                            text: qsTr("numbers of files saved today");
 
                             anchors.horizontalCenter: parent.horizontalCenter;
                             style: "title";
@@ -241,7 +241,7 @@ Item
 
                         Label
                         {
-                            text: "number of files saved";
+                            text: qsTr("number of files saved");
 
                             anchors.horizontalCenter: parent.horizontalCenter;
                             style: "title";
@@ -441,7 +441,7 @@ Item
             }
             else
             {
-                snackbar.open('Cant login, check your credentials');
+                snackbar.open(qsTr('Cant login, check your credentials'));
 
                 Global.connected = false;
                 Global.isLoading = false;
@@ -452,7 +452,7 @@ Item
 
     function wsError()
     {
-        snackbar.open('Connection lost, error occurred');
+        snackbar.open(qsTr('Connection lost, error occurred'));
         disconnect();
     }
 

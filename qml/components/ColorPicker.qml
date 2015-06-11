@@ -6,9 +6,9 @@ Dialog
 {
     id: colorPicker;
 
-    title: "Pick color";
+    title: qsTr("Pick color");
 
-    positiveButtonText: "Done";
+    positiveButtonText: qsTr("Done");
 
     property bool isCustom : false;
 
@@ -18,7 +18,7 @@ Dialog
 
         MenuField
         {
-            model: ["Light", "Dark", "Custom"];
+            model: [qsTr("Light"), qsTr("Dark"), qsTr("Custom")];
             width: Units.dp(160);
 
             selectedIndex:
@@ -168,7 +168,7 @@ Dialog
                     id: selection;
                     visible: colorPicker.isCustom;
 
-                    model: ["Primary color", "Accent color", "Background color"];
+                    model: [qsTr("Primary color"), qsTr("Accent color"), qsTr("Background color")];
                     width: Units.dp(160);
                 }
             }

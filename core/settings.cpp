@@ -34,7 +34,8 @@ Settings::Settings(QObject *parent) : QSettings(parent)
          << "show_notification_window"
          << "show_progress_window"
          << "account_key"
-         << "private_key";
+         << "private_key"
+         << "language";
 
 }
 

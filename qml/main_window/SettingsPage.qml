@@ -3,10 +3,11 @@ import Material 0.1
 import Material.ListItems 0.1 as ListItem
 
 Item {
-    id: settings
-    property var components: ["General", "Saving", "Keyboard shortcuts", "Updates", "Credits"]
+    id: settings;
+    property var components: [qsTr("General"), qsTr("Saving"), qsTr("Keyboard shortcuts"), qsTr("Updates"), qsTr("Credits")];
+    property var componentsName: ['General', 'Saving', 'Keyboard shortcuts', 'Updates', 'Credits'];
 
-    property string selectedComponent: components[0]
+    property int selectedComponent: 0;
 
     Sidebar {
         id: sidebar
@@ -18,8 +19,8 @@ Item {
                 model: settings.components
                 delegate: ListItem.Standard {
                     text: modelData
-                    selected: modelData == selectedComponent
-                    onClicked: selectedComponent = modelData
+                    selected: modelData === components[selectedComponent];
+                    onClicked: selectedComponent = components.indexOf(modelData);
                 }
             }
         }
@@ -41,7 +42,7 @@ Item {
             id: example
             anchors.fill: parent
             // selectedComponent will always be valid, as it defaults to the first component
-            source: Qt.resolvedUrl("settings/%.qml").arg(selectedComponent.replace(" ", ""))
+            source: Qt.resolvedUrl("settings/%.qml").arg(componentsName[selectedComponent].replace(" ", ""));
         }
     }
     Scrollbar {

@@ -39,12 +39,12 @@ Item
                 }
 
                 style: 'title';
-                text: 'Picture settings';
+                text: qsTr('Picture settings');
             }
 
             ListItem.SimpleMenu
             {
-                text: 'Image format';
+                text: qsTr('Image format');
                 model: ['JPEG', 'PNG'];
                 selectedIndex: Settings.value('picture/format', 0);
 
@@ -77,7 +77,7 @@ Item
 
                 Label
                 {
-                    text: 'Image quality';
+                    text: qsTr('Image quality');
                     style: 'subheading';
                 }
 
@@ -108,7 +108,7 @@ Item
             {
                 id: saveOnCheckbox;
                 checked: F.stringToBoolean(Settings.value('picture/save_on_computer', false));
-                text: 'Save pictures on computer';
+                text: qsTr('Save pictures on computer');
 
                 onCheckedChanged:
                 {
@@ -161,7 +161,7 @@ Item
     FileDialog
     {
         id: fileDialog;
-        title: 'Please choose a folder';
+        title: qsTr('Please choose a folder');
         selectFolder: true;
         onAccepted:
         {

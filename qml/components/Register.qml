@@ -10,7 +10,7 @@ import "./usquare_online.js" as UOnline
 U.Dialog
 {
     id: dialog;
-    title: "Register";
+    title: qsTr("Register");
     height: Units.dp(445);
 
     property bool hasError: false;
@@ -26,7 +26,7 @@ U.Dialog
         Label
         {
             style: 'subheading';
-            text: 'Fill fields below to get registered';
+            text: qsTr('Fill fields below to get registered');
         }
 
         View
@@ -56,7 +56,7 @@ U.Dialog
                     }
 
                     style: "title";
-                    text: "Please fill fields";
+                    text: qsTr("Please fill fields");
                 }
 
                 Item
@@ -76,7 +76,7 @@ U.Dialog
                     content: TextField
                     {
                         id: usernameField;
-                        placeholderText: "Username";
+                        placeholderText: qsTr("Username");
 
                         width: parent.width;
                         anchors.centerIn: parent;
@@ -101,7 +101,7 @@ U.Dialog
                         TextField
                         {
                             id: passwordField;
-                            placeholderText: "Password";
+                            placeholderText: qsTr("Password");
 
                             Layout.alignment: Qt.AlignVCenter
                             Layout.preferredWidth: 0.45 * parent.width
@@ -113,7 +113,7 @@ U.Dialog
                         TextField
                         {
                             id: passwordField2;
-                            placeholderText: "Repeat password";
+                            placeholderText: qsTr("Repeat password");
 
                             Layout.alignment: Qt.AlignVCenter;
                             Layout.preferredWidth: 0.45 * parent.width;
@@ -149,7 +149,7 @@ U.Dialog
                     content: TextField
                     {
                         id: emailField;
-                        placeholderText: "Email";
+                        placeholderText: qsTr("Email");
 
                         anchors.centerIn: parent;
                         width: parent.width;
@@ -175,7 +175,7 @@ U.Dialog
                     content: Checkbox
                     {
                         id: rememberCheckbox;
-                        text: 'Remember for further login attempt';
+                        text: qsTr('Remember for further login attempt');
                         checked: true;
                     }
                 }
@@ -185,7 +185,7 @@ U.Dialog
                     content: Checkbox
                     {
                         id: acceptConditionsCheckbox;
-                        text: 'I accept conditions';
+                        text: qsTr('I accept conditions');
                         checked: false;
                     }
                 }
@@ -227,28 +227,28 @@ U.Dialog
                 || passwordField2.text === '' || emailField.text === '')
         {
             statusLabel.error = true;
-            statusLabel.text = 'You must fill all fields.';
+            statusLabel.text = qsTr('You must fill all fields.');
             statusLabel.visible = true;
             return;
         }
         else if(!acceptConditionsCheckbox.checked)
         {
             statusLabel.error = true;
-            statusLabel.text = 'You must agree the conditions.';
+            statusLabel.text = qsTr('You must agree the conditions.');
             statusLabel.visible = true;
             return;
         }
         else if(!validateEmail(emailField.text))
         {
             statusLabel.error = true;
-            statusLabel.text = 'Your email must be valid.';
+            statusLabel.text = qsTr('Your email must be valid.');
             statusLabel.visible = true;
             return;
         }
         else if(passwordField.text !== passwordField2.text)
         {
             statusLabel.error = true;
-            statusLabel.text = 'Your passwords must match.';
+            statusLabel.text = qsTr('Your passwords must match.');
             statusLabel.visible = true;
             return;
         }

@@ -14,7 +14,7 @@ Item
 
         U.Label
         {
-            text: "You need to connect to U² Online before using this feature";
+            text: qsTr("You need to connect to U² Online before using this feature");
         }
 
         Row
@@ -23,7 +23,7 @@ Item
 
             Button
             {
-                text: 'Register';
+                text: qsTr('Register');
                 elevation: 1;
                 backgroundColor: Theme.accentColor;
                 onClicked:
@@ -34,7 +34,7 @@ Item
 
             Button
             {
-                text: 'Login';
+                text: qsTr('Login');
                 elevation: 2;
                 backgroundColor: Theme.accentColor;
                 onClicked:
@@ -45,7 +45,7 @@ Item
 
             Button
             {
-                text: 'uShare Online';
+                text: qsTr('uShare Online');
                 elevation: 1;
                 backgroundColor: Theme.accentColor;
             }

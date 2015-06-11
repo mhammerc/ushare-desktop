@@ -83,6 +83,19 @@ HEADERS += \
 SOURCES += \
     shortcuts/qxtglobalshortcut.cpp \
 
+# Translations
+
+lupdate_only{
+    SOURCES += qml/main_window/settings/*.qml \
+        qml/main_window/*.qml \
+        qml/components/*.qml \
+        qml/notification_window/*.qml \
+        qml/pastes/*.qml \
+        qml/upload_window/*.qml
+}
+
+TRANSLATIONS = ushare_fr.ts
+
 win32 {
     SOURCES += shortcuts/win/qxtglobalshortcut_win.cpp
     LIBS += -luser32

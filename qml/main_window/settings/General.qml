@@ -38,22 +38,32 @@ Item
                 }
 
                 style: 'title';
-                text: 'General settings';
+                text: qsTr('General settings');
             }
 
             CheckBox
             {
-                text: 'Run on startup';
+                text: qsTr('Run on startup');
                 checked: F.stringToBoolean(Settings.value('run_on_startup', false));
                 onCheckedChanged: Settings.setValue('run_on_startup', checked);
             }
 
             ListItem.SimpleMenu
             {
-                text: 'Language';
-                model: ['English', 'French'];
-                selectedIndex: Settings.value('language', 0);
-                onSelectedIndexChanged: Settings.setValue('language', selectedIndex);
+                text: qsTr('Language');
+                model: ['English', 'Français'];
+                selectedIndex:
+                {
+                    var locale = Settings.value('language', 'en');
+
+                    if(locale === 'en') return 0;
+                    else if(locale === 'fr') return 1;
+                }
+                onSelectedIndexChanged:
+                {
+                    if(selectedIndex === 0) Settings.setValue('language', 'en');
+                    else if(selectedIndex === 1) Settings.setValue('language', 'fr');
+                }
             }
 
             Label
@@ -66,7 +76,7 @@ Item
                 }
 
                 style: 'title';
-                text: 'On upload';
+                text: qsTr('On upload');
             }
 
             CheckBox
@@ -80,7 +90,7 @@ Item
             CheckBox
             {
                 id: notificationWindow;
-                text: 'Notify me on successful upload';
+                text: qsTr('Notify me on successful upload');
                 checked: F.stringToBoolean(Settings.value('show_notification_window', false));
                 onCheckedChanged: Settings.setValue('show_notification_window', checked);
             }
@@ -88,7 +98,7 @@ Item
             CheckBox
             {
                 id: progressWindow;
-                text: 'Show upload progress';
+                text: qsTr('Show upload progress');
                 checked: F.stringToBoolean(Settings.value('show_progress_window', false));
                 onCheckedChanged: Settings.setValue('show_progress_window', checked);
             }
@@ -96,7 +106,7 @@ Item
             CheckBox
             {
                 id: clipboard;
-                text: 'Copy web link to clipboard';
+                text: qsTr('Copy web link to clipboard');
                 checked: F.stringToBoolean(Settings.value('copy_link_to_clipboard', false));
                 onCheckedChanged: Settings.setValue('copy_link_to_clipboard', checked);
             }
@@ -104,7 +114,7 @@ Item
             CheckBox
             {
                 id: browser;
-                text: 'Open file in browser';
+                text: qsTr('Open file in browser');
                 checked: F.stringToBoolean(Settings.value('open_file_in_browser', false));
                 onCheckedChanged: Settings.setValue('open_file_in_browser', checked);
             } /* U.Checkbox */
