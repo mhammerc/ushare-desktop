@@ -20,13 +20,15 @@ SOURCES += main.cpp \
     sounds/filesendedsound.cpp \
     windows/notificationwindow.cpp \
     core/shared.cpp \
-    windows/pastewindow.cpp
+    windows/pastewindow.cpp \
+    windows/qmlengine.cpp
 
 RESOURCES += \
     images.qrc \
     sounds.qrc \
     translations.qrc \
-    qml.qrc
+    qml.qrc \
+    materialdesign.qrc
 
 DISTFILES += \
     qml/main_window/Overview.qml \
@@ -78,7 +80,8 @@ HEADERS += \
     qml/cpp_wrapper/desktop.h \
     core/shared.h \
     qml/cpp_wrapper/clipboard.h \
-    windows/pastewindow.h
+    windows/pastewindow.h \
+    windows/qmlengine.h
 
 # Global shortcuts from the Qxt Team !
 HEADERS += \

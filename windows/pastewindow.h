@@ -2,7 +2,7 @@
 #define PASTEWINDOW_H
 
 #include <QObject>
-#include <QQmlEngine>
+#include "qmlengine.h"
 #include <QQmlComponent>
 #include <QQuickItem>
 #include <QQuickWindow>
@@ -28,7 +28,7 @@ signals:
     void pasteReady(QString filename, QString content);
 
 private:
-    QQmlEngine engine;
+    QmlEngine engine;
     QQmlComponent * component;
     QObject * window;
 

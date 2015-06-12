@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QObject>
-#include <QQmlEngine>
+#include "qmlengine.h"
 #include <QQmlComponent>
 #include <QQmlContext>
 #include <QDebug>
@@ -22,7 +22,7 @@ public:
     ~MainWindow();
 
 private:
-    QQmlEngine engine;
+    QmlEngine engine;
     QQmlComponent  * component;
     QQmlContext * context;
     QObject * window;

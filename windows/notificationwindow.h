@@ -2,7 +2,7 @@
 #define NOTIFICATIONWINDOW_H
 
 #include <QObject>
-#include <QQmlEngine>
+#include "qmlengine.h"
 #include <QQmlComponent>
 #include <QQmlContext>
 #include <QQuickItem>
@@ -32,7 +32,7 @@ private:
     short secondsElapsed;
     QTimer * deleteTimer;
 
-    QQmlEngine engine;
+    QmlEngine engine;
     QQmlComponent  * component;
     QQmlContext * context;
     QObject * window;

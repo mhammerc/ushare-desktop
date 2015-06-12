@@ -7,7 +7,8 @@ NotificationWindow::NotificationWindow(QString title, QString text, QString link
     : QObject(parent),
       link(link)
 {
-    component = new QQmlComponent(&engine, QUrl::fromLocalFile("qml/notification_window/NotificationWindow.qml"), this);
+    engine.addImportPath("qrc:/");
+    component = new QQmlComponent(&engine, QUrl("qrc:/qml/notification_window/NotificationWindow.qml"), this);
 
     context = new QQmlContext(&engine);
 

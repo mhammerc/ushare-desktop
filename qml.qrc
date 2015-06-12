@@ -26,5 +26,6 @@
         <file>qml/main_window/settings/Saving.qml</file>
         <file>qml/main_window/settings/Updates.qml</file>
         <file>qml/pastes/PasteWindow.qml</file>
+        <file>qml/notification_window/NotificationWindow.qml</file>
     </qresource>
 </RCC>

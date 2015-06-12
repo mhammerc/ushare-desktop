@@ -222,7 +222,7 @@
     <message>
         <location filename="qml/components/Login.qml" line="202"/>
         <source>Connecting...</source>
-        <translation>Connection...</translation>
+        <translation>Connexion...</translation>
     </message>
 </context>
 <context>
@@ -294,7 +294,7 @@
     <message>
         <location filename="qml/main_window/Overview.qml" line="455"/>
         <source>Connection lost, error occurred</source>
-        <translation>Connection perdue, une erreur est survenue</translation>
+        <translation>Connexion perdue, une erreur est survenue</translation>
     </message>
 </context>
 <context>
@@ -433,7 +433,7 @@
     <message>
         <location filename="qml/main_window/SettingsPage.qml" line="7"/>
         <source>Keyboard shortcuts</source>
-        <translation>Raccourcis claviers</translation>
+        <translation>Raccourcis clavier</translation>
     </message>
     <message>
         <location filename="qml/main_window/SettingsPage.qml" line="7"/>

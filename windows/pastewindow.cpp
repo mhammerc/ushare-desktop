@@ -2,7 +2,9 @@
 
 PasteWindow::PasteWindow(QObject * parent) : QObject(parent)
 {
-    component = new QQmlComponent(&engine, QUrl::fromLocalFile("qml/pastes/PasteWindow.qml"));
+    engine.addImportPath(":/resources/qml-material/modules");
+    engine.addImportPath(":/resources/qml-extras/modules/");
+    component = new QQmlComponent(&engine, QUrl("qrc:/qml/pastes/PasteWindow.qml"));
     qDebug() << component->errorString();
 }
 

@@ -2,6 +2,8 @@
 
 MainWindow::MainWindow(QObject *parent) : QObject(parent)
 {
+    engine.addImportPath(":/resources/qml-material/modules");
+    engine.addImportPath(":/resources/qml-extras/modules/");
     component = new QQmlComponent(&engine, QUrl("qrc:/qml/main_window/main.qml"), this);
 
     /* create the context to set Settings before the creation */
