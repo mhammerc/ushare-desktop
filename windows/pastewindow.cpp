@@ -2,8 +2,6 @@
 
 PasteWindow::PasteWindow(QObject * parent) : QObject(parent)
 {
-    engine.addImportPath(":/resources/qml-material/modules");
-    engine.addImportPath(":/resources/qml-extras/modules/");
     component = new QQmlComponent(&engine, QUrl("qrc:/qml/pastes/PasteWindow.qml"));
     qDebug() << component->errorString();
 }

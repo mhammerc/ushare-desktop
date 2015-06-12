@@ -2,7 +2,6 @@
 
 UploadingWindow::UploadingWindow(QObject *parent) : QObject(parent)
 {
-    engine.addImportPath("qrc:/");
     component = new QQmlComponent(&engine, QUrl::fromLocalFile("qrc:/qml/upload_window/UploadWindow.qml"), this);
 
     context = new QQmlContext(&engine);
