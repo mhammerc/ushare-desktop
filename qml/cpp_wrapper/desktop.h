@@ -9,6 +9,7 @@
 #include <QDesktopServices>
 #include <QGuiApplication>
 #include <QCryptographicHash>
+#include <QRegExp>
 
 class QmlDesktop : public QObject
 {
@@ -24,6 +25,15 @@ public:
         QByteArray byteArray;
         byteArray.append(textToHash);
         return QString(QCryptographicHash::hash(byteArray, QCryptographicHash::Sha256).toHex());
+    }
+
+    Q_INVOKABLE bool isValidEmail(QString email)
+    {
+        QRegExp emailRegex;
+        emailRegex.setCaseSensitivity(Qt::CaseInsensitive);
+        emailRegex.setPattern(R"(\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b)");
+
+        return emailRegex.exactMatch(email);
     }
 
     QSize size()

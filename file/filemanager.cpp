@@ -88,8 +88,14 @@ void FileManager::sendClipboard()
 
 void FileManager::sendDatas(QString filename, QString content)
 {
-    if(!filename.contains("."))
+    if(filename.isEmpty())
+    {
+        filename = Utils::getNewFileName(".txt");
+    }
+    else if(!filename.contains("."))
+    {
         filename.append(".txt");
+    }
 
     QString filePath = Utils::getFolderPath(filename);
     QFile file(filePath);

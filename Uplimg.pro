@@ -102,7 +102,8 @@ lupdate_only{
         qml/upload_window/*.qml
 }
 
-TRANSLATIONS = ushare_fr.ts
+TRANSLATIONS = ushare_fr.ts \
+    ushare_sp.ts
 
 win32 {
     SOURCES += shortcuts/win/qxtglobalshortcut_win.cpp

@@ -66,13 +66,29 @@ ApplicationWindow
                         spacing: Units.dp(8);
                         anchors.right: parent.right;
 
+                        Label
+                        {
+                            id: errorLabel;
+                            color: 'red';
+                            visible: false;
+                        }
+
                         Button
                         {
                             id: buttonSend;
                             text: qsTr('Send!');
                             elevation: 1;
 
-                            onClicked: root.send(pasteName.text, content.text);
+                            onClicked:
+                            {
+                                if(content.text !== "")
+                                    root.send(pasteName.text, content.text);
+                                else
+                                {
+                                    errorLabel.text = qsTr('You must insert content into your paste.');
+                                    errorLabel.visible = true;
+                                }
+                            }
                         }
 
                         Button

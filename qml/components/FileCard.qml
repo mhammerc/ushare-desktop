@@ -170,12 +170,6 @@ View
             width: Math.min(root.moreMenuWidth, root.width);
             height: Math.min(10 * Units.dp(48) + Units.dp(16), root.moreMenuModel.length * Units.dp(48) + Units.dp(16));
 
-            Rectangle
-            {
-                anchors.fill: parent;
-                radius: Units.dp(2);
-            }
-
             ListView
             {
                 id: listView;
@@ -186,6 +180,7 @@ View
                     right: parent.right;
                     top: parent.top;
                     topMargin: Units.dp(8);
+                    bottom: parent.bottom;
                 }
 
                 interactive: false;
@@ -202,9 +197,8 @@ View
                         listView.currentIndex = index;
                         menu.close();
 
-                        if(listView.currentIndex === 1)
+                        if(fileInformations.password && listView.currentIndex === 2 || !fileInformations.password && listView.currentIndex === 1)
                         {
-
                             UOnline.deleteFile(fileInformations.shortname, function(err, result)
                             {
                                 if(err || !result.success)
@@ -221,13 +215,27 @@ View
                         {
                             passwordDialog.show();
                         }
+
+                        else if(fileInformations.password && listView.currentIndex === 1)
+                        {
+                            UOnline.editFilePassword('', fileInformations.shortname, function(err, result)
+                            {
+                                if(err || !result.success)
+                                {
+                                    snackbar.open(result.message ? result.message : qsTr('An error occurred.'));
+                                    return;
+                                }
+
+                                snackbar.open(qsTr('Password deleted.'));
+                            });
+                        }
                     }
                 }
             }
         }
     }
 
-    property var moreMenuModel: [qsTr('Edit password'), qsTr('Delete')];
+    property var moreMenuModel: fileInformations.password ? [qsTr('Edit password'), qsTr('Delete password'), qsTr('Delete')] : [qsTr('Edit password'), qsTr('Delete')];
 
     Label
     {
@@ -252,45 +260,63 @@ View
         moreMenuWidth = maxWidth;
     }
 
-    Dialog
+    U.Dialog
     {
         id: passwordDialog;
 
         title: qsTr("Edit password");
         hasActions: true;
 
-        Label
+        Column
         {
-            style: "subheading";
-            text: qsTr("Change the password in order to protect the file.");
-        }
+            spacing: Units.dp(8);
 
-        TextField
-        {
-            id: newPassword;
-
-            echoMode: TextInput.Password;
-            width: parent.width;
-
-            placeholderText: qsTr("New password");
-        }
-
-        CheckBox
-        {
-            text: qsTr("Show password");
-
-            width: parent.width;
-            checked: false;
-
-            onCheckedChanged:
+            Label
             {
-                if(checked) newPassword.echoMode = TextInput.Normal;
-                else newPassword.echoMode = TextInput.Password;
+                style: "subheading";
+                text: qsTr("Change the password in order to protect the file.");
+            }
+
+            Label
+            {
+                id: statusLabel;
+                visible: false;
+                color: 'red';
+            }
+
+            TextField
+            {
+                id: newPassword;
+
+                echoMode: TextInput.Password;
+                width: parent.width;
+
+                placeholderText: qsTr("New password");
+            }
+
+            CheckBox
+            {
+                text: qsTr("Show password");
+
+                checked: false;
+
+                onCheckedChanged:
+                {
+                    if(checked) newPassword.echoMode = TextInput.Normal;
+                    else newPassword.echoMode = TextInput.Password;
+                }
             }
         }
 
         onAccepted:
         {
+            if(!newPassword.text)
+            {
+                statusLabel.text = 'You must provide a password';
+                statusLabel.visible = true;
+                return;
+            }
+
             UOnline.editFilePassword(newPassword.text, fileInformations.shortname, function(err, result)
             {
                 if(err || !result.success)
@@ -301,7 +327,11 @@ View
 
                 snackbar.open(qsTr('Password edited.'));
             });
+
+            close();
         }
+
+        onRejected: close();
     }
 
 } /* View */

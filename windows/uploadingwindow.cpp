@@ -2,7 +2,7 @@
 
 UploadingWindow::UploadingWindow(QObject *parent) : QObject(parent)
 {
-    component = new QQmlComponent(&engine, QUrl::fromLocalFile("qrc:/qml/upload_window/UploadWindow.qml"), this);
+    component = new QQmlComponent(&engine, QUrl("qrc:/qml/upload_window/UploadWindow.qml"), this);
 
     context = new QQmlContext(&engine);
 

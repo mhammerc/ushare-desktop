@@ -7,8 +7,6 @@ var wsRequestIsPending = false;
 var wsRequestCallback = {};
 var wsCallback = {}; //connected, closed, error
 
-var sourceName = 'uShare-dev'
-
 var _connected = false;
 
 var _userInfo;
@@ -66,18 +64,15 @@ function editFilePassword(newPassword, shortName, callback)
 {
     var onEnd = function(err, result)
     {
-        console.log(Settings.editPasswordUrl);
         callback(err, JSON.parse(result));
     }
-
-    console.log(_accountKey + '+' + _privateKey);
 
     Network.post(Settings.editPasswordUrl, {
                      accountkey: _accountKey,
                      privatekey: _privateKey,
                      password: newPassword,
                      shortname: shortName,
-                     source: sourceName, }, {}, onEnd);
+                     source: Settings.appVersion, }, {}, onEnd);
 }
 
 function deleteFile(shortName, callback)
@@ -91,7 +86,7 @@ function deleteFile(shortName, callback)
                      accountkey: _accountKey,
                      privatekey: _privateKey,
                      shortname: shortName,
-                     source: sourceName }, {}, onEnd);
+                     source: Settings.appVersion }, {}, onEnd);
 }
 
 function connect(username, password, callback)
@@ -129,7 +124,7 @@ function connect(username, password, callback)
     };
 
     Network.post(Settings.authUrl,
-                 { username: _username, password: _password, source: sourceName },
+                 { username: _username, password: _password, source: Settings.appVersion },
                  {},
                  onEnd);
 }
@@ -161,7 +156,7 @@ function register(username, password, email, callback)
     };
 
     Network.post(Settings.registerUrl,
-                { username: _username, password: _password, email: _email, source: sourceName }, {}, onEndRegister);
+                { username: _username, password: _password, email: _email, source: Settings.appVersion }, {}, onEndRegister);
 }
 
 /** WEBSOCKET **/
@@ -199,7 +194,7 @@ function wsAuth(callback)
     object.path = "/user/auth";
     object.username = _username;
     object.password = _password;
-    object.source = sourceName;
+    object.source = Settings.appVersion;
 
     wsSendTextMessage(JSON.stringify(object), function(result) { callback(JSON.parse(result)); });
 }

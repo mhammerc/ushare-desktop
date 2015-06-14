@@ -4,13 +4,13 @@ import Material 0.1
 import Material.ListItems 0.1 as ListItem
 import Material.Extras 0.1
 import U.Global 1.0
-import "." as U
-import "./usquare_online.js" as UOnline
+import '.' as U
+import './usquare_online.js' as UOnline
 
 U.Dialog
 {
     id: dialog;
-    title: qsTr("Register");
+    title: qsTr('Register');
     height: Units.dp(445);
 
     property bool hasError: false;
@@ -55,8 +55,8 @@ U.Dialog
                         margins: Units.dp(16);
                     }
 
-                    style: "title";
-                    text: qsTr("Please fill fields");
+                    style: 'title';
+                    text: qsTr('Please fill fields');
                 }
 
                 Item
@@ -70,18 +70,19 @@ U.Dialog
                     action: Icon
                     {
                         anchors.centerIn: parent;
-                        name: "action/account_circle";
+                        name: 'action/account_circle';
                     }
 
                     content: TextField
                     {
                         id: usernameField;
-                        placeholderText: qsTr("Username");
+                        placeholderText: qsTr('Username');
 
                         width: parent.width;
                         anchors.centerIn: parent;
 
                         floatingLabel: true;
+
                     }
                 }
 
@@ -90,7 +91,7 @@ U.Dialog
                     action: Icon
                     {
                         anchors.centerIn: parent;
-                        name: "action/https";
+                        name: 'action/https';
                     }
 
                     content: RowLayout
@@ -101,7 +102,7 @@ U.Dialog
                         TextField
                         {
                             id: passwordField;
-                            placeholderText: qsTr("Password");
+                            placeholderText: qsTr('Password');
 
                             Layout.alignment: Qt.AlignVCenter
                             Layout.preferredWidth: 0.45 * parent.width
@@ -113,7 +114,7 @@ U.Dialog
                         TextField
                         {
                             id: passwordField2;
-                            placeholderText: qsTr("Repeat password");
+                            placeholderText: qsTr('Repeat password');
 
                             Layout.alignment: Qt.AlignVCenter;
                             Layout.preferredWidth: 0.45 * parent.width;
@@ -143,13 +144,13 @@ U.Dialog
                     action: Icon
                     {
                         anchors.centerIn: parent;
-                        name: "communication/email";
+                        name: 'communication/email';
                     }
 
                     content: TextField
                     {
                         id: emailField;
-                        placeholderText: qsTr("Email");
+                        placeholderText: qsTr('Email');
 
                         anchors.centerIn: parent;
                         width: parent.width;
@@ -158,10 +159,10 @@ U.Dialog
 
                         hasError:
                         {
-                            if(text !== "")
+                            if(text)
                             {
                                 dialog.hasError = true;
-                                return !validateEmail(text);
+                                return !Desktop.isValidEmail(text);
                             }
 
                             dialog.hasError = false;
@@ -223,8 +224,8 @@ U.Dialog
 
     onAccepted:
     {
-        if(usernameField.text === '' || passwordField.text === ''
-                || passwordField2.text === '' || emailField.text === '')
+        if(!usernameField.text || !passwordField.text
+                || !passwordField2.text || !emailField.text)
         {
             statusLabel.error = true;
             statusLabel.text = qsTr('You must fill all fields.');
@@ -238,7 +239,7 @@ U.Dialog
             statusLabel.visible = true;
             return;
         }
-        else if(!validateEmail(emailField.text))
+        else if(!Desktop.isValidEmail(emailField.text))
         {
             statusLabel.error = true;
             statusLabel.text = qsTr('Your email must be valid.');
@@ -313,11 +314,5 @@ U.Dialog
         statusLabel.visible = true;
 
         UOnline.register(username, password, email, callback);
-    }
-
-    function validateEmail(email)
-    {
-        var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(email);
     }
 }
