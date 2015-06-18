@@ -22,9 +22,9 @@ SystemTrayIcon * uShare::getSystemTray()
 
 void uShare::initModules()
 {
-    mainWindow = new MainWindow(this);
-
     systemTray = new SystemTrayIcon(this);
+
+    mainWindow = new MainWindow(systemTray, this);
 
     screenTaker = new ScreenTaker(this);
 

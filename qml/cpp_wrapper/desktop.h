@@ -49,6 +49,13 @@ public:
         return QString(QCryptographicHash::hash(byteArray, QCryptographicHash::Sha256).toHex());
     }
 
+    static QString encryptAsMD5(QString textToHash)
+    {
+        QByteArray byteArray;
+        byteArray.append(textToHash);
+        return QString(QCryptographicHash::hash(byteArray, QCryptographicHash::Md5).toHex());
+    }
+
     Q_INVOKABLE bool isValidEmail(QString email)
     {
         QRegExp emailRegex;

@@ -8,17 +8,19 @@
 #include <QDebug>
 
 #include "core/shared.h"
+#include "core/systemtrayicon.h"
 
 #include "qml/cpp_wrapper/qmlsettings.h"
 #include "qml/cpp_wrapper/clipboard.h"
 #include "qml/cpp_wrapper/desktop.h"
 #include "qml/cpp_wrapper/ushareonline.h"
+#include "qml/cpp_wrapper/shortcuts.h"
 
 class MainWindow : public QObject
 {
     Q_OBJECT
 public:
-    explicit MainWindow(QObject *parent = 0);
+    explicit MainWindow(SystemTrayIcon * systemTrayIcon, QObject * parent = 0);
     ~MainWindow();
 
 private:

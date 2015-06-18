@@ -21,9 +21,28 @@ void SystemTrayIcon::init()
 {
     setIcon(QIcon(":/images/ushare_icon.png"));
     setToolTip("Uplimg");
+    makeShortcuts();
     makeContextMenu();
     makeGlobalShortcuts();
     makeConnections();
+}
+
+void SystemTrayIcon::makeShortcuts()
+{
+    if(Settings::entry(SettingsKeys::SHORTCUT_FULLSCREEN).isNull())
+    {
+        Settings::setEntry(SettingsKeys::SHORTCUT_FULLSCREEN, "ALT+1");
+        Settings::setEntry(SettingsKeys::SHORTCUT_AREASCREEN, "ALT+2");
+        Settings::setEntry(SettingsKeys::SHORTCUT_NEWPASTE, "ALT+3");
+        Settings::setEntry(SettingsKeys::SHORTCUT_SENDFILE, "ALT+4");
+        Settings::setEntry(SettingsKeys::SHORTCUT_SENDCLIPBOARD, "ALT+5");
+    }
+
+    captureFullScreen_k = QKeySequence(Settings::entry(SettingsKeys::SHORTCUT_FULLSCREEN).toString());
+    captureSelectedScreen_k = QKeySequence(Settings::entry(SettingsKeys::SHORTCUT_AREASCREEN).toString());
+    makePaste_k = QKeySequence(Settings::entry(SettingsKeys::SHORTCUT_NEWPASTE).toString());
+    sendFile_k = QKeySequence(Settings::entry(SettingsKeys::SHORTCUT_SENDFILE).toString());
+    sendClipboard_k = QKeySequence(Settings::entry(SettingsKeys::SHORTCUT_SENDCLIPBOARD).toString());
 }
 
 void SystemTrayIcon::makeContextMenu()
@@ -66,17 +85,41 @@ void SystemTrayIcon::makeGlobalShortcuts()
 {
     /* Then we set up global shortcuts */
 
-    captureFullScreen_s = new QxtGlobalShortcut(captureFullScreen_k);
-    captureSelectedScreen_s = new QxtGlobalShortcut(captureSelectedScreen_k);
-    makePaste_s = new QxtGlobalShortcut(makePaste_k);
-    sendFile_s = new QxtGlobalShortcut(sendFile_k);
-    sendClipboard_s = new QxtGlobalShortcut(sendClipboard_k);
+    captureFullScreen_s = new QxtGlobalShortcut(captureFullScreen_k, this);
+    captureSelectedScreen_s = new QxtGlobalShortcut(captureSelectedScreen_k, this);
+    makePaste_s = new QxtGlobalShortcut(makePaste_k, this);
+    sendFile_s = new QxtGlobalShortcut(sendFile_k, this);
+    sendClipboard_s = new QxtGlobalShortcut(sendClipboard_k, this);
 
     QObject::connect(captureFullScreen_s, &QxtGlobalShortcut::activated, captureFullScreen, &QAction::trigger);
     QObject::connect(captureSelectedScreen_s, &QxtGlobalShortcut::activated, captureSelectedScreen, &QAction::trigger);
     QObject::connect(makePaste_s, &QxtGlobalShortcut::activated, makePaste, &QAction::trigger);
     QObject::connect(sendFile_s, &QxtGlobalShortcut::activated, sendFile, &QAction::trigger);
     QObject::connect(sendClipboard_s, &QxtGlobalShortcut::activated, sendClipboard, &QAction::trigger);
+}
+
+void SystemTrayIcon::updateShortcuts()
+{
+    captureFullScreen_s->setShortcut(captureFullScreen_k);
+    captureSelectedScreen_s->setShortcut(captureSelectedScreen_k);
+    makePaste_s->setShortcut(makePaste_k);
+    sendFile_s->setShortcut(sendFile_k);
+    sendClipboard_s->setShortcut(sendClipboard_k);
+
+    captureFullScreen->setShortcut(captureFullScreen_k);
+    captureSelectedScreen->setShortcut(captureSelectedScreen_k);
+    makePaste->setShortcut(makePaste_k);
+    sendFile->setShortcut(sendFile_k);
+    sendClipboard->setShortcut(sendClipboard_k);
+}
+
+void SystemTrayIcon::setShortcutsEnabled(bool enabled)
+{
+    captureFullScreen_s->setEnabled(enabled);
+    captureSelectedScreen_s->setEnabled(enabled);
+    makePaste_s->setEnabled(enabled);
+    sendFile_s->setEnabled(enabled);
+    sendClipboard_s->setEnabled(enabled);
 }
 
 void SystemTrayIcon::makeConnections()

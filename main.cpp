@@ -1,4 +1,4 @@
-/* Welcome in USquare !! I'm really happy to see you here :-)
+/* Welcome in uShare !! I'm really happy to see you here :-)
  * Don't be scary about comment or edit the code :-P
  * I hope you a good journey in this code :-) *
 */
@@ -22,9 +22,10 @@
 #include <QFileInfo>
 #include <QtQml>
 #include <QIcon>
+
+#include "qml/cpp_wrapper/shortcutgetter.h"
 #include "ushare.h"
 
-//#include "core/settings.h"
 
 int main(int argc, char *argv[])
 {
@@ -33,7 +34,8 @@ int main(int argc, char *argv[])
     app.setQuitOnLastWindowClosed(false);
     app.setWindowIcon(QIcon(":/images/ushare_icon.png"));
 
-    qmlRegisterSingletonType(QUrl("qrc:/qml/main_window/global/Global.qml"), "U.Global", 1, 0, "Global");
+    //qmlRegisterSingletonType(QUrl("qrc:/qml/main_window/global/Global.qml"), "U.Global", 1, 0, "Global");
+    qmlRegisterType<ShortcutGetter>("uShare", 0, 1, "ShortcutGetter");
 
     QCoreApplication::setOrganizationName("uSquare");
     QCoreApplication::setOrganizationDomain("usquare.io");

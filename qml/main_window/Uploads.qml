@@ -1,7 +1,6 @@
 import QtQuick 2.0
 import Material 0.1
 import Material.Extras 0.1
-import U.Global 1.0
 import "../components" as U
 
 Item
@@ -106,6 +105,11 @@ Item
 
         onTriggered:
         {
+            if(!baseItem.visible)
+            {
+                return;
+            }
+
             if(!uShareOnline.connected || uShareOnline.loading)
             {
                 return;

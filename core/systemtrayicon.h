@@ -8,6 +8,7 @@
 #include <QAction>
 #include <QKeySequence>
 
+#include "core/settings.h"
 #include "shortcuts/qxtglobalshortcut.h"
 
 class SystemTrayIcon : public QSystemTrayIcon
@@ -17,6 +18,15 @@ public:
     SystemTrayIcon(QObject * parent = 0);
     SystemTrayIcon(const QIcon & icon, QObject * parent = 0);
     ~SystemTrayIcon();
+
+    QKeySequence captureFullScreen_k;
+    QKeySequence captureSelectedScreen_k;
+    QKeySequence makePaste_k;
+    QKeySequence sendFile_k;
+    QKeySequence sendClipboard_k;
+
+    void updateShortcuts();
+    void setShortcutsEnabled(bool enabled = true);
 
 signals:
     void openUplimgAsked();
@@ -28,6 +38,7 @@ signals:
 
 private:
     void init();
+    void makeShortcuts();
     void makeContextMenu();
     void makeGlobalShortcuts();
     void makeConnections();
@@ -39,11 +50,6 @@ private:
     const QString fileIcon = ":/images/context_menu/file.png";
     const QString clipboardIcon = ":/images/context_menu/clipboard.png";
 
-    const QKeySequence captureFullScreen_k = QKeySequence("alt+1");
-    const QKeySequence captureSelectedScreen_k = QKeySequence("alt+2");
-    const QKeySequence makePaste_k = QKeySequence("alt+3");
-    const QKeySequence sendFile_k = QKeySequence("alt+4");
-    const QKeySequence sendClipboard_k = QKeySequence("alt+5");
 
     /* The menu */
     QMenu * menu;

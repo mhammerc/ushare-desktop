@@ -10,7 +10,6 @@
         <file>qml/components/Label.qml</file>
         <file>qml/components/Loading.qml</file>
         <file>qml/components/Login.qml</file>
-        <file>qml/components/network.js</file>
         <file>qml/components/Offline.qml</file>
         <file>qml/components/Register.qml</file>
         <file>qml/components/Slider.qml</file>
@@ -25,5 +24,6 @@
         <file>qml/main_window/settings/Updates.qml</file>
         <file>qml/pastes/PasteWindow.qml</file>
         <file>qml/notification_window/NotificationWindow.qml</file>
+        <file>qml/main_window/settings/Keyboardshortcuts.qml</file>
     </qresource>
 </RCC>

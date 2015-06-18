@@ -1,9 +1,7 @@
 import QtQuick 2.0
 import Material 0.1
 import Material.Extras 0.1
-import U.Global 1.0
 import "../components" as U
-import "../components/network.js" as Network
 
 Item
 {
@@ -11,17 +9,6 @@ Item
 
     /* Hold user's datas. See the API to know what is the object */
     property var datas: ({});
-
-    onFocusChanged:
-    {
-        if(!focus)
-        {
-            refreshTimer.running = false;
-            return;
-        }
-
-        refreshTimer.running = true;
-    }
 
     Component.onCompleted:
     {
@@ -70,7 +57,7 @@ Item
                         width: 85;
                         height: 85;
 
-                        source: "qrc:/design/inconnu.jpg";
+                        source: datas.avatarUrl;
                     }
 
                     Label
@@ -267,12 +254,17 @@ Item
         id: refreshTimer;
 
         interval: 1000;
-        running: false;
+        running: root.focus;
         repeat: true;
         triggeredOnStart: false;
 
         onTriggered:
         {
+            if(!baseItem.visible)
+            {
+                return;
+            }
+
             if(!uShareOnline.connected || uShareOnline.loading)
             {
                 return;
@@ -307,7 +299,6 @@ Item
             }
 
             datas = response;
-            updateAvatar();
         }
     }
 
@@ -336,22 +327,6 @@ Item
     function updateDatas()
     {
         uShareOnline.getUserInfos();
-    }
-
-    function updateAvatar()
-    {
-        Network.gravatar(datas.email, Desktop.md5, function(url)
-        {
-            if(url !== null)
-            {
-                if(gravatar.source === url) return;
-
-                gravatar.source = url;
-                return;
-            }
-
-            gravatar.source = "qrc:/design/inconnu.jpg";
-        });
     }
 
     function disconnect()

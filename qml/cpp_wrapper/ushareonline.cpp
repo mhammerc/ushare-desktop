@@ -125,6 +125,30 @@ void UShareOnline::deleteFile(QString shortName)
 void UShareOnline::disconnect()
 {
     setConnected(false);
+
+    setAccountKey("");
+    setPrivateKey("");
+    Settings::setEntry(SettingsKeys::ACCOUNT_KEY, "");
+    Settings::setEntry(SettingsKeys::PRIVATE_KEY, "");
+}
+
+void UShareOnline::getGravatarUrl(QString email)
+{
+    callback = std::bind(&UShareOnline::_gotGravatarUrl, this, std::placeholders::_1);
+
+    email = email.toLower();
+    email = QmlDesktop::encryptAsMD5(email);
+
+    QString gravatarUrl = "http://www.gravatar.com/" + email + ".json";
+
+    get(gravatarUrl);
+}
+
+void UShareOnline::getUpdates()
+{
+    callback = std::bind(&UShareOnline::_gotUpdates, this, std::placeholders::_1);
+
+    get(Shared::updateInfoUrl);
 }
 
 void UShareOnline::get(const QUrl &url, std::map<QByteArray, QByteArray> &headers)
@@ -254,6 +278,22 @@ void UShareOnline::_fileDeleted(QByteArray response)
     QVariantMap result = document.object().toVariantMap();
 
     emit fileDeleted(result);
+}
+
+void UShareOnline::_gotGravatarUrl(QByteArray response)
+{
+    QJsonDocument document = QJsonDocument::fromJson(response);
+    QVariantMap result = document.object().toVariantMap();
+
+    emit gotGravatarUrl(result);
+}
+
+void UShareOnline::_gotUpdates(QByteArray response)
+{
+    QJsonDocument document = QJsonDocument::fromJson(response);
+    QVariantList result = document.array().toVariantList();
+
+    emit gotUpdates(result);
 }
 
 void UShareOnline::requestFinished()

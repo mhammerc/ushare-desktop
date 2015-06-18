@@ -12,7 +12,9 @@
 #include <QNetworkReply>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QJsonArray>
 #include <QVariantMap>
+#include <QVariantList>
 
 #include "core/shared.h"
 #include "core/settings.h"
@@ -64,6 +66,10 @@ private:
     void _filePasswordEdited(QByteArray response);
     void _fileDeleted(QByteArray response);
 
+    void _gotGravatarUrl(QByteArray response);
+
+    void _gotUpdates(QByteArray response);
+
 
     static std::map<QByteArray, QByteArray> emptyMap;
     void get(const QUrl &url, std::map<QByteArray, QByteArray> &headers = emptyMap);
@@ -78,6 +84,10 @@ signals:
     void gotUserInfos(QVariantMap response);
     void filePasswordEdited(QVariantMap response);
     void fileDeleted(QVariantMap response);
+
+    void gotGravatarUrl(QVariantMap response);
+
+    void gotUpdates(QVariantList response);
 
     void accountKeyChanged(QString);
     void privateKeyChanged(QString);
@@ -97,6 +107,10 @@ public:
     Q_INVOKABLE void editFilePassword(QString newPassword, QString shortName);
     Q_INVOKABLE void deleteFile(QString shortName);
     Q_INVOKABLE void disconnect();
+
+    Q_INVOKABLE void getGravatarUrl(QString email);
+
+    Q_INVOKABLE void getUpdates();
 };
 
 #endif // USHAREONLINE_H

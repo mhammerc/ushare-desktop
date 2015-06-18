@@ -60,92 +60,94 @@
 <context>
     <name>FileCard</name>
     <message>
-        <location filename="qml/components/FileCard.qml" line="67"/>
+        <location filename="qml/components/FileCard.qml" line="66"/>
         <source>%1 views</source>
         <translation>%1 vues</translation>
     </message>
     <message>
-        <location filename="qml/components/FileCard.qml" line="77"/>
-        <location filename="qml/components/FileCard.qml" line="87"/>
+        <location filename="qml/components/FileCard.qml" line="76"/>
+        <location filename="qml/components/FileCard.qml" line="86"/>
         <source>Click to see password</source>
         <translation>Voir le mot de passe</translation>
     </message>
     <message>
-        <location filename="qml/components/FileCard.qml" line="77"/>
-        <location filename="qml/components/FileCard.qml" line="88"/>
+        <location filename="qml/components/FileCard.qml" line="76"/>
+        <location filename="qml/components/FileCard.qml" line="87"/>
         <source>No password</source>
         <translation>Pas de mot de passe</translation>
     </message>
     <message>
-        <location filename="qml/components/FileCard.qml" line="119"/>
+        <location filename="qml/components/FileCard.qml" line="118"/>
         <source>Open</source>
         <translation>Ouvrir</translation>
     </message>
     <message>
-        <location filename="qml/components/FileCard.qml" line="134"/>
+        <location filename="qml/components/FileCard.qml" line="133"/>
         <source>Copy link</source>
         <translation>Copier</translation>
     </message>
     <message>
-        <location filename="qml/components/FileCard.qml" line="144"/>
+        <location filename="qml/components/FileCard.qml" line="143"/>
         <source>Link copied!</source>
         <translation>Lien copié !</translation>
     </message>
     <message>
-        <location filename="qml/components/FileCard.qml" line="151"/>
+        <location filename="qml/components/FileCard.qml" line="150"/>
         <source>More</source>
         <translation>Plus</translation>
     </message>
     <message>
-        <location filename="qml/components/FileCard.qml" line="206"/>
-        <location filename="qml/components/FileCard.qml" line="225"/>
-        <location filename="qml/components/FileCard.qml" line="324"/>
         <source>An error occurred.</source>
-        <translation>Une erreur est survenue.</translation>
+        <translation type="vanished">Une erreur est survenue.</translation>
     </message>
     <message>
-        <location filename="qml/components/FileCard.qml" line="210"/>
+        <location filename="qml/components/FileCard.qml" line="315"/>
         <source>File deleted!</source>
         <translation>Fichier supprimé !</translation>
     </message>
     <message>
-        <location filename="qml/components/FileCard.qml" line="229"/>
         <source>Password deleted.</source>
-        <translation>Mot de passe supprimé.</translation>
+        <translation type="vanished">Mot de passe supprimé.</translation>
     </message>
     <message>
-        <location filename="qml/components/FileCard.qml" line="238"/>
-        <location filename="qml/components/FileCard.qml" line="267"/>
+        <location filename="qml/components/FileCard.qml" line="219"/>
+        <location filename="qml/components/FileCard.qml" line="248"/>
         <source>Edit password</source>
         <translation>Changer le mot de passe</translation>
     </message>
     <message>
-        <location filename="qml/components/FileCard.qml" line="238"/>
+        <location filename="qml/components/FileCard.qml" line="219"/>
         <source>Delete</source>
         <translation>Supprimer</translation>
     </message>
     <message>
-        <location filename="qml/components/FileCard.qml" line="238"/>
+        <location filename="qml/components/FileCard.qml" line="219"/>
         <source>Delete password</source>
         <translation>Supprimer le mot de passe</translation>
     </message>
     <message>
-        <location filename="qml/components/FileCard.qml" line="277"/>
+        <location filename="qml/components/FileCard.qml" line="258"/>
         <source>Change the password in order to protect the file.</source>
         <translation>Changez le mot de passe afin de protéger le fichier.</translation>
     </message>
     <message>
-        <location filename="qml/components/FileCard.qml" line="294"/>
+        <location filename="qml/components/FileCard.qml" line="275"/>
         <source>New password</source>
         <translation>Nouveau mot de passe</translation>
     </message>
     <message>
-        <location filename="qml/components/FileCard.qml" line="299"/>
+        <location filename="qml/components/FileCard.qml" line="280"/>
         <source>Show password</source>
         <translation>Afficher le mot de passe</translation>
     </message>
     <message>
-        <location filename="qml/components/FileCard.qml" line="328"/>
+        <location filename="qml/components/FileCard.qml" line="300"/>
+        <location filename="qml/components/FileCard.qml" line="311"/>
+        <source>Can&apos;t reach uShare Online servers.</source>
+        <translation>Impossible de contacter les serveurs de uShareOnline.</translation>
+    </message>
+    <message>
+        <location filename="qml/components/FileCard.qml" line="304"/>
         <source>Password edited.</source>
         <translation>Mot de passe modifié.</translation>
     </message>
@@ -201,37 +203,47 @@
 <context>
     <name>Login</name>
     <message>
-        <location filename="qml/components/Login.qml" line="14"/>
+        <location filename="qml/components/Login.qml" line="13"/>
         <source>Login</source>
         <translation>Se connecter</translation>
     </message>
     <message>
-        <location filename="qml/components/Login.qml" line="29"/>
+        <location filename="qml/components/Login.qml" line="26"/>
         <source>You are not connected. Try to login to continue.</source>
         <translation>Connectez vous pour continuer.</translation>
     </message>
     <message>
-        <location filename="qml/components/Login.qml" line="51"/>
+        <location filename="qml/components/Login.qml" line="48"/>
         <source>Please enter your credentials</source>
         <translation>Entrez vos identifiants</translation>
     </message>
     <message>
-        <location filename="qml/components/Login.qml" line="80"/>
+        <location filename="qml/components/Login.qml" line="77"/>
         <source>Username</source>
         <translation>Nom d&apos;utilisateur</translation>
     </message>
     <message>
-        <location filename="qml/components/Login.qml" line="100"/>
+        <location filename="qml/components/Login.qml" line="97"/>
         <source>Password</source>
         <translation>Mot de passe</translation>
     </message>
     <message>
-        <location filename="qml/components/Login.qml" line="115"/>
+        <location filename="qml/components/Login.qml" line="112"/>
         <source>Remember</source>
         <translation>Se souvenir de moi</translation>
     </message>
     <message>
-        <location filename="qml/components/Login.qml" line="202"/>
+        <location filename="qml/components/Login.qml" line="169"/>
+        <source>Can&apos;t connect to the servers of uShare Online</source>
+        <translation>Impossible de contacter les serveurs de uShare Online</translation>
+    </message>
+    <message>
+        <location filename="qml/components/Login.qml" line="177"/>
+        <source>Wrong credentials</source>
+        <translation>Mauvais identifiants</translation>
+    </message>
+    <message>
+        <location filename="qml/components/Login.qml" line="205"/>
         <source>Connecting...</source>
         <translation>Connexion...</translation>
     </message>
@@ -262,50 +274,48 @@
 <context>
     <name>Overview</name>
     <message>
-        <location filename="qml/main_window/Overview.qml" line="108"/>
-        <location filename="qml/main_window/Overview.qml" line="123"/>
+        <location filename="qml/main_window/Overview.qml" line="105"/>
+        <location filename="qml/main_window/Overview.qml" line="120"/>
         <source>Opening uShare online</source>
         <translation>Ouverture de uShare online</translation>
     </message>
     <message>
-        <location filename="qml/main_window/Overview.qml" line="118"/>
+        <location filename="qml/main_window/Overview.qml" line="115"/>
         <source>Edit account</source>
         <translation>Modifier le compte</translation>
     </message>
     <message>
-        <location filename="qml/main_window/Overview.qml" line="128"/>
+        <location filename="qml/main_window/Overview.qml" line="125"/>
         <source>Disconnect</source>
         <translation>Se déconnecter</translation>
     </message>
     <message>
-        <location filename="qml/main_window/Overview.qml" line="136"/>
+        <location filename="qml/main_window/Overview.qml" line="133"/>
         <source>Successful logout</source>
         <translation>Vous êtes déconnecté</translation>
     </message>
     <message>
-        <location filename="qml/main_window/Overview.qml" line="185"/>
+        <location filename="qml/main_window/Overview.qml" line="182"/>
         <source>views on your files</source>
         <translation>vues sur vos fichiers</translation>
     </message>
     <message>
-        <location filename="qml/main_window/Overview.qml" line="214"/>
+        <location filename="qml/main_window/Overview.qml" line="211"/>
         <source>numbers of files saved today</source>
         <translation>fichiers sauvegardés aujourd&apos;hui</translation>
     </message>
     <message>
-        <location filename="qml/main_window/Overview.qml" line="244"/>
+        <location filename="qml/main_window/Overview.qml" line="241"/>
         <source>number of files saved</source>
         <translation>fichiers sauvegardés</translation>
     </message>
     <message>
-        <location filename="qml/main_window/Overview.qml" line="444"/>
         <source>Cant login, check your credentials</source>
-        <translation>Impossible de vous connecter, vérifiez vos identifiants</translation>
+        <translation type="vanished">Impossible de vous connecter, vérifiez vos identifiants</translation>
     </message>
     <message>
-        <location filename="qml/main_window/Overview.qml" line="455"/>
         <source>Connection lost, error occurred</source>
-        <translation>Connexion perdue, une erreur est survenue</translation>
+        <translation type="vanished">Connexion perdue, une erreur est survenue</translation>
     </message>
 </context>
 <context>
@@ -341,69 +351,79 @@
 <context>
     <name>Register</name>
     <message>
-        <location filename="qml/components/Register.qml" line="13"/>
+        <location filename="qml/components/Register.qml" line="12"/>
         <source>Register</source>
         <translation>S&apos;enregistrer</translation>
     </message>
     <message>
-        <location filename="qml/components/Register.qml" line="29"/>
+        <location filename="qml/components/Register.qml" line="28"/>
         <source>Fill fields below to get registered</source>
         <translation>Fournissez les informations demandées</translation>
     </message>
     <message>
-        <location filename="qml/components/Register.qml" line="59"/>
+        <location filename="qml/components/Register.qml" line="58"/>
         <source>Please fill fields</source>
         <translation>S&apos;il vous plait remplissez les champs</translation>
     </message>
     <message>
-        <location filename="qml/components/Register.qml" line="79"/>
+        <location filename="qml/components/Register.qml" line="78"/>
         <source>Username</source>
         <translation>Nom d&apos;utilisateur</translation>
     </message>
     <message>
-        <location filename="qml/components/Register.qml" line="105"/>
+        <location filename="qml/components/Register.qml" line="104"/>
         <source>Password</source>
         <translation>Mot de passe</translation>
     </message>
     <message>
-        <location filename="qml/components/Register.qml" line="117"/>
+        <location filename="qml/components/Register.qml" line="116"/>
         <source>Repeat password</source>
         <translation>Encore le mot de passe</translation>
     </message>
     <message>
-        <location filename="qml/components/Register.qml" line="153"/>
+        <location filename="qml/components/Register.qml" line="152"/>
         <source>Email</source>
         <translation>Email</translation>
     </message>
     <message>
-        <location filename="qml/components/Register.qml" line="179"/>
+        <location filename="qml/components/Register.qml" line="178"/>
         <source>Remember for further login attempt</source>
         <translation>Se souvenir de moi</translation>
     </message>
     <message>
-        <location filename="qml/components/Register.qml" line="189"/>
+        <location filename="qml/components/Register.qml" line="188"/>
         <source>I accept conditions</source>
         <translation>J&apos;accepte les conditions</translation>
     </message>
     <message>
-        <location filename="qml/components/Register.qml" line="231"/>
+        <location filename="qml/components/Register.qml" line="230"/>
         <source>You must fill all fields.</source>
         <translation>Vous devez remplir tous les champs.</translation>
     </message>
     <message>
-        <location filename="qml/components/Register.qml" line="238"/>
+        <location filename="qml/components/Register.qml" line="237"/>
         <source>You must agree the conditions.</source>
         <translation>Vous devez accepter les conditions.</translation>
     </message>
     <message>
-        <location filename="qml/components/Register.qml" line="245"/>
+        <location filename="qml/components/Register.qml" line="244"/>
         <source>Your email must be valid.</source>
         <translation>Votre email doit être valide.</translation>
     </message>
     <message>
-        <location filename="qml/components/Register.qml" line="252"/>
+        <location filename="qml/components/Register.qml" line="251"/>
         <source>Your passwords must match.</source>
         <translation>Vos mots de passe doivent correspondre.</translation>
+    </message>
+    <message>
+        <location filename="qml/components/Register.qml" line="284"/>
+        <source>Can&apos;t reach uShare Online servers at the moment.</source>
+        <translation>Impossible de contacter les serveurs de uShare Online.</translation>
+    </message>
+    <message>
+        <location filename="qml/components/Register.qml" line="316"/>
+        <source>Loading...</source>
+        <translation>Chargement...</translation>
     </message>
 </context>
 <context>
@@ -503,32 +523,32 @@
 <context>
     <name>Updates</name>
     <message>
-        <location filename="qml/main_window/settings/Updates.qml" line="46"/>
+        <location filename="qml/main_window/settings/Updates.qml" line="45"/>
         <source>Updates</source>
         <translation>Mises à jour</translation>
     </message>
     <message>
-        <location filename="qml/main_window/settings/Updates.qml" line="60"/>
+        <location filename="qml/main_window/settings/Updates.qml" line="59"/>
         <source>Actual version: %1</source>
         <translation>Version actuelle : %1</translation>
     </message>
     <message>
-        <location filename="qml/main_window/settings/Updates.qml" line="74"/>
+        <location filename="qml/main_window/settings/Updates.qml" line="73"/>
         <source>Latest version: %1</source>
         <translation>Dernière version : %1</translation>
     </message>
     <message>
-        <location filename="qml/main_window/settings/Updates.qml" line="89"/>
+        <location filename="qml/main_window/settings/Updates.qml" line="88"/>
         <source>Description: </source>
         <translation>Description : </translation>
     </message>
     <message>
-        <location filename="qml/main_window/settings/Updates.qml" line="108"/>
+        <location filename="qml/main_window/settings/Updates.qml" line="107"/>
         <source>Update now!</source>
         <translation>Mettre à jour !</translation>
     </message>
     <message>
-        <location filename="qml/main_window/settings/Updates.qml" line="134"/>
+        <location filename="qml/main_window/settings/Updates.qml" line="133"/>
         <source>No update available :-)</source>
         <translation>Aucune mise à jour disponible :-)</translation>
     </message>
@@ -536,16 +556,14 @@
 <context>
     <name>Uplimg</name>
     <message>
-        <location filename="uplimg.cpp" line="94"/>
         <source>Congratulation!</source>
-        <translation>Félicitations !</translation>
+        <translation type="vanished">Félicitations !</translation>
     </message>
     <message>
-        <location filename="uplimg.cpp" line="94"/>
         <source>Your file is uploaded!
 The link is
 </source>
-        <translation>Votre fichier est envoyé !
+        <translation type="vanished">Votre fichier est envoyé !
 Le lien est
 </translation>
     </message>
@@ -582,10 +600,25 @@ Le lien est
         <translation>Couleurs</translation>
     </message>
     <message>
-        <location filename="qml/main_window/main.qml" line="97"/>
-        <location filename="qml/main_window/main.qml" line="108"/>
         <source>Great, you&apos;re connected!</source>
-        <translation>Super, vous êtes connecté !</translation>
+        <translation type="vanished">Super, vous êtes connecté !</translation>
+    </message>
+</context>
+<context>
+    <name>uShare</name>
+    <message>
+        <location filename="ushare.cpp" line="94"/>
+        <source>Congratulation!</source>
+        <translation>Félicitations !</translation>
+    </message>
+    <message>
+        <location filename="ushare.cpp" line="94"/>
+        <source>Your file is uploaded!
+The link is
+</source>
+        <translation>Votre fichier est envoyé !
+Le lien est
+</translation>
     </message>
 </context>
 </TS>

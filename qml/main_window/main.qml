@@ -1,5 +1,4 @@
 import QtQuick 2.2
-import U.Global 1.0
 import Material 0.1
 import Material.ListItems 0.1 as ListItem
 import "."
@@ -8,6 +7,7 @@ import "../components" as U
 
 ApplicationWindow
 {
+    id: baseItem;
     width: 670;
     height: 600;
 

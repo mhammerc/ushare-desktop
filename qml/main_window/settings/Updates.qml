@@ -1,6 +1,5 @@
 import QtQuick 2.0
 import Material 0.1
-import "../../components/network.js" as Network
 import "../../components" as U
 
 Item
@@ -143,18 +142,23 @@ Item
         }
     }
 
+    Connections
+    {
+        target: uShareOnline;
+
+        onGotUpdates:
+        {
+            for(var i = 0; i < response.length; ++i)
+            {
+                if(response[i].os === Settings.os && response[i].arch === Settings.arch)
+                    informations = response[i];
+            }
+        }
+    }
+
     function getInfos()
     {
-        Network.get(Settings.updateInfoUrl, {}, function(err, result)
-        {
-            result = JSON.parse(result);
-
-            for(var i = 0; i < result.length; ++i)
-            {
-                if(result[i].os === Settings.os && result[i].arch === Settings.arch)
-                    informations = result[i];
-            }
-        });
+        uShareOnline.getUpdates();
     }
 }
 

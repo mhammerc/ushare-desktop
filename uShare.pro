@@ -22,7 +22,9 @@ SOURCES += main.cpp \
     windows/pastewindow.cpp \
     windows/qmlengine.cpp \
     ushare.cpp \
-    qml/cpp_wrapper/ushareonline.cpp
+    qml/cpp_wrapper/ushareonline.cpp \
+    qml/cpp_wrapper/shortcutgetter.cpp \
+    qml/cpp_wrapper/shortcuts.cpp
 
 RESOURCES += \
     images.qrc \
@@ -44,7 +46,6 @@ DISTFILES += \
     qml/main_window/Uploads.qml \
     qml/main_window/settings/Credits.qml \
     qml/notification_window/NotificationWindow.qml \
-    qml/components/network.js \
     qml/components/Badge.qml \
     qml/components/ColorPicker.qml \
     qml/components/Login.qml \
@@ -55,7 +56,8 @@ DISTFILES += \
     qml/main_window/global/Global.qml \
     qml/components/Register.qml \
     qml/pastes/PasteWindow.qml \
-    qml/main_window/settings/Updates.qml
+    qml/main_window/settings/Updates.qml \
+    qml/main_window/settings/Keyboardshortcuts.qml
 
 HEADERS += \
     core/systemtrayicon.h \
@@ -79,7 +81,9 @@ HEADERS += \
     windows/pastewindow.h \
     windows/qmlengine.h \
     ushare.h \
-    qml/cpp_wrapper/ushareonline.h
+    qml/cpp_wrapper/ushareonline.h \
+    qml/cpp_wrapper/shortcutgetter.h \
+    qml/cpp_wrapper/shortcuts.h
 
 # Global shortcuts from the Qxt Team !
 HEADERS += \

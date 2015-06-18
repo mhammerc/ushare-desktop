@@ -35,7 +35,12 @@ Settings::Settings(QObject *parent) : QSettings(parent)
          << "show_progress_window"
          << "account_key"
          << "private_key"
-         << "language";
+         << "language"
+         << "fullscreen_shortcut"
+         << "selectedareascreen_shortcut"
+         << "newpaste_shortcut"
+         << "sendfile_shortcut"
+         << "sendclipboard_shortcut";
 
 }
 

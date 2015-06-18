@@ -34,7 +34,7 @@ public:
     explicit uShare(QObject *parent = 0);
     void start();
 
-    SystemTrayIcon *getSystemTray();
+    SystemTrayIcon * getSystemTray();
 
 private:
     void initModules();

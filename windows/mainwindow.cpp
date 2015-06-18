@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 
-MainWindow::MainWindow(QObject *parent) : QObject(parent)
+MainWindow::MainWindow(SystemTrayIcon *systemTrayIcon, QObject *parent) : QObject(parent)
 {
     component = new QQmlComponent(&engine, QUrl("qrc:/qml/main_window/main.qml"), this);
 
@@ -18,6 +18,9 @@ MainWindow::MainWindow(QObject *parent) : QObject(parent)
 
     QmlDesktop * dk = new QmlDesktop(this);
     context->setContextProperty("Desktop", dk);
+
+    Shortcuts * s = new Shortcuts(systemTrayIcon, this);
+    context->setContextProperty("Shortcuts", s);
 
     window = component->create(context);
     qDebug() << component->errorString();
