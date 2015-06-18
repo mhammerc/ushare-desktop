@@ -5,7 +5,6 @@ import Material.ListItems 0.1 as ListItem
 import Material.Extras 0.1
 import U.Global 1.0
 import "." as U
-import "./usquare_online.js" as UOnline
 
 U.Dialog
 {
@@ -14,8 +13,6 @@ U.Dialog
     title: qsTr("Login");
 
     height: Units.dp(350);
-
-    signal successLogin();
 
     /* Login form */
     Column
@@ -109,7 +106,7 @@ U.Dialog
 
                 ListItem.Standard
                 {
-                    content: Checkbox
+                    content: CheckBox
                     {
                         id: rememberCheckbox;
                         text: qsTr('Remember');
@@ -159,6 +156,41 @@ U.Dialog
         close();
     }
 
+    Connections
+    {
+        target: uShareOnline;
+
+        onConnected:
+        {
+            if(!dialog.focus) return;
+
+            if(response && typeof response.success === 'undefined')
+            {
+                statusLabel.text = qsTr('Can\'t connect to the servers of uShare Online');
+                statusLabel.error = true;
+                statusLabel.visible = true;
+                return;
+            }
+
+            if(response && !response.success)
+            {
+                statusLabel.text = response.message ? response.message : qsTr('Wrong credentials');
+                statusLabel.error = true;
+                statusLabel.visible = true;
+                return;
+            }
+
+            if(rememberCheckbox.checked)
+            {
+                Settings.setValue('username', usernameField.text);
+                Settings.setValue('password', passwordField.text);
+            }
+
+            resetFields();
+            close();
+        }
+    }
+
     function resetFields()
     {
         usernameField.text = '';
@@ -168,40 +200,10 @@ U.Dialog
 
     function tryToConnect()
     {
-        var username = usernameField.text;
-        var password = Desktop.sha256(passwordField.text)
-
-        var callback = function(err, result)
-        {
-            if(err !== null || !result.success)
-            {
-                statusLabel.text = result && result.message ? result.message : 'Wrong credentials';
-                statusLabel.error = true;
-                statusLabel.visible = true;
-                return;
-            }
-
-            if(rememberCheckbox.checked)
-            {
-                Settings.setValue('username', username);
-                Settings.setValue('password', password);
-            }
-
-            Settings.setValue("account_key", result.accountkey);
-            Settings.setValue("private_key", result.privatekey);
-
-            Global.hasLogin = true;
-            Global.isLoading = true;
-            Global.connected = true;
-
-            successLogin();
-            resetFields();
-            close();
-        }
+        uShareOnline.connect(usernameField.text, passwordField.text);
 
         statusLabel.text = qsTr('Connecting...');
         statusLabel.error = false;
         statusLabel.visible = true;
-        UOnline.connect(username, password, callback);
     }
 }

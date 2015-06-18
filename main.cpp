@@ -22,7 +22,7 @@
 #include <QFileInfo>
 #include <QtQml>
 #include <QIcon>
-#include "uplimg.h"
+#include "ushare.h"
 
 //#include "core/settings.h"
 
@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
 
     /* TRANSLATIONS END */
 
-    Uplimg uplimg;
+    uShare uplimg;
     uplimg.start();
 
     return app.exec();

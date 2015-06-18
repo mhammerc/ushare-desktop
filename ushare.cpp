@@ -1,12 +1,12 @@
-#include "uplimg.h"
+#include "ushare.h"
 
-Uplimg::Uplimg(QObject *parent) :
+uShare::uShare(QObject *parent) :
     QObject(parent),
     pasteWindow(this)
 {
 }
 
-void Uplimg::start()
+void uShare::start()
 {
     initModules();
     linkConnections();
@@ -15,12 +15,12 @@ void Uplimg::start()
     systemTray->show();
 }
 
-SystemTrayIcon * Uplimg::getSystemTray()
+SystemTrayIcon * uShare::getSystemTray()
 {
     return systemTray;
 }
 
-void Uplimg::initModules()
+void uShare::initModules()
 {
     mainWindow = new MainWindow(this);
 
@@ -31,7 +31,7 @@ void Uplimg::initModules()
     fileManager = new FileManager(this);
 }
 
-void Uplimg::linkConnections()
+void uShare::linkConnections()
 {
     /* Connection to the system tray */
     QObject::connect(systemTray, &SystemTrayIcon::captureFullScreenAsked, [this]()
@@ -39,39 +39,39 @@ void Uplimg::linkConnections()
         fileManager->screenTook(screenTaker->captureFullScreen());
     });
 
-    QObject::connect(systemTray, &SystemTrayIcon::captureSelectedScreenAsked, this, &Uplimg::startCaptureSelectedScreenProccess);
+    QObject::connect(systemTray, &SystemTrayIcon::captureSelectedScreenAsked, this, &uShare::startCaptureSelectedScreenProccess);
     QObject::connect(systemTray, &SystemTrayIcon::sendFileAsked, fileManager, &FileManager::chooseFile);
     QObject::connect(systemTray, &SystemTrayIcon::sendClipboardAsked, fileManager, &FileManager::sendClipboard);
-    QObject::connect(systemTray, &SystemTrayIcon::makePasteAsked, this, &Uplimg::makePaste);
+    QObject::connect(systemTray, &SystemTrayIcon::makePasteAsked, this, &uShare::makePaste);
     QObject::connect(systemTray, &SystemTrayIcon::openUplimgAsked, mainWindow, &MainWindow::show);
 
     /* Connections from the screen taker */
     QObject::connect(screenTaker, &ScreenTaker::captureSelectedZoneFinished, fileManager, &FileManager::screenTook); /* Send the screen took to the file manager */
-    QObject::connect(screenTaker, &ScreenTaker::captureSelectedZoneCanceled, this, &Uplimg::captureSelectedScreenProccessCanceled);
+    QObject::connect(screenTaker, &ScreenTaker::captureSelectedZoneCanceled, this, &uShare::captureSelectedScreenProccessCanceled);
 
     /* Connections from the file manager */
-    QObject::connect(fileManager, &FileManager::fileReadyToBeSent, this, &Uplimg::autoSendFile);
+    QObject::connect(fileManager, &FileManager::fileReadyToBeSent, this, &uShare::autoSendFile);
 
     /* Connections from paste manager */
     QObject::connect(&pasteWindow, &PasteWindow::pasteReady, fileManager, &FileManager::sendDatas);
 }
 
-void Uplimg::startCaptureSelectedScreenProccess()
+void uShare::startCaptureSelectedScreenProccess()
 {
     screenTaker->captureSelectedZone(QColor(255,0,0));
 }
 
-void Uplimg::captureSelectedScreenProccessCanceled()
+void uShare::captureSelectedScreenProccessCanceled()
 {
     /* return in idle state */
 }
 
-void Uplimg::makePaste()
+void uShare::makePaste()
 {
     pasteWindow.newPaste();
 }
 
-void Uplimg::autoSendFile(File file)
+void uShare::autoSendFile(File file)
 {
     FileSender * fileSender = new FileSender(this);
 

@@ -27,11 +27,11 @@
 
 /* This link all modules between them */
 
-class Uplimg : public QObject
+class uShare : public QObject
 {
     Q_OBJECT
 public:
-    explicit Uplimg(QObject *parent = 0);
+    explicit uShare(QObject *parent = 0);
     void start();
 
     SystemTrayIcon *getSystemTray();

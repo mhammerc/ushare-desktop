@@ -4,7 +4,6 @@ import Material.Extras 0.1
 import Material.ListItems 0.1
 import "../components" as U
 import "../components/functions.js" as F
-import "../components/usquare_online.js" as UOnline
 
 View
 {
@@ -69,7 +68,7 @@ View
 
         Label
         {
-            text: F.humanFileSize(fileInformations.size, true);
+            text: Desktop.humanFileSize(fileInformations.size, true);
         }
 
         Label
@@ -199,16 +198,7 @@ View
 
                         if(fileInformations.password && listView.currentIndex === 2 || !fileInformations.password && listView.currentIndex === 1)
                         {
-                            UOnline.deleteFile(fileInformations.shortname, function(err, result)
-                            {
-                                if(err || !result.success)
-                                {
-                                    snackbar.open(result.message ? result.message : qsTr('An error occurred.'));
-                                    return;
-                                }
-
-                                snackbar.open(qsTr('File deleted!'));
-                            });
+                            uShareOnline.deleteFile(fileInformations.shortname);
                         }
 
                         else if(listView.currentIndex === 0)
@@ -218,16 +208,7 @@ View
 
                         else if(fileInformations.password && listView.currentIndex === 1)
                         {
-                            UOnline.editFilePassword('', fileInformations.shortname, function(err, result)
-                            {
-                                if(err || !result.success)
-                                {
-                                    snackbar.open(result.message ? result.message : qsTr('An error occurred.'));
-                                    return;
-                                }
-
-                                snackbar.open(qsTr('Password deleted.'));
-                            });
+                            uShareOnline.editFilePassword('', fileInformations.shortname);
                         }
                     }
                 }
@@ -308,6 +289,33 @@ View
             }
         }
 
+        Connections
+        {
+            target: uShareOnline;
+
+            onFilePasswordEdited:
+            {
+                if(!response.success)
+                {
+                    snackbar.open(response.message ? response.message : qsTr('Can\'t reach uShare Online servers.'));
+                    return;
+                }
+
+                snackbar.open(qsTr('Password edited.'));
+            }
+
+            onFileDeleted:
+            {
+                if(!response.success)
+                {
+                    snackbar.open(response.message ? response.message : qsTr('Can\'t reach uShare Online servers.'));
+                    return;
+                }
+
+                snackbar.open(qsTr('File deleted!'));
+            }
+        }
+
         onAccepted:
         {
             if(!newPassword.text)
@@ -317,17 +325,7 @@ View
                 return;
             }
 
-            UOnline.editFilePassword(newPassword.text, fileInformations.shortname, function(err, result)
-            {
-                if(err || !result.success)
-                {
-                    snackbar.open(result.message ? result.message : qsTr('An error occurred.'));
-                    return;
-                }
-
-                snackbar.open(qsTr('Password edited.'));
-            });
-
+            uShareOnline.editFilePassword(newPassword.text, fileInformations.shortname);
             close();
         }
 

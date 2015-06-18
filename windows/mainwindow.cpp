@@ -7,11 +7,11 @@ MainWindow::MainWindow(QObject *parent) : QObject(parent)
     /* create the context to set Settings before the creation */
     context = new QQmlContext(&engine);
 
+    UShareOnline * uShareOnline = new UShareOnline(this);
+    context->setContextProperty("uShareOnline", uShareOnline);
+
     QmlSettings * settings = new QmlSettings(this);
     context->setContextProperty("Settings", settings);
-
-    PlatformDetails * pd = new PlatformDetails(this);
-    context->setContextProperty("PlatformDetails", pd);
 
     Clipboard * cb = new Clipboard(this);
     context->setContextProperty("Clipboard", cb);
@@ -23,7 +23,6 @@ MainWindow::MainWindow(QObject *parent) : QObject(parent)
     qDebug() << component->errorString();
 
     window->setProperty("visible", true);
-
 }
 
 MainWindow::~MainWindow()

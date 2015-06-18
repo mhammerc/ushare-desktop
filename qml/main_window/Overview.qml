@@ -3,9 +3,7 @@ import Material 0.1
 import Material.Extras 0.1
 import U.Global 1.0
 import "../components" as U
-import "../components/usquare_online.js" as UOnline
 import "../components/network.js" as Network
-import "../components/md5.js" as Crypto
 
 Item
 {
@@ -35,7 +33,7 @@ Item
     {
         anchors.fill: parent;
 
-        visible: Global.connected && !Global.isLoading;
+        visible: uShareOnline.connected && datas.username;
 
         Row
         {
@@ -255,31 +253,13 @@ Item
     /* When user is disconnected */
     U.Offline
     {
-        visible: !Global.connected && !Global.isLoading;
+        visible: !uShareOnline.connected;
     }
 
     /* On loading */
     U.Loading
     {
-        visible: Global.isLoading;
-    }
-
-    // DEBUG ONLY
-    ActionButton
-    {
-        anchors
-        {
-            right: parent.right;
-            bottom: parent.bottom;
-            margins: Units.dp(32);
-        }
-
-        onClicked:
-        {
-            updateDatas(false);
-        }
-
-        iconName: "content/add";
+        visible: uShareOnline.connected && !datas.username;
     }
 
     Timer
@@ -293,35 +273,41 @@ Item
 
         onTriggered:
         {
-            if(!Global.connected || Global.isLoading)
+            if(!uShareOnline.connected || uShareOnline.loading)
             {
                 return;
             }
 
-            updateDatas(true);
+            updateDatas();
         }
     }
 
     Connections
     {
-        target: Global;
+        target: uShareOnline;
 
         onConnectedChanged:
         {
-            if(!Global.connected)
+            if(!uShareOnline.connected)
             {
                 refreshTimer.running = false;
             }
+            else
+            {
+                refreshTimer.running = true;
+            }
         }
-    }
 
-    Connections
-    {
-        target: login;
-
-        onSuccessLogin:
+        onGotUserInfos:
         {
-            UOnline.initWebSocket(root);
+            if(!response.success)
+            {
+                snackbar.open('Connection to uShare Online lost :\'(' + response.message ? ' -> ' + response.message : '');
+                return;
+            }
+
+            datas = response;
+            updateAvatar();
         }
     }
 
@@ -331,78 +317,35 @@ Item
 
         onSuccessRegister:
         {
-            UOnline.initWebSocket(root);
+            onStart();
         }
     }
 
     /* When the application is started and loaded */
     function onStart()
     {
-        UOnline.setSettings(Settings);
-
-        UOnline.onWsConnected(wsConnected);
-        UOnline.onWsDisconnected(disconnect);
-        UOnline.onWsError(wsError);
-
         if(Settings.value('username', false) === 'false' || Settings.value('password', false) === 'false')
         {
             return;
         }
 
-        Global.hasLogin = true;
-        Global.isLoading = true;
-
-
-        UOnline.connect(Settings.value('username', false), Settings.value('password', false), function(err, result)
-        {
-            if(err || !result.success)
-            {
-                Global.hasLogin = false;
-                Global.isLoading = false;
-                Global.connected = false;
-                return;
-            }
-
-            Settings.setValue("account_key", result.accountkey);
-            Settings.setValue("private_key", result.privatekey);
-
-            UOnline.initWebSocket(root);
-        });
+        uShareOnline.connect(Settings.value('username', false), Settings.value('password', false));
     }
 
     /* Update datas on overview screen. If it is not lite, also update gravatar. */
-    function updateDatas(lite)
+    function updateDatas()
     {
-        Global.isLoading = lite ? false : true;
-
-        var onGetUserInfos = function(result)
-        {
-
-            if(!result.success)
-            {
-                snackbar.open('An error occurred');
-                console.log(JSON.stringify(result));
-                return;
-            }
-
-            datas = result;
-
-            if(!lite)
-            {
-                updateAvatar();
-                Global.isLoading = false;
-            }
-        }
-
-        UOnline.getUserInfos(onGetUserInfos);
+        uShareOnline.getUserInfos();
     }
 
     function updateAvatar()
     {
-        Network.gravatar(datas.email, Crypto.md5, function(url)
+        Network.gravatar(datas.email, Desktop.md5, function(url)
         {
             if(url !== null)
             {
+                if(gravatar.source === url) return;
+
                 gravatar.source = url;
                 return;
             }
@@ -413,47 +356,11 @@ Item
 
     function disconnect()
     {
-        Global.hasLogin = false;
-        Global.connected = false;
-        Global.isLoading = false;
-
-        UOnline.disconnect();
+        uShareOnline.disconnect();
 
         Settings.setValue('username', false);
         Settings.setValue('password', false);
-        Settings.setValue('account_key', false);
-        Settings.setValue('private_key', false);
 
         datas = null;
     }
-
-    function wsConnected()
-    {
-        Global.connected = true;
-        Global.isLoading = true;
-
-        UOnline.wsAuth(function(result)
-        {
-            if(result.success === true)
-            {
-                updateDatas(false);
-                refreshTimer.start();
-            }
-            else
-            {
-                snackbar.open(qsTr('Cant login, check your credentials'));
-
-                Global.connected = false;
-                Global.isLoading = false;
-                Global.hasLogin = false;
-            }
-        });
-    }
-
-    function wsError()
-    {
-        snackbar.open(qsTr('Connection lost, error occurred'));
-        disconnect();
-    }
-
 }

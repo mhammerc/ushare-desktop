@@ -7,7 +7,6 @@ QT += widgets qml quick core gui multimedia
 
 SOURCES += main.cpp \
     core/systemtrayicon.cpp \
-    uplimg.cpp \
     windows/mainwindow.cpp \
     core/screentaker.cpp \
     core/areauserdefiner.cpp \
@@ -21,7 +20,9 @@ SOURCES += main.cpp \
     windows/notificationwindow.cpp \
     core/shared.cpp \
     windows/pastewindow.cpp \
-    windows/qmlengine.cpp
+    windows/qmlengine.cpp \
+    ushare.cpp \
+    qml/cpp_wrapper/ushareonline.cpp
 
 RESOURCES += \
     images.qrc \
@@ -40,14 +41,11 @@ DISTFILES += \
     qml/components/Checkbox.qml \
     qml/main_window/settings/Saving.qml \
     qml/components/Slider.qml \
-    qml/components/functions.js \
     qml/main_window/Uploads.qml \
     qml/main_window/settings/Credits.qml \
     qml/notification_window/NotificationWindow.qml \
     qml/components/network.js \
-    qml/components/md5.js \
     qml/components/Badge.qml \
-    qml/components/usquare_online.js \
     qml/components/ColorPicker.qml \
     qml/components/Login.qml \
     qml/components/Dialog.qml \
@@ -61,7 +59,6 @@ DISTFILES += \
 
 HEADERS += \
     core/systemtrayicon.h \
-    uplimg.h \
     windows/mainwindow.h \
     core/screentaker.h \
     core/areauserdefiner.h \
@@ -75,13 +72,14 @@ HEADERS += \
     core/keys_data.h \
     qml/cpp_wrapper/qmlsettings.h \
     sounds/filesendedsound.h \
-    qml/cpp_wrapper/platformdetails.h \
     windows/notificationwindow.h \
     qml/cpp_wrapper/desktop.h \
     core/shared.h \
     qml/cpp_wrapper/clipboard.h \
     windows/pastewindow.h \
-    windows/qmlengine.h
+    windows/qmlengine.h \
+    ushare.h \
+    qml/cpp_wrapper/ushareonline.h
 
 # Global shortcuts from the Qxt Team !
 HEADERS += \

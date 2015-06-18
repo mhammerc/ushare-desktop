@@ -10,9 +10,9 @@
 #include "core/shared.h"
 
 #include "qml/cpp_wrapper/qmlsettings.h"
-#include "qml/cpp_wrapper/platformdetails.h"
 #include "qml/cpp_wrapper/clipboard.h"
 #include "qml/cpp_wrapper/desktop.h"
+#include "qml/cpp_wrapper/ushareonline.h"
 
 class MainWindow : public QObject
 {

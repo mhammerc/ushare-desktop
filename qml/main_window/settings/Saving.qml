@@ -94,7 +94,7 @@ Item
 
                     onValueChanged:
                     {
-                        value = F.round(value);
+                        value = Math.round(value);
                     }
 
                     onPressedChanged:
@@ -167,11 +167,11 @@ Item
         {
             var text;
 
-            if(PlatformDetails.isLinux)
+            if(Settings.os === "linux")
             {
                 text = folder.toString().replace('file://', '');
             }
-            else if(PlatformDetails.isWindows)
+            else if(Settings.os === "windows")
             {
                 text = folder.toString().replace('file:///', '');
             }

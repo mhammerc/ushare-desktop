@@ -92,22 +92,11 @@ ApplicationWindow
     {
         id: login
 
-        onSuccessLogin:
-        {
-            snackbar.open(qsTr('Great, you\'re connected!'));
-            Global.connected = true;
-        }
     }
 
     U.Register
     {
         id: register;
-
-        onSuccessRegister:
-        {
-            snackbar.open(qsTr('Great, you\'re connected!'));
-            Global.connected = true;
-        }
     }
 
     Snackbar

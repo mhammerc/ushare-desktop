@@ -3,9 +3,6 @@ import Material 0.1
 import Material.Extras 0.1
 import U.Global 1.0
 import "../components" as U
-import "../components/usquare_online.js" as UOnline
-import "../components/network.js" as Network
-import "../components/md5.js" as Crypto
 
 Item
 {
@@ -27,7 +24,7 @@ Item
     /** All files card **/
     Item
     {
-        visible: (Global.connected && !Global.isLoading && root.uploads && root.uploads.files && root.uploads.files.length !== 0);
+        visible: uShareOnline.connected && root.uploads && root.uploads.files && root.uploads.files.length !== 0;
         anchors.fill: parent;
 
         Flickable
@@ -59,17 +56,11 @@ Item
 
                     Repeater
                     {
-                        model:
-                        {
-                            if(root.uploads)
-                                return root.uploads.files;
-                            else
-                                return null;
-                        }
+                        id: repeater;
 
                         U.FileCard
                         {
-                            fileInformations: modelData;
+                            fileInformations: uploads.files[modelData];
                         } /* U.FileCard */
                     } /* Repeater */
                 } /* Grid */
@@ -80,7 +71,7 @@ Item
     /** If there is no files yet **/
     Item
     {
-        visible: (Global.connected && !Global.isLoading && root.uploads && root.uploads.files && root.uploads.files.length === 0);
+        visible: uShareOnline.connected && root.uploads && root.uploads.files && root.uploads.files.length === 0;
         anchors.fill: parent;
 
         U.Label
@@ -95,31 +86,13 @@ Item
     /* On offline */
     U.Offline
     {
-        visible: !Global.connected && !Global.isLoading;
+        visible: !uShareOnline.connected;
     }
 
     /* On loading */
     U.Loading
     {
-        visible: Global.isLoading || (typeof uploads === 'undefined' && Global.connected === true);
-    }
-
-    Connections
-    {
-        target: login
-        onSuccessLogin:
-        {
-            updateDatas();
-        }
-    }
-
-    Connections
-    {
-        target: register
-        onSuccessRegister:
-        {
-            updateDatas();
-        }
+        visible: typeof uploads === 'undefined' && uShareOnline.connected;
     }
 
     Timer
@@ -133,7 +106,7 @@ Item
 
         onTriggered:
         {
-            if(!Global.connected || Global.isLoading)
+            if(!uShareOnline.connected || uShareOnline.loading)
             {
                 return;
             }
@@ -142,14 +115,30 @@ Item
         }
     }
 
+    Connections
+    {
+        target: uShareOnline;
+
+        onGotUploadList:
+        {
+            if(!response.success)
+            {
+                snackbar.open('Connection to uShare Online lost :\'(' + response.message ? ' -> ' + response.message : '');
+                return;
+            }
+
+            root.uploads = response;
+
+            if(repeater.model !== response.files.length)
+            {
+                repeater.model = response.files.length;
+            }
+        }
+    }
+
     function updateDatas()
     {
-        var onGetUploads = function(uploads)
-        {
-            root.uploads = uploads;
-        }
-
-        UOnline.getUploads(50, onGetUploads);
+        uShareOnline.getUploadList(50);
     }
 }
 

@@ -5,7 +5,6 @@ import Material.ListItems 0.1 as ListItem
 import Material.Extras 0.1
 import U.Global 1.0
 import '.' as U
-import './usquare_online.js' as UOnline
 
 U.Dialog
 {
@@ -173,7 +172,7 @@ U.Dialog
 
                 ListItem.Standard
                 {
-                    content: Checkbox
+                    content: CheckBox
                     {
                         id: rememberCheckbox;
                         text: qsTr('Remember for further login attempt');
@@ -183,7 +182,7 @@ U.Dialog
 
                 ListItem.Standard
                 {
-                    content: Checkbox
+                    content: CheckBox
                     {
                         id: acceptConditionsCheckbox;
                         text: qsTr('I accept conditions');
@@ -274,45 +273,49 @@ U.Dialog
         statusLabel.visible = false;
     }
 
-    function tryToRegister()
+    Connections
     {
-        var username = usernameField.text;
-        var password = Desktop.sha256(passwordField.text);
-        var email = emailField.text;
+        target: uShareOnline;
 
-
-        var callback = function(err, result)
+        onRegistered:
         {
-            if(err !== null || !result.success)
+            if(!response.success && !response.message)
             {
+                statusLabel.text = qsTr('Can\'t reach uShare Online servers at the moment.');
                 statusLabel.error = true;
-                statusLabel.text = result.message;
-                statusLabel.visible = true
+                statusLabel.visible = true;
+
+                return;
+            }
+
+            if(!response.success)
+            {
+                statusLabel.text = response.message;
+                statusLabel.error = true;
+                statusLabel.visible = true;
+
                 return;
             }
 
             if(rememberCheckbox.checked)
             {
-                Settings.setValue('username', username);
-                Settings.setValue('password', password);
+                Settings.setValue('username', usernameField.text);
+                Settings.setValue('password', passwordField.text);
             }
 
-            Settings.setValue("account_key", result.accountkey);
-            Settings.setValue("private_key", result.privatekey);
-
-            Global.hasLogin = true;
-            Global.isLoading = true;
-            Global.connected = true;
 
             successRegister();
             resetFields();
             close();
         }
+    }
 
+    function tryToRegister()
+    {
         statusLabel.error = false;
-        statusLabel.text = 'Loading...';
+        statusLabel.text = qsTr('Loading...');
         statusLabel.visible = true;
 
-        UOnline.register(username, password, email, callback);
+        uShareOnline.register_(usernameField.text, passwordField.text, emailField.text);
     }
 }
