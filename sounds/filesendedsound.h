@@ -7,9 +7,9 @@
  * See the LICENSE file to learn more.
  *
  * If you have contributed to this file, add your name to authors list.
-*/#ifndef FILESENDEDSOUND_H
+*/
 
-
+#ifndef FILESENDEDSOUND_H
 #define FILESENDEDSOUND_H
 
 #include <QApplication>
