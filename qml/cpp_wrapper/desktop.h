@@ -1,6 +1,7 @@
 #ifndef QMLDESKTOP_H
 #define QMLDESKTOP_H
 
+#include <QApplication>
 #include <QObject>
 #include <QString>
 #include <QUrl>
@@ -27,6 +28,11 @@ public:
         units1 {"kB","MB","GB","TB","PB","EB","ZB","YB"},
         units2 {"KiB","MiB","GiB","TiB","PiB","EiB","ZiB","YiB"}
     {}
+
+    Q_INVOKABLE void aboutQt()
+    {
+        qApp->aboutQt();
+    }
 
     Q_INVOKABLE QString sha256(QString textToHash)
     {

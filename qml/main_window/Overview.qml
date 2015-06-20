@@ -15,6 +15,18 @@ Item
         onStart();
     }
 
+    onFocusChanged:
+    {
+        if(!focus)
+        {
+            refreshTimer.running = false;
+        }
+        else
+        {
+            refreshTimer.running = true;
+        }
+    }
+
     /* When user is connected */
     Item
     {
@@ -254,7 +266,7 @@ Item
         id: refreshTimer;
 
         interval: 1000;
-        running: root.focus;
+        running: false;
         repeat: true;
         triggeredOnStart: false;
 

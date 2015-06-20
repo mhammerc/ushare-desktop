@@ -20,6 +20,11 @@ bool ShortcutGetter::eventFilter(QObject *obj, QEvent *e)
         int keyInt = keyEvent->modifiers() + keyEvent->key();
 
         setKey(QKeySequence(keyInt).toString());
+        return false;
+    }
+    else
+    {
+        return QObject::eventFilter(obj, e);
     }
 }
 

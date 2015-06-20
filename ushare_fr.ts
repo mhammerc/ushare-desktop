@@ -45,6 +45,74 @@
     </message>
 </context>
 <context>
+    <name>Credits</name>
+    <message>
+        <location filename="qml/main_window/settings/Credits.qml" line="88"/>
+        <source>You are so many to help us every days...</source>
+        <translation>Vous êtes tellement nombreux à nous aider tous les jours...</translation>
+    </message>
+    <message>
+        <location filename="qml/main_window/settings/Credits.qml" line="93"/>
+        <source>We can&apos;t say thank you to all of you!</source>
+        <translation>Nous ne pouvons pas tous vous remercier !</translation>
+    </message>
+    <message>
+        <location filename="qml/main_window/settings/Credits.qml" line="98"/>
+        <source>So we tell this here : &lt;strong&gt;Thank you!&lt;/strong&gt;</source>
+        <translation>Donc nous vous le disons ici : &lt;strong&gt;Merci !&lt;/strong&gt;</translation>
+    </message>
+    <message>
+        <location filename="qml/main_window/settings/Credits.qml" line="103"/>
+        <source>We love you.</source>
+        <translation>Nous vous aimons.</translation>
+    </message>
+    <message>
+        <location filename="qml/main_window/settings/Credits.qml" line="109"/>
+        <source>And, for sure, don&apos;t forget to be #Happy4Ever!</source>
+        <translation>Et, bien sûr, n&apos;oubliez pas d&apos;être #Happy4Ever !</translation>
+    </message>
+    <message>
+        <location filename="qml/main_window/settings/Credits.qml" line="214"/>
+        <source>A superhero</source>
+        <translation>Un super héro</translation>
+    </message>
+    <message>
+        <location filename="qml/main_window/settings/Credits.qml" line="222"/>
+        <source>uShare Online Officer</source>
+        <translation>Développeur uShare Online</translation>
+    </message>
+    <message>
+        <location filename="qml/main_window/settings/Credits.qml" line="230"/>
+        <source>Marketing Director</source>
+        <translation>Directeur commercial</translation>
+    </message>
+    <message>
+        <location filename="qml/main_window/settings/Credits.qml" line="238"/>
+        <source>Minecraft director ㅡ Superhero fan</source>
+        <translation>Développeur Minecraft</translation>
+    </message>
+    <message>
+        <location filename="qml/main_window/settings/Credits.qml" line="246"/>
+        <source>Design helper</source>
+        <translation>Designer</translation>
+    </message>
+    <message>
+        <location filename="qml/main_window/settings/Credits.qml" line="254"/>
+        <source>Tester Director ㅡ Anime Fan</source>
+        <translation>Directeur des tests ㅡ Fan d&apos;animés</translation>
+    </message>
+    <message>
+        <location filename="qml/main_window/settings/Credits.qml" line="262"/>
+        <source>Helper programmer</source>
+        <translation>Polyvalent :-D</translation>
+    </message>
+    <message>
+        <location filename="qml/main_window/settings/Credits.qml" line="270"/>
+        <source>Helper</source>
+        <translation>Assistant</translation>
+    </message>
+</context>
+<context>
     <name>Dialog</name>
     <message>
         <location filename="qml/components/Dialog.qml" line="53"/>
@@ -201,49 +269,117 @@
     </message>
 </context>
 <context>
+    <name>Keyboardshortcuts</name>
+    <message>
+        <location filename="qml/main_window/settings/Keyboardshortcuts.qml" line="39"/>
+        <source>Keyboard shortcuts</source>
+        <translation>Raccourcis clavier</translation>
+    </message>
+    <message>
+        <location filename="qml/main_window/settings/Keyboardshortcuts.qml" line="52"/>
+        <source>Easily edit your shortcuts for quick access to mains functions</source>
+        <translation>Modifiez vos raccourcis pour accéder facilement aux fonctions de uShare</translation>
+    </message>
+    <message>
+        <location filename="qml/main_window/settings/Keyboardshortcuts.qml" line="70"/>
+        <source>Capture fullscreen</source>
+        <translation>Capturer l&apos;écran entier</translation>
+    </message>
+    <message>
+        <location filename="qml/main_window/settings/Keyboardshortcuts.qml" line="77"/>
+        <source>Base: ALT+1</source>
+        <translation>Base : ALT+1</translation>
+    </message>
+    <message>
+        <location filename="qml/main_window/settings/Keyboardshortcuts.qml" line="103"/>
+        <source>Capture selected area</source>
+        <translation>Sélectionner une zone</translation>
+    </message>
+    <message>
+        <location filename="qml/main_window/settings/Keyboardshortcuts.qml" line="110"/>
+        <source>Base: ALT+2</source>
+        <translation>Base : ALT+2</translation>
+    </message>
+    <message>
+        <location filename="qml/main_window/settings/Keyboardshortcuts.qml" line="136"/>
+        <source>Cook new paste</source>
+        <translation>Préparer un nouveau paste</translation>
+    </message>
+    <message>
+        <location filename="qml/main_window/settings/Keyboardshortcuts.qml" line="143"/>
+        <source>Base: ALT+3</source>
+        <translation>Base : ALT+3</translation>
+    </message>
+    <message>
+        <location filename="qml/main_window/settings/Keyboardshortcuts.qml" line="169"/>
+        <source>Send new file</source>
+        <translation>Envoyer un fichier</translation>
+    </message>
+    <message>
+        <location filename="qml/main_window/settings/Keyboardshortcuts.qml" line="176"/>
+        <source>Base: ALT+4</source>
+        <translation>Base : ALT+4</translation>
+    </message>
+    <message>
+        <location filename="qml/main_window/settings/Keyboardshortcuts.qml" line="202"/>
+        <source>Send clipboard</source>
+        <translation>Envoyer le presse papier</translation>
+    </message>
+    <message>
+        <location filename="qml/main_window/settings/Keyboardshortcuts.qml" line="209"/>
+        <source>Base: ALT+5</source>
+        <translation>Base : ALT+5</translation>
+    </message>
+    <message>
+        <location filename="qml/main_window/settings/Keyboardshortcuts.qml" line="236"/>
+        <source>Global shortcuts are disabled while editing.</source>
+        <translation>Les raccourcis claviers sont désactivés pendant l&apos;édition.</translation>
+    </message>
+</context>
+<context>
     <name>Login</name>
     <message>
-        <location filename="qml/components/Login.qml" line="13"/>
+        <location filename="qml/components/Login.qml" line="12"/>
         <source>Login</source>
         <translation>Se connecter</translation>
     </message>
     <message>
-        <location filename="qml/components/Login.qml" line="26"/>
+        <location filename="qml/components/Login.qml" line="25"/>
         <source>You are not connected. Try to login to continue.</source>
         <translation>Connectez vous pour continuer.</translation>
     </message>
     <message>
-        <location filename="qml/components/Login.qml" line="48"/>
+        <location filename="qml/components/Login.qml" line="47"/>
         <source>Please enter your credentials</source>
         <translation>Entrez vos identifiants</translation>
     </message>
     <message>
-        <location filename="qml/components/Login.qml" line="77"/>
+        <location filename="qml/components/Login.qml" line="76"/>
         <source>Username</source>
         <translation>Nom d&apos;utilisateur</translation>
     </message>
     <message>
-        <location filename="qml/components/Login.qml" line="97"/>
+        <location filename="qml/components/Login.qml" line="96"/>
         <source>Password</source>
         <translation>Mot de passe</translation>
     </message>
     <message>
-        <location filename="qml/components/Login.qml" line="112"/>
+        <location filename="qml/components/Login.qml" line="111"/>
         <source>Remember</source>
         <translation>Se souvenir de moi</translation>
     </message>
     <message>
-        <location filename="qml/components/Login.qml" line="169"/>
+        <location filename="qml/components/Login.qml" line="168"/>
         <source>Can&apos;t connect to the servers of uShare Online</source>
         <translation>Impossible de contacter les serveurs de uShare Online</translation>
     </message>
     <message>
-        <location filename="qml/components/Login.qml" line="177"/>
+        <location filename="qml/components/Login.qml" line="176"/>
         <source>Wrong credentials</source>
         <translation>Mauvais identifiants</translation>
     </message>
     <message>
-        <location filename="qml/components/Login.qml" line="205"/>
+        <location filename="qml/components/Login.qml" line="204"/>
         <source>Connecting...</source>
         <translation>Connexion...</translation>
     </message>
@@ -351,77 +487,77 @@
 <context>
     <name>Register</name>
     <message>
-        <location filename="qml/components/Register.qml" line="12"/>
+        <location filename="qml/components/Register.qml" line="11"/>
         <source>Register</source>
         <translation>S&apos;enregistrer</translation>
     </message>
     <message>
-        <location filename="qml/components/Register.qml" line="28"/>
+        <location filename="qml/components/Register.qml" line="27"/>
         <source>Fill fields below to get registered</source>
         <translation>Fournissez les informations demandées</translation>
     </message>
     <message>
-        <location filename="qml/components/Register.qml" line="58"/>
+        <location filename="qml/components/Register.qml" line="57"/>
         <source>Please fill fields</source>
         <translation>S&apos;il vous plait remplissez les champs</translation>
     </message>
     <message>
-        <location filename="qml/components/Register.qml" line="78"/>
+        <location filename="qml/components/Register.qml" line="77"/>
         <source>Username</source>
         <translation>Nom d&apos;utilisateur</translation>
     </message>
     <message>
-        <location filename="qml/components/Register.qml" line="104"/>
+        <location filename="qml/components/Register.qml" line="103"/>
         <source>Password</source>
         <translation>Mot de passe</translation>
     </message>
     <message>
-        <location filename="qml/components/Register.qml" line="116"/>
+        <location filename="qml/components/Register.qml" line="115"/>
         <source>Repeat password</source>
         <translation>Encore le mot de passe</translation>
     </message>
     <message>
-        <location filename="qml/components/Register.qml" line="152"/>
+        <location filename="qml/components/Register.qml" line="151"/>
         <source>Email</source>
         <translation>Email</translation>
     </message>
     <message>
-        <location filename="qml/components/Register.qml" line="178"/>
+        <location filename="qml/components/Register.qml" line="177"/>
         <source>Remember for further login attempt</source>
         <translation>Se souvenir de moi</translation>
     </message>
     <message>
-        <location filename="qml/components/Register.qml" line="188"/>
+        <location filename="qml/components/Register.qml" line="187"/>
         <source>I accept conditions</source>
         <translation>J&apos;accepte les conditions</translation>
     </message>
     <message>
-        <location filename="qml/components/Register.qml" line="230"/>
+        <location filename="qml/components/Register.qml" line="229"/>
         <source>You must fill all fields.</source>
         <translation>Vous devez remplir tous les champs.</translation>
     </message>
     <message>
-        <location filename="qml/components/Register.qml" line="237"/>
+        <location filename="qml/components/Register.qml" line="236"/>
         <source>You must agree the conditions.</source>
         <translation>Vous devez accepter les conditions.</translation>
     </message>
     <message>
-        <location filename="qml/components/Register.qml" line="244"/>
+        <location filename="qml/components/Register.qml" line="243"/>
         <source>Your email must be valid.</source>
         <translation>Votre email doit être valide.</translation>
     </message>
     <message>
-        <location filename="qml/components/Register.qml" line="251"/>
+        <location filename="qml/components/Register.qml" line="250"/>
         <source>Your passwords must match.</source>
         <translation>Vos mots de passe doivent correspondre.</translation>
     </message>
     <message>
-        <location filename="qml/components/Register.qml" line="284"/>
+        <location filename="qml/components/Register.qml" line="283"/>
         <source>Can&apos;t reach uShare Online servers at the moment.</source>
         <translation>Impossible de contacter les serveurs de uShare Online.</translation>
     </message>
     <message>
-        <location filename="qml/components/Register.qml" line="316"/>
+        <location filename="qml/components/Register.qml" line="315"/>
         <source>Loading...</source>
         <translation>Chargement...</translation>
     </message>
@@ -485,37 +621,37 @@
 <context>
     <name>SystemTrayIcon</name>
     <message>
-        <location filename="core/systemtrayicon.cpp" line="35"/>
+        <location filename="core/systemtrayicon.cpp" line="54"/>
         <source>Capture fullscreen</source>
         <translation>Capturer l&apos;écran entier</translation>
     </message>
     <message>
-        <location filename="core/systemtrayicon.cpp" line="38"/>
+        <location filename="core/systemtrayicon.cpp" line="57"/>
         <source>Capture selected area</source>
         <translation>Sélectionner une zone</translation>
     </message>
     <message>
-        <location filename="core/systemtrayicon.cpp" line="41"/>
+        <location filename="core/systemtrayicon.cpp" line="60"/>
         <source>Cook new paste</source>
         <translation>Préparer un nouveau paste</translation>
     </message>
     <message>
-        <location filename="core/systemtrayicon.cpp" line="44"/>
+        <location filename="core/systemtrayicon.cpp" line="63"/>
         <source>Send new file</source>
         <translation>Envoyer un fichier</translation>
     </message>
     <message>
-        <location filename="core/systemtrayicon.cpp" line="47"/>
+        <location filename="core/systemtrayicon.cpp" line="66"/>
         <source>Send clipboard</source>
         <translation>Envoyer le presse papier</translation>
     </message>
     <message>
-        <location filename="core/systemtrayicon.cpp" line="52"/>
+        <location filename="core/systemtrayicon.cpp" line="71"/>
         <source>Open online dashboard</source>
         <translation>Ouvrir uShare Online</translation>
     </message>
     <message>
-        <location filename="core/systemtrayicon.cpp" line="53"/>
+        <location filename="core/systemtrayicon.cpp" line="72"/>
         <source>Open the app</source>
         <translation>Ouvrir l&apos;app</translation>
     </message>
@@ -580,22 +716,22 @@ Le lien est
 <context>
     <name>main</name>
     <message>
-        <location filename="qml/main_window/main.qml" line="33"/>
+        <location filename="qml/main_window/main.qml" line="36"/>
         <source>Overview</source>
         <translation>Vue d&apos;ensemble</translation>
     </message>
     <message>
-        <location filename="qml/main_window/main.qml" line="36"/>
+        <location filename="qml/main_window/main.qml" line="39"/>
         <source>Uploads</source>
         <translation>Vos fichiers</translation>
     </message>
     <message>
-        <location filename="qml/main_window/main.qml" line="37"/>
+        <location filename="qml/main_window/main.qml" line="40"/>
         <source>Settings</source>
         <translation>Paramètres</translation>
     </message>
     <message>
-        <location filename="qml/main_window/main.qml" line="45"/>
+        <location filename="qml/main_window/main.qml" line="48"/>
         <source>Colors</source>
         <translation>Couleurs</translation>
     </message>
@@ -608,7 +744,8 @@ Le lien est
     <name>uShare</name>
     <message>
         <location filename="ushare.cpp" line="94"/>
-        <source>Congratulation!</source>
+        <source>Congratulations!</source>
+        <oldsource>Congratulation!</oldsource>
         <translation>Félicitations !</translation>
     </message>
     <message>

@@ -14,10 +14,11 @@ Item
         if(!focus)
         {
             refreshTimer.running = false;
-            return;
         }
-
-        refreshTimer.running = true;
+        else
+        {
+            refreshTimer.running = true;
+        }
     }
 
     /** All files card **/
@@ -36,9 +37,10 @@ Item
             Item
             {
                 id: content;
+                anchors.margins: Units.dp(12);
 
                 width: parent.width;
-                height: grid.implicitHeight + grid.anchors.margins * 2;
+                height: grid.implicitHeight + anchors.margins * 2;
 
                 Grid
                 {
@@ -46,12 +48,11 @@ Item
 
                     anchors
                     {
-                        fill: parent;
-                        margins: Units.dp(20);
+                        centerIn: parent;
                     }
 
-                    columns: Math.floor(width/Units.dp(365));
-                    spacing: Units.dp(8);
+                    columns: Math.floor(parent.width/Units.dp(365));
+                    spacing: Units.dp(16);
 
                     Repeater
                     {

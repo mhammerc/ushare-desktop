@@ -27,11 +27,11 @@ SOURCES += main.cpp \
     qml/cpp_wrapper/shortcuts.cpp
 
 RESOURCES += \
-    images.qrc \
     sounds.qrc \
     translations.qrc \
     qml.qrc \
-    materialdesign.qrc
+    materialdesign.qrc \
+    images.qrc
 
 DISTFILES += \
     qml/main_window/Overview.qml \
@@ -57,7 +57,8 @@ DISTFILES += \
     qml/components/Register.qml \
     qml/pastes/PasteWindow.qml \
     qml/main_window/settings/Updates.qml \
-    qml/main_window/settings/Keyboardshortcuts.qml
+    qml/main_window/settings/Keyboardshortcuts.qml \
+    qml/components/ProfileCard.qml
 
 HEADERS += \
     core/systemtrayicon.h \

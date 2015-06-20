@@ -75,7 +75,7 @@ void SystemTrayIcon::makeContextMenu()
 
     exitUplimg = menu->addAction("Exit uShare");
 
-    QAction * build = menu->addAction("Technology preview build 3500 - Private");
+    QAction * build = menu->addAction("Technology preview build 4000 - Private");
     build->setDisabled(true);
 
     setContextMenu(menu);

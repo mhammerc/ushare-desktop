@@ -8,8 +8,11 @@ import "../components" as U
 ApplicationWindow
 {
     id: baseItem;
-    width: 670;
+    width: 780;
     height: 600;
+
+    minimumWidth: 640;
+    minimumHeight: 480;
 
     title: 'uShare';
 

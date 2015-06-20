@@ -1,4 +1,4 @@
-import QtQuick 2.2
+import QtQuick 2.4
 import Material 0.1
 import Material.ListItems 0.1 as ListItem
 
@@ -47,6 +47,9 @@ Window
 
             x: 10;
             y: 10;
+
+            mipmap: true;
+            asynchronous: true;
 
             source: "qrc:/images/ushare_icon.png";
         }

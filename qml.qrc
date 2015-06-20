@@ -25,5 +25,6 @@
         <file>qml/pastes/PasteWindow.qml</file>
         <file>qml/notification_window/NotificationWindow.qml</file>
         <file>qml/main_window/settings/Keyboardshortcuts.qml</file>
+        <file>qml/components/ProfileCard.qml</file>
     </qresource>
 </RCC>
