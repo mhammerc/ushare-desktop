@@ -1,3 +1,14 @@
+#
+#  This file (c) by : - Martin Hammerchmidt alias Imote
+#
+#  This file is licensed under a
+#  GNU GENERAL PUBLIC LICENSE V3.0
+#
+#  See the LICENSE file to learn more.
+#
+#  If you have contributed to this file, add your name to authors list.
+#
+
 TEMPLATE = app
 
 CONFIG += console
@@ -53,7 +64,6 @@ DISTFILES += \
     qml/components/FileCard.qml \
     qml/components/Offline.qml \
     qml/components/Loading.qml \
-    qml/main_window/global/Global.qml \
     qml/components/Register.qml \
     qml/pastes/PasteWindow.qml \
     qml/main_window/settings/Updates.qml \

@@ -17,7 +17,6 @@
         <file>qml/main_window/Overview.qml</file>
         <file>qml/main_window/SettingsPage.qml</file>
         <file>qml/main_window/Uploads.qml</file>
-        <file>qml/main_window/global/Global.qml</file>
         <file>qml/main_window/settings/Credits.qml</file>
         <file>qml/main_window/settings/General.qml</file>
         <file>qml/main_window/settings/Saving.qml</file>
