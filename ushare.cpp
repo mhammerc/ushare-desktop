@@ -50,6 +50,11 @@ void uShare::linkConnections()
         fileManager->screenTook(screenTaker->captureFullScreen());
     });
 
+    QObject::connect(systemTray, &SystemTrayIcon::openLastFile, [this]()
+    {
+        QDesktopServices::openUrl(QUrl(lastFileLink));
+    });
+
     QObject::connect(systemTray, &SystemTrayIcon::captureSelectedScreenAsked, this, &uShare::startCaptureSelectedScreenProccess);
     QObject::connect(systemTray, &SystemTrayIcon::sendFileAsked, fileManager, &FileManager::chooseFile);
     QObject::connect(systemTray, &SystemTrayIcon::sendClipboardAsked, fileManager, &FileManager::sendClipboard);
@@ -105,6 +110,8 @@ void uShare::autoSendFile(File file)
             NotificationWindow * notif = new NotificationWindow(tr("Congratulations!"), tr("Your file is uploaded!\nThe link is\n") + response, response);
             notif->show();
         }
+
+        lastFileLink = response;
     });
 
     fileSender->autoSendFile(file);

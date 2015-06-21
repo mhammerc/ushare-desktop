@@ -120,6 +120,18 @@ Item
                 text: qsTr('And, for sure, don\'t forget to be #Happy4Ever!');
             }
 
+            Label
+            {
+                text: qsTr('Our servers are freely and generously powered by <a href="https://client.dedizones.com/link.php?id=46">Dedishops</a>');
+
+                MouseArea
+                {
+                    anchors.fill: parent;
+
+                    onClicked: Desktop.openUrl('https://client.dedizones.com/link.php?id=46');
+                }
+            }
+
             ThinDivider
             {}
 
@@ -246,7 +258,7 @@ Item
                     U.ProfileCard
                     {
                         name: 'Mickael V.';
-                        description: qsTr('Minecraft director ㅡ Superhero fan');
+                        description: qsTr('Minecraft dev ㅡ Superhero fan');
                         imageSource: 'qrc:/images/fanor.jpg';
                         twitterUrl: 'https://twitter.com/Fanor79';
                     }

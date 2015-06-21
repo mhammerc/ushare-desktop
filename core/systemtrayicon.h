@@ -47,6 +47,8 @@ signals:
     void sendClipboardAsked();
     void makePasteAsked();
 
+    void openLastFile();
+
 private:
     void init();
     void makeShortcuts();

@@ -144,4 +144,16 @@ void SystemTrayIcon::makeConnections()
     QObject::connect(makePaste, &QAction::triggered, this, &SystemTrayIcon::makePasteAsked);
     QObject::connect(openUplimg, &QAction::triggered, this, &SystemTrayIcon::openUplimgAsked);
     QObject::connect(exitUplimg, &QAction::triggered, qApp, &QApplication::quit);
+
+    QObject::connect(this, &QSystemTrayIcon::activated, [this](QSystemTrayIcon::ActivationReason reason)
+    {
+       if(reason == QSystemTrayIcon::Trigger)
+       {
+           emit openLastFile();
+       }
+       else if(reason == QSystemTrayIcon::DoubleClick)
+       {
+           emit openUplimgAsked();
+       }
+    });
 }

@@ -60,6 +60,8 @@ private:
     MainWindow * mainWindow;
     PasteWindow pasteWindow;
 
+    QString lastFileLink;
+
 
 signals:
 
