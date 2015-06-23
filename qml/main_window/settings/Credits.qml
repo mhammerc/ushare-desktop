@@ -258,7 +258,7 @@ Item
                     U.ProfileCard
                     {
                         name: 'Mickael V.';
-                        description: qsTr('Minecraft dev ㅡ Superhero fan');
+                        description: qsTr('Minecraft director');
                         imageSource: 'qrc:/images/fanor.jpg';
                         twitterUrl: 'https://twitter.com/Fanor79';
                     }
@@ -266,7 +266,7 @@ Item
                     U.ProfileCard
                     {
                         name: 'Benjamin B.';
-                        description: qsTr('Design helper');
+                        description: qsTr('Material Design specialist');
                         imageSource: 'qrc:/images/benjamin.jpg';
                         twitterUrl: 'https://twitter.com/benjam62217'
                     }
@@ -293,6 +293,22 @@ Item
                         description: qsTr('Helper');
                         imageSource: 'qrc:/images/jalal.jpg';
                         twitterUrl: 'https://twitter.com/xXGaminGXx33';
+                    }
+
+                    U.ProfileCard
+                    {
+                        name: 'GraphOne';
+                        description: qsTr('Superb group of graphic designers');
+                        imageSource: 'qrc:/images/graphone.png';
+                        twitterUrl: 'https://twitter.com/GroupeGraph_FR';
+                    }
+
+                    U.ProfileCard
+                    {
+                        name: 'BleuDiamant';
+                        description: qsTr('One fucking diamond!');
+                        imageSource: 'qrc:/images/bleudiamant.png';
+                        twitterUrl: 'https://twitter.com/BleuDiamantFR';
                     }
                 }
             }

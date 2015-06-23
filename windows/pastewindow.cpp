@@ -11,7 +11,7 @@
 
 #include "pastewindow.h"
 
-PasteWindow::PasteWindow(QObject * parent) : QObject(parent)
+PasteWindow::PasteWindow(QObject * parent) : QObject(parent), window(nullptr)
 {
     component = new QQmlComponent(&engine, QUrl("qrc:/qml/pastes/PasteWindow.qml"));
     qDebug() << component->errorString();

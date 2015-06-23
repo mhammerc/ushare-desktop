@@ -21,9 +21,13 @@
 #include <QtQml>
 #include <QIcon>
 
+#ifdef QT_STATIC
+#include <QtPlugin>
+Q_IMPORT_PLUGIN(QtQuick2PrivateWidgetsPlugin)
+#endif
+
 #include "qml/cpp_wrapper/shortcutgetter.h"
 #include "ushare.h"
-
 
 int main(int argc, char *argv[])
 {

@@ -14,7 +14,11 @@ TEMPLATE = app
 CONFIG += console
 CONFIG += qtquickcompiler
 
-QT += widgets qml quick core gui multimedia
+QT += widgets qml quick core gui multimedia svg network
+
+static {
+LIBS += /usr/local/Qt-5.4.2/qml/QtQuick/PrivateWidgets/libwidgetsplugin.a
+}
 
 SOURCES += main.cpp \
     core/systemtrayicon.cpp \
@@ -106,7 +110,7 @@ SOURCES += \
 
 # Translations
 
-lupdate_only{
+lupdate_only {
     SOURCES += qml/main_window/settings/*.qml \
         qml/main_window/*.qml \
         qml/components/*.qml \

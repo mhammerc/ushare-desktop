@@ -9,6 +9,8 @@
         <file alias="benjamin.jpg">resources/images/profiles/benjamin.jpg</file>
         <file alias="toinane.jpg">resources/images/profiles/toinane.jpg</file>
         <file alias="fanor.jpg">resources/images/profiles/fanor.jpg</file>
+        <file alias="bleudiamant.png">resources/images/profiles/bleudiamant.png</file>
+        <file alias="graphone.png">resources/images/profiles/graphone.png</file>
     </qresource>
     <qresource prefix="/images/context_menu">
         <file alias="clipboard.png">resources/context_menu/clipboard.png</file>

@@ -1,4 +1,5 @@
 Uplimg
+uShare
 debug/*
 release/*
 object_script.*
@@ -22,6 +23,7 @@ object_script.*
 *.pro.user.*
 moc_*.cpp
 qrc_*.cpp
+*_import.cpp
 ui_*.h
 Makefile*
 *-build-*
