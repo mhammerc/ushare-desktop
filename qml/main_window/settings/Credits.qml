@@ -55,6 +55,8 @@ Item
                     audioPlayer.stop();
                 }
 
+                console.log(audioPlayer.status)
+
             }
 
             MouseArea
@@ -318,9 +320,14 @@ Item
     MediaPlayer
     {
         id: audioPlayer;
-        source: 'qrc:/sounds/rocky.ogg';
+        source: 'qrc:/sounds/rocky.mp3';
         loops: MediaPlayer.Infinite;
-        autoLoad: false;
+        autoLoad: true;
+
+        onError:
+        {
+            console.log(errorString);
+        }
     }
 }
 
