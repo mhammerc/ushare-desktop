@@ -11,7 +11,7 @@
 
 TEMPLATE = app
 
-CONFIG += console c++11
+CONFIG += c++11
 CONFIG += qtquickcompiler
 
 QT += widgets qml quick core gui multimedia svg network
