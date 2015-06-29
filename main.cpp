@@ -36,7 +36,6 @@ int main(int argc, char *argv[])
     app.setQuitOnLastWindowClosed(false);
     app.setWindowIcon(QIcon(":/images/ushare_icon.png"));
 
-    //qmlRegisterSingletonType(QUrl("qrc:/qml/main_window/global/Global.qml"), "U.Global", 1, 0, "Global");
     qmlRegisterType<ShortcutGetter>("uShare", 0, 1, "ShortcutGetter");
 
     QCoreApplication::setOrganizationName("uSquare");
@@ -55,7 +54,6 @@ int main(int argc, char *argv[])
         Settings::setEntry(SettingsKeys::LANGUAGE, locale);
         language = QVariant(locale);
     }
-
 
     QTranslator translator;
     translator.load(QString(":/translations/ushare_") + language.toString());

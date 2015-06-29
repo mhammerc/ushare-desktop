@@ -11,7 +11,6 @@
 
 TEMPLATE = app
 
-CONFIG += console
 CONFIG += qtquickcompiler
 
 QT += widgets qml quick core gui multimedia svg network

@@ -317,7 +317,9 @@ Item
         {
             if(!response.success)
             {
-                snackbar.open('Connection to uShare Online lost :\'(' + response.message ? ' -> ' + response.message : '');
+                snackbar.open(response.message ? response.message : 'Error while connecting to uShare');
+                console.log(JSON.stringify(response));
+                uShareOnline.disconnect();
                 return;
             }
 

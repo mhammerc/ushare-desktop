@@ -31,7 +31,7 @@ SystemTrayIcon::~SystemTrayIcon()
 void SystemTrayIcon::init()
 {
     setIcon(QIcon(":/images/ushare_icon.png"));
-    setToolTip("Uplimg");
+    setToolTip("uShare - let's go!");
     makeShortcuts();
     makeContextMenu();
     makeGlobalShortcuts();
@@ -86,7 +86,7 @@ void SystemTrayIcon::makeContextMenu()
 
     exitUplimg = menu->addAction("Exit uShare");
 
-    QAction * build = menu->addAction("Technology preview build 4000 - Private");
+    QAction * build = menu->addAction("Closed beta 1.0 - Private");
     build->setDisabled(true);
 
     setContextMenu(menu);

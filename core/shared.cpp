@@ -11,7 +11,7 @@
 
 #include "shared.h"
 
-const QString Shared::appVersion = "uhare-build-4000";
+const QString Shared::appVersion = "0.0.1";
 
 const int Shared::globalPort = 80;
 

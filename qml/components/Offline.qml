@@ -25,7 +25,7 @@ Item
 
         U.Label
         {
-            text: qsTr("You need to connect to U² Online before using this feature");
+            text: qsTr("You need to connect to uShare Online before using this feature");
         }
 
         Row
