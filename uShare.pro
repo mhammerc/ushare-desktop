@@ -11,13 +11,10 @@
 
 TEMPLATE = app
 
+CONFIG += console c++11
 CONFIG += qtquickcompiler
 
 QT += widgets qml quick core gui multimedia svg network
-
-static {
-LIBS += /usr/local/Qt-5.4.2/qml/QtQuick/PrivateWidgets/libwidgetsplugin.a
-}
 
 SOURCES += main.cpp \
     core/systemtrayicon.cpp \
