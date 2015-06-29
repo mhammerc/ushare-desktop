@@ -11,8 +11,9 @@
 
 TEMPLATE = app
 
-CONFIG += c++11
-CONFIG += qtquickcompiler
+TARGET = ushare
+
+CONFIG += c++11 # C++11 for sure !
 
 QT += widgets qml quick core gui multimedia svg network
 
@@ -38,11 +39,11 @@ SOURCES += main.cpp \
     qml/cpp_wrapper/shortcuts.cpp
 
 RESOURCES += \
-    sounds.qrc \
-    translations.qrc \
-    qml.qrc \
-    materialdesign.qrc \
-    images.qrc
+    resources/sounds.qrc \
+    resources/qml.qrc \
+    resources/materialdesign.qrc \
+    resources/images.qrc \
+    resources/translations.qrc
 
 DISTFILES += \
     qml/main_window/Overview.qml \
@@ -115,8 +116,7 @@ lupdate_only {
         qml/upload_window/*.qml
 }
 
-TRANSLATIONS = ushare_fr.ts \
-    ushare_sp.ts
+TRANSLATIONS = resources/translations/ushare_fr.ts
 
 win32 {
     SOURCES += shortcuts/win/qxtglobalshortcut_win.cpp

@@ -1,0 +1,29 @@
+<RCC>
+    <qresource prefix="/">
+        <file>../qml/upload_window/UploadWindow.qml</file>
+        <file>../qml/components/Badge.qml</file>
+        <file>../qml/components/Checkbox.qml</file>
+        <file>../qml/components/ColorPicker.qml</file>
+        <file>../qml/components/Dialog.qml</file>
+        <file>../qml/components/FileCard.qml</file>
+        <file>../qml/components/functions.js</file>
+        <file>../qml/components/Label.qml</file>
+        <file>../qml/components/Loading.qml</file>
+        <file>../qml/components/Login.qml</file>
+        <file>../qml/components/Offline.qml</file>
+        <file>../qml/components/Register.qml</file>
+        <file>../qml/components/Slider.qml</file>
+        <file>../qml/main_window/main.qml</file>
+        <file>../qml/main_window/Overview.qml</file>
+        <file>../qml/main_window/SettingsPage.qml</file>
+        <file>../qml/main_window/Uploads.qml</file>
+        <file>../qml/main_window/settings/Credits.qml</file>
+        <file>../qml/main_window/settings/General.qml</file>
+        <file>../qml/main_window/settings/Saving.qml</file>
+        <file>../qml/main_window/settings/Updates.qml</file>
+        <file>../qml/pastes/PasteWindow.qml</file>
+        <file>../qml/notification_window/NotificationWindow.qml</file>
+        <file>../qml/main_window/settings/Keyboardshortcuts.qml</file>
+        <file>../qml/components/ProfileCard.qml</file>
+    </qresource>
+</RCC>

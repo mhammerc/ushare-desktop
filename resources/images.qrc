@@ -1,0 +1,27 @@
+<RCC>
+    <qresource prefix="/images">
+        <file alias="ushare_icon.png">ushare_icon.png</file>
+        <file alias="martin.jpg">images/profiles/martin.jpg</file>
+        <file alias="julien.png">images/profiles/julien.png</file>
+        <file alias="jalal.jpg">images/profiles/jalal.jpg</file>
+        <file alias="yohann.jpg">images/profiles/yohann.jpg</file>
+        <file alias="aymeric.png">images/profiles/aymeric.png</file>
+        <file alias="benjamin.jpg">images/profiles/benjamin.jpg</file>
+        <file alias="toinane.jpg">images/profiles/toinane.jpg</file>
+        <file alias="fanor.jpg">images/profiles/fanor.jpg</file>
+        <file alias="bleudiamant.png">images/profiles/bleudiamant.png</file>
+        <file alias="graphone.png">images/profiles/graphone.png</file>
+    </qresource>
+    <qresource prefix="/images/context_menu">
+        <file alias="clipboard.png">context_menu/clipboard.png</file>
+        <file alias="file.png">context_menu/file.png</file>
+        <file alias="fullscreen.png">context_menu/fullscreen.png</file>
+        <file alias="selected_screen.png">context_menu/selected_screen.png</file>
+        <file alias="paste.png">context_menu/paste.png</file>
+    </qresource>
+    <qresource prefix="/design">
+        <file alias="icon_close_hover.png">design/icon_close_hover.png</file>
+        <file alias="icon_close_unhover.png">design/icon_close_unhover.png</file>
+        <file alias="inconnu.jpg">design/inconnu.jpg</file>
+    </qresource>
+</RCC>

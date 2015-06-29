@@ -1,5 +1,5 @@
 <RCC>
     <qresource prefix="/translations">
-        <file>ushare_fr.qm</file>
+        <file alias="ushare_fr.qm">translations/ushare_fr.qm</file>
     </qresource>
 </RCC>
