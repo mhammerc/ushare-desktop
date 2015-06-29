@@ -1,0 +1,6 @@
+[submodule "resources/qml-material"]
+	path = resources/qml-material
+	url = https://github.com/uShare-app/qml-material
+[submodule "resources/qml-extras"]
+	path = resources/qml-extras
+	url = https://github.com/papyros/qml-extras
