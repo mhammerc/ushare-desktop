@@ -20,11 +20,11 @@ U.Dialog
 {
     id: dialog;
     title: qsTr('Register');
-    height: Units.dp(445);
+    height: Units.dp(450);
 
     property bool hasError: false;
 
-    signal successRegister();
+    signal successRegister(string username, string password);
 
     /* Register form */
     Column
@@ -195,8 +195,27 @@ U.Dialog
                     content: CheckBox
                     {
                         id: acceptConditionsCheckbox;
-                        text: qsTr('I accept conditions');
+                        text: qsTr('I accept CGU');
                         checked: false;
+                    }
+                }
+
+                Label
+                {
+                    anchors
+                    {
+                        left: parent.left;
+                        right: parent.right;
+                        margins: Units.dp(5);
+                    }
+
+                    text: qsTr('Open CGU');
+                    color: '#4aa3df';
+
+                    MouseArea
+                    {
+                        anchors.fill: parent;
+                        onClicked: Desktop.openUrl('http://ushare.so/itdw');
                     }
                 }
 
@@ -314,7 +333,7 @@ U.Dialog
             }
 
 
-            successRegister();
+            successRegister(usernameField.text, passwordField.text);
             resetFields();
             close();
         }
@@ -322,10 +341,10 @@ U.Dialog
 
     function tryToRegister()
     {
+        uShareOnline.register_(usernameField.text, passwordField.text, emailField.text);
+
         statusLabel.error = false;
         statusLabel.text = qsTr('Loading...');
         statusLabel.visible = true;
-
-        uShareOnline.register_(usernameField.text, passwordField.text, emailField.text);
     }
 }

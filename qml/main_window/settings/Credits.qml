@@ -54,9 +54,6 @@ Item
                 {
                     audioPlayer.stop();
                 }
-
-                console.log(audioPlayer.status)
-
             }
 
             MouseArea
@@ -254,7 +251,7 @@ Item
                         name: 'Aymeric B.';
                         description: qsTr('Marketing Director');
                         imageSource: 'qrc:/images/aymeric.png';
-                        twitterUrl: 'https://twitter.com/Mimim_Dragneel';
+                        twitterUrl: 'https://twitter.com/MimimDragneel';
                     }
 
                     U.ProfileCard

@@ -25,11 +25,21 @@ Item
 
         U.Label
         {
+            anchors
+            {
+                horizontalCenter: parent.horizontalCenter;
+            }
+
             text: qsTr("You need to connect to uShare Online before using this feature");
         }
 
         Row
         {
+            anchors
+            {
+                horizontalCenter: parent.horizontalCenter;
+            }
+
             spacing: Units.dp(5);
 
             Button

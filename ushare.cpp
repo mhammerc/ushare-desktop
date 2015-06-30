@@ -23,7 +23,7 @@ void uShare::start()
     linkConnections();
 
     // and then..
-    systemTray->show();
+    systemTray->setVisible(true);
 }
 
 SystemTrayIcon * uShare::getSystemTray()

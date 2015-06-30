@@ -205,13 +205,15 @@ void UShareOnline::sendHttpRequest(const UShareOnline::RequestType type, const Q
         }
     }
 
-    manager = new QNetworkAccessManager(this);
+    if(!manager)
+    {
+        manager = new QNetworkAccessManager(this);
+    }
 
     if(httpMultiPart)
     {
         httpMultiPart->setParent(manager);
         reply = manager->post(request, httpMultiPart);
-        reply->setParent(manager);
     }
     else
     {
@@ -309,17 +311,22 @@ void UShareOnline::_gotUpdates(QByteArray response)
 
 void UShareOnline::requestFinished()
 {
-    setRequestInProgress(false);
-    callback(reply->readAll());
-    manager->deleteLater();
+    QByteArray data = reply->readAll();
 
-    manager = nullptr;
+    setRequestInProgress(false);
+
+    httpMultiPart->deleteLater();
+    reply->deleteLater();
+
     httpMultiPart = nullptr;
     reply = nullptr;
+
+    callback(data);
 }
 
-void UShareOnline::networkError(QNetworkReply::NetworkError)
+void UShareOnline::networkError(QNetworkReply::NetworkError a)
 {
+    reply->deleteLater();
     /*manager->deleteLater();
 
     manager = nullptr;

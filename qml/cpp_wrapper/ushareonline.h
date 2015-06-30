@@ -56,6 +56,7 @@ public:
 private:
     QString accountKey;
     QString privateKey;
+
     bool isConnected;
     bool requestInProgress;
 

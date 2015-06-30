@@ -333,13 +333,19 @@ Item
 
         onSuccessRegister:
         {
-            onStart();
+            onStart(username, password);
         }
     }
 
     /* When the application is started and loaded */
-    function onStart()
+    function onStart(username, password)
     {
+        if(username && password)
+        {
+            uShareOnline.connect(username, password);
+            return;
+        }
+
         if(Settings.value('username', false) === 'false' || Settings.value('password', false) === 'false')
         {
             return;
