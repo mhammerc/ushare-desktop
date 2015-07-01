@@ -324,9 +324,8 @@ void UShareOnline::requestFinished()
     callback(data);
 }
 
-void UShareOnline::networkError(QNetworkReply::NetworkError a)
+void UShareOnline::networkError(QNetworkReply::NetworkError)
 {
-    reply->deleteLater();
     /*manager->deleteLater();
 
     manager = nullptr;

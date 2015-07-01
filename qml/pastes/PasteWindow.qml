@@ -9,7 +9,7 @@
  * If you have contributed to this file, add your name to authors list.
 */
 
-import QtQuick 2.0
+import QtQuick 2.3
 import QtQuick.Controls 1.2
 import QtQuick.Layouts 1.1
 import Material 0.1
