@@ -9,11 +9,11 @@
  * If you have contributed to this file, add your name to authors list.
 */
 
-import QtQuick 2.0
-import QtQuick.Dialogs 1.0
+import QtQuick 2.3
+import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.1
-import Material 0.1
-import Material.ListItems 0.1 as ListItem
+import "qrc:/qml-material/modules/Material" 0.1
+import "qrc:/qml-material/modules/Material/ListItems" 0.1 as ListItem
 import '../../components' as U
 import '../../components/functions.js' as F
 

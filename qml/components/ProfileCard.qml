@@ -9,8 +9,8 @@
  * If you have contributed to this file, add your name to authors list.
 */
 
-import Material 0.1
-import Material.Extras 0.1
+import "qrc:/qml-material/modules/Material" 0.1
+import "qrc:/qml-extras/modules/Material/Extras" 0.1
 import QtQuick 2.0
 
 View

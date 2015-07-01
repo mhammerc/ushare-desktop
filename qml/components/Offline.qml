@@ -10,7 +10,7 @@
 */
 
 import QtQuick 2.0
-import Material 0.1
+import "qrc:/qml-material/modules/Material" 0.1
 import "../components" as U
 
 /* When user is disconnected */

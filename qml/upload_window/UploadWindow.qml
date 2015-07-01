@@ -10,8 +10,7 @@
 */
 
 import QtQuick 2.2
-import Material 0.1
-import Material.ListItems 0.1 as ListItem
+import "qrc:/qml-material/modules/Material" 0.1
 
 Window
 {

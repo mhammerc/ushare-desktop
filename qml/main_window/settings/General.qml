@@ -11,8 +11,8 @@
 
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
-import Material 0.1
-import Material.ListItems 0.1 as ListItem
+import "qrc:/qml-material/modules/Material" 0.1
+import "qrc:/qml-material/modules/Material/ListItems" 0.1 as ListItem
 import "../../components" as U
 import "../../components/functions.js" as F
 

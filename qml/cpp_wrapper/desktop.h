@@ -35,10 +35,16 @@ private:
     QString units2[8];
 
 public:
-    QmlDesktop(QObject * parent = 0) : QObject(parent),
-        units1 {"kB","MB","GB","TB","PB","EB","ZB","YB"},
-        units2 {"KiB","MiB","GiB","TiB","PiB","EiB","ZiB","YiB"}
-    {}
+    QmlDesktop(QObject * parent = 0) : QObject(parent)
+    {
+        units1[0] = "kB"; units1[1] = "MB"; units1[2] = "GB";
+        units1[3] = "TB"; units1[4] = "PB"; units1[5] = "EB";
+        units1[6] = "ZB"; units1[7] = "YB";
+
+        units2[0] = "KiB"; units2[1] = "MiB"; units2[2] = "GiB";
+        units2[3] = "TiB"; units2[4] = "PiB"; units2[5] = "EiB";
+        units2[6] = "ZiB"; units2[7] = "YiB";
+    }
 
     Q_INVOKABLE void aboutQt()
     {

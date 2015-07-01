@@ -12,8 +12,7 @@
 import QtQuick 2.3
 import QtQuick.Controls 1.2
 import QtQuick.Layouts 1.1
-import Material 0.1
-import Material.ListItems 0.1
+import "qrc:/qml-material/modules/Material" 0.1
 
 ApplicationWindow
 {

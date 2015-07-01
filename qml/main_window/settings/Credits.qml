@@ -13,7 +13,7 @@ import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 1.3
 import QtMultimedia 5.4
-import Material 0.1
+import "qrc:/qml-material/modules/Material" 0.1
 import "../../components" as U
 
 Item

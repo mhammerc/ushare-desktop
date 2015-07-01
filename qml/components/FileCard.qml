@@ -10,9 +10,9 @@
 */
 
 import QtQuick 2.0
-import Material 0.1
-import Material.Extras 0.1
-import Material.ListItems 0.1
+import "qrc:/qml-material/modules/Material" 0.1
+import "qrc:/qml-material/modules/Material/ListItems" 0.1
+import "qrc:/qml-extras/modules/Material/Extras" 0.1
 import "../components" as U
 import "../components/functions.js" as F
 

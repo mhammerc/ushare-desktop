@@ -1,6 +1,6 @@
 <RCC>
     <qresource prefix="/images">
-        <file alias="ushare_icon.png">ushare_icon.png</file>
+        <file>ushare_icon.png</file>
         <file alias="martin.jpg">images/profiles/martin.jpg</file>
         <file alias="julien.png">images/profiles/julien.png</file>
         <file alias="jalal.jpg">images/profiles/jalal.jpg</file>

@@ -11,9 +11,9 @@
 
 import QtQuick 2.2
 import QtQuick.Layouts 1.1
-import Material 0.1
-import Material.ListItems 0.1 as ListItem
-import Material.Extras 0.1
+import "qrc:/qml-material/modules/Material" 0.1
+import "qrc:/qml-material/modules/Material/ListItems" 0.1 as ListItem
+import "qrc:/qml-extras/modules/Material/Extras" 0.1
 import "." as U
 
 U.Dialog

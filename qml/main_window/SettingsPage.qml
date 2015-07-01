@@ -10,8 +10,8 @@
 */
 
 import QtQuick 2.0
-import Material 0.1
-import Material.ListItems 0.1 as ListItem
+import "qrc:/qml-material/modules/Material" 0.1
+import "qrc:/qml-material/modules/Material/ListItems" 0.1 as ListItem
 
 Item {
     id: settings;

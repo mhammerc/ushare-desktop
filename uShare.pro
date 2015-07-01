@@ -42,8 +42,8 @@ RESOURCES += \
     resources/sounds.qrc \
     resources/qml.qrc \
     resources/materialdesign.qrc \
-    resources/images.qrc \
-    resources/translations.qrc
+    resources/translations.qrc \
+    resources/images.qrc
 
 DISTFILES += \
     qml/main_window/Overview.qml \

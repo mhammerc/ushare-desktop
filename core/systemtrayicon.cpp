@@ -30,7 +30,7 @@ SystemTrayIcon::~SystemTrayIcon()
 
 void SystemTrayIcon::init()
 {
-    setIcon(QIcon("qrc:/images/ushare_icon.png"));
+    setIcon(QIcon(":/images/ushare_icon.png"));
     setToolTip("uShare - let's go!");
     makeShortcuts();
     makeContextMenu();
