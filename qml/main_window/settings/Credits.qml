@@ -156,6 +156,7 @@ Item
                 Button
                 {
                     text: 'Find us on GitHub';
+                    onClicked: Qt.openUrlExternally('https://github.com/uShare-app');
                 }
             }
 

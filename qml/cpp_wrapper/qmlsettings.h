@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QSettings>
+#include <QApplication>
 
 #include "core/shared.h"
 
@@ -20,6 +21,8 @@ public:
     Q_INVOKABLE QVariant value(const QString &key, const QVariant &defaultValue);
 
     Q_INVOKABLE bool boolValue(const QString &key, const bool defaultValue);
+
+    Q_INVOKABLE void setStartOnStartup(bool enabled);
 
     Q_PROPERTY(QString uploadUrl READ uploadUrl CONSTANT FINAL)
 

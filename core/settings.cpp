@@ -51,7 +51,8 @@ Settings::Settings(QObject *parent) : QSettings(parent)
          << "selectedareascreen_shortcut"
          << "newpaste_shortcut"
          << "sendfile_shortcut"
-         << "sendclipboard_shortcut";
+         << "sendclipboard_shortcut"
+         << "windows10_notifications";
 
 }
 

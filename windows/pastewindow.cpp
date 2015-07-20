@@ -14,7 +14,11 @@
 PasteWindow::PasteWindow(QObject * parent) : QObject(parent), window(nullptr)
 {
     component = new QQmlComponent(&engine, QUrl("qrc:/qml/pastes/PasteWindow.qml"));
-    qDebug() << component->errorString();
+
+    context = new QQmlContext(&engine);
+
+    QmlSettings * settings = new QmlSettings(this);
+    context->setContextProperty("Settings", settings);
 }
 
 PasteWindow::~PasteWindow()
@@ -33,7 +37,9 @@ void PasteWindow::newPaste()
         return;
     }
 
-    window = component->create();
+    window = component->create(context);
+    qDebug() << component->errorString();
+
     window->setProperty("visible", true);
 
     QObject::connect(window, SIGNAL(send(QString, QString)), this, SLOT(_pasteReady(QString, QString)));

@@ -20,6 +20,8 @@
 #include <QFileInfo>
 #include <QtQml>
 #include <QIcon>
+#include <QSettings>
+#include <QVariant>
 
 #ifdef QT_STATIC
 #include <QtPlugin>
@@ -42,7 +44,25 @@ int main(int argc, char *argv[])
     QCoreApplication::setOrganizationDomain("usquare.io");
     QCoreApplication::setApplicationName("uShare");
 
-    /* TRANSLATIONS */
+    /** DEFAULT CONFIGURATION **/
+
+    QSettings s;
+
+    if(s.value("installed").isNull())
+    {
+        s.setValue("installed", true);
+        s.setValue("copy_link_to_clipboard", true);
+        s.setValue("open_file_in_browser", false);
+        s.setValue("play_sound", true);
+        s.setValue("run_on_startup", false);
+        s.setValue("show_notification_window", true);
+        s.setValue("show_progress_window", true);
+        s.setValue("windows10_notifications", false);
+    }
+
+    /** DEFAULT CONFIGURATION END **/
+
+    /** TRANSLATIONS **/
 
     Settings::init(&app);
 
@@ -59,7 +79,7 @@ int main(int argc, char *argv[])
     translator.load(QString(":/translations/ushare_") + language.toString());
     qApp->installTranslator(&translator);
 
-    /* TRANSLATIONS END */
+    /** TRANSLATIONS END **/
 
     uShare uplimg;
     uplimg.start();

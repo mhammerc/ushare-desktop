@@ -13,10 +13,13 @@
 #define PASTEWINDOW_H
 
 #include <QObject>
-#include "qmlengine.h"
 #include <QQmlComponent>
 #include <QQuickItem>
 #include <QQuickWindow>
+#include <QQmlContext>
+
+#include "qmlengine.h"
+#include "qml/cpp_wrapper/qmlsettings.h"
 
 class PasteWindow : public QObject
 {
@@ -33,6 +36,8 @@ private slots:
     void _pasteReady(QString name, QString content);
 
 private:
+    QQmlContext * context;
+
     void deletePasteWindow();
 
 signals:
