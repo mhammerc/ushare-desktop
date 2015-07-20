@@ -1,4 +1,4 @@
-# uShare ![version](https://img.shields.io/badge/version-0.0.2-green.svg?style=flat) ![Qt version](https://img.shields.io/badge/Qt-5.4.2-blue.svg?style=flat) ![Qt version](https://img.shields.io/badge/Qt-5.5.0-blue.svg?style=flat) [![License](https://img.shields.io/badge/License-GNU%20GPL%203-blue.svg?style=flat)](LICENSE)
+# uShare ![version](https://img.shields.io/badge/version-0.0.2-green.svg?style=flat-square) ![Qt version](https://img.shields.io/badge/Qt-5.4.2-blue.svg?style=flat-square) ![Qt version](https://img.shields.io/badge/Qt-5.5.0-blue.svg?style=flat-square) [![License](https://img.shields.io/badge/License-GNU%20GPL%203-blue.svg?style=flat-square)](LICENSE)
 uShare is an instant file sharing tool.
 
 Find us on [http://www.ushare.so](http://www.ushare.so).
