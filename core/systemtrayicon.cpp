@@ -86,7 +86,7 @@ void SystemTrayIcon::makeContextMenu()
 
     exitUplimg = menu->addAction("Exit uShare");
 
-    QAction * build = menu->addAction("Closed beta 1.0 - Private");
+    QAction * build = menu->addAction("Beta 0.0.2");
     build->setDisabled(true);
 
     setContextMenu(menu);
@@ -144,6 +144,7 @@ void SystemTrayIcon::makeConnections()
     QObject::connect(makePaste, &QAction::triggered, this, &SystemTrayIcon::makePasteAsked);
     QObject::connect(openUplimg, &QAction::triggered, this, &SystemTrayIcon::openUplimgAsked);
     QObject::connect(exitUplimg, &QAction::triggered, qApp, &QApplication::quit);
+    QObject::connect(this, &QSystemTrayIcon::messageClicked, this, &SystemTrayIcon::openLastFile);
 
     QObject::connect(this, &QSystemTrayIcon::activated, [this](QSystemTrayIcon::ActivationReason reason)
     {

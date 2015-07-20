@@ -19,6 +19,13 @@ ApplicationWindow
     id: root;
     title: qsTr('Cook a new paste');
 
+    theme
+    {
+        primaryColor: Settings.value('color/primaryColor', '#2196F3');
+        accentColor: Settings.value('color/accentColor','#4CAF50');
+        backgroundColor: Settings.value('color/backgroundColor', '#fafafa');
+    }
+
     initialPage: page;
 
     signal send(string name, string content);
@@ -88,6 +95,7 @@ ApplicationWindow
                             id: buttonSend;
                             text: qsTr('Send!');
                             elevation: 1;
+                            backgroundColor: Theme.accentColor;
 
                             onClicked:
                             {
@@ -106,6 +114,7 @@ ApplicationWindow
                             id: buttonCancel;
                             text: qsTr('Cancel');
                             elevation: 1;
+                            backgroundColor: Theme.accentColor;
 
                             onClicked: root.cancel();
                         }

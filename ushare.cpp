@@ -107,7 +107,16 @@ void uShare::autoSendFile(File file)
 
         if(Settings::entry(SettingsKeys::SHOW_NOTIFICATION_WINDOW).toBool())
         { // If the user want a notification window
-            NotificationWindow * notif = new NotificationWindow(tr("Congratulations!"), tr("Your file is uploaded!\nThe link is\n") + response, response);
+
+            QString message = tr("Your file is uploaded!\nThe link is ") + response;
+
+            if(Settings::entry(SettingsKeys::USE_WINDOWS10_NATIVE_NOTIFICATIONS).toBool())
+            {
+                systemTray->showMessage("uShare", message, QSystemTrayIcon::NoIcon);
+                return;
+            }
+
+            NotificationWindow * notif = new NotificationWindow(tr("Congratulations!"), message, response);
             notif->show();
         }
 
