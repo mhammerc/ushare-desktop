@@ -56,7 +56,11 @@ Item
             {
                 text: qsTr('Run on startup');
                 checked: F.stringToBoolean(Settings.value('run_on_startup', false));
-                onCheckedChanged: Settings.setValue('run_on_startup', checked);
+                onCheckedChanged:
+                {
+                    Settings.setStartOnStartup(checked);
+                    Settings.setValue('run_on_startup', checked);
+                }
             }
 
             ListItem.SimpleMenu
@@ -75,6 +79,15 @@ Item
                     if(selectedIndex === 0) Settings.setValue('language', 'en');
                     else if(selectedIndex === 1) Settings.setValue('language', 'fr');
                 }
+            }
+
+            CheckBox
+            {
+                id: windows10Notifications;
+                text: qsTr('Use native notifications');
+                anchors.left: Units.dp(16);
+                checked: F.stringToBoolean(Settings.value('windows10_notifications', false));
+                onCheckedChanged: Settings.setValue('windows10_notifications', checked);
             }
 
             Label
@@ -98,24 +111,13 @@ Item
                 onCheckedChanged: Settings.setValue('play_sound', checked);
             }
 
-            Column
-            {
-                CheckBox
-                {
-                    id: notificationWindow;
-                    text: qsTr('Notify me on successful upload');
-                    checked: F.stringToBoolean(Settings.value('show_notification_window', false));
-                    onCheckedChanged: Settings.setValue('show_notification_window', checked);
-                }
 
-                CheckBox
-                {
-                    id: windows10Notifications;
-                    text: qsTr('Use native Windows 10 notifications');
-                    anchors.leftMargin: Units.dp(16);
-                    checked: F.stringToBoolean(Settings.value('windows10_notifications', false));
-                    onCheckedChanged: Settings.setValue('windows10_notifications', checked);
-                }
+            CheckBox
+            {
+                id: notificationWindow;
+                text: qsTr('Notify me on successful upload');
+                checked: F.stringToBoolean(Settings.value('show_notification_window', false));
+                onCheckedChanged: Settings.setValue('show_notification_window', checked);
             }
 
             CheckBox

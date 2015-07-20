@@ -21,6 +21,24 @@ bool QmlSettings::boolValue(const QString &key, bool defaultValue)
     return QSettings::value(key, defaultValue).toBool();
 }
 
+void QmlSettings::setStartOnStartup(bool enabled)
+{
+#ifdef _WIN32
+    QSettings s("HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", QSettings::NativeFormat);
+
+    if(enabled)
+    {
+        QString exePath = "\"" + qApp->applicationFilePath() + "\"";
+        exePath.replace("/", "\\");
+        s.setValue("uShare", exePath);
+    }
+    else
+    {
+        s.remove("uShare");
+    }
+#endif
+}
+
 void QmlSettings::setValue(const QString &key, const QVariant &value)
 {
     QSettings::setValue(key, value);

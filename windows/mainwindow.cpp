@@ -35,8 +35,6 @@ MainWindow::MainWindow(SystemTrayIcon *systemTrayIcon, QObject *parent) : QObjec
 
     window = component->create(context);
     qDebug() << component->errorString();
-
-    window->setProperty("visible", true);
 }
 
 MainWindow::~MainWindow()

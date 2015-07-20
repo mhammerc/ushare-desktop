@@ -113,11 +113,12 @@ void uShare::autoSendFile(File file)
             if(Settings::entry(SettingsKeys::USE_WINDOWS10_NATIVE_NOTIFICATIONS).toBool())
             {
                 systemTray->showMessage("uShare", message, QSystemTrayIcon::NoIcon);
-                return;
             }
-
-            NotificationWindow * notif = new NotificationWindow(tr("Congratulations!"), message, response);
-            notif->show();
+            else
+            {
+                NotificationWindow * notif = new NotificationWindow(tr("Congratulations!"), message, response);
+                notif->show();
+            }
         }
 
         lastFileLink = response;
