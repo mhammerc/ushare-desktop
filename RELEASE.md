@@ -9,9 +9,8 @@ First public beta release!
 + Saving tab now work (I hope)
 + In credits, the GitHub button now open GitHub.
 + Our landing website is now online.
-
-~ The window won't open anymore on app startup.
-~ Some bug fixes.
++ The window won't open anymore on app startup.
++ Some bug fixes.
 
 ## 0.0.1
 Private beta release.
