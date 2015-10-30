@@ -1,11 +1,9 @@
-# uShare ![version](https://img.shields.io/badge/version-0.0.2-green.svg?style=flat-square) ![Qt version](https://img.shields.io/badge/Qt-5.4.2-blue.svg?style=flat-square) ![Qt version](https://img.shields.io/badge/Qt-5.5.0-blue.svg?style=flat-square) [![License](https://img.shields.io/badge/License-GNU%20GPL%203-blue.svg?style=flat-square)](LICENSE)
+# uShare (obselete)![version](https://img.shields.io/badge/version-0.0.2-green.svg?style=flat-square) ![Qt version](https://img.shields.io/badge/Qt-5.4.2-blue.svg?style=flat-square) ![Qt version](https://img.shields.io/badge/Qt-5.5.0-blue.svg?style=flat-square) [![License](https://img.shields.io/badge/License-GNU%20GPL%203-blue.svg?style=flat-square)](LICENSE)
 uShare is an instant file sharing tool.
 
-Find us on [http://www.ushare.so](http://www.ushare.so).
+This project is abandonned, you can find the servers here : https://github.com/martin-mh/ushare-server
 
-Current version is `0.0.2`. We are in a beta stage, we still developing it.
-
-See Release github section to download it or go to [http://www.ushare.so](http://www.ushare.so).
+Current version is `0.0.2.
 
 Thanks !
 
