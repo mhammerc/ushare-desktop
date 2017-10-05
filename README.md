@@ -1,20 +1,17 @@
 # uShare (obselete)![version](https://img.shields.io/badge/version-0.0.2-green.svg?style=flat-square) ![Qt version](https://img.shields.io/badge/Qt-5.4.2-blue.svg?style=flat-square) ![Qt version](https://img.shields.io/badge/Qt-5.5.0-blue.svg?style=flat-square) [![License](https://img.shields.io/badge/License-GNU%20GPL%203-blue.svg?style=flat-square)](LICENSE)
-uShare is an instant file sharing tool.
 
-This project is abandonned, you can find the servers here : https://github.com/martin-mh/ushare-server
+uShare is an instant file sharing tool. It allow you to share capture screens, share files and more.
 
-Current version is `0.0.2.
+A long time ago, uShare was my fun project to change the way we quickly share files to friends. I was using Qt (with QML) and Node.js.
 
-Thanks !
+At the time, it was one of the first desktop app using Material Design.
 
-## Don't be scared to contribute
-We hope you will contribute by sending some pull request to enhance uShare. Don't forget to add your name at the top of the file you edited. We use semantic versionning.
+The app is powered by Ajax to provide realtime data right in the app interface.
 
-## Languages
-This software is available in english and french. We are looking for some translators.
+You can find the [server here](https://github.com/martin-mh/ushare-server).
 
-## How to build
-Feel free to edit uShare and rebuild it. To build it you will need QtCreator. We are fully working with Linux and Windows but we still have some work for OS X.
+Obviously, the following screens were taken from uShare itself.
 
-### Qt 5.5.0
-Qt 5.5.0 has some troubles on Linux and on Windows. If you want to get ready as fast as possible, I advise you to use Qt 5.4.2 instead.
+![example1](example1.jpg)
+![example2](example2.jpg)
+![example3](example3.jpg)
